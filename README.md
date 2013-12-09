@@ -1,2 +1,1 @@
-Xjobb
-=====
+A game for Android coded in JAVA.
