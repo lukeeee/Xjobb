@@ -2,9 +2,9 @@
 <resources>
 
     <string name="app_name">CardFeud</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Rules</string>
+    <string name="title_section2">CardFeud</string>
+    <string name="title_section3">About</string>
     <string name="action_settings">Settings</string>
 
 </resources>
