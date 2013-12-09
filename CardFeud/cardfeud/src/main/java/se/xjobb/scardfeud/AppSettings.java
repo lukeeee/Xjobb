@@ -1,10 +1,11 @@
 package se.xjobb.scardfeud;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 
-public class AppSettings extends FragmentActivity {
+public class AppSettings extends Activity {
 
 
     @Override
