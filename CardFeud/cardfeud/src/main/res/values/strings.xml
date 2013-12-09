@@ -4,7 +4,10 @@
     <string name="app_name">CardFeud</string>
     <string name="title_section1">Rules</string>
     <string name="title_section2">CardFeud</string>
-    <string name="title_section3">About</string>
+    <string name="title_section3">Statistics</string>
     <string name="action_settings">Settings</string>
+    <color name="ColorWhite">#FFF</color>
+    <string name="title_activity_rules">Rules</string>
+    <string name="title_activity_stats">Stats</string>
 
 </resources>
