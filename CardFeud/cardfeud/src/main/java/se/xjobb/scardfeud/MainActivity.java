@@ -16,12 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
-
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, View.OnClickListener {
+    String[] menuTitle = {"Rules","Play", "Stats",};
+    int[] menuImage = new int[] {R.drawable.ic_rules,R.drawable.ic_play, R.drawable.ic_stats};
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -36,13 +38,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-
+    Button debug;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
+        debug = (Button)findViewById(R.id.debug);
+        debug.setOnClickListener((View.OnClickListener) this);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -73,8 +77,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            .setIcon(menuImage[i])
                             .setTabListener(this));
+
         }
+
+
 
 
     }
@@ -134,6 +142,16 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == debug){
+            Intent i = new Intent(getApplicationContext(), SignUp.class);
+            startActivity(i);
+            finish();
+        }
+
     }
 
     /**
