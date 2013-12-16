@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
     String[] menuTitle = {"Rules","Play", "Stats",};
     int[] menuImage = new int[] {R.drawable.ic_rules,R.drawable.ic_play, R.drawable.ic_stats};
     /**
@@ -45,8 +45,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
-        debug = (Button)findViewById(R.id.debug);
-        debug.setOnClickListener(this);
+
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
@@ -144,15 +143,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == debug){
-            Intent i = new Intent(getApplicationContext(), SignUp.class);
-            startActivity(i);
-            finish();
-        }
-
-    }
 
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -224,6 +214,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText("HEJ");
             textView.setTextColor(getResources().getColor(R.color.ColorWhite));
+            Button debug = (Button)rootView.findViewById(R.id.debug);
+            debug.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getActivity().getBaseContext(), SignUp.class);
+                    startActivity(i);
+                }
+
+            });
             return rootView;
         }
     }
