@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         // Set up the action bar.
         debug = (Button)findViewById(R.id.debug);
-        debug.setOnClickListener((View.OnClickListener) this);
+        debug.setOnClickListener(this);
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
