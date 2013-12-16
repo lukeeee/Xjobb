@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pager"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="se.xjobb.scardfeud.AppSettings" >
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_text"
+        android:textColor="@color/ColorWhite"
+        android:layout_marginTop="10dp"
+        android:textSize="40dp"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:inputType="textPersonName"
+            android:hint="@string/username_hint"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:background="@drawable/shape"
+            android:ems="10"
+            android:id="@+id/usernameInput"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:inputType="textPassword"
+            android:hint="@string/password_hint"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:background="@drawable/shape"
+            android:ems="10"
+            android:id="@+id/passwordInput"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:inputType="textPassword"
+            android:hint="@string/password_repeat_hint"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:background="@drawable/shape"
+            android:ems="10"
+            android:id="@+id/passwordRepeatInput"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:background="@drawable/shape"
+            android:maxLength="2"
+            android:hint="@string/country_code_hint"
+            android:id="@+id/countryCodeInput"
+            android:layout_gravity="center_horizontal" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape"
+            android:text="@string/sign_up_text"/>
+
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/ColorWhite"
+            android:textSize="20dp"
+            android:text="@string/go_to_login_text"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape"
+            android:text="@string/go_to_login_button_text"/>
+
+    </LinearLayout>
+
+</LinearLayout>

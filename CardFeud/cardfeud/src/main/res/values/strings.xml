@@ -10,4 +10,13 @@
     <string name="title_activity_rules">Rules</string>
     <string name="title_activity_stats">Stats</string>
 
+    <string name="sign_up_text">Sign Up</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="password_repeat_hint">Password Repeat</string>
+    <string name="country_code_hint">Country Code</string>
+    <string name="go_to_login_text">Already on Cardfeud?</string>
+    <string name="go_to_login_button_text">Go to Log in</string>
+
+
 </resources>
