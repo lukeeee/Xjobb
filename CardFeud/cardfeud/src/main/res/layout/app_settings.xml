@@ -9,10 +9,10 @@
 
 
 
-    <TextView
-        android:layout_height="match_parent"
+    <Button
         android:layout_width="match_parent"
-        android:text="tjena"
-        android:textColor="#FFF"/>
+        android:layout_height="match_parent"
+        android:text="debug"
+        android:id="@+id/bugga"/>
 
     </LinearLayout>
