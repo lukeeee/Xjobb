@@ -214,6 +214,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText("HEJ");
             textView.setTextColor(getResources().getColor(R.color.ColorWhite));
+
             return rootView;
         }
     }
