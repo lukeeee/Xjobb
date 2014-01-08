@@ -58,6 +58,7 @@ public class User {
         private static String username;
         private static String identifier;
         private static int userId;
+        private static String deviceId;
 
         public static String getUsername(){
             return username;
@@ -81,6 +82,14 @@ public class User {
 
         public static void setUserId(int userIdIn){
             userId = userIdIn;
+        }
+
+        public static String getDeviceId(){
+            return deviceId;
+        }
+
+        public static void setDeviceId(String deviceIdIn){
+            deviceId = deviceIdIn;
         }
 
     }
