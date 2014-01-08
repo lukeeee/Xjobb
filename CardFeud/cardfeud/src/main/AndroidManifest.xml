@@ -41,6 +41,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.xjobb.scardfeud.MainActivity" />
         </activity>
+        <activity
+            android:name=".Stats"
+            android:label="@string/action_stats"
+            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.xjobb.scardfeud.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

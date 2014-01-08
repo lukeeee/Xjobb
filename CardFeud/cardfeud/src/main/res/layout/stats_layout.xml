@@ -1,7 +1,56 @@
-<android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context="se.xjobb.scardfeud.Stats" />
+    tools:context="se.xjobb.scardfeud.Stats" >
+<View
+    android:layout_width="match_parent"
+    android:layout_height="20dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lukas| 7-5 |Emil"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:paddingBottom="5dp"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="100dp">
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="250sp"
+        android:background="@drawable/c_two"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:text="↑ Higher"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="40sp"
+        android:text="Lower ↓"/>
+
+</LinearLayout>
