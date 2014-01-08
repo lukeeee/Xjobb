@@ -147,8 +147,19 @@ public class SignUp extends Activity implements View.OnClickListener {
                 // set static username value
                 User.UserDetails.setUsername(username);
 
+                // Check network connection
+                HelperClass helperClass = new HelperClass(this);
+
+                if(helperClass.isConnected() != true){
+                    helperClass.showNetworkErrorDialog();
+                    // add retry to dialog.
+                }
+
+
                 // if boolean pass set user object and static values ( save to shared prefs, later? )
                 // show custom sign up dialog, handle timeout (non response from server)
+                // dialog on error with retry
+                // check for internet and offer retry
 
                 // send json request ( new class ) Spring??
             }
@@ -158,6 +169,7 @@ public class SignUp extends Activity implements View.OnClickListener {
             goToLoginButton.setBackgroundResource(R.drawable.shape_pressed);
             // if we already have a account
             // go to log in
+            // create layout and manifest values for login
 
         }
 
