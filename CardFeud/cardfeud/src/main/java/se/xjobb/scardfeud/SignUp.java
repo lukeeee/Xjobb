@@ -129,3 +129,6 @@ public class SignUp extends Activity implements View.OnClickListener {
 
     }
 }
+
+
+//TODO use a solid measurement instead? like screensize/2 instead of dp unit?
