@@ -50,4 +50,40 @@ public class User {
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
+
+
+    // Stored information about the user
+    // Available to the hole application, during running
+    public static class UserDetails {
+        private static String username;
+        private static String identifier;
+        private static int userId;
+
+        public static String getUsername(){
+            return username;
+        }
+
+        public static void setUsername(String usernameIn){
+            username = usernameIn;
+        }
+
+        public static String getIdentifier(){
+            return identifier;
+        }
+
+        public static void setIdentifier(String identifierIn){
+            identifier = identifierIn;
+        }
+
+        public static int getUserId(){
+            return userId;
+        }
+
+        public static void setUserId(int userIdIn){
+            userId = userIdIn;
+        }
+
+    }
+
+
 }

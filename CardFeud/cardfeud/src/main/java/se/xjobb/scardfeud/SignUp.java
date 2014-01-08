@@ -107,6 +107,7 @@ public class SignUp extends Activity implements View.OnClickListener {
         if (v == signUpButton){
 
             // if we are signing up
+            signUpButton.setBackgroundResource(R.drawable.shape_pressed);
             setNormalLayout();
 
             String username = usernameEditText.getText().toString();
@@ -122,6 +123,7 @@ public class SignUp extends Activity implements View.OnClickListener {
 
 
         } else if (v == goToLoginButton) {
+            goToLoginButton.setBackgroundResource(R.drawable.shape_pressed);
             // if we already have a account
             // go to log in
 
