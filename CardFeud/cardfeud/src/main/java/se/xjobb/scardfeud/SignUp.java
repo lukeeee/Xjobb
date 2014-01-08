@@ -51,20 +51,20 @@ public class SignUp extends Activity implements View.OnClickListener {
 
     private void validateInput(String username, String password, String passwordRepeat, String countryCode){
 
-        if(username.length() > 30){
+        if(username.length() > 30 || username.length() < 2){
             usernameEditText.setBackgroundResource(R.drawable.error);
             usernameEditText.setPadding(20, 0, 0, 0);
-            errorUsername.setText("Max 30 chars");
+            errorUsername.setText("2-30 chars");
         }
 
 
-        if(password.length() > 30){
+        if(password.length() > 30 || password.length() < 2){
             passwordEditText.setBackgroundResource(R.drawable.error);
             passwordEditText.setPadding(20, 0, 0, 0);
-            errorPassword.setText("Max 30 chars");
+            errorPassword.setText("2-30 chars");
         }
 
-        if(! password.equals(passwordRepeat)){
+        if(!password.equals(passwordRepeat)){
             passwordRepeatEditText.setBackgroundResource(R.drawable.error);
             passwordRepeatEditText.setPadding(20, 0, 0, 0);
 
@@ -74,10 +74,10 @@ public class SignUp extends Activity implements View.OnClickListener {
             errorPasswordRepeat.setText("Passwords do not match");
         }
 
-        if(countryCode.length() > 2){
+        if(countryCode.length() > 2 || countryCode.length() < 2){
             countryCodeEditText.setBackgroundResource(R.drawable.error);
             countryCodeEditText.setPadding(20, 0, 0, 0);
-            errorCountryCode.setText("Max 2 chars");
+            errorCountryCode.setText("2 chars needed");
         }
     }
 
