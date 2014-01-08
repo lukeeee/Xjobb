@@ -22,8 +22,8 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
-    String[] menuTitle = {"Rules","Play", "Stats",};
-    int[] menuImage = new int[] {R.drawable.ic_rules,R.drawable.ic_play, R.drawable.ic_stats};
+    String[] menuTitle = {"Play","Rules"};
+    int[] menuImage = new int[] {R.drawable.ic_play,R.drawable.ic_rules};
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     SectionsPagerAdapter mSectionsPagerAdapter;
+
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -48,6 +49,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -124,6 +128,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 Intent settingsIntent = new Intent(getBaseContext(), AppSettings.class);
                 startActivity(settingsIntent);
                 return true;
+            case R.id.action_stats:
+                Intent statsIntent = new Intent(getBaseContext(), Stats.class);
+                startActivity(statsIntent);
+                return true;
+            /*case R.id.action_refresh:
+                Intent refreshIntent = new Intent(getBaseContext(), refresh.class);
+                startActivity(refreshIntent);
+                return true;*/
         }
         return super.onOptionsItemSelected(item);
     }
@@ -164,7 +176,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -172,11 +184,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_activity_rules).toUpperCase(l);
+                    return getString(R.string.title_activity_start).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_activity_stats).toUpperCase(l);
+                    return getString(R.string.title_activity_rules).toUpperCase(l);
             }
             return null;
         }
