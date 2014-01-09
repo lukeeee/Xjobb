@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import se.xjobb.scardfeud.Posters.PostSignUp;
 
 
 public class SignUp extends Activity implements View.OnClickListener {
@@ -24,6 +27,9 @@ public class SignUp extends Activity implements View.OnClickListener {
 
     private Button signUpButton;
     private Button goToLoginButton;
+
+    private ProgressDialog progressDialog;
+    private HelperClass helperClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +52,75 @@ public class SignUp extends Activity implements View.OnClickListener {
         signUpButton.setOnClickListener(this);
         goToLoginButton.setOnClickListener(this);
 
+        // Check network connection
+        helperClass = new HelperClass(this);
+
     }
 
+    // show loading dialog
+    public void showProgressDialog(){
+        if(progressDialog == null){
+            // display dialog when loading data
+            progressDialog = ProgressDialog.show(this, "Loading", "Please Wait...", true, false);
+        } else {
+            progressDialog.cancel();
+            progressDialog = ProgressDialog.show(this, "Loading", "Please Wait...", true, false);
+        }
+    }
+
+    // hide loading dialog
+    public void hideProgressDialog(){
+        // if loading dialog is visible, then hide it
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
+    }
+
+    // show error dialog
+    public void showErrorDialog(String message){
+        progressDialog = null;
+        helperClass.showErrorDialog(message);
+    }
+
+    // show feedback
+    public void showFeedbackToast(String message){
+        Toast.makeText(this, message, 1000).show();
+    }
+
+    // save values to shared prefs
+    public void saveValues(){
+        try{
+            if(User.UserDetails.getUserId() != 0){
+                getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).edit().putInt("userId", User.UserDetails.getUserId()).commit();
+            }
+
+            if(User.UserDetails.getIdentifier() != null){
+                getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", User.UserDetails.getIdentifier()).commit();
+            }
+
+            if(User.UserDetails.getUsername() != null){
+                getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).edit().putString("username", User.UserDetails.getUsername()).commit();
+            }
+
+          //  if(User.UserDetails.getDeviceId() != null){
+          //      getSharedPreferences(helperClass.getPrefsDeviceId(), MODE_PRIVATE).edit().putString("deviceId", User.UserDetails.getDeviceId()).commit();
+          //  }
+
+        } catch (Exception ex){
+            Log.e("Exception: ", ex.getMessage());
+        }
+    }
+
+
+    public void finishActivity(String message){
+        showFeedbackToast(message);
+        saveValues();
+
+        System.out.println("Username: " + User.UserDetails.getUsername());
+        System.out.println("UserId: " + User.UserDetails.getUserId());
+        System.out.println("Identifier: " + User.UserDetails.getIdentifier());
+
+    }
 
 
     private boolean validateInput(String username, String password, String passwordRepeat,
@@ -116,7 +189,6 @@ public class SignUp extends Activity implements View.OnClickListener {
         if (v == signUpButton){
 
             // if we are signing up
-            signUpButton.setBackgroundResource(R.drawable.shape_pressed);
             setNormalLayout();
 
             String username = null;
@@ -147,21 +219,15 @@ public class SignUp extends Activity implements View.OnClickListener {
                 // set static username value
                 User.UserDetails.setUsername(username);
 
-                // Check network connection
-                HelperClass helperClass = new HelperClass(this);
-
                 if(helperClass.isConnected() != true){
                     helperClass.showNetworkErrorDialog();
                     // add retry to dialog.
+                } else {
+                    // http request to sign up new user
+                    PostSignUp postSignUp = new PostSignUp(this, newUser);
+                    postSignUp.postJson();
                 }
 
-
-                // if boolean pass set user object and static values ( save to shared prefs, later? )
-                // show custom sign up dialog, handle timeout (non response from server)
-                // dialog on error with retry
-                // check for internet and offer retry
-
-                // send json request ( new class ) Spring??
             }
 
 
@@ -178,3 +244,10 @@ public class SignUp extends Activity implements View.OnClickListener {
 
 
 //TODO use a solid measurement instead? like screensize/2 instead of dp unit?
+
+
+//TODO save values to shared prefs, both after sign up and login
+//TODO also read values when app opens, if values set, no need for login.
+//TODO send user in to app after sign up
+//TODO also set device_id when sign in and sign up!!
+//TODO once logged in, stay in!! no need to show login several times

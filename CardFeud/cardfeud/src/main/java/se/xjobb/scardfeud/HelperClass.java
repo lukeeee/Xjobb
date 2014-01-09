@@ -14,11 +14,32 @@ public class HelperClass {
 
     private Context context;
 
+    // private String key = "xoD98a5sCdh5e4g3s23XE7d5PfV9";
+    private final String PREFSUSERID = "cardFeudUserId";
+    private final String PREFSIDENTIFIER = "cardFeudIdentifier";
+    private final String PREFSDEVICEID = "cardFeudDeviceId";
+    private final String PREFSUSERNAME = "cardFeudUsername";
+
+    // Constructor to set Context
     public HelperClass(Context context){
         this.context = context;
     }
 
+    public String getPrefsUserId(){
+        return this.PREFSUSERID;
+    }
 
+    public String getPrefsIdentifier(){
+        return this.PREFSIDENTIFIER;
+    }
+
+    public String getPrefsUsername(){
+        return this.PREFSUSERNAME;
+    }
+
+    public String getPrefsDeviceId(){
+        return this.PREFSDEVICEID;
+    }
 
     public boolean isConnected(){
 
@@ -52,5 +73,27 @@ public class HelperClass {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    // show the error dialog
+    public void showErrorDialog(String message){
+        // if an error occurred
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(true);
+        builder.setTitle("An Error has occurred!");
+        builder.setMessage(message);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 
 }
