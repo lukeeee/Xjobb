@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +53,6 @@ public class SignUp extends Activity implements View.OnClickListener {
         signUpButton.setOnClickListener(this);
         goToLoginButton.setOnClickListener(this);
 
-        // Check network connection
         helperClass = new HelperClass(this);
 
     }
@@ -232,10 +232,10 @@ public class SignUp extends Activity implements View.OnClickListener {
 
 
         } else if (v == goToLoginButton) {
-            // if we already have a account
-            // go to log in
-            // create layout and manifest values for login
-
+            // if we already have a account, go to login
+            Intent i = new Intent(getBaseContext(), Login.class);
+            startActivity(i);
+            this.finish();
         }
 
     }

@@ -25,29 +25,29 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.xjobb.scardfeud.SignUp;
+import se.xjobb.scardfeud.Login;
 import se.xjobb.scardfeud.User;
 
 /**
  * Created by Svempa on 2014-01-09.
  */
-public class PostSignUp {
+public class PostLogin {
 
     private User user;
-    private SignUp callback;
+    private Login callback;
 
-    public PostSignUp(SignUp callback, User user){
+    public PostLogin(Login callback, User user){
         this.user = user;
         this.callback = callback;
     }
 
     public void postJson(){
         callback.showProgressDialog();
-        new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=signup&res=json");
+        new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=login&res=json");
     }
 
 
-    public static String postSignUp(String url, User user){
+    public static String postLogin(String url, User user){
         InputStream inputStream;
         String result;
         try {
@@ -64,12 +64,10 @@ public class PostSignUp {
 
             int statusCode;
 
-
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("username", user.getUsername()));
             nameValuePairs.add(new BasicNameValuePair("password", user.getPassword()));
-            nameValuePairs.add(new BasicNameValuePair("countrycode", user.getCountryCode()));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             HttpResponse httpResponse = httpclient.execute(httpPost);
@@ -107,7 +105,7 @@ public class PostSignUp {
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            return postSignUp(urls[0], user);
+            return postLogin(urls[0], user);
         }
 
         // onPostExecute displays the results of the AsyncTask.
@@ -121,8 +119,8 @@ public class PostSignUp {
                 callback.hideProgressDialog();
                 callback.showErrorDialog("A server error has occurred!, Please try again.");
             } else if (result.contains("Server Timeout")){
-                    callback.hideProgressDialog();
-                    callback.showErrorDialog("The server is not responding!, Please try again.");
+                callback.hideProgressDialog();
+                callback.showErrorDialog("The server is not responding!, Please try again.");
             } else {
                 int userId = 0;
                 String userIdentifier = null;
@@ -140,15 +138,15 @@ public class PostSignUp {
 
 
                 if(userId == -1){
-                    // username is taken
+                    // wrong username or password
                     callback.hideProgressDialog();
-                    callback.showFeedbackToast("Username is in use, Please try a different username.");
+                    callback.showFeedbackToast("Wrong username or password!, Please try again.");
                 } else if (userId != -1 && userId != 0 && userIdentifier != null){
-                    // new user added
+                    // user logged in
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
                     callback.hideProgressDialog();
-                    callback.finishActivity("User registered successfully!");
+                    callback.finishActivity("User logged in successfully!");
 
                 }
             }
@@ -165,7 +163,9 @@ public class PostSignUp {
         inputStream.close();
         return result;
     }
+
 }
+
 
 
 //TODO add retry on server timeout??

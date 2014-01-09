@@ -9,6 +9,7 @@
     <string name="action_refresh">Refresh</string>
     <string name="action_stats">Stats</string>
     <string name="action_signup">SignUp</string>
+    <string name="action_login">SignUp</string>
     <color name="ColorWhite">#FFF</color>
     <color name="ColorRed">#F00</color>
     <string name="title_activity_rules">Rules</string>
@@ -22,6 +23,10 @@
     <string name="country_code_hint">Country Code, example: "SE"</string>
     <string name="go_to_login_text">Already on Cardfeud?</string>
     <string name="go_to_login_button_text">Go to Log in</string>
+
+    <string name="sign_in_text">Sign in</string>
+    <string name="go_to_sign_up_text">New to Cardfeud?</string>
+    <string name="go_to_sign_up_button_text">Go to Sign Up</string>
 
 
 </resources>
