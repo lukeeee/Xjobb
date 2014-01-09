@@ -232,7 +232,6 @@ public class SignUp extends Activity implements View.OnClickListener {
 
 
         } else if (v == goToLoginButton) {
-            goToLoginButton.setBackgroundResource(R.drawable.shape_pressed);
             // if we already have a account
             // go to log in
             // create layout and manifest values for login
