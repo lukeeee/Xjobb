@@ -209,4 +209,4 @@ public class Login extends Activity implements View.OnClickListener{
 //TODO once logged in, stay in!! no need to show login several times
 
 
-// call to PostDeivceId from PostLogin/PostSignUp and then from PostDeviceId stop the progressDialog (stop before if error's occur)
+// call to PostDeivceId from PostLogin/PostSignUp and then from PostDeviceId (instead of from PostLogin etc) stop the progressDialog (stop before if error's occur)

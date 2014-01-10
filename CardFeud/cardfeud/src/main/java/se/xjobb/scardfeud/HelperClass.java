@@ -14,7 +14,7 @@ public class HelperClass {
 
     private Context context;
 
-    // private String key = "xoD98a5sCdh5e4g3s23XE7d5PfV9";
+    private final String KEY = "xoD98a5sCdh5e4g3s23XE7d5PfV9";
     private final String PREFSUSERID = "cardFeudUserId";
     private final String PREFSIDENTIFIER = "cardFeudIdentifier";
     private final String PREFSDEVICEID = "cardFeudDeviceId";
@@ -39,6 +39,10 @@ public class HelperClass {
 
     public String getPrefsDeviceId(){
         return this.PREFSDEVICEID;
+    }
+
+    public String getKey(){
+        return this.KEY;
     }
 
     public boolean isConnected(){
