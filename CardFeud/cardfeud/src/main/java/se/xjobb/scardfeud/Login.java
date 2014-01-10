@@ -239,13 +239,11 @@ public class Login extends Activity implements View.OnClickListener{
 
 //TODO Use Crypt class for identifier
 //TODO use a solid measurement instead? like screensize/2 instead of dp unit?
-//TODO also set device_id when sign in and sign up!! Can't simply use device id?
-//TODO once logged in, stay in!! no need to show login several times
 
 // Do we need to replace the identifier each time? or can we use the same all the time?
 
+//Can't simply use device id?
 // call to PostDeivceId from PostLogin/PostSignUp and then from PostDeviceId (instead of from PostLogin etc) stop the progressDialog (stop before if error's occur)
-
 // http://developer.android.com/google/gcm/index.html
 
 /* Overview of gcm: You send a request to google server from your android phone.

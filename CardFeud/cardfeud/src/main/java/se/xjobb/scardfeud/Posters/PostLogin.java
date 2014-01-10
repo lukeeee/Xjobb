@@ -128,8 +128,6 @@ public class PostLogin {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
 
-                    System.out.println("JSON: " + jsonObject.toString());
-
                     userId = Integer.parseInt(jsonObject.getString("userid"));
                     userIdentifier = jsonObject.getString("identifier");
                 } catch (JSONException e) {
