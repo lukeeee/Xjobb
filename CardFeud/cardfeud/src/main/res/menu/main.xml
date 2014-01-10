@@ -16,8 +16,8 @@
         app:showAsAction="always" />
 
     <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_action_settings"
-        app:showAsAction="always" />
+    android:title="@string/action_settings"
+    android:orderInCategory="100"
+    android:icon="@drawable/ic_action_settings"
+    app:showAsAction="always" />
 </menu>

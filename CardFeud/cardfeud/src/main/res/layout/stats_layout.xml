@@ -10,21 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#005500"/>
-<View
-    android:layout_width="match_parent"
-    android:layout_height="20dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="55dp"
         android:text="Lukas ( 7-5 ) Emil"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:paddingLeft="35dp"
         android:paddingRight="35dp"
         android:paddingBottom="5dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:textStyle="bold"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -41,25 +43,29 @@
         android:layout_width="180dp"
         android:layout_height="250sp"
         android:background="@drawable/start"
-         android:id="@+id/start_game"/>
+        android:id="@+id/start_game"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:text="↑ Higher"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="40sp"
         android:text="Lower ↓"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
 
 </LinearLayout>
