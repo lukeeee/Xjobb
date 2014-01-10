@@ -18,8 +18,8 @@ public class AppSettings extends Activity {
         debug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), SignUp.class);
-                startActivity(i);
+                //Intent i = new Intent(getBaseContext(), SignUp.class);
+                //startActivity(i);
             }
 
         });

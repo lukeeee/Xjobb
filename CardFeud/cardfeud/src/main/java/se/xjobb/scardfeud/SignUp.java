@@ -31,6 +31,7 @@ public class SignUp extends Activity implements View.OnClickListener {
 
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
+    private Crypt crypt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class SignUp extends Activity implements View.OnClickListener {
         goToLoginButton.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
-
+        crypt = new Crypt();
     }
 
     // show loading dialog
@@ -95,19 +96,21 @@ public class SignUp extends Activity implements View.OnClickListener {
             }
 
             if(User.UserDetails.getIdentifier() != null){
-                getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", User.UserDetails.getIdentifier()).commit();
+                // encrypt identifier
+                String encryptedIdentifier = crypt.encrypt(helperClass.getKey(), User.UserDetails.getIdentifier());
+                getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", encryptedIdentifier).commit();
             }
 
             if(User.UserDetails.getUsername() != null){
                 getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).edit().putString("username", User.UserDetails.getUsername()).commit();
             }
 
-          //  if(User.UserDetails.getDeviceId() != null){
-          //      getSharedPreferences(helperClass.getPrefsDeviceId(), MODE_PRIVATE).edit().putString("deviceId", User.UserDetails.getDeviceId()).commit();
+          //  if(User.UserDetails.getDeviceRegId() != null){
+          //      getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
           //  }
 
         } catch (Exception ex){
-            Log.e("Exception: ", ex.getMessage());
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
     }
 
@@ -116,10 +119,9 @@ public class SignUp extends Activity implements View.OnClickListener {
         showFeedbackToast(message);
         saveValues();
 
-        System.out.println("Username: " + User.UserDetails.getUsername());
-        System.out.println("UserId: " + User.UserDetails.getUserId());
-        System.out.println("Identifier: " + User.UserDetails.getIdentifier());
-
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(i);
+        this.finish();
     }
 
 
@@ -240,13 +242,3 @@ public class SignUp extends Activity implements View.OnClickListener {
 
     }
 }
-
-
-//TODO use a solid measurement instead? like screensize/2 instead of dp unit?
-
-
-//TODO save values to shared prefs, both after sign up and login
-//TODO also read values when app opens, if values set, no need for login.
-//TODO send user in to app after sign up
-//TODO also set device_id when sign in and sign up!!
-//TODO once logged in, stay in!! no need to show login several times

@@ -17,7 +17,7 @@ public class HelperClass {
     private final String KEY = "xoD98a5sCdh5e4g3s23XE7d5PfV9";
     private final String PREFSUSERID = "cardFeudUserId";
     private final String PREFSIDENTIFIER = "cardFeudIdentifier";
-    private final String PREFSDEVICEID = "cardFeudDeviceId";
+    private final String PREFSDEVICEREGID = "cardFeudDeviceId";
     private final String PREFSUSERNAME = "cardFeudUsername";
 
     // Constructor to set Context
@@ -37,8 +37,8 @@ public class HelperClass {
         return this.PREFSUSERNAME;
     }
 
-    public String getPrefsDeviceId(){
-        return this.PREFSDEVICEID;
+    public String getPrefsDeviceRegId(){
+        return this.PREFSDEVICEREGID;
     }
 
     public String getKey(){

@@ -29,6 +29,7 @@ public class Login extends Activity implements View.OnClickListener{
 
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
+    private Crypt crypt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,38 @@ public class Login extends Activity implements View.OnClickListener{
         goToSignUpButton.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
+        crypt = new Crypt();
+    }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        try{
+            User.UserDetails.setUserId(getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).getInt("userId", 0));
+            User.UserDetails.setUsername(getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).getString("username", null));
+            // decrypt the identifier
+            User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
+
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+
+        if(User.UserDetails.getUsername() != null && User.UserDetails.getIdentifier() != null
+                && User.UserDetails.getUserId() != 0){
+
+            // we found all stored values and do not need to login again.
+            Intent i = new Intent(getBaseContext(), MainActivity.class);
+            startActivity(i);
+            this.finish();
+        }
+
+        System.out.println("Username: " + User.UserDetails.getUsername());
+        System.out.println("Identifier: " + User.UserDetails.getIdentifier());
+        System.out.println("UserId: " + User.UserDetails.getUserId());
+
     }
 
 
@@ -87,7 +120,9 @@ public class Login extends Activity implements View.OnClickListener{
             }
 
             if(User.UserDetails.getIdentifier() != null){
-                getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", User.UserDetails.getIdentifier()).commit();
+                // encrypt identifier
+                String encryptedIdentifier = crypt.encrypt(helperClass.getKey(), User.UserDetails.getIdentifier());
+                getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", encryptedIdentifier).commit();
             }
 
             if(User.UserDetails.getUsername() != null){
@@ -99,7 +134,7 @@ public class Login extends Activity implements View.OnClickListener{
             //  }
 
         } catch (Exception ex){
-            Log.e("Exception: ", ex.getMessage());
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
     }
 
@@ -108,10 +143,9 @@ public class Login extends Activity implements View.OnClickListener{
         showFeedbackToast(message);
         saveValues();
 
-        System.out.println("Username: " + User.UserDetails.getUsername());
-        System.out.println("UserId: " + User.UserDetails.getUserId());
-        System.out.println("Identifier: " + User.UserDetails.getIdentifier());
-
+        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(i);
+        this.finish();
     }
 
 
@@ -202,11 +236,18 @@ public class Login extends Activity implements View.OnClickListener{
 
 }
 
-//TODO save values to shared prefs, both after sign up and login
-//TODO also read values when app opens, if values set, no need for login.
-//TODO send user in to app after sign up
-//TODO also set device_id when sign in and sign up!!
+
+//TODO Use Crypt class for identifier
+//TODO use a solid measurement instead? like screensize/2 instead of dp unit?
+//TODO also set device_id when sign in and sign up!! Can't simply use device id?
 //TODO once logged in, stay in!! no need to show login several times
 
+// Do we need to replace the identifier each time? or can we use the same all the time?
 
 // call to PostDeivceId from PostLogin/PostSignUp and then from PostDeviceId (instead of from PostLogin etc) stop the progressDialog (stop before if error's occur)
+
+// http://developer.android.com/google/gcm/index.html
+
+/* Overview of gcm: You send a request to google server from your android phone.
+ You receive a registration id as a response. You will then have to send this registration id to the server from where you wish to
+ send notifications to the mobile. Using this registration id you can then send notification to the device. */

@@ -148,7 +148,7 @@ public class PostSignUp {
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
                     callback.hideProgressDialog();
-                    callback.finishActivity("User registered successfully!");
+                    callback.finishActivity(User.UserDetails.getUsername() + " registered successfully!");
 
                 }
             }

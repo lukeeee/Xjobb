@@ -146,7 +146,7 @@ public class PostLogin {
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
                     callback.hideProgressDialog();
-                    callback.finishActivity("User logged in successfully!");
+                    callback.finishActivity(User.UserDetails.getUsername() + " logged in successfully!");
 
                 }
             }

@@ -40,7 +40,7 @@ public class User {
         private static String username;
         private static String identifier;
         private static int userId;
-        private static String deviceId;
+        private static String deviceRegId;
 
         public static String getUsername(){
             return username;
@@ -66,12 +66,12 @@ public class User {
             userId = userIdIn;
         }
 
-        public static String getDeviceId(){
-            return deviceId;
+        public static String getDeviceRegId(){
+            return deviceRegId;
         }
 
-        public static void setDeviceId(String deviceIdIn){
-            deviceId = deviceIdIn;
+        public static void setDeviceRegId(String deviceRegIdIn){
+            deviceRegId = deviceRegIdIn;
         }
 
     }
