@@ -21,9 +21,9 @@ private Button stat;
         high = (Button)findViewById(R.id.higher);
         low = (Button)findViewById(R.id.lower);
         stat = (Button)findViewById(R.id.gamestat);
-        high.getBackground().setAlpha(95);
-        low.getBackground().setAlpha(95);
-        stat.getBackground().setAlpha(95);
+        high.getBackground().setAlpha(99);
+        low.getBackground().setAlpha(99);
+        stat.getBackground().setAlpha(99);
         start.setOnClickListener(this);
 
 
