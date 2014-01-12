@@ -10,11 +10,20 @@ import android.widget.Button;
 public class Stats extends Activity implements View.OnClickListener {
 
 private Button start;
+private Button high;
+private Button low;
+private Button stat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stats_layout);
         start = (Button)findViewById(R.id.start_game);
+        high = (Button)findViewById(R.id.higher);
+        low = (Button)findViewById(R.id.lower);
+        stat = (Button)findViewById(R.id.gamestat);
+        high.getBackground().setAlpha(95);
+        low.getBackground().setAlpha(95);
+        stat.getBackground().setAlpha(95);
         start.setOnClickListener(this);
 
 
