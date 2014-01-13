@@ -24,6 +24,7 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
     String[] menuTitle = {"Play","Rules"};
     int[] menuImage = new int[] {R.drawable.ic_play,R.drawable.ic_rules};
+    int[] abImage = new int[] {R.drawable.icon};
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -50,7 +51,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        actionBar.setDisplayUseLogoEnabled(false);
+        //actionBar.setDisplayUseLogoEnabled(false);
+        //actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setLogo(abImage[0]);
         actionBar.setDisplayShowTitleEnabled(false);
 
         // Create the adapter that will return a fragment for each of the three
