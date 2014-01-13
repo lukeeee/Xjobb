@@ -12,7 +12,7 @@
     <item android:id="@+id/action_stats"
         android:title="@string/action_stats"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_action_network_cell"
+        android:icon="@drawable/ic_stats"
         app:showAsAction="always" />
 
     <item android:id="@+id/action_settings"
