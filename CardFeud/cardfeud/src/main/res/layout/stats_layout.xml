@@ -13,62 +13,53 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="35dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+
     <Button
         android:layout_width="300dp"
         android:layout_height="55dp"
-        android:text="Lukas ( 7-5 ) Emil"
+        android:text="game debug"
         android:textSize="25sp"
-        android:paddingLeft="35dp"
-        android:paddingRight="35dp"
-        android:paddingBottom="5dp"
         android:background="@drawable/button"
         android:textStyle="bold"
-        android:id="@+id/gamestat"/>
-    </RelativeLayout>
+        android:layout_gravity="center"
+        android:id="@+id/gameplay"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="250sp"
-        android:background="@drawable/c_two"/>
-     <Button
-        android:layout_width="180dp"
-        android:layout_height="250sp"
-        android:background="@drawable/start"
-        android:id="@+id/start_game"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="35dp"/>
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="↑ Higher"
+        android:layout_height="55dp"
+        android:text="start debug"
+        android:textSize="25sp"
         android:background="@drawable/button"
-        android:layout_gravity="center"
         android:textStyle="bold"
-        android:id="@+id/higher"/>
+        android:layout_gravity="center"
+        android:id="@+id/start"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="35dp"/>
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:text="Lower ↓"
+        android:layout_height="55dp"
+        android:text="rules debug"
+        android:textSize="25sp"
         android:background="@drawable/button"
-        android:layout_gravity="center"
         android:textStyle="bold"
-        android:id="@+id/lower"/>
+        android:layout_gravity="center"
+        android:id="@+id/rule"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:text="new game debug"
+        android:textSize="25sp"
+        android:background="@drawable/button"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:id="@+id/newgame"/>
+
+
 
 </LinearLayout>

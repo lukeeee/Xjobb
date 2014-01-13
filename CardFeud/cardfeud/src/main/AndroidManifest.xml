@@ -53,6 +53,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.xjobb.scardfeud.MainActivity" />
         </activity>
+        <activity
+            android:name=".Game"
+            android:label="@string/action_game"
+            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.xjobb.scardfeud.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Start"
+            android:label="@string/action_start"
+            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.xjobb.scardfeud.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
