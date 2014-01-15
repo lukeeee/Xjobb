@@ -8,11 +8,7 @@
     tools:context="se.xjobb.scardfeud.Stats" >
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#005500"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
