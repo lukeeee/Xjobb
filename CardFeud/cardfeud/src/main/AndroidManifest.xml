@@ -39,11 +39,7 @@
         </activity>
         <activity
             android:name=".SignUp"
-            android:label="@string/action_signup"
-            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="se.xjobb.scardfeud.MainActivity" />
+            android:label="@string/action_signup" >
         </activity>
         <activity
             android:name=".Stats"

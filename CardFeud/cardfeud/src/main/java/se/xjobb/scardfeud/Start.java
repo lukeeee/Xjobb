@@ -59,4 +59,8 @@ public class Start extends Fragment implements View.OnClickListener {
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
         }
-}}
+    }
+
+
+
+}

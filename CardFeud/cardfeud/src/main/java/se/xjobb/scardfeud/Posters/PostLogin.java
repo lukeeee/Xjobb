@@ -145,7 +145,7 @@ public class PostLogin {
                 } else if (userId != -1 && userId != 0 && userIdentifier != null
                         && userCountryCode != null){
                     // user logged in
-                    
+
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
                     User.UserDetails.setUserCountryCode(userCountryCode);

@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -82,6 +83,19 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        // check if user is logged out, (if the values stored are empty)
+        // if they are then finish activity
+
+        if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
+            this.finish();
+        }
     }
 
     @Override
