@@ -124,12 +124,15 @@ public class PostLogin {
             } else {
                 int userId = 0;
                 String userIdentifier = null;
+                String userCountryCode = null;
 
                 try {
                     JSONObject jsonObject = new JSONObject(result);
 
                     userId = Integer.parseInt(jsonObject.getString("userid"));
                     userIdentifier = jsonObject.getString("identifier");
+                    userCountryCode = jsonObject.getString("country");
+
                 } catch (JSONException e) {
                     Log.e("Exception JSON: ", e.getMessage());
                 }
@@ -139,10 +142,13 @@ public class PostLogin {
                     // wrong username or password
                     callback.hideProgressDialog();
                     callback.showFeedbackToast("Wrong username or password!, Please try again.");
-                } else if (userId != -1 && userId != 0 && userIdentifier != null){
+                } else if (userId != -1 && userId != 0 && userIdentifier != null
+                        && userCountryCode != null){
                     // user logged in
+                    
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
+                    User.UserDetails.setUserCountryCode(userCountryCode);
                     callback.hideProgressDialog();
                     callback.finishActivity(User.UserDetails.getUsername() + " logged in successfully!");
 

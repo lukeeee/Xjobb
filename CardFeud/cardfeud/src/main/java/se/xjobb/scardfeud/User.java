@@ -40,6 +40,7 @@ public class User {
         private static String username;
         private static String identifier;
         private static int userId;
+        private static String userCountryCode;
         private static String deviceRegId;
 
         public static String getUsername(){
@@ -64,6 +65,14 @@ public class User {
 
         public static void setUserId(int userIdIn){
             userId = userIdIn;
+        }
+
+        public static void setUserCountryCode(String countryCodeIn){
+            userCountryCode = countryCodeIn;
+        }
+
+        public static String getUserCountryCode(){
+            return userCountryCode;
         }
 
         public static String getDeviceRegId(){

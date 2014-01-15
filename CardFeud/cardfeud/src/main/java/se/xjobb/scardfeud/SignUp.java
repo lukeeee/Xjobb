@@ -105,6 +105,10 @@ public class SignUp extends Activity implements View.OnClickListener {
                 getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).edit().putString("username", User.UserDetails.getUsername()).commit();
             }
 
+            if(User.UserDetails.getUserCountryCode() != null){
+                getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).edit().putString("countrycode", User.UserDetails.getUserCountryCode()).commit();
+            }
+
           //  if(User.UserDetails.getDeviceRegId() != null){
           //      getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
           //  }
@@ -218,8 +222,9 @@ public class SignUp extends Activity implements View.OnClickListener {
                 newUser.setPassword(password);
                 newUser.setCountryCode(countryCode);
 
-                // set static username value
+                // set static username and country code value
                 User.UserDetails.setUsername(username);
+                User.UserDetails.setUserCountryCode(countryCode);
 
                 if(helperClass.isConnected() != true){
                     helperClass.showNetworkErrorDialog();

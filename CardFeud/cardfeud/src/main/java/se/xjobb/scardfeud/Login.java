@@ -58,6 +58,8 @@ public class Login extends Activity implements View.OnClickListener{
         try{
             User.UserDetails.setUserId(getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).getInt("userId", 0));
             User.UserDetails.setUsername(getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).getString("username", null));
+            User.UserDetails.setUserCountryCode(getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).getString("countrycode", null));
+
             // decrypt the identifier
             User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
 
@@ -67,17 +69,13 @@ public class Login extends Activity implements View.OnClickListener{
 
 
         if(User.UserDetails.getUsername() != null && User.UserDetails.getIdentifier() != null
-                && User.UserDetails.getUserId() != 0){
+                && User.UserDetails.getUserId() != 0 && User.UserDetails.getUserCountryCode() != null){
 
             // we found all stored values and do not need to login again.
             Intent i = new Intent(getBaseContext(), MainActivity.class);
             startActivity(i);
             this.finish();
         }
-
-        System.out.println("Username: " + User.UserDetails.getUsername());
-        System.out.println("Identifier: " + User.UserDetails.getIdentifier());
-        System.out.println("UserId: " + User.UserDetails.getUserId());
 
     }
 
@@ -127,6 +125,10 @@ public class Login extends Activity implements View.OnClickListener{
 
             if(User.UserDetails.getUsername() != null){
                 getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).edit().putString("username", User.UserDetails.getUsername()).commit();
+            }
+
+            if(User.UserDetails.getUserCountryCode() != null){
+                getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).edit().putString("countrycode", User.UserDetails.getUserCountryCode()).commit();
             }
 
             //  if(User.UserDetails.getDeviceId() != null){
@@ -237,7 +239,8 @@ public class Login extends Activity implements View.OnClickListener{
 }
 
 
-//TODO Use Crypt class for identifier
+//TODO save country code when sign up and login.
+
 //TODO use a solid measurement instead? like screensize/2 instead of dp unit?
 
 // Do we need to replace the identifier each time? or can we use the same all the time?
