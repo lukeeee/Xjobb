@@ -13,6 +13,8 @@
     <string name="action_stats">Stats</string>
     <string name="action_start">Start</string>
     <string name="action_game">Game</string>
+    <string name="action_rules">Rules</string>
+    <string name="action_newgame">New Game</string>
     <string name="action_signup">SignUp</string>
     <string name="action_login">Login</string>
     <color name="ColorWhite">#FFF</color>

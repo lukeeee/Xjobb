@@ -29,7 +29,7 @@
         android:id="@+id/user"/>
 
     <ImageView
-        android:layout_width="33dp"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/se"/>
     </RelativeLayout>
@@ -41,10 +41,11 @@
             android:layout_width="300dp"
             android:layout_height="90dp"
             android:text="Start A New Game"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:background="@drawable/button"
             android:textStyle="bold"
-            android:id="@+id/Btn_newGame"/>
+            android:id="@+id/Btn_newGame"
+            android:drawableRight="@drawable/plus"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -82,7 +83,7 @@
         android:id="@+id/game1"
         android:drawableRight="@drawable/arrow"/>
     <ImageView
-        android:layout_width="54dp"
+        android:layout_width="51dp"
         android:layout_height="51dp"
         android:background="@drawable/se"/>
     </RelativeLayout>
@@ -104,7 +105,7 @@
         android:id="@+id/game2"
         android:drawableRight="@drawable/arrow"/>
     <ImageView
-        android:layout_width="54dp"
+        android:layout_width="51dp"
         android:layout_height="51dp"
         android:background="@drawable/us"/>
     </RelativeLayout>
@@ -143,7 +144,7 @@
         android:textStyle="bold"
         android:id="@+id/finGame1"/>
         <ImageView
-            android:layout_width="54dp"
+            android:layout_width="51dp"
             android:layout_height="51dp"
             android:background="@drawable/se"/>
     </RelativeLayout>
@@ -164,7 +165,7 @@
         android:textStyle="bold"
         android:id="@+id/finGame2"/>
     <ImageView
-        android:layout_width="54dp"
+        android:layout_width="51dp"
         android:layout_height="51dp"
         android:background="@drawable/ng"/>
     </RelativeLayout>

@@ -20,11 +20,13 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="55dp"
-            android:text="Lukas ( 7-5 ) Emil"
-            android:textSize="25sp"
+            android:text="Lukas  ( 7-5 )  Emil"
+            android:textSize="20sp"
             android:background="@drawable/button"
             android:textStyle="bold"
-            android:id="@+id/gamestat"/>
+            android:id="@+id/gamestat"
+            android:drawableRight="@drawable/se"
+            android:drawableLeft="@drawable/se"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -50,11 +52,13 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="40sp"
-        android:text="↑ Higher"
+        android:text="Higher"
         android:background="@drawable/button"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:id="@+id/higher"/>
+        android:id="@+id/higher"
+        android:drawableRight="@drawable/arrow_up_l"
+        android:drawableLeft="@drawable/arrow_up_r"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
@@ -62,10 +66,13 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textSize="40sp"
-        android:text="Lower ↓"
+        android:text="Lower"
         android:background="@drawable/button"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:id="@+id/lower"/>
+        android:id="@+id/lower"
+        android:drawableRight="@drawable/arrow_down_l"
+        android:drawableLeft="@drawable/arrow_down_r"/>
+
 
 </LinearLayout>
