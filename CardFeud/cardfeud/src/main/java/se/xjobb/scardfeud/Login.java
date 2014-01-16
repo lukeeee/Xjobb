@@ -1,11 +1,16 @@
 package se.xjobb.scardfeud;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,12 +47,16 @@ public class Login extends Activity implements View.OnClickListener{
         errorPassword = (TextView) findViewById(R.id.passwordLoginError);
         signInButton = (Button) findViewById(R.id.signInButton);
         goToSignUpButton = (Button) findViewById(R.id.goToSignUpButton);
+        goToSignUpButton.getBackground().setAlpha(150);
+        signInButton.getBackground().setAlpha(150);
 
         signInButton.setOnClickListener(this);
         goToSignUpButton.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
         crypt = new Crypt();
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
 
@@ -151,7 +160,40 @@ public class Login extends Activity implements View.OnClickListener{
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.about, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_about:
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Login.this);
+                dialog.setTitle("Quick Help");
+                dialog.setIcon(R.drawable.ic_action_help_d);
+                dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
+                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
+                        "* Press pass to pass the turn to your opponent\n\n" +
+                        "* You get one point if you are right\n\n" +
+                        "* You loose one point if you are wrong");
+                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
+                return true;
+
+        }
+
+        return true;
+
+    }
 
     private boolean validateInput(String username, String password){
 
