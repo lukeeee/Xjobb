@@ -1,18 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     tools:context="se.xjobb.scardfeud.Stats" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#005500"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="35dp"/>
+        android:layout_height="20dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +33,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="20dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,7 +50,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="20dp"/>
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -61,7 +64,7 @@
         android:drawableLeft="@drawable/arrow_up_r"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="5dp"/>
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -73,6 +76,21 @@
         android:id="@+id/lower"
         android:drawableRight="@drawable/arrow_down_l"
         android:drawableLeft="@drawable/arrow_down_r"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="Pass "
+        android:background="@drawable/button"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/pass"
+        android:drawableRight="@drawable/arrow_pass_r"
+        android:drawableLeft="@drawable/arrow_pass_l"/>
 
 
 </LinearLayout>
+    </ScrollView>

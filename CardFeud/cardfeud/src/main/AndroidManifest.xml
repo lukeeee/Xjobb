@@ -18,11 +18,13 @@
         android:theme="@style/CustomActionBarTheme" >
         <activity
             android:name="se.xjobb.scardfeud.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Login"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +34,7 @@
         <activity
             android:name=".AppSettings"
             android:label="@string/action_settings"
+            android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,11 +42,13 @@
         </activity>
         <activity
             android:name=".SignUp"
+            android:screenOrientation="portrait"
             android:label="@string/action_signup" >
         </activity>
         <activity
             android:name=".Stats"
             android:label="@string/action_stats"
+            android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,6 +57,7 @@
         <activity
             android:name=".Game"
             android:label="@string/action_game"
+            android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -60,6 +66,7 @@
         <activity
             android:name=".Start"
             android:label="@string/action_start"
+            android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,6 +75,7 @@
         <activity
             android:name=".NewGame"
             android:label="@string/action_newgame"
+            android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

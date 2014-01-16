@@ -17,48 +17,12 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="55dp"
-        android:text="game debug"
-        android:textSize="25sp"
-        android:background="@drawable/button"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/gameplay"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="35dp"/>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:text="start debug"
-        android:textSize="25sp"
-        android:background="@drawable/button"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/start"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="35dp"/>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="55dp"
         android:text="rules debug"
         android:textSize="25sp"
         android:background="@drawable/button"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:id="@+id/rule"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="35dp"/>
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:text="new game debug"
-        android:textSize="25sp"
-        android:background="@drawable/button"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:id="@+id/newgame"/>
 
 
 
