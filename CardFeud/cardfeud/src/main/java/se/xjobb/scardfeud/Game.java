@@ -72,7 +72,7 @@ public class Game extends Activity implements View.OnClickListener {
         else if (view == stat){
             AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
             dialog.setTitle("Game stats");
-            dialog.setIcon(R.drawable.ic_action_help_d);
+            dialog.setIcon(R.drawable.stat);
             dialog.setMessage("Round ONE: 6 of Hearts\n" +
                     "  Lukas pressed Higher: 1 Point\n" +
                     "  Emil   pressed Lower: -1 Point");

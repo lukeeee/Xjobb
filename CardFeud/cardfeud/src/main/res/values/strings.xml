@@ -35,6 +35,7 @@
     <string name="sign_in_text">Sign in</string>
     <string name="go_to_sign_up_text">New to Cardfeud?</string>
     <string name="go_to_sign_up_button_text">Go to Sign Up</string>
+    <string name="rules">CardFeud Rules:\n\n\nWill the next card be High or Low?\n\nAce low and King high\n\nIf you guess right you get one point\n\nIf you guess wrong you loose one point\n\nYou can pass to your opponent\n\nYou can either meet your friends on Iphone or Android or meet a random opponent</string>
 
 
 </resources>
