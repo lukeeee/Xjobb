@@ -23,8 +23,6 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
-
-    int[] abImage = new int[] {R.drawable.icon};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +39,6 @@ public class Game extends Activity implements View.OnClickListener {
         start.setOnClickListener(this);
         stat.setOnClickListener(this);
         final ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setLogo(abImage[0]);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
     public void showProgressDialog(){
