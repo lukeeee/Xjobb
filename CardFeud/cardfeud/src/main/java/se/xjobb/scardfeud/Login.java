@@ -173,13 +173,12 @@ public class Login extends Activity implements View.OnClickListener{
         switch (item.getItemId()) {
             case R.id.action_about:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Login.this);
-                dialog.setTitle("Quick Help");
-                dialog.setIcon(R.drawable.ic_action_help_d);
-                dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
-                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
-                        "* Press pass to pass the turn to your opponent\n\n" +
-                        "* You get one point if you are right\n\n" +
-                        "* You loose one point if you are wrong");
+                dialog.setTitle("About CardFeud");
+                dialog.setIcon(R.drawable.ic_action_about_d);
+                dialog.setMessage("Cardfeud has been on the iPhone since 2011, and now it has launched for Android\n\n" +
+                        "This is a card game that involves you to guess whether the next card will be higher or lower than the current card\n\n" +
+                        "You can meet friends who have android phones or iphone or just meet random user\n\n" +
+                        "So tell your friends to download the app in the AppStore or Google Play and compete to see who is best");
                 dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

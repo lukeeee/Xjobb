@@ -150,8 +150,8 @@ public class SignUp extends Activity implements View.OnClickListener {
         switch (item.getItemId()) {
             case R.id.action_about:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(SignUp.this);
-                dialog.setTitle("Quick Help");
-                dialog.setIcon(R.drawable.ic_action_help_d);
+                dialog.setTitle("About CardFeud");
+                dialog.setIcon(R.drawable.ic_action_about_d);
                 dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
                         "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
                         "* Press pass to pass the turn to your opponent\n\n" +
