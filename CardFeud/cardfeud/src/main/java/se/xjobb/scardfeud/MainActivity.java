@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     int[] menuImage = new int[]
             {R.drawable.ic_play,R.drawable.ic_rules};
     int[] abImage = new int[] {R.drawable.icon};
+    private ProgressDialog progressDialog;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -78,6 +80,23 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
     }
+    public void showProgressDialog(){
+        if(progressDialog == null){
+            // display dialog when loading data
+            progressDialog = ProgressDialog.show(this, "Refreshing","Please Wait ", true, false);
+        } else {
+            progressDialog.cancel();
+            progressDialog = ProgressDialog.show(this, "Refreshing","Please Wait...", true, false);
+        }
+    }
+
+    // hide loading dialog
+    public void hideProgressDialog(){
+        // if loading dialog is visible, then hide it
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -109,17 +128,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 Intent statsIntent = new Intent(getBaseContext(), Stats.class);
                 startActivity(statsIntent);
                 return true;
-            /*case R.id.action_refresh:
-                Intent refreshIntent = new Intent(getBaseContext(), refresh.class);
+            case R.id.action_refresh:
+                Intent refreshIntent = new Intent(getBaseContext(), MainActivity.class);
+                finish();
+                showProgressDialog();
                 startActivity(refreshIntent);
-                return true;*/
+                return true;
         }
 
         return true;
 
         }
-
-
 
 
     @Override
