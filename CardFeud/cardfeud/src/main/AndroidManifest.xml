@@ -57,6 +57,15 @@
                 android:value="se.xjobb.scardfeud.MainActivity" />
         </activity>
         <activity
+            android:name=".Search"
+            android:label="@string/action_search"
+            android:screenOrientation="portrait"
+            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.xjobb.scardfeud.MainActivity" />
+        </activity>
+        <activity
             android:name=".Game"
             android:label="@string/action_game"
             android:screenOrientation="portrait"
