@@ -116,13 +116,13 @@ public class PostSignUp {
 
             if(result.contains("Did not work!")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("A error has occurred!, Please try again.");
+                callback.showErrorDialog("A error has occurred! Please try again.");
             } else if (result.contains("Server Error")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("A server error has occurred!, Please try again.");
+                callback.showErrorDialog("A server error has occurred! Please try again.");
             } else if (result.contains("Server Timeout")){
                     callback.hideProgressDialog();
-                    callback.showErrorDialog("The server is not responding!, Please try again.");
+                    callback.showErrorDialog("The server is not responding! Please try again.");
             } else {
                 int userId = 0;
                 String userIdentifier = null;

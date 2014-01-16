@@ -7,10 +7,22 @@
     android:background="@drawable/bg"
     tools:context="se.xjobb.scardfeud.Search" >
 
-    <Button
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:id="@+id/search_edit_text"
+        android:drawableRight="@drawable/search"/>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/search_button"
-        android:text="search test"/>
+        android:layout_gravity="center"
+        android:id="@+id/search_container">
+
+    </RelativeLayout>
 
 </LinearLayout>

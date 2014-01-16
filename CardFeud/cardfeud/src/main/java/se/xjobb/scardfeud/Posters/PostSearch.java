@@ -72,6 +72,8 @@ public class PostSearch {
             Log.e("Exception Substring: ", ex.getMessage());
         } catch (NullPointerException ex) {
             Log.e("Exception Null: ", ex.getMessage());
+        } catch (StringIndexOutOfBoundsException ex) {
+            Log.e("StringBounds Exception: ", ex.getMessage());
         }
 
     }
@@ -152,19 +154,19 @@ public class PostSearch {
 
             if(result.contains("Did not work!")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("An error has occurred!, Please try again.");
+                callback.showErrorDialog("An error has occurred! Please try again.");
             } else if (result.contains("Server Error")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("A server error has occurred!, Please try again.");
+                callback.showErrorDialog("A server error has occurred! Please try again.");
             } else if (result.contains("Wrong account details")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("Account Error!, Please try logging in again.");
+                callback.showErrorDialog("Account Error! Please try logging in again.");
             } else if(result.contains("Something went wrong")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("We are sorry something went wrong!, Please try again.");
+                callback.showErrorDialog("We are sorry something went wrong! Please try again.");
             } else if (result.contains("Server Timeout")){
                 callback.hideProgressDialog();
-                callback.showErrorDialog("The server is not responding!, Please try again.");
+                callback.showErrorDialog("The server is not responding! Please try again.");
             } else {
                 setFoundUserValues(result);
                 callback.hideProgressDialog();

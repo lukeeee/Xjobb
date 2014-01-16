@@ -19,6 +19,7 @@
     <string name="action_signup">SignUp</string>
     <string name="action_login">Login</string>
     <color name="ColorWhite">#FFF</color>
+    <color name="ColorBlack">#000</color>
     <color name="ColorRed">#F00</color>
     <string name="title_activity_rules">Rules</string>
     <string name="title_activity_stats">Stats</string>
