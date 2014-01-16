@@ -8,6 +8,7 @@ public class User {
     private String username;
     private String password;
     private String countryCode;
+    private int id;
 
     public String getUsername() {
         return username;
@@ -33,6 +34,13 @@ public class User {
         this.countryCode = countryCode;
     }
 
+    public int getUserId(){
+        return this.id;
+    }
+
+    public void setUserId(int id){
+        this.id = id;
+    }
 
     // Stored information about the user
     // Available to the hole application, during running

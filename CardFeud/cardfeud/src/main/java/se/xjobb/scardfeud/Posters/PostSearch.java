@@ -39,6 +39,43 @@ public class PostSearch {
         this.callback = callback;
     }
 
+
+    private void setFoundUserValues(String result){
+        int foundUserId;
+        String foundUsername;
+
+        try{
+            // parse the Json result manually
+
+            result = result.replaceAll("\"", "");
+            int delimiterIndex = result.indexOf(":");
+
+            String idString = result.substring(0, delimiterIndex);
+            idString = idString.replace("{", "");
+            foundUserId = Integer.parseInt(idString);
+
+            int resultLength = result.length();
+            foundUsername = result.substring(delimiterIndex, resultLength);
+            foundUsername = foundUsername.replace("}", "");
+            foundUsername = foundUsername.replace(":", "");
+
+            if(foundUserId != 0 && foundUsername != null){
+                // set the user values for the found user
+                foundUser = new User();
+                foundUser.setUsername(foundUsername);
+                foundUser.setUserId(foundUserId);
+            } else {
+                foundUser = null;
+            }
+
+        } catch (NumberFormatException ex) {
+            Log.e("Exception Substring: ", ex.getMessage());
+        } catch (NullPointerException ex) {
+            Log.e("Exception Null: ", ex.getMessage());
+        }
+
+    }
+
     public void postQuery(){
         callback.showProgressDialog();
         new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=findplayer&user=" + userId + "&sid=" + userIdentifier +"&username=" + searchQuery + "&res=json");
@@ -129,12 +166,9 @@ public class PostSearch {
                 callback.hideProgressDialog();
                 callback.showErrorDialog("The server is not responding!, Please try again.");
             } else {
-                foundUser = new User();
-
-                System.out.println("Sökresultat: " + result);
-
+                setFoundUserValues(result);
                 callback.hideProgressDialog();
-                //callback.finishActivity(User userFound);
+                callback.finishActivity(foundUser);
             }
         }
     }
@@ -153,4 +187,4 @@ public class PostSearch {
 }
 
 
-// handle if there are many users returned???....
+//TODO handle if there are many users returned???.... Will that ever be the case?

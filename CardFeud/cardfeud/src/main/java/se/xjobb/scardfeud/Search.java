@@ -55,9 +55,9 @@ public class Search extends Activity implements View.OnClickListener{
     }
 
     // method to set found user
-    public void finishActivity(User userFound){
-        this.foundUser = userFound;
-        // add buttons etc...
+    public void finishActivity(User foundUser){
+        this.foundUser = foundUser;
+        Toast.makeText(this, foundUser.getUsername(), 1000).show();
     }
 
     // show error dialog
