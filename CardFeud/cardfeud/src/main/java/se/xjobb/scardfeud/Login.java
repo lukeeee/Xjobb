@@ -42,6 +42,8 @@ public class Login extends Activity implements View.OnClickListener{
         errorPassword = (TextView) findViewById(R.id.passwordLoginError);
         signInButton = (Button) findViewById(R.id.signInButton);
         goToSignUpButton = (Button) findViewById(R.id.goToSignUpButton);
+        goToSignUpButton.getBackground().setAlpha(150);
+        signInButton.getBackground().setAlpha(150);
 
         signInButton.setOnClickListener(this);
         goToSignUpButton.setOnClickListener(this);

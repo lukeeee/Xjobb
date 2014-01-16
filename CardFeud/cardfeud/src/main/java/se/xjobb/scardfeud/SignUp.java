@@ -50,6 +50,8 @@ public class SignUp extends Activity implements View.OnClickListener {
 
         signUpButton = (Button) findViewById(R.id.signUpButton);
         goToLoginButton = (Button) findViewById(R.id.goToLoginButton);
+        signUpButton.getBackground().setAlpha(150);
+        goToLoginButton.getBackground().setAlpha(150);
 
         signUpButton.setOnClickListener(this);
         goToLoginButton.setOnClickListener(this);

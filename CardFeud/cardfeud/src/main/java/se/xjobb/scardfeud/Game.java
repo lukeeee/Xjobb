@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +23,8 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
+
+    int[] abImage = new int[] {R.drawable.icon};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,11 @@ public class Game extends Activity implements View.OnClickListener {
         pass.getBackground().setAlpha(150);
         start.setOnClickListener(this);
         stat.setOnClickListener(this);
-
+        final ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setLogo(abImage[0]);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
     public void showProgressDialog(){
@@ -109,7 +116,7 @@ public class Game extends Activity implements View.OnClickListener {
                 dialog.setTitle("Quick Help");
                 dialog.setIcon(R.drawable.ic_action_help_d);
                 dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
-                        "* Guess if the next card will be higher or lower then the showing card by pressing Higher or Lower\n\n" +
+                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
                         "* Press pass to pass the turn to your opponent\n\n" +
                         "* You get one point if you are right\n\n" +
                         "* You loose one point if you are wrong");

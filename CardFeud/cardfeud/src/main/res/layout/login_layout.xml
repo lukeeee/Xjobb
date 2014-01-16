@@ -1,15 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login"
-    android:orientation="vertical"
+    android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context="se.xjobb.scardfeud.AppSettings" >
-    <View
+    android:background="@drawable/bg"
+    tools:context="se.xjobb.scardfeud.Login" >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#005500"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#005500"/>
     <TextView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
@@ -69,7 +72,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="55dp"
             android:layout_marginTop="20dp"
             android:id="@+id/signInButton"
             android:background="@drawable/button"
@@ -96,7 +99,7 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="44dp"
+            android:layout_height="55dp"
             android:layout_marginTop="10dp"
             android:id="@+id/goToSignUpButton"
             android:background="@drawable/button"
@@ -106,3 +109,4 @@
     </LinearLayout>
 
 </LinearLayout>
+    </ScrollView>
