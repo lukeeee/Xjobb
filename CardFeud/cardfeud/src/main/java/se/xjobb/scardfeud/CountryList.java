@@ -11,14 +11,14 @@ import android.widget.TextView;
  * Created by Lukas on 2014-01-17.
  */
 public class CountryList extends Fragment {
-    TextView rules;
+    TextView coulist_txt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.rules_layout, container, false);
-        rules = (TextView)rootView.findViewById(R.id.rules);
-        rules.getBackground().setAlpha(150);
+        View rootView = inflater.inflate(R.layout.countrylist_layout, container, false);
+        coulist_txt = (TextView)rootView.findViewById(R.id.coulist_txt);
+        coulist_txt.getBackground().setAlpha(150);
 
         return rootView;
     }
