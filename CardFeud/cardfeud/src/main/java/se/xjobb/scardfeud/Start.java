@@ -26,6 +26,7 @@ public class Start extends Fragment implements View.OnClickListener {
     ListView waiting;
     ListView finGames;
     private String username;
+    private String myCountry;
     ImageView flag;
 
     @Override
@@ -51,9 +52,17 @@ public class Start extends Fragment implements View.OnClickListener {
         waitingtext.getBackground().setAlpha(150);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
+        myCountry = User.UserDetails.getUserCountryCode();
+        if (myCountry.contains("US")){
+            Drawable myFlag = getResources().getDrawable(R.drawable.us);
+            flag.setImageDrawable(myFlag);
+        }
+        else{
         Drawable myFlag = getResources().getDrawable(R.drawable.se);
+            flag.setImageDrawable(myFlag);
+        }
         user.setText(username);
-        flag.setImageDrawable(myFlag);
+
         return rootView;
     }
 

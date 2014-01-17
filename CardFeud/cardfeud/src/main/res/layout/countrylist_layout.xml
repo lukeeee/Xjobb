@@ -31,9 +31,9 @@
                 android:id="@+id/coulist_txt"/>
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/se"/>
+                android:layout_width="51dp"
+                android:layout_height="51dp"
+                android:id="@+id/country_flag"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
