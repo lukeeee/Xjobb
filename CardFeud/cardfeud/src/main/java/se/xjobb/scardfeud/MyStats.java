@@ -22,7 +22,7 @@ public class MyStats extends Fragment {
         personalstat_txt = (TextView)rootView.findViewById(R.id.personalstat_txt);
         personalstat_txt.getBackground().setAlpha(150);
         username = User.UserDetails.getUsername();
-        Drawable myFlag = getResources().getDrawable(R.drawable.se);
+        Drawable myFlag = getResources().getDrawable(R.drawable.us);
         if(username.endsWith("s")){
             personalstat_txt.setText(username + " " + "Stats");
             personalstat_txt.setCompoundDrawablesWithIntrinsicBounds(myFlag, null, null, null);
