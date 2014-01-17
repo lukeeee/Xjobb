@@ -29,7 +29,6 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/se"
         android:id="@+id/myFlag"/>
     </RelativeLayout>
     <RelativeLayout
