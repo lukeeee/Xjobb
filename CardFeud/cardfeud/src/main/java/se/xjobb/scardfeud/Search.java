@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import se.xjobb.scardfeud.Posters.PostGameStart;
 import se.xjobb.scardfeud.Posters.PostSearch;
 
 /**
@@ -125,13 +126,13 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
 
     // show loading dialog
-    public void showProgressDialog(){
+    public void showProgressDialog(String message){
         if(progressDialog == null){
             // display dialog when loading data
-            progressDialog = ProgressDialog.show(this, null, "Searching...", true, false);
+            progressDialog = ProgressDialog.show(this, null, message, true, false);
         } else {
             progressDialog.cancel();
-            progressDialog = ProgressDialog.show(this, null, "Searching...", true, false);
+            progressDialog = ProgressDialog.show(this, null, message, true, false);
         }
     }
 
@@ -144,7 +145,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     }
 
     // method to set found user
-    public void finishActivity(User foundUserIn){
+    public void finishSearch(User foundUserIn){
         this.foundUser = foundUserIn;
 
         if(foundUser != null){
@@ -155,6 +156,11 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
     }
 
+    // finish request
+    public void finishRequest(){
+        Toast.makeText(this, "Game request sent!", 1000).show();
+    }
+
     // show error dialog
     public void showErrorDialog(String message){
         progressDialog = null;
@@ -162,11 +168,26 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     }
 
 
+    private void challengePlayer(){
+        if(helperClass.isConnected() != true){
+            helperClass.showNetworkErrorDialog();
+            // add retry to dialog.
+        } else {
+            if(foundUser.getUserId() != 0){
+                // http request to challenge the user we found with given id
+                PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), foundUser.getUserId(), this);
+                postGameStart.postRequest();
+            }
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
         if(v == foundUserButton){
-            // start game vs that user here
-            Log.i("Button Clicked: ", "Should start a game here");
+            // challenge found player
+            //challengePlayer();
+            Toast.makeText(this, "Disabled! :)", 1000).show();
         }
     }
 
@@ -219,5 +240,3 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
 
 // TODO if or when we get country code from the server then use it to display the correct flag
-
-// TODO add function to the button so we start a new game vs player onclick

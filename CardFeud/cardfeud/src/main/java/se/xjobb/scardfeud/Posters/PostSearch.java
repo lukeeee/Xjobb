@@ -80,7 +80,7 @@ public class PostSearch {
     }
 
     public void postQuery(){
-        callback.showProgressDialog();
+        callback.showProgressDialog("Searching...");
         new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=findplayer&user=" + userId + "&sid=" + userIdentifier +"&username=" + searchQuery + "&res=json");
     }
 
@@ -171,7 +171,7 @@ public class PostSearch {
             } else {
                 setFoundUserValues(result);
                 callback.hideProgressDialog();
-                callback.finishActivity(foundUser);
+                callback.finishSearch(foundUser);
             }
         }
     }
