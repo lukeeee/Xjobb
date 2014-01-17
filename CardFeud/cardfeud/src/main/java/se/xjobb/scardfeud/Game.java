@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -23,6 +25,8 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
+    private ImageView gamecards;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,7 @@ public class Game extends Activity implements View.OnClickListener {
         low = (Button)findViewById(R.id.lower);
         stat = (Button)findViewById(R.id.gamestat);
         pass = (Button)findViewById(R.id.pass);
+        gamecards = (ImageView)findViewById(R.id.gamecards);
         high.getBackground().setAlpha(150);
         low.getBackground().setAlpha(150);
         stat.getBackground().setAlpha(150);

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="se.xjobb.scardfeud.MyStats" >
+    tools:context="se.xjobb.scardfeud.CountryList" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="52dp"
-                android:text="Lukas Stats"
+                android:text="Country List"
                 android:textSize="25dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="20dp"
@@ -28,7 +28,7 @@
                 android:shadowColor="#000"
                 android:shadowRadius="30"
                 android:background="@drawable/button"
-                android:id="@+id/personalstat_txt"/>
+                android:id="@+id/coulist_txt"/>
 
             <ImageView
                 android:layout_width="50dp"

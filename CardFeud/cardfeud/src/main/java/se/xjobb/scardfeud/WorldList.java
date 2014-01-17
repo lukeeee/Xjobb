@@ -11,14 +11,14 @@ import android.widget.TextView;
  * Created by Lukas on 2014-01-17.
  */
 public class WorldList extends Fragment {
-    TextView rules;
+    TextView worldlist_txt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.rules_layout, container, false);
-        rules = (TextView)rootView.findViewById(R.id.rules);
-        rules.getBackground().setAlpha(150);
+        View rootView = inflater.inflate(R.layout.worldlist_layout, container, false);
+        worldlist_txt = (TextView)rootView.findViewById(R.id.worldlist_txt);
+        worldlist_txt.getBackground().setAlpha(150);
 
         return rootView;
     }

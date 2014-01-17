@@ -41,6 +41,8 @@
             android:background="@drawable/button"
             android:textStyle="bold"
             android:id="@+id/Btn_newGame"
+            android:shadowColor="#000"
+            android:shadowRadius="40"
             android:drawableRight="@drawable/plus"/>
     </RelativeLayout>
     <View
