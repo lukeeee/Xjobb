@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ public class Start extends Fragment implements View.OnClickListener {
     ListView games;
     ListView waiting;
     ListView finGames;
+    private String username;
+    ImageView flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +40,7 @@ public class Start extends Fragment implements View.OnClickListener {
         games = (ListView)rootView.findViewById(R.id.games);
         waiting = (ListView)rootView.findViewById(R.id.waiting);
         finGames = (ListView)rootView.findViewById(R.id.finGames);
+        flag = (ImageView)rootView.findViewById(R.id.myFlag);
         games.getBackground().setAlpha(150);
         waiting.getBackground().setAlpha(150);
         finGames.getBackground().setAlpha(150);
@@ -46,6 +50,10 @@ public class Start extends Fragment implements View.OnClickListener {
         newGame.getBackground().setAlpha(150);
         waitingtext.getBackground().setAlpha(150);
         newGame.setOnClickListener(this);
+        username = User.UserDetails.getUsername();
+        Drawable myFlag = getResources().getDrawable(R.drawable.se);
+        user.setText(username);
+        flag.setImageDrawable(myFlag);
         return rootView;
     }
 

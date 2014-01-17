@@ -19,7 +19,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:text="Lukas"
         android:textSize="20dp"
         android:paddingLeft="40dp"
         android:paddingRight="20dp"
@@ -30,7 +29,8 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/se"/>
+        android:background="@drawable/se"
+        android:id="@+id/myFlag"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"

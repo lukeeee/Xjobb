@@ -18,7 +18,7 @@ public class HelperClass {
     private final String PREFSUSERID = "cardFeudUserId";
     private final String PREFSIDENTIFIER = "cardFeudIdentifier";
     private final String PREFSDEVICEREGID = "cardFeudDeviceId";
-    private final String PREFSUSERNAME = "cardFeudUsername";
+    public static final String PREFSUSERNAME = "cardFeudUsername";
     private final String PREFSCOUNTRYCODE = "cardFeudCountryCode";
 
     // Constructor to set Context

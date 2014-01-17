@@ -19,9 +19,7 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="52dp"
-                android:text="Lukas Stats"
                 android:textSize="25dp"
-                android:paddingLeft="40dp"
                 android:paddingRight="20dp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -29,11 +27,6 @@
                 android:shadowRadius="30"
                 android:background="@drawable/button"
                 android:id="@+id/personalstat_txt"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/se"/>
 
         </RelativeLayout>
 
