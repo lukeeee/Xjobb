@@ -20,7 +20,7 @@ public class Splash extends Activity {
         @Override
              public void run() {
              //Start main activity when timer is over
-             Intent i = new Intent(Splash.this, MainActivity.class);
+             Intent i = new Intent(Splash.this, Login.class);
              startActivity(i);
 
              // Close this activity
