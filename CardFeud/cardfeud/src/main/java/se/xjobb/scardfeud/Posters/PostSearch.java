@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
+import java.net.URLEncoder;
 
 import se.xjobb.scardfeud.Search;
 import se.xjobb.scardfeud.User;

@@ -178,7 +178,10 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
             removeOldResults();
             // get search string
             searchQuery = searchText.getText().toString();
-            searchQuery.replaceAll("\\s+", "");
+            // trim all trailing whitespaces
+            searchQuery.trim();
+            // replace all whitespaces in search string with url appropriate char
+            searchQuery = searchQuery.replace(" ", "%20");
 
             if(searchQuery.length() < 1 || searchQuery.length() > 30){
                 searchQuery = null;
