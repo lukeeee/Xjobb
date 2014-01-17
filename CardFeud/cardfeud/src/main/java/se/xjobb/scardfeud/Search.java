@@ -174,10 +174,17 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
             // remove old results
             removeOldResults();
             // get search string
             searchQuery = searchText.getText().toString();
+
+            // check if query is all whitespaces
+            if(searchQuery.matches("^\\s*$")){
+                searchQuery = "";
+            }
+
             // trim all trailing whitespaces
             searchQuery.trim();
             // replace all whitespaces in search string with url appropriate char
