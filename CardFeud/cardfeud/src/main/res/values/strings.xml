@@ -24,6 +24,9 @@
     <string name="title_activity_rules">Rules</string>
     <string name="title_activity_stats">Stats</string>
     <string name="title_activity_start">Start</string>
+    <string name="title_activity_mystat">My Stats</string>
+    <string name="title_activity_worldlist">Worldlist</string>
+    <string name="title_activity_countrylist">Countrylist</string>
 
     <string name="sign_up_text">Sign Up</string>
     <string name="username_hint">Username</string>
