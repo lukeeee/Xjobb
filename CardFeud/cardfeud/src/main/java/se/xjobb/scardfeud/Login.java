@@ -261,9 +261,7 @@ public class Login extends Activity implements View.OnClickListener{
 
             try{
                 username = usernameEditText.getText().toString();
-                username = username.trim();
                 password = passwordEditText.getText().toString();
-                password = password.trim();
 
             } catch (NullPointerException ex) {
                 Log.e("Null Exception: ", ex.getMessage());
@@ -272,6 +270,9 @@ public class Login extends Activity implements View.OnClickListener{
 
             // check input
             if(validateInput(username, password) != false){
+
+                username = username.trim();
+                password = password.trim();
 
                 // create user object
                 User newUser = new User();
