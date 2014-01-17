@@ -27,6 +27,10 @@
                 android:shadowRadius="30"
                 android:background="@drawable/button"
                 android:id="@+id/personalstat_txt"/>
+            <ImageView
+                android:layout_width="51dp"
+                android:layout_height="51dp"
+                android:id="@+id/my_flag"/>
 
         </RelativeLayout>
 

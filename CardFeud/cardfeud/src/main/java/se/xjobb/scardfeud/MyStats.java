@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -14,6 +15,7 @@ import android.widget.TextView;
 public class MyStats extends Fragment {
     TextView personalstat_txt;
     private String username;
+    ImageView flag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,14 +24,14 @@ public class MyStats extends Fragment {
         personalstat_txt = (TextView)rootView.findViewById(R.id.personalstat_txt);
         personalstat_txt.getBackground().setAlpha(150);
         username = User.UserDetails.getUsername();
-        Drawable myFlag = getResources().getDrawable(R.drawable.us);
+        flag = (ImageView)rootView.findViewById(R.id.my_flag);
+        Drawable myFlag = getResources().getDrawable(R.drawable.se);
         if(username.endsWith("s")){
             personalstat_txt.setText(username + " " + "Stats");
-            personalstat_txt.setCompoundDrawablesWithIntrinsicBounds(myFlag, null, null, null);
         }else{
             personalstat_txt.setText(username + "'s Stats");
-            personalstat_txt.setCompoundDrawablesWithIntrinsicBounds(myFlag, null, null, null);
         }
+        flag.setImageDrawable(myFlag);
 
         return rootView;
     }
