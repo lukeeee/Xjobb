@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import se.xjobb.scardfeud.Posters.PostLogin;
 
 /**
@@ -203,6 +206,13 @@ public class Login extends Activity implements View.OnClickListener{
             return false;
         }
 
+        if(username.matches("^\\s*$")){
+            usernameEditText.setBackgroundResource(R.drawable.error);
+            usernameEditText.setPadding(20, 0, 0, 0);
+            errorUsername.setText("Can't be only whitespace");
+            return false;
+        }
+
 
         if(password.length() > 30 || password.length() < 2){
             passwordEditText.setBackgroundResource(R.drawable.error);
@@ -210,6 +220,18 @@ public class Login extends Activity implements View.OnClickListener{
             errorPassword.setText("2-30 chars");
             return false;
         }
+
+        Pattern pattern = Pattern.compile("\\s");
+        Matcher matcher = pattern.matcher(password);
+        boolean found = matcher.find();
+
+        if(found){
+            passwordEditText.setBackgroundResource(R.drawable.error);
+            passwordEditText.setPadding(20, 0, 0, 0);
+            errorPassword.setText("Whitespace not allowed in password");
+            return false;
+        }
+
 
         return true;
     }
@@ -239,8 +261,9 @@ public class Login extends Activity implements View.OnClickListener{
 
             try{
                 username = usernameEditText.getText().toString();
+                username = username.trim();
                 password = passwordEditText.getText().toString();
-
+                password = password.trim();
 
             } catch (NullPointerException ex) {
                 Log.e("Null Exception: ", ex.getMessage());
