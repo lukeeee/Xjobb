@@ -14,6 +14,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
     private Button logoutButton;
     private HelperClass helperClass;
     private String username;
+    private Button game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,10 @@ public class AppSettings extends Activity implements View.OnClickListener{
         setContentView(R.layout.app_settings);
 
         logoutButton = (Button)findViewById(R.id.logout);
+        game = (Button)findViewById(R.id.game);
 
         logoutButton.setOnClickListener(this);
+        game.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
     }
@@ -69,6 +72,10 @@ public class AppSettings extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         if(v == logoutButton){
             finishActivity();
+        }
+        else if (v == game){
+            Intent gp = new Intent(getApplicationContext(), Game.class);
+            startActivity(gp);
         }
     }
 }

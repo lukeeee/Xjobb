@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -12,12 +13,15 @@ import android.widget.TextView;
  */
 public class WorldList extends Fragment {
     TextView worldlist_txt;
+    ListView worldList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.worldlist_layout, container, false);
         worldlist_txt = (TextView)rootView.findViewById(R.id.worldlist_txt);
+        worldList = (ListView)rootView.findViewById(R.id.worldlist);
+        worldList.getBackground().setAlpha(150);
         worldlist_txt.getBackground().setAlpha(150);
 
         return rootView;

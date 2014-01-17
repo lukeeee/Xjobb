@@ -1,11 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="se.xjobb.scardfeud.NewGameame" >
+    tools:context="se.xjobb.scardfeud.NewGame" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -86,87 +89,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Emil"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/one"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/se"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
-    <RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
-    <Button
+    <ListView
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="Benteke"
-        android:background="@drawable/button"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:textStyle="bold"
-        android:id="@+id/two"/>
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/ng"/>
-</RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Stanley"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/three"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/us"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="José"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/four"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/es"/>
-    </RelativeLayout>
+        android:background="@drawable/button"
+        android:id="@+id/friends"/>
 
 
 </LinearLayout>
+    </ScrollView>

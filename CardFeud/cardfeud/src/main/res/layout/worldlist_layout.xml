@@ -35,6 +35,18 @@
                 android:layout_height="50dp"
                 android:background="@drawable/globe"/>
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp"/>
+        <ListView
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:background="@drawable/button"
+            android:id="@+id/worldlist">
+
+        </ListView>
+
 
     </LinearLayout>
 </ScrollView>

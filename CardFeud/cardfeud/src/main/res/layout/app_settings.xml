@@ -23,6 +23,19 @@
         android:layout_gravity="center"
         android:textStyle="bold"
         android:id="@+id/logout"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            />
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:background="@drawable/button"
+            android:text="Game debug"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/game"/>
 
     </LinearLayout>
     </ScrollView>

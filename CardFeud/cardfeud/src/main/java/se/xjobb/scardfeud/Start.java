@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -16,46 +17,42 @@ import android.widget.TextView;
  */
 public class Start extends Fragment implements View.OnClickListener {
     TextView user;
-    TextView games;
-    TextView fin_Games;
+    TextView gamestext;
+    TextView waitingtext;
+    TextView fin_Gamestext;
     Button newGame;
-    Button game1;
-    Button game2;
-    Button fGame1;
-    Button fGame2;
+    ListView games;
+    ListView waiting;
+    ListView finGames;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.start_layout, container, false);
         user = (TextView)rootView.findViewById(R.id.user);
-        games = (TextView)rootView.findViewById(R.id.games);
-        fin_Games = (TextView)rootView.findViewById(R.id.fin_game);
+        gamestext = (TextView)rootView.findViewById(R.id.games_text);
+        fin_Gamestext = (TextView)rootView.findViewById(R.id.fin_game_text);
         newGame = (Button)rootView.findViewById(R.id.Btn_newGame);
-        game1 = (Button)rootView.findViewById(R.id.game1);
-        game2 = (Button)rootView.findViewById(R.id.game2);
-        fGame1 = (Button)rootView.findViewById(R.id.finGame1);
-        fGame2 = (Button)rootView.findViewById(R.id.finGame2);
-        user.getBackground().setAlpha(150);
+        waitingtext = (TextView)rootView.findViewById(R.id.waiting_text);
+        games = (ListView)rootView.findViewById(R.id.games);
+        waiting = (ListView)rootView.findViewById(R.id.waiting);
+        finGames = (ListView)rootView.findViewById(R.id.finGames);
         games.getBackground().setAlpha(150);
-        fin_Games.getBackground().setAlpha(150);
+        waiting.getBackground().setAlpha(150);
+        finGames.getBackground().setAlpha(150);
+        user.getBackground().setAlpha(150);
+        gamestext.getBackground().setAlpha(150);
+        fin_Gamestext.getBackground().setAlpha(150);
         newGame.getBackground().setAlpha(150);
-        game1.getBackground().setAlpha(150);
-        game2.getBackground().setAlpha(150);
-        fGame1.getBackground().setAlpha(150);
-        fGame2.getBackground().setAlpha(150);
-        game1.setOnClickListener(this);
+        waitingtext.getBackground().setAlpha(150);
         newGame.setOnClickListener(this);
         return rootView;
     }
 
     @Override
     public void onClick(View view) {
-        if (view == game1){
-            Intent gp = new Intent(getActivity().getApplicationContext(), Game.class);
-            startActivity(gp);
-    }
-        else if (view == newGame){
+
+        if (view == newGame){
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
         }
