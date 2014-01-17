@@ -53,14 +53,18 @@ public class Start extends Fragment implements View.OnClickListener {
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
-        if (myCountry.contains("US")){
+        /*if (myCountry.contains("US")){
             Drawable myFlag = getResources().getDrawable(R.drawable.us);
             flag.setImageDrawable(myFlag);
         }
         else{
         Drawable myFlag = getResources().getDrawable(R.drawable.se);
             flag.setImageDrawable(myFlag);
-        }
+        }*/
+        String country = myCountry.toLowerCase();
+        int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
+        Drawable drawable = getResources().getDrawable(id);
+        flag.setImageDrawable(drawable);
         user.setText(username);
 
         return rootView;

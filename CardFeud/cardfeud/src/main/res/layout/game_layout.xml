@@ -23,15 +23,12 @@
         <Button
             android:layout_width="300dp"
             android:layout_height="55dp"
-            android:text="Lukas  ( 7-5 )  Emil"
             android:textSize="20sp"
             android:background="@drawable/button"
             android:textStyle="bold"
             android:id="@+id/gamestat"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/se"
-            android:drawableLeft="@drawable/se"/>
+            android:shadowRadius="30"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -43,13 +40,12 @@
         <ImageView
             android:layout_width="180dp"
             android:layout_height="250sp"
-            android:background="@drawable/c_two"
             android:id="@+id/gamecards"/>
-        <Button
+        <!--Button
             android:layout_width="180dp"
             android:layout_height="250sp"
             android:background="@drawable/start"
-            android:id="@+id/start_game"/>
+            android:id="@+id/start_game"/-->
     </RelativeLayout>
     <View
         android:layout_width="match_parent"

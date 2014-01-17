@@ -16,6 +16,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 public class Game extends Activity implements View.OnClickListener {
 
@@ -26,12 +28,18 @@ public class Game extends Activity implements View.OnClickListener {
     private Button pass;
     private ProgressDialog progressDialog;
     private ImageView gamecards;
+    private static final Random rgenerator = new Random();
+    private ImageView iv;
+
+    private static final Integer[] mImageIds =
+            { R.drawable.c_a, R.drawable.c_eight, R.drawable.c_five,R.drawable.c_four,R.drawable.c_j,R.drawable.c_k,R.drawable.c_nine,R.drawable.c_q,R.drawable.c_seven,
+                    R.drawable.c_six,R.drawable.c_ten,R.drawable.c_three,R.drawable.c_two};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
-        start = (Button)findViewById(R.id.start_game);
+        //start = (Button)findViewById(R.id.start_game);
         high = (Button)findViewById(R.id.higher);
         low = (Button)findViewById(R.id.lower);
         stat = (Button)findViewById(R.id.gamestat);
@@ -41,10 +49,32 @@ public class Game extends Activity implements View.OnClickListener {
         low.getBackground().setAlpha(150);
         stat.getBackground().setAlpha(150);
         pass.getBackground().setAlpha(150);
-        start.setOnClickListener(this);
+        //start.setOnClickListener(this);
         stat.setOnClickListener(this);
         final ActionBar actionBar = getActionBar();
+        Integer q = mImageIds[rgenerator.nextInt(mImageIds.length)];
+        changeImageResource();
+        high.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeImageResource();
+            }
+        });
+        low.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeImageResource();
+            }
+        });
+        pass.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeImageResource();
+            }
+        });
 
+    }
+    public void changeImageResource()
+    {
+        int i = rgenerator.nextInt(13);
+        gamecards.setImageResource(mImageIds[i]);
     }
     public void showProgressDialog(){
         if(progressDialog == null){
@@ -71,10 +101,10 @@ public class Game extends Activity implements View.OnClickListener {
         return true;
     }
     public void onClick(View view) {
-        if (view == start){
+        /*if (view == start){
             start.setVisibility(Button.INVISIBLE);
-        }
-        else if (view == stat){
+        }*/
+       if (view == stat){
             AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
             dialog.setTitle("Game stats");
             dialog.setIcon(R.drawable.stat);
@@ -88,6 +118,7 @@ public class Game extends Activity implements View.OnClickListener {
             });
             dialog.show();
         }
+
     }
 
 
