@@ -133,7 +133,6 @@ public class Login extends Activity implements View.OnClickListener{
             User.UserDetails.setAppVersion(getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).getInt("appVersion", 0));
             // decrypt the identifier
             User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
-System.out.println("REG: " + User.UserDetails.getDeviceRegId());
         } catch (Exception ex) {
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
@@ -154,7 +153,6 @@ System.out.println("REG: " + User.UserDetails.getDeviceRegId());
             } else if(User.UserDetails.getAppVersion() == 0){
                 // when we start the app the first time
                 // we found all stored values and do not need to login again.
-                System.out.println("REG: " + User.UserDetails.getDeviceRegId());
 
                 Intent i = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(i);
