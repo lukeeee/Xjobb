@@ -20,6 +20,7 @@ public class NewGame extends Activity implements View.OnClickListener{
     Button search_player;
     Button random_player;
     private String username;
+    private String userCountry;
     ImageView flag;
 
     private ProgressDialog progressDialog;
@@ -41,15 +42,28 @@ public class NewGame extends Activity implements View.OnClickListener{
         search_player.setOnClickListener(this);
         random_player.setOnClickListener(this);
         username = User.UserDetails.getUsername();
-        Drawable myFlag = getResources().getDrawable(R.drawable.se);
-        user.setText(username);
-        flag.setImageDrawable(myFlag);
+        userCountry = User.UserDetails.getUserCountryCode();
 
         helperClass = new HelperClass(this);
     }
 
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        user.setText(username);
 
+        try {
+            String country = userCountry.toLowerCase();
+            int id = getResources().getIdentifier(country, "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
+        } catch (RuntimeException ex) {
+            Toast.makeText(this, "Finns inte!", 1000).show();
+        }
+
+
+    }
 
     // show loading dialog
     public void showProgressDialog(){

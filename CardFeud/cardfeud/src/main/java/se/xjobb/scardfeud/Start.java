@@ -70,6 +70,7 @@ public class Start extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
+
     @Override
     public void onClick(View view) {
 
