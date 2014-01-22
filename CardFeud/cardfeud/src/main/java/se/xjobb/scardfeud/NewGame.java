@@ -22,8 +22,8 @@ public class NewGame extends Activity implements View.OnClickListener{
     Button random_player;
     private String username;
     private String userCountry;
+    private boolean setFlag = false;
     ImageView flag;
-    private String myCountry;
 
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
@@ -47,12 +47,23 @@ public class NewGame extends Activity implements View.OnClickListener{
         userCountry = User.UserDetails.getUserCountryCode();
 
         helperClass = new HelperClass(this);
+        setFlag = true;
+        setUserFlag();
     }
 
 
     @Override
     protected void onResume(){
         super.onResume();
+
+        // if on create was not called
+        if(setFlag != false){
+            setUserFlag();
+        }
+    }
+
+
+    private void setUserFlag(){
         user.setText(username);
 
         try {

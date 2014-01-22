@@ -38,6 +38,7 @@ public class Login extends Activity implements View.OnClickListener{
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
     private Crypt crypt;
+    private boolean created = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,9 @@ public class Login extends Activity implements View.OnClickListener{
 
         helperClass = new HelperClass(this);
         crypt = new Crypt();
+        created = true;
+        getUserDetails();
+
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
@@ -67,6 +71,13 @@ public class Login extends Activity implements View.OnClickListener{
     protected void onResume(){
         super.onResume();
 
+        if(created != true){
+            // if onCreate didn't run
+            getUserDetails();
+        }
+    }
+
+    private void getUserDetails(){
         try{
             User.UserDetails.setUserId(getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).getInt("userId", 0));
             User.UserDetails.setUsername(getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).getString("username", null));
