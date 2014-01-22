@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,11 +55,19 @@ public class Start extends Fragment implements View.OnClickListener {
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
 
-        String country = myCountry.toLowerCase();
-        int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
-        Drawable drawable = getResources().getDrawable(id);
-        flag.setImageDrawable(drawable);
         user.setText(username);
+
+        try {
+            String country = myCountry.toLowerCase();
+            int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getActivity().getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
+        }
 
         return rootView;
     }
