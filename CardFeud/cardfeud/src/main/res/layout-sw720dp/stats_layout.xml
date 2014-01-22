@@ -11,16 +11,15 @@
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="30dp"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="300dp"
-                android:layout_height="52dp"
-                android:textSize="25dp"
-                android:paddingRight="20dp"
+                android:layout_width="600dp"
+                android:layout_height="102dp"
+                android:textSize="50dp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:shadowColor="#000"
@@ -28,8 +27,8 @@
                 android:background="@drawable/button"
                 android:id="@+id/personalstat_txt"/>
             <ImageView
-                android:layout_width="51dp"
-                android:layout_height="51dp"
+                android:layout_width="102dp"
+                android:layout_height="102dp"
                 android:id="@+id/my_flag"/>
 
         </RelativeLayout>
@@ -37,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="15dp"/>
         <ListView
-            android:layout_width="300dp"
+            android:layout_width="600dp"
             android:layout_gravity="center"
             android:layout_height="match_parent"
             android:background="@drawable/button"

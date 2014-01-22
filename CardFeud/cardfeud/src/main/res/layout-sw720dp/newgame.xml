@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="se.xjobb.scardfeud.NewGame" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#005500"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textSize="40dp"
+                android:paddingLeft="80dp"
+                android:paddingRight="40dp"
+                android:textStyle="bold"
+                android:background="@drawable/button"
+                android:id="@+id/user2"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/flagMy"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <Button
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:text="Search Player"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/search_player"
+            android:shadowColor="#000"
+            android:shadowRadius="30"
+            android:drawableRight="@drawable/search"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <Button
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:text="Random Player"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/random_player"
+            android:shadowColor="#000"
+            android:shadowRadius="30"
+            android:drawableRight="@drawable/random"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Friends"
+                android:textSize="40dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:textStyle="bold"
+                android:background="@drawable/button"
+                android:id="@+id/friends"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+        <ListView
+            android:layout_width="600dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/button"
+            android:id="@+id/friends"/>
+
+
+    </LinearLayout>
+</ScrollView>

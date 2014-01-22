@@ -8,13 +8,13 @@
     tools:context="se.xjobb.scardfeud.Search" >
 
     <EditText
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_width="600dp"
+        android:layout_height="80dp"
         android:imeOptions="actionSearch"
-        android:background="@drawable/button"
         android:inputType="text"
+        android:background="@drawable/button"
         android:id="@+id/search_edit_text"
         android:drawableRight="@drawable/search"/>
 

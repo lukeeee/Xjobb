@@ -4,46 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="se.xjobb.scardfeud.MyStats" >
+    tools:context="se.xjobb.scardfeud.CountryList" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="30dp"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="300dp"
-                android:layout_height="52dp"
-                android:textSize="25dp"
-                android:paddingRight="20dp"
+                android:layout_width="600dp"
+                android:layout_height="102dp"
+                android:text="Country List"
+                android:textSize="50dp"
+                android:paddingLeft="80dp"
+                android:paddingRight="40dp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:shadowColor="#000"
                 android:shadowRadius="30"
                 android:background="@drawable/button"
-                android:id="@+id/personalstat_txt"/>
-            <ImageView
-                android:layout_width="51dp"
-                android:layout_height="51dp"
-                android:id="@+id/my_flag"/>
+                android:id="@+id/coulist_txt"/>
 
+            <ImageView
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:id="@+id/country_flag"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="15dp"/>
         <ListView
-            android:layout_width="300dp"
+            android:layout_width="600dp"
             android:layout_gravity="center"
             android:layout_height="match_parent"
             android:background="@drawable/button"
-            android:id="@+id/myStatList">
+            android:id="@+id/countrylist">
 
         </ListView>
+
 
     </LinearLayout>
 </ScrollView>
