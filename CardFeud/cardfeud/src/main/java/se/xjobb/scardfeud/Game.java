@@ -58,6 +58,8 @@ public class Game extends Activity implements View.OnClickListener {
         waiting.setVisibility(View.INVISIBLE);
         waiting.setText("Waiting for " + "null");
         final ActionBar actionBar = getActionBar();
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
         Integer q = mImageIds[rgenerator.nextInt(mImageIds.length)];
         changeImageResource();
         high.setOnClickListener(new View.OnClickListener() {
