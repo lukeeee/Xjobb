@@ -56,6 +56,7 @@ public class Game extends Activity implements View.OnClickListener {
         pass.getBackground().setAlpha(150);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
+        waiting.setText("Waiting for " + "null");
         final ActionBar actionBar = getActionBar();
         Integer q = mImageIds[rgenerator.nextInt(mImageIds.length)];
         changeImageResource();

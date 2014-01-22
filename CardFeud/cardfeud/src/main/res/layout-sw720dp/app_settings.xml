@@ -13,21 +13,128 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#005500"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:text="Settings"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:textSize="50dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="600dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sounds"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="50dp"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:id="@+id/sounds"
+                android:layout_marginLeft="107dp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="600dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vibration"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"
+                android:textColor="#fff"
+                android:textSize="50dp"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vibration"
+                android:background="@drawable/button"
+                android:layout_marginLeft="52dp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Account"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="left"
+                android:id="@+id/myAccount"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:gravity="left"
+                android:id="@+id/about_us"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:gravity="left"
+                android:id="@+id/logout"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
 
         <Button
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:text="Log out"
-            android:background="@drawable/button"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/logout"/>
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            />
-        <Button
+            android:layout_marginTop="70dp"
             android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:textSize="50sp"
@@ -38,7 +145,7 @@
             android:id="@+id/game"/>
         <View
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="20dp"
             />
         <Button
             android:layout_width="600dp"
@@ -49,7 +156,6 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:id="@+id/debug_country"/>
-
 
     </LinearLayout>
 </ScrollView>

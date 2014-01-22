@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ public class AppSettings extends Activity implements View.OnClickListener{
     private String username;
     private Button game;
     private Button countryDebug;
+    private Button myAccount;
+    private Button about_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +31,20 @@ public class AppSettings extends Activity implements View.OnClickListener{
         logoutButton = (Button)findViewById(R.id.logout);
         game = (Button)findViewById(R.id.game);
         countryDebug = (Button)findViewById(R.id.debug_country);
+        myAccount = (Button)findViewById(R.id.myAccount);
+        about_btn = (Button)findViewById(R.id.about_us);
+        about_btn.getBackground().setAlpha(0);
+        myAccount.getBackground().setAlpha(0);
+        logoutButton.getBackground().setAlpha(0);
 
         logoutButton.setOnClickListener(this);
         game.setOnClickListener(this);
         countryDebug.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
+        final ActionBar actionBar = getActionBar();
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
     }
 
 

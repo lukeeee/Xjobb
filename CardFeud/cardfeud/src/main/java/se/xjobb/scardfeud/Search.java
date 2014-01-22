@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
@@ -57,7 +58,9 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
         searchText.setOnEditorActionListener(this);
         helperClass = new HelperClass(this);
-
+        final ActionBar actionBar = getActionBar();
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
 
         //Determine screen size
         if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
