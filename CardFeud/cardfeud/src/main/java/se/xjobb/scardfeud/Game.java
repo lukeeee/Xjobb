@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -26,7 +27,10 @@ public class Game extends Activity implements View.OnClickListener {
     private ProgressDialog progressDialog;
     private ImageView gamecards;
     private static final Random rgenerator = new Random();
-    private ImageView iv;
+    private int userId;
+    private int gameId;
+    private int choice;
+    private TextView waiting;
 
     private static final Integer[] mImageIds =
             { R.drawable.c_a, R.drawable.c_eight, R.drawable.c_five,R.drawable.c_four,R.drawable.c_j,R.drawable.c_k,R.drawable.c_nine,R.drawable.c_q,R.drawable.c_seven,
@@ -39,34 +43,47 @@ public class Game extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_layout);
-        //start = (Button)findViewById(R.id.start_game);
         high = (Button)findViewById(R.id.higher);
         low = (Button)findViewById(R.id.lower);
         stat = (Button)findViewById(R.id.gamestat);
         pass = (Button)findViewById(R.id.pass);
         gamecards = (ImageView)findViewById(R.id.gamecards);
+        waiting = (TextView)findViewById(R.id.waiting);
+        waiting.getBackground().setAlpha(150);
         high.getBackground().setAlpha(150);
         low.getBackground().setAlpha(150);
         stat.getBackground().setAlpha(150);
         pass.getBackground().setAlpha(150);
-        //start.setOnClickListener(this);
         stat.setOnClickListener(this);
+        waiting.setVisibility(View.INVISIBLE);
         final ActionBar actionBar = getActionBar();
         Integer q = mImageIds[rgenerator.nextInt(mImageIds.length)];
         changeImageResource();
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
+                high.setVisibility(View.INVISIBLE);
+                low.setVisibility(View.INVISIBLE);
+                pass.setVisibility(View.INVISIBLE);
+                waiting.setVisibility(View.VISIBLE);
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
+                high.setVisibility(View.INVISIBLE);
+                low.setVisibility(View.INVISIBLE);
+                pass.setVisibility(View.INVISIBLE);
+                waiting.setVisibility(View.VISIBLE);
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
+                high.setVisibility(View.INVISIBLE);
+                low.setVisibility(View.INVISIBLE);
+                pass.setVisibility(View.INVISIBLE);
+                waiting.setVisibility(View.VISIBLE);
             }
         });
 
@@ -108,9 +125,7 @@ public class Game extends Activity implements View.OnClickListener {
             AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
             dialog.setTitle("Game stats");
             dialog.setIcon(R.drawable.stat);
-            dialog.setMessage("Round ONE: 6 of Hearts\n" +
-                    "  Lukas pressed Higher: 1 Point\n" +
-                    "  Emil   pressed Lower: -1 Point");
+            dialog.setMessage("Round ONE: ");
             dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
@@ -159,10 +174,13 @@ public class Game extends Activity implements View.OnClickListener {
 
                 return true;
             case R.id.action_refresh:
-                Intent refreshIntent = new Intent(getBaseContext(), Game.class);
+                Intent intent = getIntent();
+                overridePendingTransition(0, 0);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
                 showProgressDialog();
-                startActivity(refreshIntent);
                 return true;
         }
 
@@ -173,9 +191,6 @@ public class Game extends Activity implements View.OnClickListener {
 
     // This object represents the current ongoing game_layout
 
-    private int userId;
-    private int gameId;
-    private int choice;
 
     public int getUserId() {
         return userId;
