@@ -65,9 +65,11 @@ public class PostLogin {
             int statusCode;
 
             // Add your data
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(4);
             nameValuePairs.add(new BasicNameValuePair("username", user.getUsername()));
             nameValuePairs.add(new BasicNameValuePair("password", user.getPassword()));
+            nameValuePairs.add(new BasicNameValuePair("version", "1.0"));
+            nameValuePairs.add(new BasicNameValuePair("device", "android"));
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             HttpResponse httpResponse = httpclient.execute(httpPost);

@@ -136,7 +136,7 @@ public class SignUp extends Activity implements View.OnClickListener {
         showFeedbackToast(message);
         saveValues();
 
-        Intent i = new Intent(getBaseContext(), MainActivity.class);
+        Intent i = new Intent(getBaseContext(), Login.class);
         startActivity(i);
         this.finish();
     }

@@ -2,7 +2,9 @@ package se.xjobb.scardfeud;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +43,7 @@ public class Login extends Activity implements View.OnClickListener{
     private HelperClass helperClass;
     private Crypt crypt;
     private boolean created = false;
+    private final static int REQUEST_GOOGLE_PLAY_SERVICES = 9000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +82,46 @@ public class Login extends Activity implements View.OnClickListener{
         }
     }
 
+    // check if google play service is available
+    private boolean checkGooglePlayServicesAvailable() {
+        final int connectionStatusCode = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(this);
+        Log.i("CardFeud: ",
+                "checkGooglePlayServicesAvailable, connectionStatusCode="
+                        + connectionStatusCode);
+        if (GooglePlayServicesUtil.isUserRecoverableError(connectionStatusCode)) {
+            showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
+            return false;
+        }
+
+        return true;
+    }
+
+    // show a dialog if google play service ain't available
+    private void showGooglePlayServicesAvailabilityErrorDialog(
+        final int connectionStatusCode) {
+
+        final Activity activity = this;
+
+        runOnUiThread(new Runnable() {
+            public void run() {
+
+                final Dialog dialog = GooglePlayServicesUtil.getErrorDialog(
+                        connectionStatusCode, activity,
+                        REQUEST_GOOGLE_PLAY_SERVICES);
+                if (dialog == null) {
+                    Log.e("CardFeud: ",
+                            "couldn't get GooglePlayServicesUtil.getErrorDialog");
+
+                }
+                dialog.show();
+            }
+        });
+    }
+
+
     private void getUserDetails(){
+
         try{
             User.UserDetails.setUserId(getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).getInt("userId", 0));
             User.UserDetails.setUsername(getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).getString("username", null));
@@ -98,6 +142,11 @@ public class Login extends Activity implements View.OnClickListener{
             Intent i = new Intent(getBaseContext(), MainActivity.class);
             startActivity(i);
             this.finish();
+        } else {
+            // if we are coming from sign up
+            if(User.UserDetails.getUsername() != null){
+                usernameEditText.setText(User.UserDetails.getUsername());
+            }
         }
 
     }
@@ -263,61 +312,63 @@ public class Login extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        if(v == signInButton){
-            // if we are logging in
-            setNormalLayout();
+        // make sure Google Play Service is available
+        if(checkGooglePlayServicesAvailable()) {
 
-            String username = null;
-            String password = null;
+            if(v == signInButton){
+                // if we are logging in
+                setNormalLayout();
 
-            try{
-                username = usernameEditText.getText().toString();
-                password = passwordEditText.getText().toString();
+                String username = null;
+                String password = null;
 
-            } catch (NullPointerException ex) {
-                Log.e("Null Exception: ", ex.getMessage());
-            }
+                try{
+                    username = usernameEditText.getText().toString();
+                    password = passwordEditText.getText().toString();
 
-
-            // check input
-            if(validateInput(username, password) != false){
-
-                username = username.trim();
-                password = password.trim();
-
-                // create user object
-                User newUser = new User();
-                newUser.setUsername(username);
-                newUser.setPassword(password);
-
-                // set static username value
-                User.UserDetails.setUsername(username);
-
-                if(helperClass.isConnected() != true){
-                    helperClass.showNetworkErrorDialog();
-                    // add retry to dialog.
-                } else {
-                    // http request to sign up new user
-                    PostLogin postSignUp = new PostLogin(this, newUser);
-                    postSignUp.postJson();
+                } catch (NullPointerException ex) {
+                    Log.e("Null Exception: ", ex.getMessage());
                 }
 
+
+                // check input
+                if(validateInput(username, password) != false){
+
+                    username = username.trim();
+                    password = password.trim();
+
+                    // create user object
+                    User newUser = new User();
+                    newUser.setUsername(username);
+                    newUser.setPassword(password);
+
+                    // set static username value
+                    User.UserDetails.setUsername(username);
+
+                    if(helperClass.isConnected() != true){
+                        helperClass.showNetworkErrorDialog();
+                        // add retry to dialog.
+                    } else {
+                        // http request to sign up new user
+                        PostLogin postSignUp = new PostLogin(this, newUser);
+                        postSignUp.postJson();
+                    }
+
+                }
+            } else if(v == goToSignUpButton){
+                // if we don't have an account, go to sign up
+                Intent i = new Intent(getBaseContext(), SignUp.class);
+                startActivity(i);
+                this.finish();
             }
-        } else if(v == goToSignUpButton){
-            // if we don't have an account, go to sign up
-            Intent i = new Intent(getBaseContext(), SignUp.class);
-            startActivity(i);
-            this.finish();
         }
+
     }
 
 
 }
 
 
-//TODO save country code when sign up and login.
-
-//TODO use a solid measurement instead? like screensize/2 instead of dp unit?
 
 // Do we need to replace the identifier each time? or can we use the same all the time?
 
