@@ -43,7 +43,6 @@ public class NewGame extends Activity implements View.OnClickListener{
         search_player.setOnClickListener(this);
         random_player.setOnClickListener(this);
         username = User.UserDetails.getUsername();
-<<<<<<< HEAD
         Drawable myFlag = getResources().getDrawable(R.drawable.se);
         user.setText(username);
         myCountry = User.UserDetails.getUserCountryCode();
@@ -51,9 +50,7 @@ public class NewGame extends Activity implements View.OnClickListener{
         int id = getResources().getIdentifier(country, "drawable", this.getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         flag.setImageDrawable(drawable);
-=======
         userCountry = User.UserDetails.getUserCountryCode();
->>>>>>> bfb342ba2ee404c72b876f5ecea4046ffa592bff
 
         helperClass = new HelperClass(this);
     }
