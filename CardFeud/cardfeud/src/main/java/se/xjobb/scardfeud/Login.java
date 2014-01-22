@@ -7,6 +7,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -23,6 +25,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import se.xjobb.scardfeud.Posters.PostDeviceId;
+import se.xjobb.scardfeud.Posters.PostGoogleRegistration;
 import se.xjobb.scardfeud.Posters.PostLogin;
 
 /**
@@ -119,29 +123,44 @@ public class Login extends Activity implements View.OnClickListener{
         });
     }
 
-
     private void getUserDetails(){
 
         try{
             User.UserDetails.setUserId(getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).getInt("userId", 0));
             User.UserDetails.setUsername(getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).getString("username", null));
             User.UserDetails.setUserCountryCode(getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).getString("countrycode", null));
-
+            User.UserDetails.setDeviceRegId(getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).getString("deviceRegId", null));
+            User.UserDetails.setAppVersion(getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).getInt("appVersion", 0));
             // decrypt the identifier
             User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
-
+System.out.println("REG: " + User.UserDetails.getDeviceRegId());
         } catch (Exception ex) {
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
 
 
         if(User.UserDetails.getUsername() != null && User.UserDetails.getIdentifier() != null
-                && User.UserDetails.getUserId() != 0 && User.UserDetails.getUserCountryCode() != null){
+                && User.UserDetails.getUserId() != 0 && User.UserDetails.getUserCountryCode() != null
+                && User.UserDetails.getDeviceRegId() != null){
 
-            // we found all stored values and do not need to login again.
-            Intent i = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(i);
-            this.finish();
+            int currentVersion = getAppVersion(this);
+
+            // check so the app version has not been changed
+            if (User.UserDetails.getAppVersion() == currentVersion) {
+                // we found all stored values and do not need to login again.
+                Intent i = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(i);
+                this.finish();
+            } else if(User.UserDetails.getAppVersion() == 0){
+                // when we start the app the first time
+                // we found all stored values and do not need to login again.
+                System.out.println("REG: " + User.UserDetails.getDeviceRegId());
+
+                Intent i = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(i);
+                this.finish();
+            }
+
         } else {
             // if we are coming from sign up
             if(User.UserDetails.getUsername() != null){
@@ -151,6 +170,17 @@ public class Login extends Activity implements View.OnClickListener{
 
     }
 
+
+    private static int getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            // should never happen
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
 
     // show loading dialog
     public void showProgressDialog(){
@@ -203,15 +233,30 @@ public class Login extends Activity implements View.OnClickListener{
                 getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).edit().putString("countrycode", User.UserDetails.getUserCountryCode()).commit();
             }
 
-            //  if(User.UserDetails.getDeviceId() != null){
-            //      getSharedPreferences(helperClass.getPrefsDeviceId(), MODE_PRIVATE).edit().putString("deviceId", User.UserDetails.getDeviceId()).commit();
-            //  }
+            if(User.UserDetails.getDeviceRegId() != null){
+                 getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
+            }
+
+            if(User.UserDetails.getAppVersion() != 0){
+                getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).edit().putInt("appVersion", User.UserDetails.getAppVersion()).commit();
+            }
 
         } catch (Exception ex){
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
     }
 
+    // register the device at Google Cloud Messaging
+    public void googleRegister(){
+        PostGoogleRegistration postGoogleRegistration = new PostGoogleRegistration(this, helperClass.getProjectNumber());
+        postGoogleRegistration.register();
+    }
+
+    // register the device on backend-server with registerId
+    public void registerDevice(){
+        PostDeviceId postDeviceId = new PostDeviceId(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), User.UserDetails.getDeviceRegId(), this);
+        postDeviceId.postRequest();
+    }
 
     public void finishActivity(String message){
         showFeedbackToast(message);

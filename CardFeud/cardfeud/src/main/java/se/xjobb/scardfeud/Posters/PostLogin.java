@@ -151,9 +151,7 @@ public class PostLogin {
                     User.UserDetails.setIdentifier(userIdentifier);
                     User.UserDetails.setUserId(userId);
                     User.UserDetails.setUserCountryCode(userCountryCode);
-                    callback.hideProgressDialog();
-                    callback.finishActivity(User.UserDetails.getUsername() + " logged in successfully!");
-
+                    callback.googleRegister();
                 }
             }
         }

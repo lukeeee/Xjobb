@@ -55,8 +55,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
             getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", User.UserDetails.getIdentifier()).commit();
             getSharedPreferences(helperClass.getPrefsUsername(), MODE_PRIVATE).edit().putString("username", User.UserDetails.getUsername()).commit();
             getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).edit().putString("countrycode", User.UserDetails.getUserCountryCode()).commit();
-
-            //getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
+            getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
 
         } catch (Exception ex){
             Log.e("Exception SharedPrefs: ", ex.getMessage());
@@ -69,6 +68,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
         User.UserDetails.setIdentifier(null);
         User.UserDetails.setUserId(0);
         User.UserDetails.setUserCountryCode(null);
+        User.UserDetails.setDeviceRegId(null);
     }
 
    // show feedback and go to "android home"

@@ -20,7 +20,8 @@ public class HelperClass {
     private final String PREFSDEVICEREGID = "cardFeudDeviceId";
     private final String PREFSUSERNAME = "cardFeudUsername";
     private final String PREFSCOUNTRYCODE = "cardFeudCountryCode";
-
+    private final String PREFSAPPVERSION = "cardFeudAppVersion";
+    private String projectNumber = "155115390012";
     // Constructor to set Context
     public HelperClass(Context context){
         this.context = context;
@@ -44,6 +45,14 @@ public class HelperClass {
 
     public String getPrefsCountryCode(){
         return this.PREFSCOUNTRYCODE;
+    }
+
+    public String getPrefsAppVersion() {
+        return this.PREFSAPPVERSION;
+    }
+
+    public String getProjectNumber() {
+        return this.projectNumber;
     }
 
     public String getKey(){

@@ -50,6 +50,7 @@ public class User {
         private static int userId;
         private static String userCountryCode;
         private static String deviceRegId;
+        private static int appVersion;
 
         public static String getUsername(){
             return username;
@@ -89,6 +90,14 @@ public class User {
 
         public static void setDeviceRegId(String deviceRegIdIn){
             deviceRegId = deviceRegIdIn;
+        }
+
+        public static int getAppVersion(){
+            return appVersion;
+        }
+
+        public static void setAppVersion(int appVersionIn){
+            appVersion = appVersionIn;
         }
 
     }
