@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     int pixelLayout;
     int pixelMargin;
     int imageLayout;
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +57,24 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
         searchText.setOnEditorActionListener(this);
         helperClass = new HelperClass(this);
-        scale = this.getResources().getDisplayMetrics().density;
-        pixelLayout = (int) (300 * scale + 0.5f);
-        pixelMargin = (int) (30 * scale + 0.5f);
-        imageLayout = (int) (48 * scale + 0.5f);
+
+
+        //Determine screen size
+        if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+            // Extra Large Screen
+            scale = this.getResources().getDisplayMetrics().density;
+            pixelLayout = (int) (600 * scale + 0.5f);
+            pixelMargin = (int) (60 * scale + 0.5f);
+            imageLayout = (int) (96 * scale + 0.5f);
+            textSize = 70;
+        } else {
+            // Normal Size Screen
+            scale = this.getResources().getDisplayMetrics().density;
+            pixelLayout = (int) (300 * scale + 0.5f);
+            pixelMargin = (int) (30 * scale + 0.5f);
+            imageLayout = (int) (48 * scale + 0.5f);
+            textSize = 20;
+        }
     }
 
 
@@ -100,7 +116,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
         foundUserButton.setBackgroundResource(R.drawable.button);
         foundUserButton.getBackground().setAlpha(150);
         foundUserButton.setText(foundUser.getUsername());
-        foundUserButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        foundUserButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         foundUserButton.setTypeface(null, Typeface.BOLD);
         foundUserButton.setId(4);
         foundUserButton.setGravity(Gravity.CENTER);

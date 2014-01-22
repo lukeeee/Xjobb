@@ -12,6 +12,7 @@
         android:layout_gravity="center"
         android:layout_width="600dp"
         android:layout_height="80dp"
+        android:textSize="40sp"
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:background="@drawable/button"
