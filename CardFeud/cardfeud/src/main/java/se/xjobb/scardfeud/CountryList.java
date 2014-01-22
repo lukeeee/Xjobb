@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.app.ActionBar;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

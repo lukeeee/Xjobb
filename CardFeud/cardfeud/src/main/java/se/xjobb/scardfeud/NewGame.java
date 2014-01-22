@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -49,6 +50,9 @@ public class NewGame extends Activity implements View.OnClickListener{
         helperClass = new HelperClass(this);
         setFlag = true;
         setUserFlag();
+        final ActionBar actionBar = getActionBar();
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
     }
 
 

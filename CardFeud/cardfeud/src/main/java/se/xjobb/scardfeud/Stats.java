@@ -43,6 +43,8 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setLogo(R.drawable.icon);
+        actionBar.setDisplayShowTitleEnabled(false);
 
 
         // Create the adapter that will return a fragment for each of the three
