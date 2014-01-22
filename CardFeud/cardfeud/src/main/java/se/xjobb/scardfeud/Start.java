@@ -52,7 +52,7 @@ public class Start extends Fragment implements View.OnClickListener {
         waitingtext.getBackground().setAlpha(150);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
-        myCountry = User.UserDetails.getUserCountryCode();
+
         /*if (myCountry.contains("US")){
             Drawable myFlag = getResources().getDrawable(R.drawable.us);
             flag.setImageDrawable(myFlag);
@@ -61,6 +61,7 @@ public class Start extends Fragment implements View.OnClickListener {
         Drawable myFlag = getResources().getDrawable(R.drawable.se);
             flag.setImageDrawable(myFlag);
         }*/
+        myCountry = User.UserDetails.getUserCountryCode();
         String country = myCountry.toLowerCase();
         int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
         Drawable drawable = getResources().getDrawable(id);

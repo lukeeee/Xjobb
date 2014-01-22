@@ -21,6 +21,7 @@ public class NewGame extends Activity implements View.OnClickListener{
     Button random_player;
     private String username;
     ImageView flag;
+    private String myCountry;
 
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
@@ -43,7 +44,11 @@ public class NewGame extends Activity implements View.OnClickListener{
         username = User.UserDetails.getUsername();
         Drawable myFlag = getResources().getDrawable(R.drawable.se);
         user.setText(username);
-        flag.setImageDrawable(myFlag);
+        myCountry = User.UserDetails.getUserCountryCode();
+        String country = myCountry.toLowerCase();
+        int id = getResources().getIdentifier(country, "drawable", this.getPackageName());
+        Drawable drawable = getResources().getDrawable(id);
+        flag.setImageDrawable(drawable);
 
         helperClass = new HelperClass(this);
     }
