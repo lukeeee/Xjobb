@@ -4,6 +4,7 @@ package se.xjobb.scardfeud;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -58,8 +59,11 @@ public class NewGame extends Activity implements View.OnClickListener{
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             flag.setImageDrawable(drawable);
-        } catch (RuntimeException ex) {
-            Toast.makeText(this, "Finns inte!", 1000).show();
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
         }
 
 
