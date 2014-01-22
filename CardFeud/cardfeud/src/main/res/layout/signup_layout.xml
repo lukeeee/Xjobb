@@ -21,6 +21,7 @@
         android:textColor="@color/ColorWhite"
         android:layout_marginTop="10dp"
         android:textSize="40dp"
+        android:gravity="center"
         android:layout_gravity="center"/>
 
     <LinearLayout
@@ -126,6 +127,7 @@
             android:layout_width="154dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginTop="40dp"
             android:textSize="16sp"
             android:textColor="@color/ColorWhite"
