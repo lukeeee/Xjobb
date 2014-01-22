@@ -36,6 +36,20 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:id="@+id/game"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            />
+        <Button
+            android:layout_width="600dp"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:background="@drawable/button"
+            android:text="Change Country Debug"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:id="@+id/debug_country"/>
+
 
     </LinearLayout>
 </ScrollView>
