@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AppSettings extends Activity implements View.OnClickListener{
 
@@ -15,6 +18,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
     private HelperClass helperClass;
     private String username;
     private Button game;
+    private Button countryDebug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +27,11 @@ public class AppSettings extends Activity implements View.OnClickListener{
 
         logoutButton = (Button)findViewById(R.id.logout);
         game = (Button)findViewById(R.id.game);
+        countryDebug = (Button)findViewById(R.id.debug_country);
 
         logoutButton.setOnClickListener(this);
         game.setOnClickListener(this);
+        countryDebug.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
     }
@@ -72,10 +78,29 @@ public class AppSettings extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         if(v == logoutButton){
             finishActivity();
-        }
-        else if (v == game){
+        } else if (v == game){
             Intent gp = new Intent(getApplicationContext(), Game.class);
             startActivity(gp);
+        } else if(v == countryDebug){
+            // debug for temporary change of country
+            List<String> debugCountries = new ArrayList<String>();
+            debugCountries.add("SE");
+            debugCountries.add("DE");
+            debugCountries.add("NG");
+            debugCountries.add("US");
+            debugCountries.add("GB");
+            debugCountries.add("ES");
+            debugCountries.add("BG");
+            debugCountries.add("XX");
+            debugCountries.add("C_");
+            debugCountries.add("PE");
+            debugCountries.add("IS");
+
+
+            int random = (int )(Math.random() * 10);
+            String country = debugCountries.get(random);
+            User.UserDetails.setUserCountryCode(country);
+            Toast.makeText(this, "Country changed to: " + country, 1000).show();
         }
     }
 }
