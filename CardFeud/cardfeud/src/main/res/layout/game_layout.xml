@@ -95,6 +95,17 @@
         android:shadowRadius="30"
         android:drawableRight="@drawable/arrow_pass_r"
         android:drawableLeft="@drawable/arrow_pass_l"/>
+        <TextView
+            android:layout_marginTop="-150dp"
+            android:layout_width="300dp"
+            android:layout_height="140dp"
+            android:background="@drawable/button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="Waiting for opponent"
+            android:id="@+id/waiting"/>
 
 
 </LinearLayout>

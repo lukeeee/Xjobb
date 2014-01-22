@@ -130,7 +130,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
 
         foundUserImage = new ImageView(this);
-        foundUserImage.setImageResource(R.drawable.se);
+        foundUserImage.setImageResource(R.drawable.globe);
 
         RelativeLayout.LayoutParams paramsImage = new RelativeLayout.LayoutParams(
                 imageLayout, imageLayout);

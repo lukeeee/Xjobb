@@ -129,10 +129,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(statsIntent);
                 return true;
             case R.id.action_refresh:
-                Intent refreshIntent = new Intent(getBaseContext(), MainActivity.class);
+                Intent intent = getIntent();
+                overridePendingTransition(0, 0);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
+                overridePendingTransition(0, 0);
+                startActivity(intent);
                 showProgressDialog();
-                startActivity(refreshIntent);
                 return true;
         }
 
