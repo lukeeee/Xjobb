@@ -16,6 +16,7 @@ public class MyStats extends Fragment {
     TextView personalstat_txt;
     private String username;
     ImageView flag;
+    private String myCountry;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,13 +26,16 @@ public class MyStats extends Fragment {
         personalstat_txt.getBackground().setAlpha(150);
         username = User.UserDetails.getUsername();
         flag = (ImageView)rootView.findViewById(R.id.my_flag);
-        Drawable myFlag = getResources().getDrawable(R.drawable.se);
+        myCountry = User.UserDetails.getUserCountryCode();
+        String country = myCountry.toLowerCase();
+        int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
+        Drawable drawable = getResources().getDrawable(id);
+        flag.setImageDrawable(drawable);
         if(username.endsWith("s")){
             personalstat_txt.setText(username + " " + "Stats");
         }else{
             personalstat_txt.setText(username + "'s Stats");
         }
-        flag.setImageDrawable(myFlag);
 
         return rootView;
     }

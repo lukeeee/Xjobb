@@ -16,7 +16,8 @@ import android.widget.TextView;
 public class CountryList extends Fragment {
     TextView coulist_txt;
     ListView countryList;
-    ImageView country;
+    ImageView country_flag;
+    private String myCountry;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,11 +25,14 @@ public class CountryList extends Fragment {
         View rootView = inflater.inflate(R.layout.countrylist_layout, container, false);
         coulist_txt = (TextView)rootView.findViewById(R.id.coulist_txt);
         countryList = (ListView)rootView.findViewById(R.id.countrylist);
-        country = (ImageView)rootView.findViewById(R.id.country_flag);
+        country_flag = (ImageView)rootView.findViewById(R.id.country_flag);
         coulist_txt.getBackground().setAlpha(150);
         countryList.getBackground().setAlpha(150);
-        Drawable myCountry = getResources().getDrawable(R.drawable.se);
-        country.setImageDrawable(myCountry);
+        myCountry = User.UserDetails.getUserCountryCode();
+        String country = myCountry.toLowerCase();
+        int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
+        Drawable drawable = getResources().getDrawable(id);
+        country_flag.setImageDrawable(drawable);
 
         return rootView;
     }
