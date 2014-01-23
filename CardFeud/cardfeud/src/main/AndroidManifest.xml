@@ -29,8 +29,6 @@
         android:theme="@style/CustomActionBarTheme" >
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
         <activity
             android:name="se.xjobb.scardfeud.Splash"
             android:screenOrientation="portrait"
@@ -122,6 +120,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.xjobb.scardfeud.MainActivity" />
         </activity>
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <receiver
             android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >

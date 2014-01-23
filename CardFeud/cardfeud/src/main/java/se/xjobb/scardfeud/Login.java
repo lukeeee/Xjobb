@@ -414,14 +414,4 @@ public class Login extends Activity implements View.OnClickListener{
 
 
 // Do we need to replace the identifier each time? or can we use the same all the time?
-
-//Can't simply use device id?
-// call to PostDeivceId from PostLogin/PostSignUp and then from PostDeviceId (instead of from PostLogin etc) stop the progressDialog (stop before if error's occur)
-// http://developer.android.com/google/gcm/index.html
-// http://rdcworld-android.blogspot.in/2013/11/android-push-notification-google-cloud.html
-
-
-
-/* Overview of gcm: You send a request to google server from your android phone.
- You receive a registration id as a response. You will then have to send this registration id to the server from where you wish to
- send notifications to the mobile. Using this registration id you can then send notification to the device. */
+// Change appearance of the notice and make sure it is removed onclick
