@@ -23,7 +23,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     String[] menuTitle = {"Play","Rules"};
     int[] menuImage = new int[]
             {R.drawable.ic_play,R.drawable.ic_rules};
-    int[] abImage = new int[] {R.drawable.icon};
     private ProgressDialog progressDialog;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -47,7 +46,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setLogo(abImage[0]);
+        actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -76,7 +75,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setIcon(menuImage[i])
+                            //.setIcon(menuImage[i])
                             .setTabListener(this));
         }
     }
