@@ -70,6 +70,11 @@ public class PostDeviceId {
                 result = "Did not work!";
             }
 
+            // if the request was sent
+            if(statusCode == 200){
+                result = "Request Sent";
+            }
+
             // if there is a server error
             if(statusCode == 500){
                 result = "Server Error";
@@ -125,7 +130,7 @@ public class PostDeviceId {
             } else if (result.contains("Server Timeout")){
                 callback.hideProgressDialog();
                 callback.showErrorDialog("The server is not responding! Please try again.");
-            } else {
+            } else if(result.contains("Request Sent")){
                 callback.hideProgressDialog();
                 callback.finishActivity(User.UserDetails.getUsername() + " logged in successfully!");
             }
