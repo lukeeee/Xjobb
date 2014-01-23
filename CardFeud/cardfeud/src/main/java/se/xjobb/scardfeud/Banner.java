@@ -27,7 +27,7 @@ public class Banner extends Activity {
         layout.addView(adView);
 
         // Initiate a generic request.
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("A292CCD1E62309968500EC6413315B5F").build();
 
         // Load the adView with the ad request.
         adView.loadAd(adRequest);
