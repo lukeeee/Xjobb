@@ -22,6 +22,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
     private Button countryDebug;
     private Button myAccount;
     private Button about_btn;
+    private Button debug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
         countryDebug = (Button)findViewById(R.id.debug_country);
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
+        debug = (Button)findViewById(R.id.debug);
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
         logoutButton.getBackground().setAlpha(0);
@@ -40,6 +42,7 @@ public class AppSettings extends Activity implements View.OnClickListener{
         logoutButton.setOnClickListener(this);
         game.setOnClickListener(this);
         countryDebug.setOnClickListener(this);
+        debug.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
         final ActionBar actionBar = getActionBar();
@@ -92,6 +95,9 @@ public class AppSettings extends Activity implements View.OnClickListener{
         } else if (v == game){
             Intent gp = new Intent(getApplicationContext(), Game.class);
             startActivity(gp);
+        } else if (v == debug){
+            Intent p = new Intent(getApplicationContext(), Banner.class);
+            startActivity(p);
         } else if(v == countryDebug){
             // debug for temporary change of country
             List<String> debugCountries = new ArrayList<String>();

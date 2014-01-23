@@ -8,6 +8,9 @@
         android:minSdkVersion="9"
         android:targetSdkVersion="16" />
 
+
+
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS " />
@@ -26,6 +29,8 @@
         android:theme="@style/CustomActionBarTheme" >
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
         <activity
             android:name="se.xjobb.scardfeud.Splash"
             android:screenOrientation="portrait"
@@ -101,6 +106,15 @@
         </activity>
         <activity
             android:name=".NewGame"
+            android:label="@string/action_newgame"
+            android:screenOrientation="portrait"
+            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="se.xjobb.scardfeud.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Banner"
             android:label="@string/action_newgame"
             android:screenOrientation="portrait"
             android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
