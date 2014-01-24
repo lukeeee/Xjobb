@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.*;
 
+
 public class Banner extends Activity {
     private AdView adView;
 

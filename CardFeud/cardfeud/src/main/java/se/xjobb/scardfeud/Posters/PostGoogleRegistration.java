@@ -51,6 +51,7 @@ public class PostGoogleRegistration {
                     callback.showErrorDialog("A error has occurred! Please try again.");
                 } else if (result.contains("Success")){
                     // if the registration was successful
+                    System.out.println("REG: " + User.UserDetails.getDeviceRegId());
                     callback.hideProgressDialog();
                     callback.registerDevice();
                 } else {
