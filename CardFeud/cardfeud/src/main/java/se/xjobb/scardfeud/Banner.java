@@ -8,47 +8,26 @@ import com.google.android.gms.ads.*;
 
 
 public class Banner extends Activity {
-    private AdView adView;
+    LinearLayout lnrMain;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        lnrMain = (LinearLayout) findViewById(R.id.lnrMain);
 
-        // Create the adView.
-        adView = new AdView(this);
-        adView.setAdUnitId("MY_AD_UNIT_ID");
-        adView.setAdSize(AdSize.BANNER);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AdView adView = new AdView(Banner.this);
+                adView.setAdUnitId("0445b7141d9d4e1b");
+                adView.setAdSize(AdSize.BANNER);
+                AdRequest.Builder builder = new AdRequest.Builder();
+                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                adView.loadAd(builder.build());
+                lnrMain.addView(adView);
+            }
+        });
 
-        // Lookup your LinearLayout assuming it's been given
-        // the attribute android:id="@+id/mainLayout".
-        LinearLayout layout = (LinearLayout)findViewById(R.id.mainLayout);
-
-        // Add the adView to it.
-        layout.addView(adView);
-
-        // Initiate a generic request.
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("A292CCD1E62309968500EC6413315B5F").build();
-
-        // Load the adView with the ad request.
-        adView.loadAd(adRequest);
-    }
-
-    @Override
-    public void onPause() {
-        adView.pause();
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        adView.resume();
-    }
-
-    @Override
-    public void onDestroy() {
-        adView.destroy();
-        super.onDestroy();
     }
 }
