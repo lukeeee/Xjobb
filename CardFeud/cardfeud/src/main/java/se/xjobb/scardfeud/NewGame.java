@@ -11,8 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
@@ -25,6 +30,7 @@ public class NewGame extends Activity implements View.OnClickListener{
     private String userCountry;
     private boolean setFlag = false;
     ImageView flag;
+    LinearLayout lnrMain;
 
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
@@ -38,6 +44,7 @@ public class NewGame extends Activity implements View.OnClickListener{
         search_player = (Button)findViewById(R.id.search_player);
         random_player = (Button)findViewById(R.id.random_player);
         flag = (ImageView)findViewById(R.id.flagMy);
+        lnrMain = (LinearLayout)findViewById(R.id.lnrMain);
         search_player.getBackground().setAlpha(150);
         user.getBackground().setAlpha(150);
         friends.getBackground().setAlpha(150);
@@ -53,8 +60,20 @@ public class NewGame extends Activity implements View.OnClickListener{
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
-    }
 
+    runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            AdView adView = new AdView(NewGame.this);
+            adView.setAdUnitId("0445b7141d9d4e1b");
+            adView.setAdSize(AdSize.BANNER);
+            AdRequest.Builder builder = new AdRequest.Builder();
+            builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+            adView.loadAd(builder.build());
+            lnrMain.addView(adView);
+        }
+    });
+    }
 
     @Override
     protected void onResume(){
