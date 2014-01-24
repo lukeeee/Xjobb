@@ -42,12 +42,12 @@
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="25dp"/>
-        <Switch
+         <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:id="@+id/sounds"
-            android:layout_marginLeft="107dp"/>
+            android:layout_marginLeft="141dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -65,12 +65,12 @@
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:textSize="25dp"/>
-            <Switch
+            <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/vibration"
                 android:background="@drawable/button"
-                android:layout_marginLeft="92dp"/>
+                android:layout_marginLeft="125dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

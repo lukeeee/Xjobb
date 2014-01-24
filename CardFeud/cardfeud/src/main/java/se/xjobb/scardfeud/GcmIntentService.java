@@ -5,6 +5,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
@@ -55,7 +58,11 @@ public class GcmIntentService extends IntentService{
                 }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
-                sendNotification("Received: " + extras.toString());
+                try{
+                    sendNotification(extras.getString("message").toString());
+                } catch (NullPointerException ex) {
+                    Log.e("CardFeud Exception: ", ex.getMessage());
+                }
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -80,6 +87,23 @@ public class GcmIntentService extends IntentService{
                         .setContentTitle("CardFeud")
                         .setContentText(msg)
                         .setAutoCancel(true);
+
+        // if vibration is active
+        if(User.UserDetails.getVibration()){
+            long[] pattern = {0, 1000};
+            mBuilder.setVibrate(pattern);
+
+        }
+
+        // if sound is active
+        if(User.UserDetails.getSound()){
+            try {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                mBuilder.setSound(notification);
+            } catch (Exception ex) {
+                Log.e("CardFeud Sound Exception: ", ex.getMessage());
+            }
+        }
 
         mBuilder.setContentIntent(contentIntent);
         notificationManager.notify(NOTIFICATION_ID, mBuilder.build());

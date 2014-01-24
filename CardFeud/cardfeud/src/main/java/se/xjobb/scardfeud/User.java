@@ -51,6 +51,8 @@ public class User {
         private static String userCountryCode;
         private static String deviceRegId;
         private static int appVersion;
+        private static boolean vibration;
+        private static boolean sound;
 
         public static String getUsername(){
             return username;
@@ -100,6 +102,21 @@ public class User {
             appVersion = appVersionIn;
         }
 
+        public static boolean getVibration(){
+            return vibration;
+        }
+
+        public static void setVibration(boolean vibrationIn){
+            vibration = vibrationIn;
+        }
+
+        public static boolean getSound(){
+            return sound;
+        }
+
+        public static void setSound(boolean soundIn){
+            sound = soundIn;
+        }
     }
 
 

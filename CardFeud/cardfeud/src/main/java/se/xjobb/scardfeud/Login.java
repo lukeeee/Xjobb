@@ -131,8 +131,11 @@ public class Login extends Activity implements View.OnClickListener{
             User.UserDetails.setUserCountryCode(getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).getString("countrycode", null));
             User.UserDetails.setDeviceRegId(getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).getString("deviceRegId", null));
             User.UserDetails.setAppVersion(getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).getInt("appVersion", 0));
+            User.UserDetails.setSound(getSharedPreferences(helperClass.getPrefsSound(), MODE_PRIVATE).getBoolean("sound", true));
+            User.UserDetails.setVibration(getSharedPreferences(helperClass.getPrefsVibration(), MODE_PRIVATE).getBoolean("vibration", true));
             // decrypt the identifier
             User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
+
         } catch (Exception ex) {
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
@@ -238,7 +241,6 @@ public class Login extends Activity implements View.OnClickListener{
             if(User.UserDetails.getAppVersion() != 0){
                 getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).edit().putInt("appVersion", User.UserDetails.getAppVersion()).commit();
             }
-
         } catch (Exception ex){
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }

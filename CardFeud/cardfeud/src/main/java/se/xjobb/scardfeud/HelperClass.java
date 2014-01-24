@@ -21,6 +21,8 @@ public class HelperClass {
     private final String PREFSUSERNAME = "cardFeudUsername";
     private final String PREFSCOUNTRYCODE = "cardFeudCountryCode";
     private final String PREFSAPPVERSION = "cardFeudAppVersion";
+    private final String PREFSSOUND = "cardFeudSound";
+    private final String PREFSVIBRATION = "cardFeudVibration";
     private String projectNumber = "155115390012";
     // Constructor to set Context
     public HelperClass(Context context){
@@ -53,6 +55,14 @@ public class HelperClass {
 
     public String getProjectNumber() {
         return this.projectNumber;
+    }
+
+    public String getPrefsSound(){
+        return this.PREFSSOUND;
+    }
+
+    public String getPrefsVibration() {
+        return this.PREFSVIBRATION;
     }
 
     public String getKey(){

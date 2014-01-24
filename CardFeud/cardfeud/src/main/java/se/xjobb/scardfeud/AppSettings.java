@@ -7,13 +7,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AppSettings extends Activity implements View.OnClickListener{
+public class AppSettings extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
     private Button logoutButton;
     private HelperClass helperClass;
@@ -22,7 +25,10 @@ public class AppSettings extends Activity implements View.OnClickListener{
     private Button countryDebug;
     private Button myAccount;
     private Button about_btn;
+    private ToggleButton soundToggleButton;
+    private ToggleButton vibrationToggleButton;
     private Button debug;
+    private boolean created = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,8 @@ public class AppSettings extends Activity implements View.OnClickListener{
         countryDebug = (Button)findViewById(R.id.debug_country);
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
+        soundToggleButton = (ToggleButton)findViewById(R.id.sounds);
+        vibrationToggleButton = (ToggleButton)findViewById(R.id.vibration);
         debug = (Button)findViewById(R.id.debug);
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
@@ -42,17 +50,69 @@ public class AppSettings extends Activity implements View.OnClickListener{
         logoutButton.setOnClickListener(this);
         game.setOnClickListener(this);
         countryDebug.setOnClickListener(this);
+        soundToggleButton.setOnCheckedChangeListener(this);
+        vibrationToggleButton.setOnCheckedChangeListener(this);
         debug.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
+        created = true;
+        setSwitchStatus();
+
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(!created){
+            // onCreate didn't run so we set switches status here
+            Log.i("onResume", "YEE");
+            setSwitchStatus();
+        }
+
+    }
+
+    // set the status for the switches
+    private void setSwitchStatus(){
+       if(User.UserDetails.getSound()){
+           // sound if on and switch is set to on
+           soundToggleButton.setChecked(true);
+       } else {
+           soundToggleButton.setChecked(false);
+       }
+
+       if(User.UserDetails.getVibration()){
+           // vibration is on and switch is set to on
+           vibrationToggleButton.setChecked(true);
+       } else {
+           vibrationToggleButton.setChecked(false);
+       }
+   }
+
+    // save settings for sound/vibration
+    private void saveSettings(int choice){
+
+        if(choice == 1){
+            // save sound settings
+            try{
+                getSharedPreferences(helperClass.getPrefsSound(), MODE_PRIVATE).edit().putBoolean("sound", User.UserDetails.getSound()).commit();
+            } catch (Exception ex){
+                Log.e("CardFeud SharedPrefs Exception", ex.getMessage());
+            }
+        } else if(choice == 2){
+            // save vibration settings
+            try{
+                getSharedPreferences(helperClass.getPrefsVibration(), MODE_PRIVATE).edit().putBoolean("vibration", User.UserDetails.getVibration()).commit();
+            } catch (Exception ex){
+                Log.e("CardFeud SharedPrefs Exception", ex.getMessage());
+            }
+        }
+    }
 
     // save the empty values to shared prefs
-    public void saveValues(){
+    private void saveValues(){
         try{
             getSharedPreferences(helperClass.getPrefsUserId(), MODE_PRIVATE).edit().putInt("userId", User.UserDetails.getUserId()).commit();
             getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).edit().putString("identifier", User.UserDetails.getIdentifier()).commit();
@@ -119,5 +179,33 @@ public class AppSettings extends Activity implements View.OnClickListener{
             User.UserDetails.setUserCountryCode(country);
             Toast.makeText(this, "Country changed to: " + country, 1000).show();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        if(buttonView == soundToggleButton){
+            if(isChecked){
+                // sound is on
+                User.UserDetails.setSound(true);
+            } else {
+                // sound off
+                User.UserDetails.setSound(false);
+            }
+            // save new settings for sounds
+            saveSettings(1);
+
+        } else if (buttonView == vibrationToggleButton){
+            if(isChecked){
+                // vibration on
+                User.UserDetails.setVibration(true);
+            } else {
+                // vibration off
+                User.UserDetails.setVibration(false);
+            }
+            // save new settings for vibration
+            saveSettings(2);
+        }
+
     }
 }
