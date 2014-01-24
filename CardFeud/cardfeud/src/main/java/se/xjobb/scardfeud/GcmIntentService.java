@@ -65,10 +65,10 @@ public class GcmIntentService extends IntentService{
             }
         } catch (NullPointerException ex) {
             Log.e("CardFeud Exception: ", ex.getMessage());
+        } finally {
+            // Release the wake lock provided by the WakefulBroadcastReceiver.
+            GcmBroadcastReceiver.completeWakefulIntent(intent);
         }
-
-        // Release the wake lock provided by the WakefulBroadcastReceiver.
-        GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
 
