@@ -35,40 +35,40 @@ public class GcmIntentService extends IntentService{
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
         String messageType = gcm.getMessageType(intent);
 
-        try {
-            if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
+        if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
              * Filter messages based on message type. Since it is likely that GCM will be
              * extended in the future with new message types, just ignore any message types you're
              * not interested in, or that you don't recognize.
              */
-                if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
-                    sendNotification("Send error: " + extras.toString());
-                } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
-                    sendNotification("Deleted messages on server: " + extras.toString());
-                    // If it's a regular GCM message, do some work.
-                } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                    // This loop represents the service doing some work.
-                    for (int i = 0; i < 5; i++) {
-                        Log.i(TAG, "Working... " + (i + 1)
-                                + "/5 @ " + SystemClock.elapsedRealtime());
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException e) {
-                        }
+            if (GoogleCloudMessaging.MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
+                sendNotification("Send error: " + extras.toString());
+            } else if (GoogleCloudMessaging.MESSAGE_TYPE_DELETED.equals(messageType)) {
+                sendNotification("Deleted messages on server: " + extras.toString());
+                // If it's a regular GCM message, do some work.
+            } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
+                // This loop represents the service doing some work.
+                for (int i = 0; i < 5; i++) {
+                    Log.i(TAG, "Working... " + (i + 1)
+                            + "/5 @ " + SystemClock.elapsedRealtime());
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
                     }
-                    Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
+                }
+                Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
+
+                try {
                     // Post notification of received message.
                     sendNotification(extras.getString("message").toString());
                     Log.i(TAG, "Received: " + extras.toString());
+                } catch (NullPointerException ex) {
+                    Log.e("CardFeud Exception: ", ex.getMessage());
                 }
             }
-        } catch (NullPointerException ex) {
-            Log.e("CardFeud Exception: ", ex.getMessage());
-        } finally {
-            // Release the wake lock provided by the WakefulBroadcastReceiver.
-            GcmBroadcastReceiver.completeWakefulIntent(intent);
         }
+        // Release the wake lock provided by the WakefulBroadcastReceiver.
+        GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
 
 
