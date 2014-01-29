@@ -26,9 +26,10 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private Button myAccount;
     private Button about_btn;
     private ToggleButton soundToggleButton;
+    private ToggleButton notificationSoundToggleButton;
     private ToggleButton vibrationToggleButton;
-    private Button debug;
     private boolean created = false;
+    private final String TAG = "CardFeud SharedPrefs Exception";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,8 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
         soundToggleButton = (ToggleButton)findViewById(R.id.sounds);
+        notificationSoundToggleButton = (ToggleButton)findViewById(R.id.notification_sound);
         vibrationToggleButton = (ToggleButton)findViewById(R.id.vibration);
-        debug = (Button)findViewById(R.id.debug);
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
         logoutButton.getBackground().setAlpha(0);
@@ -51,8 +52,8 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         game.setOnClickListener(this);
         countryDebug.setOnClickListener(this);
         soundToggleButton.setOnCheckedChangeListener(this);
+        notificationSoundToggleButton.setOnCheckedChangeListener(this);
         vibrationToggleButton.setOnCheckedChangeListener(this);
-        debug.setOnClickListener(this);
 
         helperClass = new HelperClass(this);
         created = true;
@@ -77,7 +78,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     // set the status for the switches
     private void setSwitchStatus(){
        if(User.UserDetails.getSound()){
-           // sound if on and switch is set to on
+           // game sound if on and switch is set to on
            soundToggleButton.setChecked(true);
        } else {
            soundToggleButton.setChecked(false);
@@ -89,24 +90,38 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
        } else {
            vibrationToggleButton.setChecked(false);
        }
+
+       if(User.UserDetails.getNotificationSound()){
+           // sound for notifications is on and switch is set to on
+           notificationSoundToggleButton.setChecked(true);
+       } else {
+           notificationSoundToggleButton.setChecked(false);
+       }
    }
 
     // save settings for sound/vibration
     private void saveSettings(int choice){
 
         if(choice == 1){
-            // save sound settings
+            // save game sound settings
             try{
                 getSharedPreferences(helperClass.getPrefsSound(), MODE_PRIVATE).edit().putBoolean("sound", User.UserDetails.getSound()).commit();
             } catch (Exception ex){
-                Log.e("CardFeud SharedPrefs Exception", ex.getMessage());
+                Log.e(TAG, ex.getMessage());
             }
         } else if(choice == 2){
             // save vibration settings
             try{
                 getSharedPreferences(helperClass.getPrefsVibration(), MODE_PRIVATE).edit().putBoolean("vibration", User.UserDetails.getVibration()).commit();
             } catch (Exception ex){
-                Log.e("CardFeud SharedPrefs Exception", ex.getMessage());
+                Log.e(TAG, ex.getMessage());
+            }
+        } else if(choice == 3){
+            // save notification sound settings
+            try{
+                getSharedPreferences(helperClass.getPrefsNotificationSound(), MODE_PRIVATE).edit().putBoolean("notificationSound", User.UserDetails.getNotificationSound()).commit();
+            } catch (Exception ex){
+                Log.e(TAG, ex.getMessage());
             }
         }
     }
@@ -155,9 +170,6 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         } else if (v == game){
             Intent gp = new Intent(getApplicationContext(), Game.class);
             startActivity(gp);
-        } else if (v == debug){
-            Intent p = new Intent(getApplicationContext(), Banner.class);
-            startActivity(p);
         } else if(v == countryDebug){
             // debug for temporary change of country
             List<String> debugCountries = new ArrayList<String>();
@@ -186,13 +198,13 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
 
         if(buttonView == soundToggleButton){
             if(isChecked){
-                // sound is on
+                // sound for game is on
                 User.UserDetails.setSound(true);
             } else {
-                // sound off
+                // sound for game off
                 User.UserDetails.setSound(false);
             }
-            // save new settings for sounds
+            // save new settings for game sounds
             saveSettings(1);
 
         } else if (buttonView == vibrationToggleButton){
@@ -205,7 +217,21 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             }
             // save new settings for vibration
             saveSettings(2);
+        } else if (buttonView == notificationSoundToggleButton){
+            if(isChecked){
+                // sound for notifications on
+                User.UserDetails.setNotificationSound(true);
+            } else {
+                // sound for notifications off
+                User.UserDetails.setNotificationSound(false);
+            }
+            // save new settings for notification sound
+            saveSettings(3);
         }
 
     }
 }
+
+
+
+// sound settings for only notifications and one for game
