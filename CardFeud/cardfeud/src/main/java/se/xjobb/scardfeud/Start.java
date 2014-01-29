@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
 /**
  * Created by Lukas on 2014-01-08.
  */
@@ -57,6 +61,7 @@ public class Start extends Fragment implements View.OnClickListener {
 
         user.setText(username);
 
+        // set the correct flag, if not found set default
         try {
             String country = myCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
@@ -68,6 +73,7 @@ public class Start extends Fragment implements View.OnClickListener {
             Drawable drawable = getResources().getDrawable(id);
             flag.setImageDrawable(drawable);
         }
+
 
         return rootView;
     }
