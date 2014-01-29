@@ -21,7 +21,6 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 public class GcmIntentService extends IntentService{
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager notificationManager;
-    NotificationCompat.Builder notificationCompBuilder;
 
     public static final String TAG = "CardFeud";
 
@@ -92,8 +91,8 @@ public class GcmIntentService extends IntentService{
 
         }
 
-        // if sound is active
-        if(User.UserDetails.getSound()){
+        // if notification sound is active
+        if(User.UserDetails.getNotificationSound()){
             try {
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 mBuilder.setSound(notification);

@@ -132,6 +132,7 @@ public class Login extends Activity implements View.OnClickListener{
             User.UserDetails.setDeviceRegId(getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).getString("deviceRegId", null));
             User.UserDetails.setAppVersion(getSharedPreferences(helperClass.getPrefsAppVersion(), MODE_PRIVATE).getInt("appVersion", 0));
             User.UserDetails.setSound(getSharedPreferences(helperClass.getPrefsSound(), MODE_PRIVATE).getBoolean("sound", true));
+            User.UserDetails.setNotificationSound(getSharedPreferences(helperClass.getPrefsNotificationSound(), MODE_PRIVATE).getBoolean("notificationSound", true));
             User.UserDetails.setVibration(getSharedPreferences(helperClass.getPrefsVibration(), MODE_PRIVATE).getBoolean("vibration", true));
             // decrypt the identifier
             User.UserDetails.setIdentifier(crypt.decrypt(helperClass.getKey(), getSharedPreferences(helperClass.getPrefsIdentifier(), MODE_PRIVATE).getString("identifier", null)));
@@ -417,3 +418,5 @@ public class Login extends Activity implements View.OnClickListener{
 
 // Do we need to replace the identifier each time? or can we use the same all the time?
 // Change appearance of the notice and make sure it is removed onclick
+// log sound and vibb in service
+// if != null && !isEmpty() ???
