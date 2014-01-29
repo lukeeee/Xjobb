@@ -100,6 +100,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     // Here the data is presented
     public void finishRequest(String result){
         Log.i("RESULTAT: ", result);
+
+
+        /* {"invitations":{"1":{"game_id":"290215","start_time":"2014-01-17 16:24:29","finished_time":"0000-00-00 00:00:00","lastevent":"2014-01-17 16:24:29","lastevent_time":"289h 23m","player_1":"51318","player_2":"51308","player_name":"emiltest","opponent_id":"51318","opponent_name":"search test","card_color":"0","card_value":"0","pass_prohibited":"0","last_round_details":"","this_round_details":"","last_round_points":"0","this_round_points":"0","my_turn":0,"opponent_points":"0","opponent_errors":"0","opponent_wins":0,"player_points":"0","player_errors":"0","player_wins":0,"chat_unread":0,"odds":""}}}
+*/
     }
 
     // used to get current games/invites to games

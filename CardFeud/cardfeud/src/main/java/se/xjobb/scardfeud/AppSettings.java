@@ -86,14 +86,14 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE){
             // large device layout
             if(User.UserDetails.getAppVersion() != 0){
-                versionText.setText("Version:  Beta " + User.UserDetails.getAppVersion());
+                versionText.setText("Version:       " + User.UserDetails.getAppVersion());
             }
 
         } else {
             // normal size device layout
 
             if(User.UserDetails.getAppVersion() != 0){
-                versionText.setText("Version:                  Beta " + User.UserDetails.getAppVersion());
+                versionText.setText("Version:                       " + User.UserDetails.getAppVersion());
             }
         }
     }
