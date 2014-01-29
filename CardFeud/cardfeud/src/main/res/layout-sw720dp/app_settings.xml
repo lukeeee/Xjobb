@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sounds"
+                android:text="App Sounds"
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="50dp"/>
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/sounds"
                 android:background="@drawable/button"
-                android:layout_marginLeft="160dp"/>
+                android:layout_marginLeft="190dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vibration"
+                android:text="App Vibration"
                 android:textStyle="bold"
                 android:layout_marginRight="20dp"
                 android:textColor="#fff"
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/vibration"
                 android:background="@drawable/button"
-                android:layout_marginLeft="105dp"/>
+                android:layout_marginLeft="135dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="Notification Sounds"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:textSize="50dp"/>
@@ -90,14 +90,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/notification_sound"
                 android:background="@drawable/button"
-                android:layout_marginLeft="45dp"/>
+                android:layout_marginLeft="15dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="540dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -118,7 +118,7 @@
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="540dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -137,7 +137,7 @@
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="400dp"
+            android:layout_width="540dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -166,7 +166,7 @@
                 android:text="Version:  Beta 1.0"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:layout_marginLeft="105dp"
+                android:layout_marginLeft="40dp"
                 android:textSize="50dp"
                 android:gravity="left"/>
         </LinearLayout>

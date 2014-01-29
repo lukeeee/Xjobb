@@ -111,15 +111,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="se.xjobb.scardfeud.MainActivity" />
         </activity>
-        <activity
-            android:name=".Banner"
-            android:label="@string/action_newgame"
-            android:screenOrientation="portrait"
-            android:parentActivityName="se.xjobb.scardfeud.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="se.xjobb.scardfeud.MainActivity" />
-        </activity>
         <activity android:name="com.google.android.gms.ads.AdActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <receiver
             android:name=".GcmBroadcastReceiver"
