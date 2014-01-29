@@ -80,10 +80,24 @@ public class Login extends Activity implements View.OnClickListener{
     protected void onResume(){
         super.onResume();
 
-        if(created != true){
+        if(!created){
             // if onCreate didn't run
             getUserDetails();
         }
+    }
+
+    @Override
+    protected void onPause(){
+        // should never need to be used by us
+        super.onPause();
+        created = false;
+    }
+
+    @Override
+    protected void onStop(){
+        // should never need to be used by us
+        super.onStop();
+        created = false;
     }
 
     // check if google play service is available

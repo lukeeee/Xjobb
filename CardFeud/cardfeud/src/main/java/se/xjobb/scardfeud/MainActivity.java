@@ -45,10 +45,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        isCreated = true;
-        checkUserDetails();
-        getGameLists();
-
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -84,6 +80,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             //.setIcon(menuImage[i])
                             .setTabListener(this));
         }
+
+        checkUserDetails();
+        getGameLists();
+        isCreated = true;
+
     }
 
     // check user details
@@ -150,7 +151,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         return true;
     }
 
-
     @Override
     protected void onResume(){
         super.onResume();
@@ -158,8 +158,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         if(!isCreated){
             // if onCreate was not called
             checkUserDetails();
-            getGameLists();
+            //getGameLists();  If we want to search for new games each time we re-enter activity
         }
+    } 
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        isCreated = false;
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        isCreated = false;
     }
 
     @Override

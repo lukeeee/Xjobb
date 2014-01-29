@@ -80,15 +80,28 @@ public class NewGame extends Activity implements View.OnClickListener{
         super.onResume();
 
         // if on create was not called
-        if(setFlag != false){
+        if(!setFlag){
             setUserFlag();
         }
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        setFlag = false;
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        setFlag = false;
     }
 
 
     private void setUserFlag(){
         user.setText(username);
 
+        // set the user flag, if not found set default
         try {
             String country = userCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
