@@ -3,12 +3,14 @@ package se.xjobb.scardfeud;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -25,6 +27,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private Button countryDebug;
     private Button myAccount;
     private Button about_btn;
+    private TextView versionText;
     private ToggleButton soundToggleButton;
     private ToggleButton notificationSoundToggleButton;
     private ToggleButton vibrationToggleButton;
@@ -41,6 +44,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         countryDebug = (Button)findViewById(R.id.debug_country);
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
+        versionText = (TextView)findViewById(R.id.version_text);
         soundToggleButton = (ToggleButton)findViewById(R.id.sounds);
         notificationSoundToggleButton = (ToggleButton)findViewById(R.id.notification_sound);
         vibrationToggleButton = (ToggleButton)findViewById(R.id.vibration);
@@ -58,6 +62,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         helperClass = new HelperClass(this);
         created = true;
         setSwitchStatus();
+        setVersionText();
 
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
@@ -71,8 +76,26 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             // onCreate didn't run so we set switches status here
             Log.i("onResume", "YEE");
             setSwitchStatus();
+            setVersionText();
         }
 
+    }
+
+    // set version text
+    private void setVersionText(){
+        if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE){
+            // large device layout
+            if(User.UserDetails.getAppVersion() != 0){
+                versionText.setText("Version:  Beta " + User.UserDetails.getAppVersion());
+            }
+
+        } else {
+            // normal size device layout
+
+            if(User.UserDetails.getAppVersion() != 0){
+                versionText.setText("Version:                  Beta " + User.UserDetails.getAppVersion());
+            }
+        }
     }
 
     // set the status for the switches

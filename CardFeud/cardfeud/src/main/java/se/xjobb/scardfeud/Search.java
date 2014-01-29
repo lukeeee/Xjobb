@@ -205,8 +205,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     public void onClick(View v) {
         if(v == foundUserButton){
             // challenge found player
-            //challengePlayer();
-            Toast.makeText(this, "Disabled! :)", 1000).show();
+            challengePlayer();
         }
     }
 

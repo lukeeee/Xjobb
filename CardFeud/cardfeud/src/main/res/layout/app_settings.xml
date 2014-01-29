@@ -167,6 +167,7 @@
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="25dp"
+                android:id="@+id/version_text"
                 android:gravity="left|center"/>
         </LinearLayout>
         <View

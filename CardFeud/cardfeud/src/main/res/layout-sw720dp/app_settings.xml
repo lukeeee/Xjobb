@@ -168,6 +168,7 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="40dp"
                 android:textSize="50dp"
+                android:id="@+id/version_text"
                 android:gravity="left"/>
         </LinearLayout>
         <View

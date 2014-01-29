@@ -10,16 +10,22 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.Locale;
+
+import se.xjobb.scardfeud.Posters.PostGameList;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
     String[] menuTitle = {"Play","Rules"};
     int[] menuImage = new int[]
             {R.drawable.ic_play,R.drawable.ic_rules};
     private ProgressDialog progressDialog;
+    private boolean isCreated = false;
+    HelperClass helperClass = new HelperClass(this);
+
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -38,6 +44,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        isCreated = true;
+        checkUserDetails();
+        getGameLists();
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
@@ -75,13 +85,43 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
     }
+
+    // check user details
+    private void checkUserDetails(){
+        // check if user is logged out, (if the values stored are empty)
+        // if they are then finish activity
+
+        if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
+            this.finish();
+        }
+    }
+
+    // called when Async Post is finished
+    // Here the data is presented
+    public void finishRequest(String result){
+        Log.i("RESULTAT: ", result);
+    }
+
+    // used to get current games/invites to games
+    private void getGameLists(){
+
+        if(!helperClass.isConnected()){
+            helperClass.showNetworkErrorDialog();
+            // add retry dialog
+        } else {
+            // post to get the game invitations/current games from server
+            PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this);
+            postGameList.postRequest();
+        }
+    }
+
     public void showProgressDialog(){
         if(progressDialog == null){
             // display dialog when loading data
-            progressDialog = ProgressDialog.show(this, "Refreshing","Please Wait ", true, false);
+            progressDialog = ProgressDialog.show(this, null,"Loading...", true, false);
         } else {
             progressDialog.cancel();
-            progressDialog = ProgressDialog.show(this, "Refreshing","Please Wait...", true, false);
+            progressDialog = ProgressDialog.show(this, null,"Loading...", true, false);
         }
     }
 
@@ -92,6 +132,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             progressDialog.cancel();
         }
     }
+
+    // show error dialog
+    public void showErrorDialog(String message){
+        progressDialog = null;
+        helperClass.showErrorDialog(message);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,11 +151,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onResume(){
         super.onResume();
 
-        // check if user is logged out, (if the values stored are empty)
-        // if they are then finish activity
-
-        if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
-            this.finish();
+        if(!isCreated){
+            // if onCreate was not called
+            checkUserDetails();
+            getGameLists();
         }
     }
 
@@ -130,7 +176,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(intent);
-                showProgressDialog();
                 return true;
         }
 
