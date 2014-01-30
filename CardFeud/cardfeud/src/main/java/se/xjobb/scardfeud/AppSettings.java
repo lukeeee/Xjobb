@@ -193,6 +193,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     @Override
     public void onClick(View v) {
         if(v == logoutButton){
+            logoutButton.setTextColor(getResources().getColor(R.color.ColorBlack));
             finishActivity();
         } else if (v == game){
             Intent gp = new Intent(getApplicationContext(), Game.class);
@@ -219,6 +220,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             Toast.makeText(this, "Country changed to: " + country, 1000).show();
         }
         else if (v == myAccount){
+            myAccount.setTextColor(getResources().getColor(R.color.ColorBlack));
             AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
             dialog.setTitle("My Account");
             dialog.setIcon(R.drawable.ic_action_person);
@@ -226,21 +228,24 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
+                    myAccount.setTextColor(getResources().getColor(R.color.ColorWhite));
                 }
             });
             dialog.show();
         }
         else if (v == about_btn){
+            about_btn.setTextColor(getResources().getColor(R.color.ColorBlack));
             AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
             dialog.setTitle("About Cardfeud");
             dialog.setIcon(R.drawable.ic_action_about_d);
             dialog.setMessage("Cardfeud has been available on iPhone since 2011, and now its launched for Android\n\n" +
                     "This is a card game that involves you to guess whether the next card will be higher or lower than the current card\n\n" +
-                    "You can meet friends who have android phones or iphone or just meet random user\n\n" +
+                    "You can meet your friends who have android phones or iphone or just meet random user\n\n" +
                     "So tell your friends to download it on Google Play or AppStore and compete to see who's the best");
             dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
+                    about_btn.setTextColor(getResources().getColor(R.color.ColorWhite));
                 }
             });
             dialog.show();
