@@ -29,6 +29,7 @@ public class PostGameList {
     private String userId;
     private String userIdentifier;
     private MainActivity callback;
+    private boolean refresh = false;
 
     public PostGameList(int userId, String userIdentifier, MainActivity callback){
         this.userId = Integer.toString(userId);
@@ -36,10 +37,24 @@ public class PostGameList {
         this.callback = callback;
     }
 
+    public PostGameList(int userId, String userIdentifier, MainActivity callback, boolean refresh){
+        this.userId = Integer.toString(userId);
+        this.userIdentifier = userIdentifier;
+        this.callback = callback;
+        this.refresh = refresh;
+    }
+
     public void postRequest(){
 
-        new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamelist&user=" + userId + "&sid=" + userIdentifier + "&res=json");
-        callback.showProgressDialog();
+        if(!refresh){
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamelist&user=" + userId + "&sid=" + userIdentifier + "&res=json");
+            callback.showProgressDialog();
+
+        } else {
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamelist&user=" + userId + "&sid=" + userIdentifier + "&res=json");
+            // we are refreshing after posting responses to game invites and feedback is already visible
+        }
+
     }
 
 

@@ -1,8 +1,10 @@
 package se.xjobb.scardfeud;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +29,7 @@ import java.util.Locale;
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
+import se.xjobb.scardfeud.Posters.PostGameStart;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
     String[] menuTitle = {"Play","Rules"};
@@ -36,6 +39,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private boolean isCreated = false;
     HelperClass helperClass = new HelperClass(this);
     private final String TAG = "CardFeud JSON Exception: ";
+    private List<InvitationResponse> invitationResponsesList;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -93,9 +97,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
 
         checkUserDetails();
-        getGameLists();
+        getGameLists(false);
         isCreated = true;
-
     }
 
     // check user details
@@ -105,6 +108,74 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
             this.finish();
+        }
+    }
+
+
+    // used to send the response to the invites
+    private void sendInviteResponses(){
+
+        // when we have responses to all the invites
+        if(invitationResponsesList.size() == GameListResult.getInvitations().size()){
+            // all invitation responses are stored and we continue to send data to server
+            for(InvitationResponse invitationResponse : invitationResponsesList){
+                if(!helperClass.isConnected()){
+                    helperClass.showNetworkErrorDialog();
+                    // add retry dialog
+                } else {
+                    showProgressDialog();
+                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), invitationResponse, this);
+                    postGameStart.postRequest();
+                }
+            }
+        }
+    }
+
+    // show a popup with the new game invitation
+    private void showGameInvitationPopUp(final Response response){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Game Invitation");
+        dialog.setIcon(R.drawable.invite);
+        dialog.setMessage(response.opponentName + " invited you to play.\n\n" + "Do you accept?");
+        dialog.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // create InvitationResponse object (answer 1 for Yes)
+                InvitationResponse invitationResponse = new InvitationResponse(Integer.parseInt(response.opponentId), 1);
+
+                // save to a invitation list
+                invitationResponsesList.add(invitationResponse);
+
+                sendInviteResponses();
+                dialog.cancel();
+            }
+        });
+        dialog.setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // create InvitationResponse object (answer 2 for No)
+                InvitationResponse invitationResponse = new InvitationResponse(Integer.parseInt(response.opponentId), 2);
+
+                // save to invitation list
+                invitationResponsesList.add(invitationResponse);
+
+                sendInviteResponses();
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+
+    }
+
+    // check if there are any game invitations
+    private void checkGameInvitations() {
+        if(GameListResult.getInvitations().size() > 0){
+
+            // we have invitations and need the list to store them in
+            invitationResponsesList = new ArrayList<InvitationResponse>();
+
+            // show a popup for each invitation object
+            for(Response response : GameListResult.getInvitations()){
+                showGameInvitationPopUp(response);
+            }
         }
     }
 
@@ -154,11 +225,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
                 // get and store all invitation response objects in a static list
                 GameListResult.setInvitations(getResponses(jsonResponse, "invitations"));
-
-
-                for(Response response : GameListResult.getInvitations()){
-                    Log.i("invitation: ", response.opponentName);
-                }
+            } else {
+                // if we don't find and invitations make sure there aren't any left in the list
+                GameListResult.setInvitations(new ArrayList<Response>());
             }
 
             if(!jsonResponse.isNull("my_turn")){
@@ -166,34 +235,60 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
                 // get and store all my_turn response objects in a static list
                 GameListResult.setMyTurns(getResponses(jsonResponse, "my_turn"));
+            } else {
+                // make sure old values are removed
+                GameListResult.setMyTurns(new ArrayList<Response>());
             }
 
             if(!jsonResponse.isNull("opponents_turn")){
-                Log.i("opponents_turn: ","true");
+                Log.i("opponents_turn: ", "true");
 
                 // get and store all opponents_turn response objects in a static list
                 GameListResult.setOpponentsTurns(getResponses(jsonResponse, "opponents_turn"));
+            } else {
+                // make sure old values are removed
+                GameListResult.setOpponentsTurns(new ArrayList<Response>());
             }
 
             if(!jsonResponse.isNull("finished")){
-                Log.i("finished: ","true");
+                Log.i("finished: ", "true");
 
                 // get and store all finished response objects in a static list
                 GameListResult.setFinishedGames(getResponses(jsonResponse, "finished"));
+            } else {
+                // make sure old values are removed
+                GameListResult.setFinishedGames(new ArrayList<Response>());
             }
         }
+
+        // make sure old invites and invite responses are removed
+        if(invitationResponsesList != null){
+            invitationResponsesList.clear();
+        }
+
+        // check if there are any game invitations
+        checkGameInvitations();
+
     }
 
     // used to get current games/invites to games
-    private void getGameLists(){
+    public void getGameLists(boolean refresh){
 
         if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
             // add retry dialog
         } else {
-            // post to get the game responses/current games from server
-            PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this);
-            postGameList.postRequest();
+            if(!refresh){
+                // post to get the game responses/current games from server
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this);
+                postGameList.postRequest();
+            } else {
+                // if we are just refreshing after posting responses to game invites feedback is already visible
+                // post to get the game responses/current games from server
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, refresh);
+                postGameList.postRequest();
+            }
+
         }
     }
 

@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud.Posters;
 
+import android.app.IntentService;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -18,6 +19,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 
+import se.xjobb.scardfeud.InvitationResponse;
+import se.xjobb.scardfeud.MainActivity;
 import se.xjobb.scardfeud.NewGame;
 import se.xjobb.scardfeud.Search;
 
@@ -28,35 +31,51 @@ public class PostGameStart {
     private String userId;
     private String opponent;
     private String userIdentifier;
+    private InvitationResponse invitationResponse;
     private NewGame newGameCallback = null;
     private Search searchCallback = null;
+    private MainActivity mainActivityInvitationResponseCallback = null;
 
-    public PostGameStart(int userId, String userIdentifier, int opponent , NewGame newGameCallback){
+    public PostGameStart(int userId, String userIdentifier, int opponent , NewGame newGameCallback) {
         this.userId = Integer.toString(userId);
         this.userIdentifier = userIdentifier;
         this.opponent = Integer.toString(opponent);
         this.newGameCallback = newGameCallback;
     }
 
-    public PostGameStart(int userId, String userIdentifier, int opponent , Search searchCallback){
+    public PostGameStart(int userId, String userIdentifier, int opponent , Search searchCallback) {
         this.userId = Integer.toString(userId);
         this.userIdentifier = userIdentifier;
         this.opponent = Integer.toString(opponent);
         this.searchCallback = searchCallback;
     }
 
+    public PostGameStart(int userId, String userIdentifier, InvitationResponse invitationResponse,
+                         MainActivity mainActivityInvitationResponseCallback) {
+        this.userId = Integer.toString(userId);
+        this.userIdentifier = userIdentifier;
+        this.invitationResponse = invitationResponse;
+        this.mainActivityInvitationResponseCallback = mainActivityInvitationResponseCallback;
+    }
+
 
     public void postRequest(){
 
-        new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + opponent + "&res=json");
 
         if(newGameCallback != null){
             // if the request is coming from NewGame
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + opponent + "&res=json");
             newGameCallback.showProgressDialog();
 
         } else if(searchCallback != null){
             // if the request us coming from Search
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + opponent + "&res=json");
             searchCallback.showProgressDialog("Loading...");
+
+        } else if(mainActivityInvitationResponseCallback != null){
+            // if we are answering game invitation requests
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + Integer.toString(invitationResponse.getOpponentId()) + "&answer=" + Integer.toString(invitationResponse.getAnswer()) +"&res=json");
+            // dialog is already showing...  (MainActivity shows it)
         }
     }
 
@@ -130,50 +149,91 @@ public class PostGameStart {
             return postGameRequest(urls[0]);
         }
 
+        // Process result for NewGame class
+        private void feedBackNewGame(String result, NewGame newGameCallback){
+            if(result.contains("Did not work!")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.showErrorDialog("An error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.showErrorDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Wrong account details")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.showErrorDialog("Account Error! Please try logging in again.");
+            } else if (result.contains("Something went wrong")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.showErrorDialog("The server is not responding! Please try again.");
+            } else if(result.contains("Request Sent")){
+                newGameCallback.hideProgressDialog();
+                newGameCallback.finishRequest();
+            }
+        }
+
+
+        // process result for Search class
+        private void feedBackSearch(String result, Search searchCallback){
+            if(result.contains("Did not work!")){
+                searchCallback.hideProgressDialog();
+                searchCallback.showErrorDialog("An error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                searchCallback.hideProgressDialog();
+                searchCallback.showErrorDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Wrong account details")){
+                searchCallback.hideProgressDialog();
+                searchCallback.showErrorDialog("Account Error! Please try logging in again.");
+            } else if (result.contains("Something went wrong")){
+                searchCallback.hideProgressDialog();
+                searchCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                searchCallback.hideProgressDialog();
+                searchCallback.showErrorDialog("The server is not responding! Please try again.");
+            } else if(result.contains("Request Sent")){
+                searchCallback.hideProgressDialog();
+                searchCallback.finishRequest();
+            }
+        }
+
+        // process result for MainActivity class, when answering game invitation
+        private void feedBackMainActivityGameInvitation(String result, MainActivity mainActivityInvitationResponseCallback){
+            if(result.contains("Did not work!")){
+                mainActivityInvitationResponseCallback.hideProgressDialog();
+                mainActivityInvitationResponseCallback.showErrorDialog("An error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                mainActivityInvitationResponseCallback.hideProgressDialog();
+                mainActivityInvitationResponseCallback.showErrorDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Wrong account details")){
+                mainActivityInvitationResponseCallback.hideProgressDialog();
+                mainActivityInvitationResponseCallback.showErrorDialog("Account Error! Please try logging in again.");
+            } else if (result.contains("Something went wrong")){
+                mainActivityInvitationResponseCallback.hideProgressDialog();
+                mainActivityInvitationResponseCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                mainActivityInvitationResponseCallback.hideProgressDialog();
+                mainActivityInvitationResponseCallback.showErrorDialog("The server is not responding! Please try again.");
+            } else if(result.contains("Request Sent")){
+                mainActivityInvitationResponseCallback.getGameLists(true);
+            }
+        }
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result){
 
             if(newGameCallback != null){
-                if(result.contains("Did not work!")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.showErrorDialog("An error has occurred! Please try again.");
-                } else if (result.contains("Server Error")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.showErrorDialog("A server error has occurred! Please try again.");
-                } else if (result.contains("Wrong account details")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.showErrorDialog("Account Error! Please try logging in again.");
-                } else if (result.contains("Something went wrong")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
-                } else if (result.contains("Server Timeout")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.showErrorDialog("The server is not responding! Please try again.");
-                } else if(result.contains("Request Sent")){
-                    newGameCallback.hideProgressDialog();
-                    newGameCallback.finishRequest();
-                }
+                // process result
+                feedBackNewGame(result, newGameCallback);
+
             } else if (searchCallback != null){
-                if(result.contains("Did not work!")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.showErrorDialog("An error has occurred! Please try again.");
-                } else if (result.contains("Server Error")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.showErrorDialog("A server error has occurred! Please try again.");
-                } else if (result.contains("Wrong account details")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.showErrorDialog("Account Error! Please try logging in again.");
-                } else if (result.contains("Something went wrong")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
-                } else if (result.contains("Server Timeout")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.showErrorDialog("The server is not responding! Please try again.");
-                } else if(result.contains("Request Sent")){
-                    searchCallback.hideProgressDialog();
-                    searchCallback.finishRequest();
-                }
+                // process result
+                feedBackSearch(result, searchCallback);
+
+            } else if (mainActivityInvitationResponseCallback != null){
+                // process result
+                feedBackMainActivityGameInvitation(result, mainActivityInvitationResponseCallback);
+
             }
 
 
