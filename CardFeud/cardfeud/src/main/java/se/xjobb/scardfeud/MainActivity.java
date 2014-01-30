@@ -14,8 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Locale;
 
+import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
 
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -98,13 +104,115 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     }
 
     // called when Async Post is finished
-    // Here the data is presented
+    // Here the json data is processed
     public void finishRequest(String result){
         Log.i("RESULTAT: ", result);
 
+        if(result.contains("invitations")){
+            Log.i("invite: ","true");
+        }
 
-        /* {"invitations":{"1":{"game_id":"290215","start_time":"2014-01-17 16:24:29","finished_time":"0000-00-00 00:00:00","lastevent":"2014-01-17 16:24:29","lastevent_time":"289h 23m","player_1":"51318","player_2":"51308","player_name":"emiltest","opponent_id":"51318","opponent_name":"search test","card_color":"0","card_value":"0","pass_prohibited":"0","last_round_details":"","this_round_details":"","last_round_points":"0","this_round_points":"0","my_turn":0,"opponent_points":"0","opponent_errors":"0","opponent_wins":0,"player_points":"0","player_errors":"0","player_wins":0,"chat_unread":0,"odds":""}}}
-*/
+        if(result.contains("my_turn")){
+            Log.i("my_turn: ","true");
+
+        }
+
+        if(result.contains("opponents_turn")){
+            Log.i("opponents_turn: ","true");
+
+        }
+
+        if(result.contains("finished")){
+            Log.i("finished: ","true");
+
+        }
+
+        JSONObject jsonResponse = null;
+        JSONObject jsonMyTurn = null;
+        JSONObject jsonInvitations = null;
+        JSONObject jsonOpponentsTurn = null;
+        JSONObject jsonFinished = null;
+
+
+        // try to get JSON Response
+        try {
+             jsonResponse = new JSONObject(result);
+
+        } catch (JSONException ex) {
+            Log.e("CardFeud JSON Exception: ", ex.getMessage());
+        }
+
+        //JSONObject jsonInvitation = jsonResponse.getJSONObject("invitations");
+
+
+
+  /*
+
+        try {
+            // try to get all invitations and save as java objects
+            //JSONObject jsonInvitation = jsonResponse.getJSONObject("invitations");
+            JSONObject jsonFirstInvitation = jsonInvitation.getJSONObject("1");
+
+            Gson gson = new Gson();
+            Response response = gson.fromJson(jsonFirstInvitation.toString(), Response.class);
+            Log.i("KUK ", response.playerName);
+
+        /*
+        Use GSON object for these aswell??
+
+        // parse json string int's to int.
+        // how to handle several responses etc...
+
+        // my_turn object looks just as the responses
+
+
+
+        } catch (JSONException ex) {
+            Log.e("CardFeud JSON Exception: ", ex.getMessage());
+        }  /*
+
+
+        /*
+        GameListResponse invitationResponse = gson.fromJson(result, GameListResponse.class);
+        List<Response> responses = invitationResponse.responses;
+
+        for(Response invitation : responses){
+            Log.i("Test: ", invitation.gameId);
+        }  */
+
+
+
+        /* {"responses":
+            {"1":
+                {"game_id":"290215","
+                start_time":"2014-01-17 16:24:29","
+                finished_time":"0000-00-00 00:00:00","
+                lastevent":"2014-01-17 16:24:29","
+                lastevent_time":"289h 23m","
+                player_1":"51318","
+                player_2":"51308","
+                player_name":"emiltest","
+                opponent_id":"51318","
+                opponent_name":"search test","
+                card_color":"0","
+                card_value":"0","
+                pass_prohibited":"0","
+                last_round_details":"","
+                this_round_details":"","
+                last_round_points":"0","
+                this_round_points":"0","
+                my_turn":0,"
+                opponent_points":"0","
+                opponent_errors":"0","o
+                pponent_wins":0,"
+                player_points":"0","
+                player_errors":"0","
+                player_wins":0,"
+                chat_unread":0,"
+                odds":""}
+            }
+          }  */
+
     }
 
     // used to get current games/invites to games
@@ -114,7 +222,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             helperClass.showNetworkErrorDialog();
             // add retry dialog
         } else {
-            // post to get the game invitations/current games from server
+            // post to get the game responses/current games from server
             PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this);
             postGameList.postRequest();
         }
@@ -160,7 +268,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             checkUserDetails();
             //getGameLists();  If we want to search for new games each time we re-enter activity
         }
-    } 
+    }
 
     @Override
     protected void onPause(){

@@ -254,7 +254,3 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
 
     }
 }
-
-
-
-// sound settings for only notifications and one for game
