@@ -144,22 +144,135 @@ public class SignUp extends Activity implements View.OnClickListener {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.about, menu);
+        getMenuInflater().inflate(R.menu.globe, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_about:
+            case R.id.action_globe:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(SignUp.this);
-                dialog.setTitle("About CardFeud");
-                dialog.setIcon(R.drawable.ic_action_about_d);
-                dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
-                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
-                        "* Press pass to pass the turn to your opponent\n\n" +
-                        "* You get one point if you are right\n\n" +
-                        "* You loose one point if you are wrong");
+                dialog.setTitle("Country Codes");
+                dialog.setIcon(R.drawable.globe_icon);
+                dialog.setMessage("Afghanistan: AF\n" +
+                        "Albania: AL\n" +
+                        "Algeria: DZ\n" +
+                        "Andorra: AD\n" +
+                        "Angola: AO\n" +
+                        "Argentina: AR\n" +
+                        "Armenia: AM\n" +
+                        "Australia: AU\n" +
+                        "Austria: AT\n" +
+                        "Azerbaijan: AZ\n" +
+                        "Bahamas: BS\n" +
+                        "Bahrain: BH\n" +
+                        "Barbados: BB\n" +
+                        "Belarus: BY\n" +
+                        "Belgium: BE\n" +
+                        "Bolivia: BO\n" +
+                        "Bosnia & Herzegowina: BA\n" +
+                        "Brazil: BR\n" +
+                        "Bulgaria: BG\n" +
+                        "Cameroon: CM\n" +
+                        "Canado: CA\n" +
+                        "Chile: CL\n" +
+                        "China: CN\n" +
+                        "Colombia: CO\n" +
+                        "Costa Rica: CR\n" +
+                        "Ivory Coast: CI\n" +
+                        "Croatia: HR\n" +
+                        "Cuba: CU\n" +
+                        "Cyprus: CY\n" +
+                        "Czech Republic: CZ\n" +
+                        "Denmark: DK\n" +
+                        "Dominican Republic: DO\n" +
+                        "Ecuador: EC\n" +
+                        "Egypt: EG\n" +
+                        "El Salvador: SV\n" +
+                        "Estonia: EE\n" +
+                        "Faroe Islands: FO\n" +
+                        "Fiji: FJ\n" +
+                        "Finland: FI\n" +
+                        "France: FR\n" +
+                        "Georgia: GE\n" +
+                        "Germany: DE\n" +
+                        "Ghana: GH\n" +
+                        "Greeze: GR\n" +
+                        "Guatemala: GT\n" +
+                        "Honduras: HN\n" +
+                        "Hong Kong: HK\n" +
+                        "Hungary: HU\n" +
+                        "Iceland: IS\n" +
+                        "India: IN\n" +
+                        "Indonesia: ID\n" +
+                        "Iran: IR\n" +
+                        "Iraq: IQ\n" +
+                        "Ireland: IE\n" +
+                        "Israel: IL\n" +
+                        "Italy: IT\n" +
+                        "Jamaica: JM\n" +
+                        "Japan: JP\n" +
+                        "Kazakhstan: KZ\n" +
+                        "Latvia: LV\n" +
+                        "Lebanon: LB\n" +
+                        "Libyan: LY\n" +
+                        "Liechtenstein: LI\n" +
+                        "Lithuania: LT\n" +
+                        "Luxembourg: LU\n" +
+                        "Macedonia: MK\n" +
+                        "Malaysia: MY\n" +
+                        "Malta: MT\n" +
+                        "Mexico: MX\n" +
+                        "Moldova: MD\n" +
+                        "Monaco: MC\n" +
+                        "Montenegro: ME\n" +
+                        "Morocco: MA\n" +
+                        "Nepal: NP\n" +
+                        "Netherlands. NL\n" +
+                        "New Zealand: NZ\n" +
+                        "Nigeria: NG\n" +
+                        "North Korea: KP\n" +
+                        "Norway: NO\n" +
+                        "Oman: OM\n" +
+                        "Pakistan: PK\n" +
+                        "Panama: PA\n" +
+                        "Paraguay: PY\n" +
+                        "Peru: PE\n" +
+                        "Philippines: PH\n" +
+                        "PolandPL\n" +
+                        "Portugal: PT\n" +
+                        "Puerto Rico: PR\n" +
+                        "Qatar: QA\n" +
+                        "Romania: RO\n" +
+                        "Russia: RU\n" +
+                        "San Marino: SM\n" +
+                        "Saudi Arabia: SA\n" +
+                        "Senegal: SN\n" +
+                        "Serbia: RS\n" +
+                        "Singapore: SG\n" +
+                        "Slovakia: SK\n" +
+                        "Slovenia: SI\n" +
+                        "Somalia: SO\n" +
+                        "South Africa: ZA\n" +
+                        "South Korea: KR\n" +
+                        "Spain: ES\n" +
+                        "Sweden: SE\n" +
+                        "Switzerland: CH\n" +
+                        "Syria: SY\n" +
+                        "Taiwan: TW\n" +
+                        "Thailand: TH\n" +
+                        "Trinidad & Tobago: TT\n" +
+                        "Tunisia: TN\n" +
+                        "Turkey: TR\n" +
+                        "Ukraine: UA\n" +
+                        "United Arab Emirates: AE\n" +
+                        "United Kingdom: GB\n" +
+                        "USA: US\n" +
+                        "Uruguay: UY\n" +
+                        "Uzbekistan: UZ\n" +
+                        "Venezuela: VE\n" +
+                        "Vietnam: VN\n");
                 dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

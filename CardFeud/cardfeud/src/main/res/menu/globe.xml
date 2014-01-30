@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_globe"
+        android:title="@string/action_globe"
+        android:orderInCategory="100"
+        android:icon="@drawable/globe_icon"
+        android:showAsAction="always"/>
+
+</menu>

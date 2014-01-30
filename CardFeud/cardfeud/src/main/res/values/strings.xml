@@ -9,6 +9,7 @@
     <string name="action_chat">Chat</string>
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
+    <string name="action_globe">Country Code</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_stats">Stats</string>
     <string name="action_search">Search</string>
@@ -32,14 +33,14 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="password_repeat_hint">Password Repeat</string>
-    <string name="country_code_hint">Country Code, example: "SE"</string>
+    <string name="country_code_hint">Press globe in actionbar for help</string>
     <string name="go_to_login_text">Already on Cardfeud?</string>
     <string name="go_to_login_button_text">Go to Log in</string>
 
     <string name="sign_in_text">Sign in</string>
     <string name="go_to_sign_up_text">New to Cardfeud?</string>
     <string name="go_to_sign_up_button_text">Go to Sign Up</string>
-    <string name="rules">\nCardFeud Rules:\n\n\nWill the next card be High or Low?\n\nAce low and King high\n\nIf you guess right you get one point\n\nIf you guess wrong you loose one point\n\nYou can pass to your opponent\n\nYou can either meet your friends on Iphone or Android or meet a random opponent</string>
+    <string name="rules">\nWill the next card be High or Low?\n\nAce low and King high\n\nIf your right you win one point and get to keep playing\n\nIf your wrong you loose one point and the turn to your opponent\n\nYou can pass to your opponent if you don´t want to guess\n\nYou can either meet your friends on Iphone or Android or meet a random opponent</string>
 
 
 </resources>
