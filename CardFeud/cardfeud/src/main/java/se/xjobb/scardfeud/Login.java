@@ -298,10 +298,10 @@ public class Login extends Activity implements View.OnClickListener{
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Login.this);
                 dialog.setTitle("About CardFeud");
                 dialog.setIcon(R.drawable.ic_action_about_d);
-                dialog.setMessage("Cardfeud has been on the iPhone since 2011, and now it has launched for Android\n\n" +
+                dialog.setMessage("Cardfeud has been available on iPhone since 2011, and now its launched for Android\n\n" +
                         "This is a card game that involves you to guess whether the next card will be higher or lower than the current card\n\n" +
                         "You can meet friends who have android phones or iphone or just meet random user\n\n" +
-                        "So tell your friends to download the app in the AppStore or Google Play and compete to see who is best");
+                        "So tell your friends to download it on Google Play or AppStore and compete to see who's the best");
                 dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

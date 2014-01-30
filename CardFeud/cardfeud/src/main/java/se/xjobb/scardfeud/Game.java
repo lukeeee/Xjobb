@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class Game extends Activity implements View.OnClickListener {
 
-    private Button start;
     private Button high;
     private Button low;
     private Button stat;
@@ -121,9 +120,6 @@ public class Game extends Activity implements View.OnClickListener {
         return true;
     }
     public void onClick(View view) {
-        /*if (view == start){
-            start.setVisibility(Button.INVISIBLE);
-        }*/
        if (view == stat){
             AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
             dialog.setTitle("Game stats");
@@ -164,7 +160,8 @@ public class Game extends Activity implements View.OnClickListener {
                 dialog.setTitle("Quick Help");
                 dialog.setIcon(R.drawable.ic_action_help_d);
                 dialog.setMessage("* Press the scoreboard to watch stats over this game\n\n" +
-                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower\n\n" +
+                        "* Guess if the next card will be higher or lower than the showing card by pressing Higher or Lower," +
+                        " if you're right you get to keep playing but if you're wrong the turn goes over to your opponent\n\n" +
                         "* Press pass to pass the turn to your opponent\n\n" +
                         "* You get one point if you are right\n\n" +
                         "* You loose one point if you are wrong");

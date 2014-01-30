@@ -2,6 +2,8 @@ package se.xjobb.scardfeud;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -22,7 +23,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
 
     private Button logoutButton;
     private HelperClass helperClass;
-    private String username;
+    private String username, myCountry;
     private Button game;
     private Button countryDebug;
     private Button myAccount;
@@ -58,7 +59,10 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         soundToggleButton.setOnCheckedChangeListener(this);
         notificationSoundToggleButton.setOnCheckedChangeListener(this);
         vibrationToggleButton.setOnCheckedChangeListener(this);
-
+        myAccount.setOnClickListener(this);
+        about_btn.setOnClickListener(this);
+        username = User.UserDetails.getUsername();
+        myCountry = User.UserDetails.getUserCountryCode();
         helperClass = new HelperClass(this);
         created = true;
         setSwitchStatus();
@@ -174,7 +178,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
 
    // show feedback and go to "android home"
     private void finishActivity(){
-        username = User.UserDetails.getUsername();
+
         clearValues();
         saveValues();
         Toast.makeText(this, username + " logged out!", 1000).show();
@@ -214,7 +218,35 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             User.UserDetails.setUserCountryCode(country);
             Toast.makeText(this, "Country changed to: " + country, 1000).show();
         }
-    }
+        else if (v == myAccount){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
+            dialog.setTitle("My Account");
+            dialog.setIcon(R.drawable.ic_action_person);
+            dialog.setMessage("Name: " + username + "\nCountry: " + myCountry);
+            dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }
+        else if (v == about_btn){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
+            dialog.setTitle("About Cardfeud");
+            dialog.setIcon(R.drawable.ic_action_about_d);
+            dialog.setMessage("Cardfeud has been available on iPhone since 2011, and now its launched for Android\n\n" +
+                    "This is a card game that involves you to guess whether the next card will be higher or lower than the current card\n\n" +
+                    "You can meet friends who have android phones or iphone or just meet random user\n\n" +
+                    "So tell your friends to download it on Google Play or AppStore and compete to see who's the best");
+            dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }
+
+        }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
