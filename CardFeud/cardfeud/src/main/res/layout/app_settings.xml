@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:id="@+id/sounds"
-            android:layout_marginLeft="95dp"/>
+            android:layout_marginLeft="92dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -176,7 +176,7 @@
             android:background="#fff"/>
 
         <Button
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:textSize="25sp"
