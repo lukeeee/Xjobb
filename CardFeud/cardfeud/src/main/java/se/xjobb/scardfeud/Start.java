@@ -13,6 +13,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
+import se.xjobb.scardfeud.JsonGetClasses.Response;
+
 
 /**
  * Created by Lukas on 2014-01-08.
@@ -22,10 +26,11 @@ public class Start extends Fragment implements View.OnClickListener {
     TextView gamestext;
     TextView waitingtext;
     TextView fin_Gamestext;
-    Button newGame;
-    ListView games;
-    ListView waiting;
-    ListView finGames;
+    private Button newGame;
+    private ListView games, waiting, finGames;
+    private List<Response> myTurns;
+    private List<Response> opponentsTurns;
+    private List<Response> finishedGames;
     private String username;
     private String myCountry;
     ImageView flag;
@@ -71,6 +76,35 @@ public class Start extends Fragment implements View.OnClickListener {
         }
 
 
+        if(!myTurns.isEmpty()) {
+            AvailableGameAdapter availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    gamestext.setVisibility(view.INVISIBLE);
+                }
+            });
+            games.setAdapter(availableGameAdapter);
+        } else if(!opponentsTurns.isEmpty()) {
+            WaitingGameAdapter waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    waitingtext.setVisibility(view.INVISIBLE);
+                }
+            });
+            waiting.setAdapter(waitingGameAdapter);
+        } else if(!myTurns.isEmpty()) {
+            FinishedGameAdapter finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    fin_Gamestext.setVisibility(view.INVISIBLE);
+                }
+            });
+            finGames.setAdapter(finishedGameAdapter);
+        }
+
         return rootView;
     }
 
@@ -83,7 +117,6 @@ public class Start extends Fragment implements View.OnClickListener {
             startActivity(ng);
         }
     }
-
 
 
 }
