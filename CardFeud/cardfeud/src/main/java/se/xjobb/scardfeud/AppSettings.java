@@ -33,7 +33,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private ToggleButton notificationSoundToggleButton;
     private ToggleButton vibrationToggleButton;
     private boolean created = false;
-    private final String TAG = "CardFeud SharedPrefs Exception";
+    private final String TAG = "CardFeud SharedPrefs Exception ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

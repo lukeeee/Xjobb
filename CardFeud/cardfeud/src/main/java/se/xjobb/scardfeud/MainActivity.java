@@ -19,8 +19,12 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
+import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
 
@@ -31,6 +35,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     private ProgressDialog progressDialog;
     private boolean isCreated = false;
     HelperClass helperClass = new HelperClass(this);
+    private final String TAG = "CardFeud JSON Exception: ";
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -103,116 +108,80 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
     }
 
+    // get all objects of a certain type in the json response and save them to a list
+    private List<Response> getResponses(JSONObject serverResponse, String objectName){
+        List<Response> responses = new ArrayList<Response>();
+        JSONObject jsonObject;
+        try{
+            final Gson gson = new Gson();
+            jsonObject = serverResponse.getJSONObject(objectName);
+            final Iterator<String> keys = jsonObject.keys();
+
+            // add all responses to the list as Response objects
+            while(keys.hasNext()) {
+                final String key = keys.next();
+                responses.add(gson.fromJson(jsonObject.getJSONObject(key).toString(), Response.class));
+            }
+
+        } catch (JSONException ex){
+            Log.e(TAG, ex.getMessage());
+        }
+
+        return responses;
+    }
+
     // called when Async Post is finished
-    // Here the json data is processed
+    // Here where the json data is processed
     public void finishRequest(String result){
         Log.i("RESULTAT: ", result);
 
-        if(result.contains("invitations")){
-            Log.i("invite: ","true");
-        }
-
-        if(result.contains("my_turn")){
-            Log.i("my_turn: ","true");
-
-        }
-
-        if(result.contains("opponents_turn")){
-            Log.i("opponents_turn: ","true");
-
-        }
-
-        if(result.contains("finished")){
-            Log.i("finished: ","true");
-
-        }
-
         JSONObject jsonResponse = null;
-        JSONObject jsonMyTurn = null;
-        JSONObject jsonInvitations = null;
-        JSONObject jsonOpponentsTurn = null;
-        JSONObject jsonFinished = null;
-
 
         // try to get JSON Response
         try {
-             jsonResponse = new JSONObject(result);
+            jsonResponse = new JSONObject(result);
 
         } catch (JSONException ex) {
-            Log.e("CardFeud JSON Exception: ", ex.getMessage());
+            Log.e(TAG, ex.getMessage());
         }
 
-        //JSONObject jsonInvitation = jsonResponse.getJSONObject("invitations");
+        // check which JSON objects that are present
+        if(jsonResponse != null){
+
+            // if there is invitations present in response
+            if(!jsonResponse.isNull("invitations")){
+                Log.i("invite: ","true");
+
+                // get and store all invitation response objects in a static list
+                GameListResult.setInvitations(getResponses(jsonResponse, "invitations"));
 
 
-
-  /*
-
-        try {
-            // try to get all invitations and save as java objects
-            //JSONObject jsonInvitation = jsonResponse.getJSONObject("invitations");
-            JSONObject jsonFirstInvitation = jsonInvitation.getJSONObject("1");
-
-            Gson gson = new Gson();
-            Response response = gson.fromJson(jsonFirstInvitation.toString(), Response.class);
-            Log.i("KUK ", response.playerName);
-
-        /*
-        Use GSON object for these aswell??
-
-        // parse json string int's to int.
-        // how to handle several responses etc...
-
-        // my_turn object looks just as the responses
-
-
-
-        } catch (JSONException ex) {
-            Log.e("CardFeud JSON Exception: ", ex.getMessage());
-        }  /*
-
-
-        /*
-        GameListResponse invitationResponse = gson.fromJson(result, GameListResponse.class);
-        List<Response> responses = invitationResponse.responses;
-
-        for(Response invitation : responses){
-            Log.i("Test: ", invitation.gameId);
-        }  */
-
-
-
-        /* {"responses":
-            {"1":
-                {"game_id":"290215","
-                start_time":"2014-01-17 16:24:29","
-                finished_time":"0000-00-00 00:00:00","
-                lastevent":"2014-01-17 16:24:29","
-                lastevent_time":"289h 23m","
-                player_1":"51318","
-                player_2":"51308","
-                player_name":"emiltest","
-                opponent_id":"51318","
-                opponent_name":"search test","
-                card_color":"0","
-                card_value":"0","
-                pass_prohibited":"0","
-                last_round_details":"","
-                this_round_details":"","
-                last_round_points":"0","
-                this_round_points":"0","
-                my_turn":0,"
-                opponent_points":"0","
-                opponent_errors":"0","o
-                pponent_wins":0,"
-                player_points":"0","
-                player_errors":"0","
-                player_wins":0,"
-                chat_unread":0,"
-                odds":""}
+                for(Response response : GameListResult.getInvitations()){
+                    Log.i("invitation: ", response.opponentName);
+                }
             }
-          }  */
 
+            if(!jsonResponse.isNull("my_turn")){
+                Log.i("my_turn: ","true");
+
+                // get and store all my_turn response objects in a static list
+                GameListResult.setMyTurns(getResponses(jsonResponse, "my_turn"));
+            }
+
+            if(!jsonResponse.isNull("opponents_turn")){
+                Log.i("opponents_turn: ","true");
+
+                // get and store all opponents_turn response objects in a static list
+                GameListResult.setOpponentsTurns(getResponses(jsonResponse, "opponents_turn"));
+            }
+
+            if(!jsonResponse.isNull("finished")){
+                Log.i("finished: ","true");
+
+                // get and store all finished response objects in a static list
+                GameListResult.setFinishedGames(getResponses(jsonResponse, "finished"));
+            }
+        }
     }
 
     // used to get current games/invites to games
