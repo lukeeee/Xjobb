@@ -15,7 +15,7 @@
         android:background="#005500"/>
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,14 +32,14 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="250sp"
+            android:layout_width="160dp"
+            android:layout_height="230sp"
             android:id="@+id/gamecards"/>
         <!--Button
             android:layout_width="180dp"
@@ -49,7 +49,7 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"/>
+        android:layout_height="10dp"/>
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -95,8 +95,17 @@
         android:shadowRadius="30"
         android:drawableRight="@drawable/arrow_pass_r"
         android:drawableLeft="@drawable/arrow_pass_l"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gamelnrMain"
+            android:layout_gravity="center|bottom">
+
+        </LinearLayout>
         <TextView
-            android:layout_marginTop="-150dp"
+            android:layout_marginTop="-220dp"
             android:layout_width="300dp"
             android:layout_height="140dp"
             android:background="@drawable/button"
@@ -106,6 +115,7 @@
             android:textStyle="bold"
             android:text="Waiting for opponent"
             android:id="@+id/waiting"/>
+
 
 
 </LinearLayout>

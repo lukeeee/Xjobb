@@ -174,30 +174,44 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#fff"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
         <Button
             android:layout_marginTop="10dp"
-            android:layout_width="300dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:background="@drawable/button"
             android:text="Game debug"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:layout_marginRight="150dp"
             android:id="@+id/game"/>
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            />
+
         <Button
-            android:layout_width="300dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:background="@drawable/button"
-            android:text="Change Country Debug"
+            android:text="Change Cnty"
             android:layout_gravity="center"
             android:textStyle="bold"
+            android:layout_marginLeft="155dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/debug_country"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/settingslnrMain"
+            android:layout_gravity="center|bottom">
+
+        </LinearLayout>
 
     </LinearLayout>
     </ScrollView>

@@ -12,7 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Random;
 
@@ -30,6 +35,7 @@ public class Game extends Activity implements View.OnClickListener {
     private int gameId;
     private int choice;
     private TextView waiting;
+    private LinearLayout lnrMain;
 
     private static final Integer[] mImageIds =
             { R.drawable.c_a, R.drawable.c_eight, R.drawable.c_five,R.drawable.c_four,R.drawable.c_j,R.drawable.c_k,R.drawable.c_nine,R.drawable.c_q,R.drawable.c_seven,
@@ -53,6 +59,7 @@ public class Game extends Activity implements View.OnClickListener {
         low.getBackground().setAlpha(150);
         stat.getBackground().setAlpha(150);
         pass.getBackground().setAlpha(150);
+        lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
         waiting.setText("Waiting for " + "null");
@@ -88,7 +95,18 @@ public class Game extends Activity implements View.OnClickListener {
                 waiting.setVisibility(View.VISIBLE);
             }
         });
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AdView adView = new AdView(Game.this);
+                adView.setAdUnitId("0445b7141d9d4e1b");
+                adView.setAdSize(AdSize.BANNER);
+                AdRequest.Builder builder = new AdRequest.Builder();
+                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                adView.loadAd(builder.build());
+                lnrMain.addView(adView);
+            }
+        });
     }
     public void changeImageResource()
     {

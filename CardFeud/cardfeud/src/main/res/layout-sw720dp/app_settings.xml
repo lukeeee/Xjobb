@@ -176,29 +176,44 @@
             android:layout_height="1dp"
             android:background="#fff"/>
 
-        <Button
-            android:layout_marginTop="70dp"
-            android:layout_width="600dp"
-            android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:background="@drawable/button"
-            android:text="Game debug"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/game"/>
-        <View
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                android:background="@drawable/button"
+                android:text="Game debug"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginRight="300dp"
+                android:id="@+id/game"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                android:background="@drawable/button"
+                android:text="Change Cnty"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/debug_country"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            />
-        <Button
-            android:layout_width="600dp"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:background="@drawable/button"
-            android:text="Change Country Debug"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/debug_country"/>
+            android:orientation="vertical"
+            android:id="@+id/settingslnrMain"
+            android:layout_gravity="center|bottom">
+
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

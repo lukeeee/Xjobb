@@ -11,9 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private ToggleButton vibrationToggleButton;
     private boolean created = false;
     private final String TAG = "CardFeud SharedPrefs Exception ";
+    private LinearLayout lnrMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         soundToggleButton = (ToggleButton)findViewById(R.id.sounds);
         notificationSoundToggleButton = (ToggleButton)findViewById(R.id.notification_sound);
         vibrationToggleButton = (ToggleButton)findViewById(R.id.vibration);
+        lnrMain = (LinearLayout)findViewById(R.id.settingslnrMain);
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
         logoutButton.getBackground().setAlpha(0);
@@ -71,6 +78,18 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                AdView adView = new AdView(AppSettings.this);
+                adView.setAdUnitId("0445b7141d9d4e1b");
+                adView.setAdSize(AdSize.BANNER);
+                AdRequest.Builder builder = new AdRequest.Builder();
+                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                adView.loadAd(builder.build());
+                lnrMain.addView(adView);
+            }
+        });
     }
 
     @Override
