@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,12 +15,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.Random;
+
+import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.Posters.PostGamePlay;
+import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
 public class Game extends Activity implements View.OnClickListener {
@@ -36,6 +47,10 @@ public class Game extends Activity implements View.OnClickListener {
     private int choice;
     private TextView waiting;
     private LinearLayout lnrMain;
+    private Response gameResponse;  // This object represents a current game
+    private final String TAG = "CardFeud JSON Exception: ";
+    private HelperClass helperClass;
+    private int rematchChoice;  // represents the choice for rematch, 1 = Yes 0 = No
 
     private static final Integer[] mImageIds =
             { R.drawable.c_a, R.drawable.c_eight, R.drawable.c_five,R.drawable.c_four,R.drawable.c_j,R.drawable.c_k,R.drawable.c_nine,R.drawable.c_q,R.drawable.c_seven,
@@ -107,6 +122,9 @@ public class Game extends Activity implements View.OnClickListener {
                 lnrMain.addView(adView);
             }
         });
+
+        helperClass = new HelperClass(this);
+
     }
     public void changeImageResource()
     {
@@ -116,10 +134,10 @@ public class Game extends Activity implements View.OnClickListener {
     public void showProgressDialog(){
         if(progressDialog == null){
             // display dialog when loading data
-            progressDialog = ProgressDialog.show(this, "Refreshing", "Please Wait ", true, false);
+            progressDialog = ProgressDialog.show(this, null, "Loading...", true, false);
         } else {
             progressDialog.cancel();
-            progressDialog = ProgressDialog.show(this, "Refreshing","Please Wait...", true, false);
+            progressDialog = ProgressDialog.show(this, null,"Loading...", true, false);
         }
     }
 
@@ -158,9 +176,14 @@ public class Game extends Activity implements View.OnClickListener {
     protected void onResume(){
         super.onResume();
 
+       // debug
+        // should only be done as long as we are guessing correct!!
+       // PostGamePlay postGamePlay = new PostGamePlay(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), "290215", 2, this);
+       // postGamePlay.postRequest();
+
+
         // check if user is logged out, (if the values stored are empty)
         // if they are then finish activity
-
         if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
             this.finish();
         }
@@ -198,12 +221,142 @@ public class Game extends Activity implements View.OnClickListener {
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(intent);
-                showProgressDialog();
                 return true;
         }
 
         return true;
 
+    }
+
+    // used to send the rematch data to server
+    private void sendRematchPost(){
+
+        if(!helperClass.isConnected()){
+            helperClass.showNetworkErrorDialog();
+            // add retry dialog
+        } else {
+            // send request for a rematch
+            PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.opponentId, rematchChoice, this);
+            postGameStart.postRequest();
+        }
+    }
+
+    // show a popup with game result, and the possibility to request a rematch
+    private void showGameFinishedPopUp(final Response response){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Game Finished");
+        dialog.setIcon(R.drawable.invite);
+
+        if(!response.playerWins.contentEquals("0")){
+            // if the current player wins
+            dialog.setMessage("Congratulations! \n\n" + "You won against " + response.opponentName + "\n\n");
+            //TODO write out score as well
+
+        } else if (!response.opponentWins.contentEquals("0")){
+            // if the opponent wins
+            dialog.setMessage("Sorry! \n\n" + response.opponentName + "won against you. \n\n");
+            //TODO write out score as well
+
+        }
+
+        dialog.setPositiveButton("Rematch", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // rematch
+                rematchChoice = 1;
+                sendRematchPost();
+                dialog.cancel();
+            }
+        });
+        /*
+        dialog.setNeutralButton("Brag on Facebook", new DialogInterface.OnClickListener() {
+           public void onClick(DialogInterface dialog, int which) {
+
+               // TODO Implement brag on facebook
+                // brag on facebook
+                dialog.cancel();
+            }
+        });
+        */
+        dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // rematch
+                rematchChoice = 0;
+                sendRematchPost();
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+
+    }
+
+    // show error feedback and offer retry on game rematch post
+    public void showErrorRematchDialog(String message){
+        progressDialog = null;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("An Error has occurred!");
+        builder.setMessage(message);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send request to the server again.
+                sendRematchPost();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // just close the dialog
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    // finish method when posting rematch data
+    public void finishRematchRequest(){
+        if(rematchChoice == 1){
+            // if we want to play a rematch
+            Toast.makeText(this, "Rematch request sent!", 1000).show();
+        }
+
+        //Intent i = new Intent(getBaseContext(), MainActivity.class);
+        //startActivity(i);
+
+        //
+        this.finish();
+    }
+
+    // show error feedback on game play
+    public void showErrorDialog(String message){
+        progressDialog = null;
+        helperClass.showErrorDialog(message);
+    }
+
+    // finish method when posting game play
+    public void finishRequest(String result){
+        Log.i("Result: ", result);
+
+        try{
+            final Gson gson = new Gson();
+
+            // create Response object with all the JSON values
+            gameResponse = gson.fromJson(result, Response.class);
+
+        } catch (Exception ex){
+            Log.e(TAG, ex.getMessage());
+        }
+
+        // if the finished time field is set, the game is over and we show a dialog.
+        if(!gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
+            // the game is over
+            showGameFinishedPopUp(gameResponse);
+        }
     }
 
 

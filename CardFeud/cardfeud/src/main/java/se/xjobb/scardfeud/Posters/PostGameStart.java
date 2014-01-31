@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 
+import se.xjobb.scardfeud.Game;
 import se.xjobb.scardfeud.InvitationResponse;
 import se.xjobb.scardfeud.MainActivity;
 import se.xjobb.scardfeud.NewGame;
@@ -31,10 +32,12 @@ public class PostGameStart {
     private String userId;
     private String opponent;
     private String userIdentifier;
+    private String rematch;
     private InvitationResponse invitationResponse;
     private NewGame newGameCallback = null;
     private Search searchCallback = null;
     private MainActivity mainActivityInvitationResponseCallback = null;
+    private Game gameCallback = null;
 
     public PostGameStart(int userId, String userIdentifier, int opponent , NewGame newGameCallback) {
         this.userId = Integer.toString(userId);
@@ -58,6 +61,14 @@ public class PostGameStart {
         this.mainActivityInvitationResponseCallback = mainActivityInvitationResponseCallback;
     }
 
+    public PostGameStart(int userId, String userIdentifier, String opponent, int rematch, Game gameCallback) {
+        this.userId = Integer.toString(userId);
+        this.userIdentifier = userIdentifier;
+        this.opponent = opponent;
+        this.rematch = Integer.toString(rematch);
+        this.gameCallback = gameCallback;
+    }
+
 
     public void postRequest(){
 
@@ -76,6 +87,9 @@ public class PostGameStart {
             // if we are answering game invitation requests
             new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + Integer.toString(invitationResponse.getOpponentId()) + "&answer=" + Integer.toString(invitationResponse.getAnswer()) +"&res=json");
             // dialog is already showing...  (MainActivity shows it)
+        } else if (gameCallback != null){
+            new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + opponent + "&rematch=" + rematch +"&res=json");
+            gameCallback.showProgressDialog();;
         }
     }
 
@@ -218,6 +232,29 @@ public class PostGameStart {
             }
         }
 
+        // process result for Game class, when requesting rematch (yes or no)
+        private void feedBackGame(String result, Game gameCallback){
+            if(result.contains("Did not work!")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorRematchDialog("An error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorRematchDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Wrong account details")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorRematchDialog("Account Error! Please try logging in again.");
+            } else if (result.contains("Something went wrong")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorRematchDialog("We are sorry something went wrong! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorRematchDialog("The server is not responding! Please try again.");
+            } else if(result.contains("Request Sent")){
+                gameCallback.hideProgressDialog();
+                gameCallback.finishRematchRequest();
+            }
+        }
+
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result){
@@ -234,6 +271,9 @@ public class PostGameStart {
                 // process result
                 feedBackMainActivityGameInvitation(result, mainActivityInvitationResponseCallback);
 
+            } else if (gameCallback != null){
+                // process result
+                feedBackGame(result, gameCallback);
             }
 
 
