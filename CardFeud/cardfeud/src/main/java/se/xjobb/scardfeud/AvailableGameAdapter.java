@@ -1,7 +1,6 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +53,9 @@ public class AvailableGameAdapter extends BaseAdapter {
         }
 
         Button play = (Button)view.findViewById(R.id.playGameBtn);
-        for(Response response : GameListResult.getMyTurns()){
-            Log.i("MyTurn:", response.opponentName);
-            play.setText("Your turn against " + response.opponentName);
-        }
+        Response response = GameListResult.getMyTurns().get(i);
+        play.setText("Your turn against " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
+
 
         play.getBackground().setAlpha(150);
         view.setTag(myTurns.get(i));
