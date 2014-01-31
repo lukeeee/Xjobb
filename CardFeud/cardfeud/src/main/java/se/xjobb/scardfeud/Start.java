@@ -50,9 +50,6 @@ public class Start extends Fragment implements View.OnClickListener {
         waiting = (ListView)rootView.findViewById(R.id.waiting);
         finGames = (ListView)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
-        games.getBackground().setAlpha(150);
-        waiting.getBackground().setAlpha(150);
-        finGames.getBackground().setAlpha(150);
         user.getBackground().setAlpha(150);
         gamestext.getBackground().setAlpha(150);
         fin_Gamestext.getBackground().setAlpha(150);
@@ -86,12 +83,11 @@ public class Start extends Fragment implements View.OnClickListener {
                     ft.replace(R.id.icon, new Start(), view.getTag() + "");
                     ft.addToBackStack(null);
                     ft.commit();
+                    gamestext.setVisibility(View.INVISIBLE);
 
                 }
             });
             games.setAdapter(availableGameAdapter);
-
-            gamestext.setVisibility(View.INVISIBLE);
         }
         return rootView;
     }

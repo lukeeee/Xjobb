@@ -1,14 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
+    android:baselineAligned="false"
+    android:orientation="vertical"
     tools:context="se.xjobb.scardfeud.Stats" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"/>
@@ -53,7 +52,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="left">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -62,35 +61,31 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textStyle="bold"
+        android:layout_marginLeft="31dp"
         android:background="@drawable/button"
         android:id="@+id/games_text"
         android:textColor="#00ff00"/>
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-    </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+    <LinearLayout
+        android:layout_width="300dp"
+           android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+        android:orientation="vertical">
         <ListView
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:id="@+id/games"/>
+            android:id="@+id/games"
+            android:layout_alignParentTop="true"/>
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+            android:layout_height="10dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -102,23 +97,21 @@
             android:background="@drawable/button"
             android:id="@+id/waiting_text"
             android:textColor="#fff200"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        </RelativeLayout>
         <ListView
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:id="@+id/waiting"/>
+            android:id="@+id/waiting"
+            android:layout_alignParentTop="true"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="15dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="left">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="30dp"
@@ -138,9 +131,8 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/button"
             android:id="@+id/finGames"/>
-
+    </LinearLayout>
 
 </LinearLayout>
-</ScrollView>
+

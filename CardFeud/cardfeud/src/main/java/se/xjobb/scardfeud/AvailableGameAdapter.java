@@ -56,9 +56,9 @@ public class AvailableGameAdapter extends BaseAdapter {
         Button play = (Button)view.findViewById(R.id.playGameBtn);
         for(Response response : GameListResult.getMyTurns()){
             Log.i("MyTurn:", response.opponentName);
-
             play.setText("Your turn against " + response.opponentName);
         }
+
         play.getBackground().setAlpha(150);
         view.setTag(myTurns.get(i));
         view.setOnClickListener(myTurnsListener);
