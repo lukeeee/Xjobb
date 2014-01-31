@@ -59,6 +59,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
             play.setText("Your turn against " + response.opponentName);
         }
+        play.getBackground().setAlpha(150);
         view.setTag(myTurns.get(i));
         view.setOnClickListener(myTurnsListener);
 

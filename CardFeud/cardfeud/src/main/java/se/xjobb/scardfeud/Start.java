@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 
 
@@ -74,37 +76,23 @@ public class Start extends Fragment implements View.OnClickListener {
             Drawable drawable = getResources().getDrawable(id);
             flag.setImageDrawable(drawable);
         }
-
+        myTurns = GameListResult.getMyTurns();
 
         if(!myTurns.isEmpty()) {
             AvailableGameAdapter availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-
                 @Override
                 public void onClick(View view) {
-                    gamestext.setVisibility(view.INVISIBLE);
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.icon, new Start(), view.getTag() + "");
+                    ft.addToBackStack(null);
+                    ft.commit();
+
                 }
             });
             games.setAdapter(availableGameAdapter);
-        } else if(!opponentsTurns.isEmpty()) {
-            WaitingGameAdapter waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
 
-                @Override
-                public void onClick(View view) {
-                    waitingtext.setVisibility(view.INVISIBLE);
-                }
-            });
-            waiting.setAdapter(waitingGameAdapter);
-        } else if(!myTurns.isEmpty()) {
-            FinishedGameAdapter finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    fin_Gamestext.setVisibility(view.INVISIBLE);
-                }
-            });
-            finGames.setAdapter(finishedGameAdapter);
+            gamestext.setVisibility(View.INVISIBLE);
         }
-
         return rootView;
     }
 
