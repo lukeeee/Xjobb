@@ -1,7 +1,6 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,11 +51,8 @@ public class WaitingGameAdapter extends BaseAdapter {
 
         Button wait = (Button)view.findViewById(R.id.waitGameBtn);
         wait.getBackground().setAlpha(150);
-        for(Response response : GameListResult.getOpponentsTurns()){
-            Log.i("MyTurn:", response.opponentName);
-
-            wait.setText("Waiting for " + response.opponentName);
-        }
+        Response response = GameListResult.getOpponentsTurns().get(i);
+        wait.setText("Your turn against " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
 
         view.setTag(opponentsTurns.get(i));
         view.setOnClickListener(waitingListener);

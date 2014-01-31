@@ -2,7 +2,6 @@ package se.xjobb.scardfeud;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,11 +59,9 @@ public class FinishedGameAdapter extends BaseAdapter{
         }*/
 
 
-        for(Response response : GameListResult.getFinishedGames()){
-            Log.i("MyTurn:", response.opponentName);
+        Response response = GameListResult.getFinishedGames().get(i);
+        finish.setText("You " + "won/lost" +" against "+ response.opponentName);
 
-            finish.setText("You " + "won/lost" +" against "+ response.opponentName);
-        }
 
         view.setTag(finishedGames.get(i));
         view.setOnClickListener(finListener);
