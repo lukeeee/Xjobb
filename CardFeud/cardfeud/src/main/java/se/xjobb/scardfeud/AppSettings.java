@@ -23,6 +23,9 @@ import com.google.android.gms.ads.AdView;
 import java.util.ArrayList;
 import java.util.List;
 
+import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
+import se.xjobb.scardfeud.JsonGetClasses.Response;
+
 
 public class AppSettings extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
@@ -193,6 +196,12 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         User.UserDetails.setUserId(0);
         User.UserDetails.setUserCountryCode(null);
         User.UserDetails.setDeviceRegId(null);
+
+        // need to clear these as well
+        GameListResult.setFinishedGames(new ArrayList<Response>());
+        GameListResult.setInvitations(new ArrayList<Response>());
+        GameListResult.setOpponentsTurns(new ArrayList<Response>());
+        GameListResult.setMyTurns(new ArrayList<Response>());
     }
 
    // show feedback and go to "android home"
