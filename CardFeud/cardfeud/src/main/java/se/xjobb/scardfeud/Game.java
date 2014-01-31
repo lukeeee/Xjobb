@@ -249,13 +249,13 @@ public class Game extends Activity implements View.OnClickListener {
 
         if(!response.playerWins.contentEquals("0")){
             // if the current player wins
-            dialog.setMessage("Congratulations! \n\n" + "You won against " + response.opponentName + "\n\n");
-            //TODO write out score as well
+            dialog.setMessage("Congratulations! \n\n" + "You won against " + response.opponentName + "\n\n" +
+                response.playerPoints + " - " + response.opponentPoints);
 
         } else if (!response.opponentWins.contentEquals("0")){
             // if the opponent wins
-            dialog.setMessage("Sorry! \n\n" + response.opponentName + "won against you. \n\n");
-            //TODO write out score as well
+            dialog.setMessage("Sorry! \n\n" + response.opponentName + " won against you. \n\n" +
+                response.opponentPoints + " - " + response.playerPoints);
 
         }
 

@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     HelperClass helperClass = new HelperClass(this);
     private final String TAG = "CardFeud JSON Exception: ";
     private List<InvitationResponse> invitationResponsesList;
+    private static String startTag;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -266,6 +267,13 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             invitationResponsesList.clear();
         }
 
+        // refresh the start fragment
+        Start startFrag = (Start) getSupportFragmentManager().findFragmentByTag(startTag);
+        if(startFrag != null){
+            startFrag.refresh();
+            Log.i("TAG Found ", "Found it");
+        }
+
         // check if there are any game invitations
         checkGameInvitations();
 
@@ -314,6 +322,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void showErrorDialog(String message){
         progressDialog = null;
         helperClass.showErrorDialog(message);
+    }
+
+    // set tag for start fragment
+    public static void setStartTag(String tag){
+        startTag = tag;
     }
 
     @Override

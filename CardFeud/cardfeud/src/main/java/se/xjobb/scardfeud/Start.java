@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,12 @@ public class Start extends Fragment implements View.OnClickListener {
     private String myCountry;
     LinearLayout games, waiting, finGames;
     ImageView flag;
+    FinishedGameAdapter finishedGameAdapter;
+    WaitingGameAdapter waitingGameAdapter;
+    AvailableGameAdapter availableGameAdapter;
+    boolean finishedGameAdapterCreated = false;
+    boolean waitingGameAdapterCreated = false;
+    boolean availableGameAdapterCreated = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,8 +86,30 @@ public class Start extends Fragment implements View.OnClickListener {
         myTurns = GameListResult.getMyTurns();
         opponentsTurns = GameListResult.getOpponentsTurns();
         finishedGames = GameListResult.getFinishedGames();
+
+        createAvailableGameAdapter();
+        createWaitingGameAdapter();
+        createFinishedGameAdapter();
+
+        MainActivity.setStartTag(getTag());
+
+        return rootView;
+    }
+
+
+    @Override
+    public void onClick(View view) {
+
+        if (view == newGame){
+            Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
+            startActivity(ng);
+        }
+    }
+
+    private void createAvailableGameAdapter(){
         if(!myTurns.isEmpty()) {
-            AvailableGameAdapter availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+            availableGameAdapterCreated = true;
+            availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -99,8 +128,12 @@ public class Start extends Fragment implements View.OnClickListener {
             }
             gamestext.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void createWaitingGameAdapter(){
         if(!opponentsTurns.isEmpty()) {
-            WaitingGameAdapter waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+            waitingGameAdapterCreated = true;
+            waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -119,8 +152,12 @@ public class Start extends Fragment implements View.OnClickListener {
             }
             waitingtext.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void createFinishedGameAdapter(){
         if(!finishedGames.isEmpty()) {
-            FinishedGameAdapter finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+            finishedGameAdapterCreated = true;
+            finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -139,18 +176,40 @@ public class Start extends Fragment implements View.OnClickListener {
             }
             fin_Gamestext.setVisibility(View.VISIBLE);
         }
-        return rootView;
     }
 
 
-    @Override
-    public void onClick(View view) {
+    // refresh the arraylists data and adapters
+    public void refresh(){
+        myTurns = GameListResult.getMyTurns();
+        opponentsTurns = GameListResult.getOpponentsTurns();
+        finishedGames = GameListResult.getFinishedGames();
 
-        if (view == newGame){
-            Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
-            startActivity(ng);
+        // check if the arraylist adapters is instantiated
+        if(!availableGameAdapterCreated){
+            createAvailableGameAdapter();
+        }
+
+        if(!finishedGameAdapterCreated){
+            createFinishedGameAdapter();
+        }
+
+        if(!waitingGameAdapterCreated){
+            createWaitingGameAdapter();
+        }
+
+
+        // make sure tha adapters are not null
+        if(availableGameAdapter != null){
+            availableGameAdapter.notifyDataSetChanged();
+        }
+
+        if(finishedGameAdapter != null){
+            finishedGameAdapter.notifyDataSetChanged();
+        }
+
+        if(waitingGameAdapter != null){
+            waitingGameAdapter.notifyDataSetChanged();
         }
     }
-
-
 }
