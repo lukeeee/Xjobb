@@ -23,7 +23,6 @@
         android:paddingLeft="40dp"
         android:paddingRight="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="2dp"
         android:background="@drawable/button"
         android:id="@+id/user"/>
 

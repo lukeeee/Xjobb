@@ -58,6 +58,9 @@ public class Start extends Fragment implements View.OnClickListener {
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
+        gamestext.setVisibility(View.INVISIBLE);
+        waitingtext.setVisibility(View.INVISIBLE);
+        fin_Gamestext.setVisibility(View.INVISIBLE);
 
         user.setText(username);
 
@@ -75,6 +78,7 @@ public class Start extends Fragment implements View.OnClickListener {
         }
         myTurns = GameListResult.getMyTurns();
         opponentsTurns = GameListResult.getOpponentsTurns();
+        finishedGames = GameListResult.getFinishedGames();
         if(!myTurns.isEmpty()) {
             AvailableGameAdapter availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
                 @Override
@@ -83,11 +87,12 @@ public class Start extends Fragment implements View.OnClickListener {
                     ft.replace(R.id.icon, new Start(), view.getTag() + "");
                     ft.addToBackStack(null);
                     ft.commit();
-                    gamestext.setVisibility(View.INVISIBLE);
+
 
                 }
             });
             games.setAdapter(availableGameAdapter);
+            gamestext.setVisibility(View.VISIBLE);
         }
         if(!opponentsTurns.isEmpty()) {
             WaitingGameAdapter waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
@@ -97,11 +102,27 @@ public class Start extends Fragment implements View.OnClickListener {
                     ft.replace(R.id.icon, new Start(), view.getTag() + "");
                     ft.addToBackStack(null);
                     ft.commit();
-                    waitingtext.setVisibility(View.INVISIBLE);
+
 
                 }
             });
             waiting.setAdapter(waitingGameAdapter);
+            waitingtext.setVisibility(View.VISIBLE);
+        }
+        if(!finishedGames.isEmpty()) {
+            FinishedGameAdapter finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    ft.replace(R.id.icon, new Start(), view.getTag() + "");
+                    ft.addToBackStack(null);
+                    ft.commit();
+
+
+                }
+            });
+            finGames.setAdapter(finishedGameAdapter);
+            fin_Gamestext.setVisibility(View.VISIBLE);
         }
         return rootView;
     }
