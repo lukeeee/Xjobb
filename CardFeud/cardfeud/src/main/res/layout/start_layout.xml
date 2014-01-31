@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
     android:layout_width="match_parent"
@@ -6,8 +6,17 @@
     android:background="@drawable/background"
     android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context="se.xjobb.scardfeud.Stats" >
-
+    tools:context="se.xjobb.scardfeud.Start" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
@@ -62,22 +71,17 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textStyle="bold"
-        android:layout_marginLeft="31dp"
         android:background="@drawable/button"
         android:id="@+id/games_text"
         android:textColor="#00ff00"/>
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="300dp"
-           android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-        android:orientation="vertical">
-        <ListView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:id="@+id/games"
+            android:orientation="vertical"
             android:layout_alignParentTop="true"/>
 
         <View
@@ -99,16 +103,16 @@
             android:id="@+id/waiting_text"
             android:textColor="#fff200"/>
         </RelativeLayout>
-        <ListView
+        <LinearLayout
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:id="@+id/waiting"
+            android:orientation="vertical"
             android:layout_alignParentTop="true"/>
-
         <View
             android:layout_width="match_parent"
-            android:layout_height="15dp"/>
+            android:layout_height="10dp"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,12 +132,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
-        <ListView
+        <LinearLayout
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:orientation="vertical"
             android:id="@+id/finGames"/>
+
+    </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
 

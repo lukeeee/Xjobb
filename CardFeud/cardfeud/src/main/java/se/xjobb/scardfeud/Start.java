@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -29,12 +29,12 @@ public class Start extends Fragment implements View.OnClickListener {
     TextView waitingtext;
     TextView fin_Gamestext;
     private Button newGame;
-    private ListView games, waiting, finGames;
     private List<Response> myTurns;
     private List<Response> opponentsTurns;
     private List<Response> finishedGames;
     private String username;
     private String myCountry;
+    LinearLayout games, waiting, finGames;
     ImageView flag;
 
     @Override
@@ -46,9 +46,9 @@ public class Start extends Fragment implements View.OnClickListener {
         fin_Gamestext = (TextView)rootView.findViewById(R.id.fin_game_text);
         newGame = (Button)rootView.findViewById(R.id.Btn_newGame);
         waitingtext = (TextView)rootView.findViewById(R.id.waiting_text);
-        games = (ListView)rootView.findViewById(R.id.games);
-        waiting = (ListView)rootView.findViewById(R.id.waiting);
-        finGames = (ListView)rootView.findViewById(R.id.finGames);
+        games = (LinearLayout)rootView.findViewById(R.id.games);
+        waiting = (LinearLayout)rootView.findViewById(R.id.waiting);
+        finGames = (LinearLayout)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
         user.getBackground().setAlpha(150);
         gamestext.getBackground().setAlpha(150);
@@ -91,7 +91,12 @@ public class Start extends Fragment implements View.OnClickListener {
 
                 }
             });
-            games.setAdapter(availableGameAdapter);
+            final int adapterCount = availableGameAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = availableGameAdapter.getView(i, null, null);
+                games.addView(item);
+            }
             gamestext.setVisibility(View.VISIBLE);
         }
         if(!opponentsTurns.isEmpty()) {
@@ -106,7 +111,12 @@ public class Start extends Fragment implements View.OnClickListener {
 
                 }
             });
-            waiting.setAdapter(waitingGameAdapter);
+            final int adapterCount = waitingGameAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = waitingGameAdapter.getView(i, null, null);
+                waiting.addView(item);
+            }
             waitingtext.setVisibility(View.VISIBLE);
         }
         if(!finishedGames.isEmpty()) {
@@ -121,7 +131,12 @@ public class Start extends Fragment implements View.OnClickListener {
 
                 }
             });
-            finGames.setAdapter(finishedGameAdapter);
+            final int adapterCount = finishedGameAdapter.getCount();
+
+            for (int i = 0; i < adapterCount; i++) {
+                View item = finishedGameAdapter.getView(i, null, null);
+                finGames.addView(item);
+            }
             fin_Gamestext.setVisibility(View.VISIBLE);
         }
         return rootView;
