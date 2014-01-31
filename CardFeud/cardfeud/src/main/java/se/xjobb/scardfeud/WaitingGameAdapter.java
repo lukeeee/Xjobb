@@ -51,6 +51,7 @@ public class WaitingGameAdapter extends BaseAdapter {
         }
 
         Button wait = (Button)view.findViewById(R.id.waitGameBtn);
+        wait.getBackground().setAlpha(150);
         for(Response response : GameListResult.getOpponentsTurns()){
             Log.i("MyTurn:", response.opponentName);
 
