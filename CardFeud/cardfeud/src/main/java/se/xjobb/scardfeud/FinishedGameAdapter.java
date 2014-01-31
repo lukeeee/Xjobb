@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,8 @@ public class FinishedGameAdapter extends BaseAdapter{
     ArrayList<Response> finishedGames;
     Context context;
     View.OnClickListener finListener;
-    //TODO Drawable win = getResources().getDrawable(R.drawable.win);
-    //TODO Drawable loose = getResources().getDrawable(R.drawable.loose);
+    Drawable win = context.getResources().getDrawable(R.drawable.win);
+    Drawable loose = context.getResources().getDrawable(R.drawable.loose);
 
     public FinishedGameAdapter(Context context, View.OnClickListener finListener){
         this.context = context;
