@@ -15,11 +15,17 @@
             android:background="@drawable/button"
             android:id="@+id/playGameBtn"
             android:gravity="left|center"
-            android:paddingLeft="5dp"
+            android:paddingLeft="45dp"
             android:textColor="#000"
             android:paddingRight="3dp"
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
             android:layout_alignParentTop="true"
             android:drawableRight="@drawable/arrow"/>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="12dp"
+        android:id="@+id/playFlag"/>
 </RelativeLayout>

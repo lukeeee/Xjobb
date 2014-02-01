@@ -1,11 +1,14 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,7 @@ public class WaitingGameAdapter extends BaseAdapter {
     ArrayList<Response> opponentsTurns;
     Context context;
     View.OnClickListener waitingListener;
+    ImageView waitFlag;
 
 
     public WaitingGameAdapter(Context context, View.OnClickListener waitingListener){
@@ -50,9 +54,24 @@ public class WaitingGameAdapter extends BaseAdapter {
         }
 
         Button wait = (Button)view.findViewById(R.id.waitGameBtn);
-        wait.getBackground().setAlpha(150);
+        waitFlag = (ImageView)view.findViewById(R.id.waitFlag);
+
+
+        wait.getBackground().setAlpha(100);
         Response response = GameListResult.getOpponentsTurns().get(i);
-        wait.setText("Your turn against " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
+        try {
+            String country = response.opponentName.toLowerCase();
+            int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+            waitFlag.setBackground(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+
+            waitFlag.setBackground(drawable);
+        }
+        wait.setText("Waiting for  " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
 
         view.setTag(opponentsTurns.get(i));
         view.setOnClickListener(waitingListener);

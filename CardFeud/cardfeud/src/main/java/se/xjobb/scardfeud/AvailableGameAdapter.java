@@ -1,11 +1,14 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,7 @@ public class AvailableGameAdapter extends BaseAdapter {
     Context context;
     View.OnClickListener myTurnsListener;
     private String username;
-
+    ImageView playFlag;
 
 
 
@@ -53,7 +56,20 @@ public class AvailableGameAdapter extends BaseAdapter {
         }
 
         Button play = (Button)view.findViewById(R.id.playGameBtn);
+        playFlag = (ImageView)view.findViewById(R.id.playFlag);
         Response response = GameListResult.getMyTurns().get(i);
+        try {
+            String country = response.opponentName.toLowerCase();
+            int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+            playFlag.setBackground(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+
+            playFlag.setBackground(drawable);
+        }
         play.setText("Your turn against " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
 
 

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,7 @@ public class Start extends Fragment implements View.OnClickListener {
         gamestext.getBackground().setAlpha(150);
         fin_Gamestext.getBackground().setAlpha(150);
         newGame.getBackground().setAlpha(150);
-        waitingtext.getBackground().setAlpha(150);
+        waitingtext.getBackground().setAlpha(100);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
