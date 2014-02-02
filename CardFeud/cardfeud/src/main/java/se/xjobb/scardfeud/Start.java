@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -67,6 +68,13 @@ public class Start extends Fragment implements View.OnClickListener {
         gamestext.setVisibility(View.INVISIBLE);
         waitingtext.setVisibility(View.INVISIBLE);
         fin_Gamestext.setVisibility(View.INVISIBLE);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/hobostd.otf");
+        newGame.setTypeface(tf);
+        user.setTypeface(tf);
+        gamestext.setTypeface(tf);
+        waitingtext.setTypeface(tf);
+        fin_Gamestext.setTypeface(tf);
 
         user.setText(username);
 

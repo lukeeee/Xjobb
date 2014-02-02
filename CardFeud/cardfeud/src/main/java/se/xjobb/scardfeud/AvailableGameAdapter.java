@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,8 @@ public class AvailableGameAdapter extends BaseAdapter {
         Button play = (Button)view.findViewById(R.id.playGameBtn);
         playFlag = (ImageView)view.findViewById(R.id.playFlag);
         Response response = GameListResult.getMyTurns().get(i);
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/hobostd.otf");
         try {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
@@ -71,6 +74,7 @@ public class AvailableGameAdapter extends BaseAdapter {
             playFlag.setBackground(drawable);
         }
         play.setText("Your turn against " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
+        play.setTypeface(tf);
 
 
         play.getBackground().setAlpha(150);

@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +48,8 @@ public class FinishedGameAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         String result;
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/hobostd.otf");
         Button finish = (Button)view.findViewById(R.id.finGameBtn);
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,6 +64,7 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         Response response = GameListResult.getFinishedGames().get(i);
         finish.setText("You " + "won/lost" +" against "+ response.opponentName);
+        finish.setTypeface(tf);
 
 
         view.setTag(finishedGames.get(i));

@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,8 @@ public class WaitingGameAdapter extends BaseAdapter {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = infalInflater.inflate(R.layout.waitgame_list, null);
         }
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/hobostd.otf");
 
         Button wait = (Button)view.findViewById(R.id.waitGameBtn);
         waitFlag = (ImageView)view.findViewById(R.id.waitFlag);
@@ -71,8 +74,8 @@ public class WaitingGameAdapter extends BaseAdapter {
 
             waitFlag.setBackground(drawable);
         }
-        wait.setText("Waiting for  " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
-
+        wait.setText("Waiting for " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
+        wait.setTypeface(tf);
         view.setTag(opponentsTurns.get(i));
         view.setOnClickListener(waitingListener);
 
