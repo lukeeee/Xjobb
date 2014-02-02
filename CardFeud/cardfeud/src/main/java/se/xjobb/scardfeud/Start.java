@@ -99,6 +99,7 @@ public class Start extends Fragment implements View.OnClickListener {
         createFinishedGameAdapter();
 
         MainActivity.setStartTag(getTag());
+        flag.setOnClickListener(this);
 
         return rootView;
     }
@@ -110,6 +111,9 @@ public class Start extends Fragment implements View.OnClickListener {
         if (view == newGame){
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
+        } else if (view == flag){
+            flag.animate().translationX(210);
+
         }
     }
 
