@@ -137,7 +137,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
             // normal size device layout
 
             if(User.UserDetails.getAppVersion() != 0){
-                versionText.setText("Version:                       " + User.UserDetails.getAppVersion());
+                versionText.setText("Version:                   " + User.UserDetails.getAppVersion());
             }
         }
     }
