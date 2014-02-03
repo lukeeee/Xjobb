@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="80dp"
             android:text="Settings"
+            android:id="@+id/settings"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
@@ -36,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="App Sounds"
+            android:id="@+id/appsoundtxt"
             android:textColor="#fff"
             android:textStyle="bold"
             android:textSize="25dp"/>
@@ -44,7 +46,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:id="@+id/sounds"
-            android:layout_marginLeft="92dp"/>
+            android:layout_marginLeft="92dp"
+             android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -59,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="App Vibration"
+                android:id="@+id/appvibtxt"
                 android:textStyle="bold"
                 android:textColor="#fff"
                 android:textSize="25dp"/>
@@ -67,7 +71,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/vibration"
                 android:background="@drawable/button"
-                android:layout_marginLeft="75dp"/>
+                android:layout_marginLeft="75dp"
+                android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -83,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="Notification Sounds"
                 android:textStyle="bold"
+                android:id="@+id/appnottxt"
                 android:textColor="#fff"
                 android:textSize="25dp"/>
             <ToggleButton
@@ -90,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/notification_sound"
                 android:background="@drawable/button"
+                android:textSize="20sp"
                 android:layout_marginLeft="6dp"/>
         </LinearLayout>
         <View
@@ -163,7 +170,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Version:                  Beta 1.0"
+                android:text="Version:                Beta 1.0"
                 android:textColor="#fff"
                 android:textStyle="bold"
                 android:textSize="25dp"

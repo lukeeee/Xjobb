@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -53,6 +54,12 @@ public class NewGame extends Activity implements View.OnClickListener{
         random_player.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         userCountry = User.UserDetails.getUserCountryCode();
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        search_player.setTypeface(tf);
+        random_player.setTypeface(tf);
+        user.setTypeface(tf);
+        friends.setTypeface(tf);
 
         helperClass = new HelperClass(this);
         setFlag = true;

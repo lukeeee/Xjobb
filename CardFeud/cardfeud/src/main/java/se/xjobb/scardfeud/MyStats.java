@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,9 @@ public class MyStats extends Fragment {
         int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         flag.setImageDrawable(drawable);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/hobostd.otf");
+        personalstat_txt.setTypeface(tf);
         if(username.endsWith("s")){
             personalstat_txt.setText(username + " " + "Stats");
         }else{

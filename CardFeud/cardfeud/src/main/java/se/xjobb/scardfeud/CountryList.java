@@ -1,6 +1,6 @@
 package se.xjobb.scardfeud;
 
-import android.app.ActionBar;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,6 +34,9 @@ public class CountryList extends Fragment {
         int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         country_flag.setImageDrawable(drawable);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/hobostd.otf");
+        coulist_txt.setTypeface(tf);
 
         return rootView;
     }

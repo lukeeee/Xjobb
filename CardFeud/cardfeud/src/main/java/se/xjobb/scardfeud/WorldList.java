@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,6 +23,9 @@ public class WorldList extends Fragment {
         worldlist_txt = (TextView)rootView.findViewById(R.id.worldlist_txt);
         worldList = (ListView)rootView.findViewById(R.id.worldlist);
         worldList.getBackground().setAlpha(150);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/hobostd.otf");
+        worldlist_txt.setTypeface(tf);
         worldlist_txt.getBackground().setAlpha(150);
 
         return rootView;

@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,7 +37,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private Button countryDebug;
     private Button myAccount;
     private Button about_btn;
-    private TextView versionText;
+    private TextView versionText, appsoundstxt, appnottxt, appvibtxt, settings;
     private ToggleButton soundToggleButton;
     private ToggleButton notificationSoundToggleButton;
     private ToggleButton vibrationToggleButton;
@@ -55,6 +56,10 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
         versionText = (TextView)findViewById(R.id.version_text);
+        appnottxt = (TextView)findViewById(R.id.appnottxt);
+        appsoundstxt = (TextView)findViewById(R.id.appsoundtxt);
+        appvibtxt = (TextView)findViewById(R.id.appvibtxt);
+        settings = (TextView)findViewById(R.id.settings);
         soundToggleButton = (ToggleButton)findViewById(R.id.sounds);
         notificationSoundToggleButton = (ToggleButton)findViewById(R.id.notification_sound);
         vibrationToggleButton = (ToggleButton)findViewById(R.id.vibration);
@@ -62,6 +67,19 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
         logoutButton.getBackground().setAlpha(0);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        logoutButton.setTypeface(tf);
+        myAccount.setTypeface(tf);
+        about_btn.setTypeface(tf);
+        versionText.setTypeface(tf);
+        vibrationToggleButton.setTypeface(tf);
+        soundToggleButton.setTypeface(tf);
+        notificationSoundToggleButton.setTypeface(tf);
+        appnottxt.setTypeface(tf);
+        settings.setTypeface(tf);
+        appsoundstxt.setTypeface(tf);
+        appvibtxt.setTypeface(tf);
 
         logoutButton.setOnClickListener(this);
         game.setOnClickListener(this);

@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +26,9 @@ LinearLayout rulesLnrMain;
         View rootView = inflater.inflate(R.layout.rules_layout, container, false);
         rules = (TextView)rootView.findViewById(R.id.rules);
         rules.getBackground().setAlpha(150);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
+                "fonts/hobostd.otf");
+        rules.setTypeface(tf);
 
         rulesLnrMain = (LinearLayout)rootView.findViewById(R.id.rulesLnrMain);
 
