@@ -40,6 +40,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="se.xjobb.scardfeud.GameSplash"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+        <activity
             android:name="se.xjobb.scardfeud.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">

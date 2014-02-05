@@ -79,7 +79,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
         play.getBackground().setAlpha(200);
         view.setTag(myTurns.get(i));
-        view.setOnClickListener(myTurnsListener);
+        play.setOnClickListener(myTurnsListener);
 
         return view;
     }
