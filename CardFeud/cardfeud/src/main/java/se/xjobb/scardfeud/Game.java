@@ -86,7 +86,7 @@ public class Game extends Activity implements View.OnClickListener {
                 pass.setVisibility(View.INVISIBLE);
                 waiting.setVisibility(View.VISIBLE);*/
                 high.animate().translationX(710);
-                low.animate().translationX(710);
+                low.animate().translationX(-710);
                 pass.animate().translationX(710);
             }
         });
