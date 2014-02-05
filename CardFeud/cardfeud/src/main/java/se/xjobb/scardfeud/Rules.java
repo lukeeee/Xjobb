@@ -25,7 +25,7 @@ LinearLayout rulesLnrMain;
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.rules_layout, container, false);
         rules = (TextView)rootView.findViewById(R.id.rules);
-        rules.getBackground().setAlpha(200);
+        //rules.getBackground().setAlpha(200);
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/hobostd.otf");
         rules.setTypeface(tf);

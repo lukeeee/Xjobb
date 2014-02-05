@@ -1,7 +1,6 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -61,7 +60,7 @@ public class WaitingGameAdapter extends BaseAdapter {
         waitFlag = (ImageView)view.findViewById(R.id.waitFlag);
 
 
-        wait.getBackground().setAlpha(200);
+        //wait.getBackground().setAlpha(200);
         Response response = GameListResult.getOpponentsTurns().get(i);
         try {
             String country = response.opponentName.toLowerCase();
