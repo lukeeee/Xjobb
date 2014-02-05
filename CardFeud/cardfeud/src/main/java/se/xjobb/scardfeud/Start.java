@@ -119,7 +119,7 @@ public class Start extends Fragment implements View.OnClickListener {
     private void createAvailableGameAdapter(){
         if(!myTurns.isEmpty()) {
             availableGameAdapterCreated = true;
-            availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext());
+            availableGameAdapter = new AvailableGameAdapter(getActivity());
 
             final int adapterCount = availableGameAdapter.getCount();
 

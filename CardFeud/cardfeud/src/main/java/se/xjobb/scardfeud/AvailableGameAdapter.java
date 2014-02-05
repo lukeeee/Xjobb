@@ -85,7 +85,6 @@ public class AvailableGameAdapter extends BaseAdapter {
                 i.putExtra("opponentName", response.opponentName);
                 i.putExtra("gameId", response.gameId);
                 i.putExtra("playerName", response.playerName);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
         });
