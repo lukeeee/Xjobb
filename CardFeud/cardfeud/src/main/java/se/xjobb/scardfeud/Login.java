@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -38,7 +39,7 @@ public class Login extends Activity implements View.OnClickListener{
     private EditText passwordEditText;
 
     private TextView errorUsername;
-    private TextView errorPassword;
+    private TextView errorPassword,signInText,new_cardfeud;
 
     private Button signInButton;
     private Button goToSignUpButton;
@@ -60,11 +61,23 @@ public class Login extends Activity implements View.OnClickListener{
         errorPassword = (TextView) findViewById(R.id.passwordLoginError);
         signInButton = (Button) findViewById(R.id.signInButton);
         goToSignUpButton = (Button) findViewById(R.id.goToSignUpButton);
-        goToSignUpButton.getBackground().setAlpha(150);
-        signInButton.getBackground().setAlpha(150);
+        new_cardfeud = (TextView)findViewById(R.id.new_cardfeud);
+        signInText = (TextView)findViewById(R.id.signIn_text);
+        goToSignUpButton.getBackground().setAlpha(200);
+        signInButton.getBackground().setAlpha(200);
 
         signInButton.setOnClickListener(this);
         goToSignUpButton.setOnClickListener(this);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        signInButton.setTypeface(tf);
+        goToSignUpButton.setTypeface(tf);
+        usernameEditText.setTypeface(tf);
+        passwordEditText.setTypeface(tf);
+        errorPassword.setTypeface(tf);
+        errorUsername.setTypeface(tf);
+        signInText.setTypeface(tf);
+        new_cardfeud.setTypeface(tf);
 
         helperClass = new HelperClass(this);
         crypt = new Crypt();
