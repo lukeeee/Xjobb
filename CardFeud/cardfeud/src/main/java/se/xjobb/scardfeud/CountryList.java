@@ -27,8 +27,8 @@ public class CountryList extends Fragment {
         coulist_txt = (TextView)rootView.findViewById(R.id.coulist_txt);
         countryList = (ListView)rootView.findViewById(R.id.countrylist);
         country_flag = (ImageView)rootView.findViewById(R.id.country_flag);
-        coulist_txt.getBackground().setAlpha(150);
-        countryList.getBackground().setAlpha(150);
+        coulist_txt.getBackground().setAlpha(200);
+        countryList.getBackground().setAlpha(200);
         myCountry = User.UserDetails.getUserCountryCode();
         String country = myCountry.toLowerCase();
         int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());

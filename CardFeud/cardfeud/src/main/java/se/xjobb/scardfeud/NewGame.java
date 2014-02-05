@@ -46,10 +46,10 @@ public class NewGame extends Activity implements View.OnClickListener{
         random_player = (Button)findViewById(R.id.random_player);
         flag = (ImageView)findViewById(R.id.flagMy);
         lnrMain = (LinearLayout)findViewById(R.id.lnrMain);
-        search_player.getBackground().setAlpha(150);
-        user.getBackground().setAlpha(150);
-        friends.getBackground().setAlpha(150);
-        random_player.getBackground().setAlpha(150);
+        search_player.getBackground().setAlpha(200);
+        user.getBackground().setAlpha(200);
+        friends.getBackground().setAlpha(200);
+        random_player.getBackground().setAlpha(200);
         search_player.setOnClickListener(this);
         random_player.setOnClickListener(this);
         username = User.UserDetails.getUsername();

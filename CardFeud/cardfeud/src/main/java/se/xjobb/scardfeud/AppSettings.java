@@ -36,7 +36,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
     private Button game;
     private Button countryDebug;
     private Button myAccount;
-    private Button about_btn;
+    private Button about_btn, premium;
     private TextView versionText, appsoundstxt, appnottxt, appvibtxt, settings;
     private ToggleButton soundToggleButton;
     private ToggleButton notificationSoundToggleButton;
@@ -55,6 +55,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         countryDebug = (Button)findViewById(R.id.debug_country);
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
+        premium = (Button)findViewById(R.id.premium);
         versionText = (TextView)findViewById(R.id.version_text);
         appnottxt = (TextView)findViewById(R.id.appnottxt);
         appsoundstxt = (TextView)findViewById(R.id.appsoundtxt);
@@ -67,12 +68,14 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         about_btn.getBackground().setAlpha(0);
         myAccount.getBackground().setAlpha(0);
         logoutButton.getBackground().setAlpha(0);
+        premium.getBackground().setAlpha(0);
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         logoutButton.setTypeface(tf);
         myAccount.setTypeface(tf);
         about_btn.setTypeface(tf);
         versionText.setTypeface(tf);
+        premium.setTypeface(tf);
         vibrationToggleButton.setTypeface(tf);
         soundToggleButton.setTypeface(tf);
         notificationSoundToggleButton.setTypeface(tf);

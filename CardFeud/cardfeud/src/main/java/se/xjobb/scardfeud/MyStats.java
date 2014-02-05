@@ -24,7 +24,7 @@ public class MyStats extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.stats_layout, container, false);
         personalstat_txt = (TextView)rootView.findViewById(R.id.personalstat_txt);
-        personalstat_txt.getBackground().setAlpha(150);
+        personalstat_txt.getBackground().setAlpha(200);
         username = User.UserDetails.getUsername();
         flag = (ImageView)rootView.findViewById(R.id.my_flag);
         myCountry = User.UserDetails.getUserCountryCode();
