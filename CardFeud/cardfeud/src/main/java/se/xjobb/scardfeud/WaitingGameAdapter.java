@@ -60,7 +60,7 @@ public class WaitingGameAdapter extends BaseAdapter {
         waitFlag = (ImageView)view.findViewById(R.id.waitFlag);
 
 
-        wait.getBackground().setAlpha(100);
+        wait.getBackground().setAlpha(200);
         Response response = GameListResult.getOpponentsTurns().get(i);
         try {
             String country = response.opponentName.toLowerCase();

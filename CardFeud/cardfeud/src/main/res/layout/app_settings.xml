@@ -16,13 +16,15 @@
         android:background="#005500"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
-            android:text="Settings"
+            android:layout_height="40dp"
+            android:text=".:Settings:."
+            android:id="@+id/settings"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="25dp"/>
+            android:layout_marginBottom="4dp"
+            android:textSize="35sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -36,15 +38,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="App Sounds"
+            android:id="@+id/appsoundtxt"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:textSize="25dp"/>
+            android:textSize="25sp"/>
          <ToggleButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:id="@+id/sounds"
-            android:layout_marginLeft="92dp"/>
+            android:layout_marginLeft="92dp"
+             android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -59,15 +63,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="App Vibration"
+                android:id="@+id/appvibtxt"
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:textSize="25dp"/>
+                android:textSize="25sp"/>
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/vibration"
                 android:background="@drawable/button"
-                android:layout_marginLeft="75dp"/>
+                android:layout_marginLeft="75dp"
+                android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -83,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="Notification Sounds"
                 android:textStyle="bold"
+                android:id="@+id/appnottxt"
                 android:textColor="#fff"
                 android:textSize="25dp"/>
             <ToggleButton
@@ -90,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/notification_sound"
                 android:background="@drawable/button"
+                android:textSize="20sp"
                 android:layout_marginLeft="6dp"/>
         </LinearLayout>
         <View
@@ -107,7 +115,7 @@
                 android:text="My Account"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:gravity="left"
@@ -128,9 +136,28 @@
                 android:text="About"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:gravity="left"
                 android:id="@+id/about_us"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="315dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CardFeud Premium?"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:gravity="left"
+                android:id="@+id/premium"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -147,7 +174,7 @@
                 android:text="Log Out"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:gravity="left"
                 android:id="@+id/logout"/>
         </LinearLayout>
@@ -163,11 +190,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Version:                  Beta 1.0"
+                android:text="Version:            Beta 1.0"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:id="@+id/version_text"
+                android:layout_marginLeft="3dp"
                 android:gravity="left|center"/>
         </LinearLayout>
         <View

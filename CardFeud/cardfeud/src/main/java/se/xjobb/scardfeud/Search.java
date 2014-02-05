@@ -5,9 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -61,6 +59,9 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        searchText.setTypeface(tf);
 
         //Determine screen size
         if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
@@ -114,6 +115,8 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
     // add a button with the found user
     private void addUserButton(){
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
         foundUserButton = new Button(this);
         foundUserButton.setOnClickListener(this);
         foundUserButton.setBackgroundResource(R.drawable.button);
@@ -123,6 +126,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
         foundUserButton.setTypeface(null, Typeface.BOLD);
         foundUserButton.setId(4);
         foundUserButton.setGravity(Gravity.CENTER);
+        foundUserButton.setTypeface(tf);
 
         RelativeLayout.LayoutParams paramsButton = new RelativeLayout.LayoutParams(
                 pixelLayout, ViewGroup.LayoutParams.WRAP_CONTENT);

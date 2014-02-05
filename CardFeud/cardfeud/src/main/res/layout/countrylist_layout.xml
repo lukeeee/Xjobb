@@ -26,7 +26,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:shadowColor="#000"
-                android:shadowRadius="30"
+                android:shadowRadius="40"
                 android:background="@drawable/button"
                 android:id="@+id/coulist_txt"/>
 

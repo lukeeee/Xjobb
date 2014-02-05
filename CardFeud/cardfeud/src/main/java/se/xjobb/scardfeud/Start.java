@@ -57,11 +57,10 @@ public class Start extends Fragment implements View.OnClickListener {
         waiting = (LinearLayout)rootView.findViewById(R.id.waiting);
         finGames = (LinearLayout)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
-        user.getBackground().setAlpha(150);
-        gamestext.getBackground().setAlpha(150);
-        fin_Gamestext.getBackground().setAlpha(150);
-        newGame.getBackground().setAlpha(150);
-        waitingtext.getBackground().setAlpha(100);
+        user.getBackground().setAlpha(200);
+        gamestext.getBackground().setAlpha(200);
+        fin_Gamestext.getBackground().setAlpha(200);
+        waitingtext.getBackground().setAlpha(200);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
@@ -99,6 +98,7 @@ public class Start extends Fragment implements View.OnClickListener {
         createFinishedGameAdapter();
 
         MainActivity.setStartTag(getTag());
+        flag.setOnClickListener(this);
 
         return rootView;
     }
@@ -110,6 +110,9 @@ public class Start extends Fragment implements View.OnClickListener {
         if (view == newGame){
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
+        } else if (view == flag){
+            flag.animate().translationX(210);
+
         }
     }
 

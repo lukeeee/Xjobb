@@ -27,7 +27,7 @@
             android:paddingLeft="40dp"
             android:paddingRight="20dp"
             android:textStyle="bold"
-            android:background="@drawable/button"
+            android:background="@drawable/btn_game"
             android:id="@+id/user2"/>
 
         <ImageView
@@ -35,12 +35,13 @@
             android:layout_height="30dp"
             android:id="@+id/flagMy"/>
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
         <Button
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:textSize="25sp"
             android:text="Search Player"
             android:background="@drawable/button"
@@ -48,15 +49,26 @@
             android:textStyle="bold"
             android:id="@+id/search_player"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/search"/>
+            android:paddingRight="50dp"
+            android:shadowRadius="40"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="250dp"
+            android:background="@drawable/search"/>
+        </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
         <Button
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:textSize="25sp"
             android:text="Random Player"
             android:background="@drawable/button"
@@ -64,8 +76,15 @@
             android:textStyle="bold"
             android:id="@+id/random_player"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/random"/>
+            android:paddingRight="50dp"
+            android:shadowRadius="40"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/random"/>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -82,12 +101,9 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textStyle="bold"
-            android:background="@drawable/button"
+            android:background="@drawable/btn_game"
             android:id="@+id/friends"/>
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"/>
     <ListView
         android:layout_width="300dp"
         android:layout_height="match_parent"

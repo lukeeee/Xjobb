@@ -20,8 +20,13 @@
             android:paddingRight="8dp"
             android:layout_marginBottom="1dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentTop="true"
-            android:drawableRight="@drawable/arrow_game"/>
+            android:layout_alignParentTop="true"/>
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="250dp"
+        android:background="@drawable/arrow_game"
+        android:layout_marginTop="7dp"/>
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
