@@ -52,10 +52,10 @@
             android:paddingRight="50dp"
             android:shadowRadius="40"/>
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="245dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="250dp"
             android:background="@drawable/search"/>
         </RelativeLayout>
     <View
@@ -79,10 +79,10 @@
             android:paddingRight="50dp"
             android:shadowRadius="40"/>
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="245dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/random"/>
     </RelativeLayout>
 

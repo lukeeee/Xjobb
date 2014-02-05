@@ -22,14 +22,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
 import java.util.Random;
 
 import se.xjobb.scardfeud.JsonGetClasses.Response;
-import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
@@ -69,11 +64,11 @@ public class Game extends Activity implements View.OnClickListener {
         pass = (Button)findViewById(R.id.pass);
         gamecards = (ImageView)findViewById(R.id.gamecards);
         waiting = (TextView)findViewById(R.id.waiting);
-        waiting.getBackground().setAlpha(150);
-        high.getBackground().setAlpha(150);
-        low.getBackground().setAlpha(150);
-        stat.getBackground().setAlpha(150);
-        pass.getBackground().setAlpha(150);
+        waiting.getBackground().setAlpha(200);
+        high.getBackground().setAlpha(200);
+        low.getBackground().setAlpha(200);
+        stat.getBackground().setAlpha(200);
+        pass.getBackground().setAlpha(200);
         lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
@@ -86,10 +81,13 @@ public class Game extends Activity implements View.OnClickListener {
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
-                high.setVisibility(View.INVISIBLE);
+                /*high.setVisibility(View.INVISIBLE);
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE);
+                waiting.setVisibility(View.VISIBLE);*/
+                high.animate().translationX(710);
+                low.animate().translationX(710);
+                pass.animate().translationX(710);
             }
         });
         low.setOnClickListener(new View.OnClickListener() {

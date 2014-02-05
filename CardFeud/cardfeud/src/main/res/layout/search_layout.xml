@@ -22,10 +22,10 @@
         android:textSize="20sp"
         android:id="@+id/search_edit_text"/>
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="245dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="250dp"
         android:background="@drawable/search"/>
 </RelativeLayout>
 

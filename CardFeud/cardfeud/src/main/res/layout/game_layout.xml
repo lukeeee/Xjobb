@@ -28,7 +28,7 @@
             android:textStyle="bold"
             android:id="@+id/gamestat"
             android:shadowColor="#000"
-            android:shadowRadius="30"/>
+            android:shadowRadius="40"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -41,11 +41,6 @@
             android:layout_width="160dp"
             android:layout_height="230sp"
             android:id="@+id/gamecards"/>
-        <!--Button
-            android:layout_width="180dp"
-            android:layout_height="250sp"
-            android:background="@drawable/start"
-            android:id="@+id/start_game"/-->
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -60,7 +55,7 @@
         android:textStyle="bold"
         android:id="@+id/higher"
         android:shadowColor="#000"
-        android:shadowRadius="30"
+        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_up_l"
         android:drawableLeft="@drawable/arrow_up_r"/>
     <View
@@ -76,7 +71,7 @@
         android:textStyle="bold"
         android:id="@+id/lower"
         android:shadowColor="#000"
-        android:shadowRadius="30"
+        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_down_l"
         android:drawableLeft="@drawable/arrow_down_r"/>
     <View
@@ -92,7 +87,7 @@
         android:textStyle="bold"
         android:id="@+id/pass"
         android:shadowColor="#000"
-        android:shadowRadius="30"
+        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_pass_r"
         android:drawableLeft="@drawable/arrow_pass_l"/>
         <LinearLayout
