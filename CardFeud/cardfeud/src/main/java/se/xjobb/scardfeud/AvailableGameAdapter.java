@@ -76,7 +76,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         play.setTypeface(tf);
 
 
-        play.getBackground().setAlpha(200);
+        //play.getBackground().setAlpha(200);
         view.setTag(myTurns.get(i));
         play.setOnClickListener(new View.OnClickListener() {
             @Override
