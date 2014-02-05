@@ -33,7 +33,7 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="password_repeat_hint">Password Repeat</string>
-    <string name="country_code_hint">Press globe in actionbar for help</string>
+    <string name="country_code_hint">Country code: Press globe for help</string>
     <string name="go_to_login_text">Already on Cardfeud?</string>
     <string name="go_to_login_button_text">Go to Log in</string>
 

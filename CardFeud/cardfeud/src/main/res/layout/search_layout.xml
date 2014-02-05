@@ -16,7 +16,7 @@
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:imeOptions="actionSearch"
-        android:background="@drawable/button"
+        android:background="@drawable/button_test"
         android:paddingLeft="10dp"
         android:inputType="text"
         android:textSize="20sp"

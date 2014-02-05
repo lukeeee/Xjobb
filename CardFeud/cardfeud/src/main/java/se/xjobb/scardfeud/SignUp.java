@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -32,7 +33,7 @@ public class SignUp extends Activity implements View.OnClickListener {
     private TextView errorUsername;
     private TextView errorPassword;
     private TextView errorPasswordRepeat;
-    private TextView errorCountryCode;
+    private TextView errorCountryCode, signuptext, already_text;
 
     private Button signUpButton;
     private Button goToLoginButton;
@@ -56,11 +57,27 @@ public class SignUp extends Activity implements View.OnClickListener {
         errorPassword = (TextView) findViewById(R.id.passwordError);
         errorPasswordRepeat = (TextView) findViewById(R.id.passwordRepeatError);
         errorCountryCode = (TextView) findViewById(R.id.coutryCodeError);
+        signuptext = (TextView)findViewById(R.id.signup_text);
+        already_text = (TextView)findViewById(R.id.already_text);
 
         signUpButton = (Button) findViewById(R.id.signUpButton);
         goToLoginButton = (Button) findViewById(R.id.goToLoginButton);
-        signUpButton.getBackground().setAlpha(150);
-        goToLoginButton.getBackground().setAlpha(150);
+        signUpButton.getBackground().setAlpha(200);
+        goToLoginButton.getBackground().setAlpha(200);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        goToLoginButton.setTypeface(tf);
+        signUpButton.setTypeface(tf);
+        errorCountryCode.setTypeface(tf);
+        errorPassword.setTypeface(tf);
+        errorPasswordRepeat.setTypeface(tf);
+        errorUsername.setTypeface(tf);
+        usernameEditText.setTypeface(tf);
+        passwordEditText.setTypeface(tf);
+        passwordRepeatEditText.setTypeface(tf);
+        countryCodeEditText.setTypeface(tf);
+        signuptext.setTypeface(tf);
+        already_text.setTypeface(tf);
 
         signUpButton.setOnClickListener(this);
         goToLoginButton.setOnClickListener(this);

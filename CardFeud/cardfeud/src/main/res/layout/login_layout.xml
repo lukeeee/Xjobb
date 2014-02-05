@@ -47,7 +47,7 @@
             android:hint="@string/username_hint"
             android:singleLine="true"
             android:maxLength="30"
-            android:background="@drawable/shape"
+            android:background="@drawable/button_test"
             android:ems="10"
             android:id="@+id/usernameLoginInput"
             android:layout_gravity="center_horizontal" />
@@ -67,7 +67,7 @@
             android:hint="@string/password_hint"
             android:singleLine="true"
             android:maxLength="30"
-            android:background="@drawable/shape"
+            android:background="@drawable/button_test"
             android:ems="10"
             android:id="@+id/passwordLoginInput"
             android:layout_gravity="center_horizontal" />
