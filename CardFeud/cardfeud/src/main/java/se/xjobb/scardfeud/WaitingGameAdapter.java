@@ -66,13 +66,13 @@ public class WaitingGameAdapter extends BaseAdapter {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
-            waitFlag.setBackground(drawable);
+            waitFlag.setImageDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
 
-            waitFlag.setBackground(drawable);
+            waitFlag.setImageDrawable(drawable);
         }
         wait.setText("for: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
         wait.setTypeface(tf);
