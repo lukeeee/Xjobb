@@ -119,19 +119,8 @@ public class Start extends Fragment implements View.OnClickListener {
     private void createAvailableGameAdapter(){
         if(!myTurns.isEmpty()) {
             availableGameAdapterCreated = true;
-            availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(getActivity().getApplicationContext(), GameSplash.class);
-                    startActivity(i);
-                    /*final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.icon, new Start(), view.getTag() + "");
-                    ft.addToBackStack(null);
-                    ft.commit();*/
+            availableGameAdapter = new AvailableGameAdapter(getActivity().getApplicationContext());
 
-
-                }
-            });
             final int adapterCount = availableGameAdapter.getCount();
 
             for (int i = 0; i < adapterCount; i++) {
