@@ -32,10 +32,10 @@ public class GameSplash extends Activity {
         v_char = (TextView)findViewById(R.id.v_char);
         s_char = (TextView)findViewById(R.id.s_char);
         username = User.UserDetails.getUsername();
-        for(Response response : GameListResult.getMyTurns()){
-            Log.i("tjenis", response.opponentName);
-            opponent.setText(response.opponentName);
-        }
+
+        Intent intent = getIntent();
+        opponentname = intent.getStringExtra("opponentName");
+        opponent.setText(opponentname);
 
         you.setText(username);
 

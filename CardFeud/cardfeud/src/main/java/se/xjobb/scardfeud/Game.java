@@ -252,7 +252,7 @@ public class Game extends Activity implements View.OnClickListener {
 
         } else if (!response.opponentWins.contentEquals("0")){
             // if the opponent wins
-            dialog.setMessage("Sorry! \n\n" + response.opponentName + " won against you. \n\n" +
+            dialog.setMessage("Sorry! \n\n" + response.opponentName + " giwon against you. \n\n" +
                 response.opponentPoints + " - " + response.playerPoints);
 
         }

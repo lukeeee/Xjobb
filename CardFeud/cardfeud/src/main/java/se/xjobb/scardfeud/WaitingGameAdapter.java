@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -81,5 +82,7 @@ public class WaitingGameAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 }
 

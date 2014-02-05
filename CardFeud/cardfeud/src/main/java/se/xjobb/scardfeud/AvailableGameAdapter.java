@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -22,16 +23,14 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
 public class AvailableGameAdapter extends BaseAdapter {
     ArrayList<Response> myTurns;
     Context context;
-    View.OnClickListener myTurnsListener;
     private String username;
     ImageView playFlag;
 
 
 
-    public AvailableGameAdapter(Context context, View.OnClickListener myTurnsListener){
+    public AvailableGameAdapter(Context context){
         this.context = context;
         this.myTurns = (ArrayList) GameListResult.getMyTurns();
-        this.myTurnsListener = myTurnsListener;
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
         Button play = (Button)view.findViewById(R.id.playGameBtn);
         playFlag = (ImageView)view.findViewById(R.id.playFlag);
-        Response response = GameListResult.getMyTurns().get(i);
+        final Response response = GameListResult.getMyTurns().get(i);
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
         try {
@@ -79,7 +78,17 @@ public class AvailableGameAdapter extends BaseAdapter {
 
         play.getBackground().setAlpha(200);
         view.setTag(myTurns.get(i));
-        play.setOnClickListener(myTurnsListener);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, GameSplash.class);
+                i.putExtra("opponentName", response.opponentName);
+                i.putExtra("gameId", response.gameId);
+                i.putExtra("playerName", response.playerName);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+        });
 
         return view;
     }
