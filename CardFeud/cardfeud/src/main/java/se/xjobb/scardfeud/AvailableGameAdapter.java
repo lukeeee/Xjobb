@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,6 +76,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         }
         play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
         play.setTypeface(tf);
+
 
 
         //play.getBackground().setAlpha(200);
