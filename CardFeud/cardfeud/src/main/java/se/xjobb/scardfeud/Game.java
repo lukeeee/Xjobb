@@ -63,11 +63,11 @@ public class Game extends Activity implements View.OnClickListener {
         pass = (Button)findViewById(R.id.pass);
         gamecards = (ImageView)findViewById(R.id.gamecards);
         waiting = (TextView)findViewById(R.id.waiting);
-        waiting.getBackground().setAlpha(200);
-        high.getBackground().setAlpha(200);
-        low.getBackground().setAlpha(200);
-        stat.getBackground().setAlpha(200);
-        pass.getBackground().setAlpha(200);
+        //waiting.getBackground().setAlpha(200);
+        //high.getBackground().setAlpha(200);
+        //low.getBackground().setAlpha(200);
+        //stat.getBackground().setAlpha(200);
+        //pass.getBackground().setAlpha(200);
         lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
@@ -132,7 +132,7 @@ public class Game extends Activity implements View.OnClickListener {
         Intent i = getIntent();
         //i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
         gameResponse = (Response) i.getParcelableExtra("responseObject");
-        stat.setText("You: " + gameResponse.playerPoints + " " + gameResponse.opponentName + " " + gameResponse.opponentPoints);
+        stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
 
         Log.i("Response: ", gameResponse.thisRoundPoints);
         Log.i("Response: ", gameResponse.chatUnread);
@@ -142,13 +142,13 @@ public class Game extends Activity implements View.OnClickListener {
         Log.i("Response: ", gameResponse.cardValue);
         Log.i("Response: ", gameResponse.finishedTime);
         Log.i("Response: ", gameResponse.lastEvent);
-        Log.i("Response: ", gameResponse.lastEventTime);
+        Log.i("Response: ", gameResponse.lastEventTime);  //adad
         Log.i("Response: ", gameResponse.lastRoundDetails);
         Log.i("Response: ", gameResponse.gameId);
         Log.i("Response: ", gameResponse.startTime);
         Log.i("Response: ", gameResponse.odds);
         Log.i("Response: ", gameResponse.thisRoundDetails);
-        Log.i("Response: ", gameResponse.lastRoundPoints);
+        Log.i("Response: ", gameResponse.lastRoundPoints); ///
         Log.i("Response: ", gameResponse.passProhibited);
         Log.i("Response: ", gameResponse.playerErrors);
         Log.i("Response: ", gameResponse.playerName);
