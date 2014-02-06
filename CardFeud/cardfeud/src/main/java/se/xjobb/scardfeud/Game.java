@@ -1,5 +1,6 @@
 package se.xjobb.scardfeud;
 
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,7 +40,7 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
-    private ImageView gamecards, youFlag, opponentFlag;
+    private ImageView gamecard, youFlag, opponentFlag;
     private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr;
     private static final Random rgenerator = new Random();
     private int userId;
@@ -50,12 +51,13 @@ public class Game extends Activity implements View.OnClickListener {
     private HelperClass helperClass;
     private int rematchChoice;  // represents the choice for rematch, 1 = Yes 0 = No
 
+    /*
     private static final Integer[] mImageIds =
-            { R.drawable.c_a, R.drawable.c_eight, R.drawable.c_five,R.drawable.c_four,R.drawable.c_j,R.drawable.c_k,R.drawable.c_nine,R.drawable.c_q,R.drawable.c_seven,
-                    R.drawable.c_six,R.drawable.c_ten,R.drawable.c_three,R.drawable.c_two,R.drawable.s_a, R.drawable.s_eight, R.drawable.s_five,R.drawable.s_four,R.drawable.s_j,R.drawable.s_k,R.drawable.s_nine,R.drawable.s_q,R.drawable.s_seven,
-                    R.drawable.s_six,R.drawable.s_ten,R.drawable.s_three,R.drawable.s_two,R.drawable.h_a, R.drawable.h_eight, R.drawable.h_five,R.drawable.h_four,R.drawable.h_j,R.drawable.h_k,R.drawable.h_nine,R.drawable.h_q,R.drawable.h_seven,
-                    R.drawable.h_six,R.drawable.h_ten,R.drawable.h_three,R.drawable.h_two,R.drawable.d_a, R.drawable.d_eight, R.drawable.d_five,R.drawable.d_four,R.drawable.d_j,R.drawable.d_k,R.drawable.d_nine,R.drawable.d_q,R.drawable.d_seven,
-                    R.drawable.d_six,R.drawable.d_ten,R.drawable.d_three,R.drawable.d_two};
+            { R.drawable.c_1, R.drawable.c_8, R.drawable.c_5,R.drawable.c_4,R.drawable.c_11,R.drawable.c_13,R.drawable.c_9,R.drawable.c_12,R.drawable.c_7,
+                    R.drawable.c_6,R.drawable.c_10,R.drawable.c_3,R.drawable.c_2,R.drawable.s_1, R.drawable.s_8, R.drawable.s_5,R.drawable.s_4,R.drawable.s_11,R.drawable.s_13,R.drawable.s_9,R.drawable.s_12,R.drawable.s_7,
+                    R.drawable.s_6,R.drawable.s_10,R.drawable.s_3,R.drawable.s_2,R.drawable.h_1, R.drawable.h_8, R.drawable.h_5,R.drawable.h_4,R.drawable.h_11,R.drawable.h_13,R.drawable.h_9,R.drawable.h_12,R.drawable.h_7,
+                    R.drawable.h_6,R.drawable.h_10,R.drawable.h_3,R.drawable.h_2,R.drawable.d_1, R.drawable.d_8, R.drawable.d_5,R.drawable.d_4,R.drawable.d_11,R.drawable.d_13,R.drawable.d_9,R.drawable.d_12,R.drawable.d_7,
+                    R.drawable.d_6,R.drawable.d_10,R.drawable.d_3,R.drawable.d_2}; */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class Game extends Activity implements View.OnClickListener {
         low = (Button)findViewById(R.id.lower);
         stat = (Button)findViewById(R.id.gamestat);
         pass = (Button)findViewById(R.id.pass);
-        gamecards = (ImageView)findViewById(R.id.gamecards);
+        gamecard = (ImageView)findViewById(R.id.gamecards);
         youFlag = (ImageView)findViewById(R.id.youflag);
         opponentFlag = (ImageView)findViewById(R.id.opponentFlag);
         waiting = (TextView)findViewById(R.id.waiting);
@@ -94,62 +96,47 @@ public class Game extends Activity implements View.OnClickListener {
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
-        Integer q = mImageIds[rgenerator.nextInt(mImageIds.length)];
-        changeImageResource();
+
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                changeImageResource();
-                high.setVisibility(View.INVISIBLE);
-                low.setVisibility(View.INVISIBLE);
-                pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE);
-                arrowhl.setVisibility(View.INVISIBLE);
-                arrowpl.setVisibility(View.INVISIBLE);
-                arrowhr.setVisibility(View.INVISIBLE);
-                arrowpr.setVisibility(View.INVISIBLE);
-                arrowlr.setVisibility(View.INVISIBLE);
-                arrowll.setVisibility(View.INVISIBLE);
-                // send RequestToServer "1 = higher"
-               // sendRequestToServer(1);
+                // when pressing "higher"
+                // sendRequestToServer "1 = higher"
+                sendRequestToServer(1);
+                disableGamePay();
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                changeImageResource();
-                high.setVisibility(View.INVISIBLE);
-                low.setVisibility(View.INVISIBLE);
-                pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE);
-                arrowhl.setVisibility(View.INVISIBLE);
-                arrowpl.setVisibility(View.INVISIBLE);
-                arrowhr.setVisibility(View.INVISIBLE);
-                arrowpr.setVisibility(View.INVISIBLE);
-                arrowlr.setVisibility(View.INVISIBLE);
-                arrowll.setVisibility(View.INVISIBLE);
-
+                // when pressing "lower"
                 // send RequestToServer "2 = lower"
-               // sendRequestToServer(2);
+                sendRequestToServer(2);
+                disableGamePay();
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                changeImageResource();
+                //changeImageResource();
                /* high.setVisibility(View.INVISIBLE);
                 low.setVisibility(View.INVISIBLE);
-                pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE); */
-                high.animate().translationX(710);
-                low.animate().translationX(-710);
-                pass.animate().translationX(710);
-                arrowhl.animate().translationX(710);
-                arrowpl.animate().translationX(710);
-                arrowhr.animate().translationX(710);
-                arrowpr.animate().translationX(710);
-                arrowlr.animate().translationX(-710);
-                arrowll.animate().translationX(-710);
+                pass.setVisibility(View.INVISIBLE); */
+                high.animate().translationX(710).setDuration(1000);
+                low.animate().translationX(-710).setDuration(1000);
+                pass.animate().translationX(710).setDuration(1000);
+                arrowhl.animate().translationX(710).setDuration(1000);
+                arrowpl.animate().translationX(710).setDuration(1000);
+                arrowhr.animate().translationX(710).setDuration(1000);
+                arrowpr.animate().translationX(710).setDuration(1000);
+                arrowlr.animate().translationX(-710).setDuration(1000);
+                arrowll.animate().translationX(-710).setDuration(1000);
+                ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
+                anim.setDuration(2000);
+                anim.start();
+
+                // TODO handle if pass is disabled in JSON response
 
                 // send RequestToServer "3 = pass"
                 // sendRequestToServer(3);
+                // disableGamePay();
             }
         });
         runOnUiThread(new Runnable() {
@@ -173,8 +160,10 @@ public class Game extends Activity implements View.OnClickListener {
         gameResponse = (Response) i.getParcelableExtra("responseObject");
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
         waiting.setText("Waiting for " + gameResponse.opponentName);
+        setCorrectCard();
+        enableGamePlay();
 
-       // Log.i("Response: ", gameResponse.thisRoundPoints);
+        // Log.i("Response: ", gameResponse.thisRoundPoints);
        // Log.i("Response: ", gameResponse.chatUnread);
        // Log.i("Response: ", gameResponse.myTurn);
        // Log.i("Response: ", gameResponse.opponentName);
@@ -227,19 +216,83 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
+   /*
     public void changeImageResource()
     {
         int i = rgenerator.nextInt(51);
-        gamecards.setImageResource(mImageIds[i]);
+        gamecard.setImageResource(mImageIds[i]);
+    }
+*/
+
+    // used to disable game buttons
+    private void disableGamePay(){
+        high.setVisibility(View.INVISIBLE);
+        low.setVisibility(View.INVISIBLE);
+        pass.setVisibility(View.INVISIBLE);
+        waiting.setVisibility(View.VISIBLE);
+        arrowhl.setVisibility(View.INVISIBLE);
+        arrowpl.setVisibility(View.INVISIBLE);
+        arrowhr.setVisibility(View.INVISIBLE);
+        arrowpr.setVisibility(View.INVISIBLE);
+        arrowlr.setVisibility(View.INVISIBLE);
+        arrowll.setVisibility(View.INVISIBLE);
+
+        // TODO handle if pass is disabled in JSON response
+
     }
 
-    private void setCurrentCard(){
-        if(gameResponse != null){
+    // used to enable game buttons
+    private void enableGamePlay(){
+        high.setVisibility(View.VISIBLE);
+        low.setVisibility(View.VISIBLE);
+        pass.setVisibility(View.VISIBLE);
+        waiting.setVisibility(View.INVISIBLE);
+        arrowhl.setVisibility(View.VISIBLE);
+        arrowpl.setVisibility(View.VISIBLE);
+        arrowhr.setVisibility(View.VISIBLE);
+        arrowpr.setVisibility(View.VISIBLE);
+        arrowlr.setVisibility(View.VISIBLE);
+        arrowll.setVisibility(View.VISIBLE);
 
-        } else {
-            Log.i("Response is Null ", "How??");
+        // TODO handle if pass is disabled in JSON response
+
+    }
+
+    // used to update stats
+    private void updateStats(){
+        stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
+    }
+
+
+    // used to select the correct card from resources, with cardName and then set that card
+    private void setCardFromResources(String cardName){
+        int id = getResources().getIdentifier(cardName, "drawable", getPackageName());
+        Drawable drawable = getResources().getDrawable(id);
+        gamecard.setImageDrawable(drawable);
+    }
+
+    // used to set the correct card
+    private void setCorrectCard(){
+        Log.i("Card Color: ", gameResponse.cardColor);
+        Log.i("Card value: ", gameResponse.cardValue);
+
+
+        if(gameResponse.cardColor.contains("1")){
+            // if the card should be spades
+            setCardFromResources("s_" + gameResponse.cardValue);
+        } else if(gameResponse.cardColor.contains("2")){
+            // if the card should be cloves
+            setCardFromResources("c_" + gameResponse.cardValue);
+        } else if(gameResponse.cardColor.contains("3")){
+            // if the card should be hearts
+            setCardFromResources("h_" + gameResponse.cardValue);
+        } else if(gameResponse.cardColor.contains("4")){
+            // if the card should be diamonds
+            setCardFromResources("d_" + gameResponse.cardValue);
+
         }
     }
+
 
     public void showProgressDialog(){
         if(progressDialog == null){
@@ -444,6 +497,7 @@ public class Game extends Activity implements View.OnClickListener {
     // show error feedback on game play
     public void showErrorDialog(String message){
         progressDialog = null;
+        disableGamePay();
         helperClass.showErrorDialog(message);
     }
 
@@ -461,9 +515,24 @@ public class Game extends Activity implements View.OnClickListener {
             Log.e(TAG, ex.getMessage());
         }
 
+        setCorrectCard();
+        updateStats();
+        if(gameResponse.lastRoundDetails != null){
+            Toast.makeText(this, gameResponse.lastRoundDetails, 1000).show();
+        }
+
+        if(gameResponse.myTurn.contains("1")){
+            // it is my turn
+            enableGamePlay();
+        } else {
+            // it's not my turn
+            disableGamePay();
+        }
+
         // if the finished time field is set, the game is over and we show a dialog.
         if(!gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
             // the game is over
+            disableGamePay();
             showGameFinishedPopUp(gameResponse);
         }
     }

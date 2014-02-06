@@ -343,7 +343,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         if(!isCreated){
             // if onCreate was not called
             checkUserDetails();
-            //getGameLists();  If we want to search for new games each time we re-enter activity
+            // update
+           // getGameLists(true);
         }
     }
 

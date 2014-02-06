@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
@@ -89,6 +90,7 @@ public class Start extends Fragment implements View.OnClickListener {
             Drawable drawable = getResources().getDrawable(id);
             flag.setImageDrawable(drawable);
         }
+
         myTurns = GameListResult.getMyTurns();
         opponentsTurns = GameListResult.getOpponentsTurns();
         finishedGames = GameListResult.getFinishedGames();
