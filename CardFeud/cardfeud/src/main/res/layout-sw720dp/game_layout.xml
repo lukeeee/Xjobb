@@ -55,9 +55,7 @@
             android:textStyle="bold"
             android:id="@+id/higher"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/arrow_up_l"
-            android:drawableLeft="@drawable/arrow_up_r"/>
+            android:shadowRadius="30"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
@@ -71,9 +69,7 @@
             android:textStyle="bold"
             android:id="@+id/lower"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/arrow_down_l"
-            android:drawableLeft="@drawable/arrow_down_r"/>
+            android:shadowRadius="30"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
@@ -87,9 +83,7 @@
             android:textStyle="bold"
             android:id="@+id/pass"
             android:shadowColor="#000"
-            android:shadowRadius="30"
-            android:drawableRight="@drawable/arrow_pass_r"
-            android:drawableLeft="@drawable/arrow_pass_l"/>
+            android:shadowRadius="30"/>
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
