@@ -62,8 +62,8 @@ public class SignUp extends Activity implements View.OnClickListener {
 
         signUpButton = (Button) findViewById(R.id.signUpButton);
         goToLoginButton = (Button) findViewById(R.id.goToLoginButton);
-        signUpButton.getBackground().setAlpha(200);
-        goToLoginButton.getBackground().setAlpha(200);
+        //signUpButton.getBackground().setAlpha(200);
+        //goToLoginButton.getBackground().setAlpha(200);
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         goToLoginButton.setTypeface(tf);

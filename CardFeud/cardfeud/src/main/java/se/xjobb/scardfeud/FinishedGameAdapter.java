@@ -51,7 +51,7 @@ public class FinishedGameAdapter extends BaseAdapter{
         String result;
         Drawable win = context.getResources().getDrawable(R.drawable.game_win);
         Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
-        
+
 
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

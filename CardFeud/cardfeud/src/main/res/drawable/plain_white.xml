@@ -7,11 +7,12 @@
             <gradient android:endColor="#fff" android:startColor="#fff"
                 android:centerColor="#fff" android:angle="270" />
             <stroke
+                android:width="0.1dp"
                 android:color="#000"
                 />
             <padding android:left="2dp" android:top="3dp" android:right="2dp"
                 android:bottom="3dp" />
-            <corners android:bottomRightRadius="0dp" android:bottomLeftRadius="0dp"
+            <corners android:bottomRightRadius="7dp" android:bottomLeftRadius="7dp"
                 android:topLeftRadius="7dp" android:topRightRadius="7dp"/>
         </shape>
 

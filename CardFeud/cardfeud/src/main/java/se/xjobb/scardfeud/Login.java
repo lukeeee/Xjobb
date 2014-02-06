@@ -63,8 +63,8 @@ public class Login extends Activity implements View.OnClickListener{
         goToSignUpButton = (Button) findViewById(R.id.goToSignUpButton);
         new_cardfeud = (TextView)findViewById(R.id.new_cardfeud);
         signInText = (TextView)findViewById(R.id.signIn_text);
-        goToSignUpButton.getBackground().setAlpha(200);
-        signInButton.getBackground().setAlpha(200);
+        //goToSignUpButton.getBackground().setAlpha(200);
+        //signInButton.getBackground().setAlpha(200);
 
         signInButton.setOnClickListener(this);
         goToSignUpButton.setOnClickListener(this);
