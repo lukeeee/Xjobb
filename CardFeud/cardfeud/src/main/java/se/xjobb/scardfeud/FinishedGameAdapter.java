@@ -57,13 +57,10 @@ public class FinishedGameAdapter extends BaseAdapter{
         ImageView finFlag = (ImageView)view.findViewById(R.id.finFlag);
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = infalInflater.inflate(R.layout.waitgame_list, null);
+            view = infalInflater.inflate(R.layout.fingames_list, null);
         }
-       /*TODO if (GameListResult.getFinishedGames() == lost){
-          TODO  finish.setCompoundDrawablesWithIntrinsicBounds(loose, null, null, null);
-         TODO } else {
-          TODO  finish.setCompoundDrawablesWithIntrinsicBounds(win, null, null, null);
-        }*/
+
+
 
 
         Response response = GameListResult.getFinishedGames().get(i);
@@ -78,9 +75,15 @@ public class FinishedGameAdapter extends BaseAdapter{
             Drawable drawable = context.getResources().getDrawable(id);
 
             finFlag.setImageDrawable(drawable);
-        }
+
         finish.setText("You " + "won/lost" +" against "+ response.opponentName);
         finish.setTypeface(tf);
+        if (response.opponentWins){
+            gameResultIMG.setImageDrawable(loose);
+        } else if (GameListResult.getFinishedGames() == response.playerWins) {
+            gameResultIMG.setImageDrawable(win);
+        }
+        }
 
 
         view.setTag(finishedGames.get(i));
