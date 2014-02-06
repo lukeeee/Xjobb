@@ -120,7 +120,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
         foundUserButton = new Button(this);
         foundUserButton.setOnClickListener(this);
         foundUserButton.setBackgroundResource(R.drawable.button);
-        foundUserButton.getBackground().setAlpha(150);
+        //foundUserButton.getBackground().setAlpha(150);
         foundUserButton.setText(foundUser.getUsername());
         foundUserButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         foundUserButton.setTypeface(null, Typeface.BOLD);
