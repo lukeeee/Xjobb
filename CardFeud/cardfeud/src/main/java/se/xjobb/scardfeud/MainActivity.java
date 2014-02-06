@@ -93,7 +93,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            //.setIcon(menuImage[i])
+                            .setIcon(menuImage[i])
                             .setTabListener(this));
         }
 
