@@ -51,8 +51,7 @@ public class FinishedGameAdapter extends BaseAdapter{
         String result;
         Drawable win = context.getResources().getDrawable(R.drawable.game_win);
         Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
-        Drawable looseBtn = context.getResources().getDrawable(R.drawable.btn_lost);
-        Drawable winBtn = context.getResources().getDrawable(R.drawable.btn_win);
+        
 
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -77,22 +76,24 @@ public class FinishedGameAdapter extends BaseAdapter{
             Drawable drawable = context.getResources().getDrawable(id);
 
             finFlag.setImageDrawable(drawable);
-        }
+
             finishBtn.setTypeface(tf);
             int myPoints = Integer.parseInt(response.playerPoints);
             int opPoints = Integer.parseInt(response.opponentPoints);
 
+
             if(myPoints> opPoints){
+                finishBtn.setText("You won against\n" + response.opponentName + " " + myPoints + "-" + opPoints);
                 gameResultIMG.setImageDrawable(win);
-                finishBtn.setBackground(winBtn);
-                finishBtn.setText("You won against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+
             } else if(opPoints > myPoints) {
-                gameResultIMG.setImageDrawable(loose);
-                finishBtn.setBackground(looseBtn);
                 finishBtn.setText("You lost against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+                gameResultIMG.setImageDrawable(loose);
+
             } else {
                 //oavgjort...
             }
+        }
 
 
 

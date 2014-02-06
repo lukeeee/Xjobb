@@ -13,7 +13,7 @@
         android:textSize="19sp"
         android:textStyle="bold"
         android:id="@+id/finGameBtn"
-        android:background="@drawable/button"
+        android:background="@drawable/btn_fin"
         android:gravity="left|center"
         android:paddingLeft="50dp"
         android:textColor="#000"
