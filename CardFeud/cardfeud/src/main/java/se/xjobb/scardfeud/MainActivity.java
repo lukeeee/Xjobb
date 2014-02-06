@@ -344,14 +344,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // if onCreate was not called
             checkUserDetails();
             // update
-           // getGameLists(true);
+            getGameLists(false);
         }
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        isCreated = false;
+        //isCreated = false;
     }
 
     @Override
@@ -379,6 +379,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 overridePendingTransition(0, 0);
                 startActivity(intent);
                 return true;
+
+                // refresh
+                //getGameLists(false);
+                //return true;
         }
 
         return true;
