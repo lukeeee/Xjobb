@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -68,6 +69,13 @@ public class Game extends Activity implements View.OnClickListener {
         //low.getBackground().setAlpha(200);
         //stat.getBackground().setAlpha(200);
         //pass.getBackground().setAlpha(200);
+        Typeface tf = Typeface.createFromAsset(getAssets(),
+                "fonts/hobostd.otf");
+        waiting.setTypeface(tf);
+        high.setTypeface(tf);
+        low.setTypeface(tf);
+        stat.setTypeface(tf);
+        pass.setTypeface(tf);
         lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
