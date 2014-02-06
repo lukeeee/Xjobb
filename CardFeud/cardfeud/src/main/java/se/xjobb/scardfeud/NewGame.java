@@ -173,8 +173,7 @@ public class NewGame extends Activity implements View.OnClickListener{
             startActivity(i);
             this.finish();
         } else if(v == random_player){
-            //challengeRandomPlayer();
-            Toast.makeText(this, "Disabled! :)", 1000).show();
+            challengeRandomPlayer();
         }
     }
 }
