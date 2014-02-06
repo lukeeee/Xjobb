@@ -74,7 +74,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
             playFlag.setImageDrawable(drawable);
         }
-        play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints);
+        play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         play.setTypeface(tf);
 
 
