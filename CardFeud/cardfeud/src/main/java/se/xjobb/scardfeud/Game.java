@@ -6,7 +6,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -37,7 +39,7 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
-    private ImageView gamecards;
+    private ImageView gamecards, youFlag, opponentFlag;
     private static final Random rgenerator = new Random();
     private int userId;
     private TextView waiting;
@@ -63,6 +65,8 @@ public class Game extends Activity implements View.OnClickListener {
         stat = (Button)findViewById(R.id.gamestat);
         pass = (Button)findViewById(R.id.pass);
         gamecards = (ImageView)findViewById(R.id.gamecards);
+        youFlag = (ImageView)findViewById(R.id.youflag);
+        opponentFlag = (ImageView)findViewById(R.id.opponentFlag);
         waiting = (TextView)findViewById(R.id.waiting);
         //waiting.getBackground().setAlpha(200);
         //high.getBackground().setAlpha(200);
@@ -136,6 +140,8 @@ public class Game extends Activity implements View.OnClickListener {
             }
         });
 
+
+
         helperClass = new HelperClass(this);
         Intent i = getIntent();
         //i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
@@ -168,6 +174,30 @@ public class Game extends Activity implements View.OnClickListener {
         Log.i("Response: ", gameResponse.opponentErrors);
         Log.i("Response: ", gameResponse.opponentId);
         Log.i("Response: ", gameResponse.opponentPoints);
+        try {
+            String country = gameResponse.opponentName.toLowerCase();
+            int id = getResources().getIdentifier(country, "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            opponentFlag.setImageDrawable(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+
+            opponentFlag.setImageDrawable(drawable);
+        }
+        try {
+            String country = User.UserDetails.getUserCountryCode().toLowerCase();
+            int id = getResources().getIdentifier(country, "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            youFlag.setImageDrawable(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+
+            youFlag.setImageDrawable(drawable);
+        }
     }
 
     public void changeImageResource()
