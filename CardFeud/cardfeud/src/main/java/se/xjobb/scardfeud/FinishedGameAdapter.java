@@ -78,7 +78,7 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         finish.setText("You " + "won/lost" +" against "+ response.opponentName);
         finish.setTypeface(tf);
-        if (response.opponentWins){
+        if (GameListResult.getFinishedGames() == response.opponentWins){
             gameResultIMG.setImageDrawable(loose);
         } else if (GameListResult.getFinishedGames() == response.playerWins) {
             gameResultIMG.setImageDrawable(win);
