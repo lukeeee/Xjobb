@@ -344,7 +344,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // if onCreate was not called
             checkUserDetails();
             // update
-           // getGameLists(true);
+           // getGameLists(false);
         }
     }
 
@@ -372,12 +372,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(statsIntent);
                 return true;
             case R.id.action_refresh:
-                Intent intent = getIntent();
-                overridePendingTransition(0, 0);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(intent);
+                // refresh
+                getGameLists(false);
                 return true;
         }
 
