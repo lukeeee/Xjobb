@@ -37,7 +37,7 @@ public class GameSplash extends Activity {
 
 
         Intent i = getIntent();
-        i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
+       // i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
         response = (Response) i.getParcelableExtra("responseObject");
         opponent.setText(response.opponentName);
 

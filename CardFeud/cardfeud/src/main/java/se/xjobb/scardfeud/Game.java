@@ -85,7 +85,7 @@ public class Game extends Activity implements View.OnClickListener {
                 pass.setVisibility(View.INVISIBLE);
                 waiting.setVisibility(View.VISIBLE);
                 // send RequestToServer "1 = higher"
-                sendRequestToServer(1);
+               // sendRequestToServer(1);
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +97,7 @@ public class Game extends Activity implements View.OnClickListener {
                 waiting.setVisibility(View.VISIBLE);
 
                 // send RequestToServer "2 = lower"
-                sendRequestToServer(2);
+               // sendRequestToServer(2);
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +130,36 @@ public class Game extends Activity implements View.OnClickListener {
 
         helperClass = new HelperClass(this);
         Intent i = getIntent();
-        i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
+        //i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
         gameResponse = (Response) i.getParcelableExtra("responseObject");
         stat.setText("You: " + gameResponse.playerPoints + " " + gameResponse.opponentName + " " + gameResponse.opponentPoints);
+
+        Log.i("Response: ", gameResponse.thisRoundPoints);
+        Log.i("Response: ", gameResponse.chatUnread);
+        Log.i("Response: ", gameResponse.myTurn);
+        Log.i("Response: ", gameResponse.opponentName);
+        Log.i("Response: ", gameResponse.cardColor);
+        Log.i("Response: ", gameResponse.cardValue);
+        Log.i("Response: ", gameResponse.finishedTime);
+        Log.i("Response: ", gameResponse.lastEvent);
+        Log.i("Response: ", gameResponse.lastEventTime);
+        Log.i("Response: ", gameResponse.lastRoundDetails);
+        Log.i("Response: ", gameResponse.gameId);
+        Log.i("Response: ", gameResponse.startTime);
+        Log.i("Response: ", gameResponse.odds);
+        Log.i("Response: ", gameResponse.thisRoundDetails);
+        Log.i("Response: ", gameResponse.lastRoundPoints);
+        Log.i("Response: ", gameResponse.passProhibited);
+        Log.i("Response: ", gameResponse.playerErrors);
+        Log.i("Response: ", gameResponse.playerName);
+        Log.i("Response: ", gameResponse.playerOne);
+        Log.i("Response: ", gameResponse.playerPoints);
+        Log.i("Response: ", gameResponse.playerTwo);
+        Log.i("Response: ", gameResponse.playerWins);
+        Log.i("Response: ", gameResponse.opponentWins);
+        Log.i("Response: ", gameResponse.opponentErrors);
+        Log.i("Response: ", gameResponse.opponentId);
+        Log.i("Response: ", gameResponse.opponentPoints);
     }
 
     public void changeImageResource()
