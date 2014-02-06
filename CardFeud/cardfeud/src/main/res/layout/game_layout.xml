@@ -73,13 +73,15 @@
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_high"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowhigl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_high"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowhigr"/>
 
         </RelativeLayout>
         <View
@@ -103,13 +105,15 @@
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_low"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowlowl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_low"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowlowr"/>
 
         </RelativeLayout>
     <View
@@ -133,13 +137,15 @@
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_pass_l"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowpassl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_pass_r"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                android:id="@+id/arrowpassr"/>
 
         </RelativeLayout>
         <LinearLayout

@@ -40,6 +40,7 @@ public class Game extends Activity implements View.OnClickListener {
     private Button pass;
     private ProgressDialog progressDialog;
     private ImageView gamecards, youFlag, opponentFlag;
+    private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr;
     private static final Random rgenerator = new Random();
     private int userId;
     private TextView waiting;
@@ -68,6 +69,12 @@ public class Game extends Activity implements View.OnClickListener {
         youFlag = (ImageView)findViewById(R.id.youflag);
         opponentFlag = (ImageView)findViewById(R.id.opponentFlag);
         waiting = (TextView)findViewById(R.id.waiting);
+        arrowhl = (ImageView)findViewById(R.id.arrowhigl);
+        arrowhr = (ImageView)findViewById(R.id.arrowhigr);
+        arrowll = (ImageView)findViewById(R.id.arrowlowl);
+        arrowlr = (ImageView)findViewById(R.id.arrowlowr);
+        arrowpl = (ImageView)findViewById(R.id.arrowpassl);
+        arrowpr = (ImageView)findViewById(R.id.arrowpassr);
         //waiting.getBackground().setAlpha(200);
         //high.getBackground().setAlpha(200);
         //low.getBackground().setAlpha(200);
@@ -96,6 +103,12 @@ public class Game extends Activity implements View.OnClickListener {
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
                 waiting.setVisibility(View.VISIBLE);
+                arrowhl.setVisibility(View.INVISIBLE);
+                arrowpl.setVisibility(View.INVISIBLE);
+                arrowhr.setVisibility(View.INVISIBLE);
+                arrowpr.setVisibility(View.INVISIBLE);
+                arrowlr.setVisibility(View.INVISIBLE);
+                arrowll.setVisibility(View.INVISIBLE);
                 // send RequestToServer "1 = higher"
                // sendRequestToServer(1);
             }
@@ -107,6 +120,12 @@ public class Game extends Activity implements View.OnClickListener {
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
                 waiting.setVisibility(View.VISIBLE);
+                arrowhl.setVisibility(View.INVISIBLE);
+                arrowpl.setVisibility(View.INVISIBLE);
+                arrowhr.setVisibility(View.INVISIBLE);
+                arrowpr.setVisibility(View.INVISIBLE);
+                arrowlr.setVisibility(View.INVISIBLE);
+                arrowll.setVisibility(View.INVISIBLE);
 
                 // send RequestToServer "2 = lower"
                // sendRequestToServer(2);
@@ -122,6 +141,12 @@ public class Game extends Activity implements View.OnClickListener {
                 high.animate().translationX(710);
                 low.animate().translationX(-710);
                 pass.animate().translationX(710);
+                arrowhl.animate().translationX(710);
+                arrowpl.animate().translationX(710);
+                arrowhr.animate().translationX(710);
+                arrowpr.animate().translationX(710);
+                arrowlr.animate().translationX(-710);
+                arrowll.animate().translationX(-710);
 
                 // send RequestToServer "3 = pass"
                 // sendRequestToServer(3);
