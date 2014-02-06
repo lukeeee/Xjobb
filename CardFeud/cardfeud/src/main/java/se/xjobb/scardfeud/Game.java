@@ -134,38 +134,46 @@ public class Game extends Activity implements View.OnClickListener {
         gameResponse = (Response) i.getParcelableExtra("responseObject");
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
 
-        Log.i("Response: ", gameResponse.thisRoundPoints);
-        Log.i("Response: ", gameResponse.chatUnread);
-        Log.i("Response: ", gameResponse.myTurn);
-        Log.i("Response: ", gameResponse.opponentName);
-        Log.i("Response: ", gameResponse.cardColor);
-        Log.i("Response: ", gameResponse.cardValue);
-        Log.i("Response: ", gameResponse.finishedTime);
-        Log.i("Response: ", gameResponse.lastEvent);
-        Log.i("Response: ", gameResponse.lastEventTime);  //adad
-        Log.i("Response: ", gameResponse.lastRoundDetails);
-        Log.i("Response: ", gameResponse.gameId);
-        Log.i("Response: ", gameResponse.startTime);
-        Log.i("Response: ", gameResponse.odds);
-        Log.i("Response: ", gameResponse.thisRoundDetails);
-        Log.i("Response: ", gameResponse.lastRoundPoints); ///
-        Log.i("Response: ", gameResponse.passProhibited);
-        Log.i("Response: ", gameResponse.playerErrors);
-        Log.i("Response: ", gameResponse.playerName);
-        Log.i("Response: ", gameResponse.playerOne);
-        Log.i("Response: ", gameResponse.playerPoints);
-        Log.i("Response: ", gameResponse.playerTwo);
-        Log.i("Response: ", gameResponse.playerWins);
-        Log.i("Response: ", gameResponse.opponentWins);
-        Log.i("Response: ", gameResponse.opponentErrors);
-        Log.i("Response: ", gameResponse.opponentId);
-        Log.i("Response: ", gameResponse.opponentPoints);
+       // Log.i("Response: ", gameResponse.thisRoundPoints);
+       // Log.i("Response: ", gameResponse.chatUnread);
+       // Log.i("Response: ", gameResponse.myTurn);
+       // Log.i("Response: ", gameResponse.opponentName);
+       // Log.i("Response: ", gameResponse.cardColor);
+       // Log.i("Response: ", gameResponse.cardValue);
+       // Log.i("Response: ", gameResponse.finishedTime);
+       // Log.i("Response: ", gameResponse.lastEvent);
+       // Log.i("Response: ", gameResponse.lastEventTime);  //adad
+       // ----Log.i("Response: ", gameResponse.lastRoundDetails);
+       // Log.i("Response: ", gameResponse.gameId);
+       // Log.i("Response: ", gameResponse.startTime);
+       // ----Log.i("Response: ", gameResponse.odds);
+       // Log.i("Response: ", gameResponse.thisRoundDetails);
+       // Log.i("Response: ", gameResponse.lastRoundPoints); ///
+       // Log.i("Response: ", gameResponse.passProhibited);
+       // Log.i("Response: ", gameResponse.playerErrors);
+       // Log.i("Response: ", gameResponse.playerName);
+       // Log.i("Response: ", gameResponse.playerOne);
+       // Log.i("Response: ", gameResponse.playerPoints);
+       // Log.i("Response: ", gameResponse.playerTwo);
+       // Log.i("Response: ", gameResponse.playerWins);
+       // Log.i("Response: ", gameResponse.opponentWins);
+       // Log.i("Response: ", gameResponse.opponentErrors);
+       // Log.i("Response: ", gameResponse.opponentId);
+       // Log.i("Response: ", gameResponse.opponentPoints);
     }
 
     public void changeImageResource()
     {
         int i = rgenerator.nextInt(51);
         gamecards.setImageResource(mImageIds[i]);
+    }
+
+    private void setCurrentCard(){
+        if(gameResponse != null){
+
+        } else {
+            Log.i("Response is Null ", "How??");
+        }
     }
 
     public void showProgressDialog(){
