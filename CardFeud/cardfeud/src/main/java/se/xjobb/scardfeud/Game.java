@@ -115,28 +115,13 @@ public class Game extends Activity implements View.OnClickListener {
         });
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //changeImageResource();
-               /* high.setVisibility(View.INVISIBLE);
-                low.setVisibility(View.INVISIBLE);
-                pass.setVisibility(View.INVISIBLE); */
-                high.animate().translationX(710).setDuration(1000);
-                low.animate().translationX(-710).setDuration(1000);
-                pass.animate().translationX(710).setDuration(1000);
-                arrowhl.animate().translationX(710).setDuration(1000);
-                arrowpl.animate().translationX(710).setDuration(1000);
-                arrowhr.animate().translationX(710).setDuration(1000);
-                arrowpr.animate().translationX(710).setDuration(1000);
-                arrowlr.animate().translationX(-710).setDuration(1000);
-                arrowll.animate().translationX(-710).setDuration(1000);
-                ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
-                anim.setDuration(2000);
-                anim.start();
 
                 // TODO handle if pass is disabled in JSON response
 
-                // send RequestToServer "3 = pass"
-                // sendRequestToServer(3);
-                // disableGamePay();
+                // when pressing pass
+                //send RequestToServer "3 = pass"
+                sendRequestToServer(3);
+                disableGamePay();
             }
         });
         runOnUiThread(new Runnable() {
@@ -216,20 +201,27 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
-   /*
-    public void changeImageResource()
-    {
-        int i = rgenerator.nextInt(51);
-        gamecard.setImageResource(mImageIds[i]);
+    private void animate(){
+        high.animate().translationX(710).setDuration(1000);
+        low.animate().translationX(-710).setDuration(1000);
+        pass.animate().translationX(710).setDuration(1000);
+        arrowhl.animate().translationX(710).setDuration(1000);
+        arrowpl.animate().translationX(710).setDuration(1000);
+        arrowhr.animate().translationX(710).setDuration(1000);
+        arrowpr.animate().translationX(710).setDuration(1000);
+        arrowlr.animate().translationX(-710).setDuration(1000);
+        arrowll.animate().translationX(-710).setDuration(1000);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
+        anim.setDuration(2000);
+        anim.start();
     }
-*/
+
 
     // used to disable game buttons
     private void disableGamePay(){
         high.setVisibility(View.INVISIBLE);
         low.setVisibility(View.INVISIBLE);
         pass.setVisibility(View.INVISIBLE);
-        waiting.setVisibility(View.VISIBLE);
         arrowhl.setVisibility(View.INVISIBLE);
         arrowpl.setVisibility(View.INVISIBLE);
         arrowhr.setVisibility(View.INVISIBLE);
@@ -372,12 +364,16 @@ public class Game extends Activity implements View.OnClickListener {
 
                 return true;
             case R.id.action_refresh:
+                /*
                 Intent intent = getIntent();
                 overridePendingTransition(0, 0);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
                 overridePendingTransition(0, 0);
-                startActivity(intent);
+                startActivity(intent); */
+
+                // refresh
+                sendRequestToServer(0);
                 return true;
         }
 
@@ -527,6 +523,7 @@ public class Game extends Activity implements View.OnClickListener {
         } else {
             // it's not my turn
             disableGamePay();
+            waiting.setVisibility(View.VISIBLE);
         }
 
         // if the finished time field is set, the game is over and we show a dialog.
