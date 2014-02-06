@@ -23,8 +23,7 @@ public class FinishedGameAdapter extends BaseAdapter{
     ArrayList<Response> finishedGames;
     Context context;
     View.OnClickListener finListener;
-    Drawable win = context.getResources().getDrawable(R.drawable.game_win);
-    Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
+
 
     public FinishedGameAdapter(Context context, View.OnClickListener finListener){
         this.context = context;
@@ -50,20 +49,23 @@ public class FinishedGameAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         String result;
-        Typeface tf = Typeface.createFromAsset(context.getAssets(),
-                "fonts/hobostd.otf");
-        Button finish = (Button)view.findViewById(R.id.finGameBtn);
-        ImageView gameResultIMG = (ImageView)view.findViewById(R.id.gameResult_img);
-        ImageView finFlag = (ImageView)view.findViewById(R.id.finFlag);
+        Drawable win = context.getResources().getDrawable(R.drawable.game_win);
+        Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
+        Drawable looseBtn = context.getResources().getDrawable(R.drawable.btn_lost);
+        Drawable winBtn = context.getResources().getDrawable(R.drawable.btn_win);
+
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = infalInflater.inflate(R.layout.fingames_list, null);
         }
+        Typeface tf = Typeface.createFromAsset(context.getAssets(),
+                "fonts/hobostd.otf");
+        Button finishBtn = (Button)view.findViewById(R.id.finGameBtn);
+        ImageView gameResultIMG = (ImageView)view.findViewById(R.id.gameResult_img);
+        ImageView finFlag = (ImageView)view.findViewById(R.id.finFlag);
 
 
-
-
-        Response response = GameListResult.getFinishedGames().get(i);
+        final Response response = GameListResult.getFinishedGames().get(i);
         try {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
@@ -75,15 +77,23 @@ public class FinishedGameAdapter extends BaseAdapter{
             Drawable drawable = context.getResources().getDrawable(id);
 
             finFlag.setImageDrawable(drawable);
+        }
+            finishBtn.setTypeface(tf);
+            int myPoints = Integer.parseInt(response.playerPoints);
+            int opPoints = Integer.parseInt(response.opponentPoints);
 
-        finish.setText("You " + "won/lost" +" against "+ response.opponentName);
-        finish.setTypeface(tf);
-        if (GameListResult.getFinishedGames() == response.opponentWins){
-            gameResultIMG.setImageDrawable(loose);
-        } else if (GameListResult.getFinishedGames() == response.playerWins) {
-            gameResultIMG.setImageDrawable(win);
-        }
-        }
+            if(myPoints> opPoints){
+                gameResultIMG.setImageDrawable(win);
+                finishBtn.setBackground(winBtn);
+                finishBtn.setText("You won against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+            } else if(opPoints > myPoints) {
+                gameResultIMG.setImageDrawable(loose);
+                finishBtn.setBackground(looseBtn);
+                finishBtn.setText("You lost against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+            } else {
+                //oavgjort...
+            }
+
 
 
         view.setTag(finishedGames.get(i));
