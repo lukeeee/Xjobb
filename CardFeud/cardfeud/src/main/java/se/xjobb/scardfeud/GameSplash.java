@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -19,7 +20,8 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
 public class GameSplash extends Activity {
     private static int SPLASH_TIME_OUT = 2000;
     TextView you, opponent,v_char,s_char;
-    String username, opponentname;
+    String username;
+    Response response;
     ArrayList<Response> myTurns;
 
 
@@ -33,9 +35,11 @@ public class GameSplash extends Activity {
         s_char = (TextView)findViewById(R.id.s_char);
         username = User.UserDetails.getUsername();
 
-        Intent intent = getIntent();
-        opponentname = intent.getStringExtra("opponentName");
-        opponent.setText(opponentname);
+
+        Intent i = getIntent();
+        i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
+        response = (Response) i.getParcelableExtra("responseObject");
+        opponent.setText(response.opponentName);
 
         you.setText(username);
 
@@ -52,8 +56,9 @@ public class GameSplash extends Activity {
             @Override
             public void run() {
                 //Start main activity when timer is over
-                Intent i = new Intent(GameSplash.this, Game.class);
-                startActivity(i);
+                Intent ix = new Intent(GameSplash.this, Game.class);
+                ix.putExtra("responseObject", (Parcelable) response);
+                startActivity(ix);
 
                 // Close this activity
                 finish();

@@ -1,5 +1,8 @@
 package se.xjobb.scardfeud.JsonGetClasses;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -8,7 +11,9 @@ import com.google.gson.annotations.SerializedName;
  * This represents a json response. GameList -> Response
  *
  */
-public class Response {
+public class Response implements Parcelable {
+
+    /* Used to represent json objects */
 
     @SerializedName("game_id")
     public String gameId;
@@ -87,5 +92,87 @@ public class Response {
 
     @SerializedName("odds")
     public String odds;
+
+    /* Everything below is used to pass objects of this type along with intents */
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Response> CREATOR = new Parcelable.Creator<Response>() {
+        public Response createFromParcel(Parcel in) {
+            return new Response(in);
+        }
+
+        public Response[] newArray(int size) {
+            return new Response[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        //dest.writeStrin("");
+        dest.writeStringArray(new String[]{
+                this.gameId,
+                this.startTime,
+                this.finishedTime,
+                this.lastEvent,
+                this.lastEventTime,
+                this.playerOne,
+                this.playerTwo,
+                this.playerName,
+                this.opponentId,
+                this.opponentName,
+                this.cardColor,
+                this.cardValue,
+                this.passProhibited,
+                this.lastRoundDetails,
+                this.thisRoundDetails,
+                this.lastRoundPoints,
+                this.thisRoundPoints,
+                this.myTurn,
+                this.opponentPoints,
+                this.opponentErrors,
+                this.opponentWins,
+                this.playerPoints,
+                this.playerErrors,
+                this.playerWins,
+                this.chatUnread,
+                this.odds});
+    }
+
+    public Response (Parcel in) {
+        // gameId = in.readString();
+        String[] data = new String[26];
+        in.readStringArray(data);
+        this.gameId = data[0];
+        this.startTime = data[1];
+        this.finishedTime = data[2];
+        this.lastEvent = data[3];
+        this.lastEventTime = data[4];
+        this.playerOne = data[5];
+        this.playerTwo = data[6];
+        this.playerName = data[7];
+        this.opponentId = data[8];
+        this.opponentName = data[9];
+        this.cardColor = data[10];
+        this.cardValue = data[11];
+        this.passProhibited = data[12];
+        this.lastRoundDetails = data[13];
+        this.thisRoundDetails = data[14];
+        this.lastRoundPoints = data[15];
+        this.thisRoundPoints = data[16];
+        this.myTurn = data[17];
+        this.opponentPoints = data[18];
+        this.opponentErrors = data[19];
+        this.opponentWins = data[20];
+        this.playerPoints = data[21];
+        this.playerErrors = data[22];
+        this.playerWins = data[23];
+        this.chatUnread = data[24];
+        this.odds = data[25];
+    }
 
 }

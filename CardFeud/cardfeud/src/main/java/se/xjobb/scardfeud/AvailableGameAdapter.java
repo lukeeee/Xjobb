@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,9 +85,8 @@ public class AvailableGameAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GameSplash.class);
-                i.putExtra("opponentName", response.opponentName);
-                i.putExtra("gameId", response.gameId);
-                i.putExtra("playerName", response.playerName);
+                i.putExtra("responseObject", (Parcelable) response);
+                Log.i("INFO", response.chatUnread);
                 context.startActivity(i);
             }
         });

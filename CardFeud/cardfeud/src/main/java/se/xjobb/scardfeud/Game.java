@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import java.util.Random;
 
 import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
@@ -38,8 +39,6 @@ public class Game extends Activity implements View.OnClickListener {
     private ImageView gamecards;
     private static final Random rgenerator = new Random();
     private int userId;
-    private int gameId;
-    private int choice;
     private TextView waiting;
     private LinearLayout lnrMain;
     private Response gameResponse;  // This object represents a current game
@@ -81,13 +80,12 @@ public class Game extends Activity implements View.OnClickListener {
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
-                /*high.setVisibility(View.INVISIBLE);
+                high.setVisibility(View.INVISIBLE);
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE);*/
-                high.animate().translationX(710);
-                low.animate().translationX(-710);
-                pass.animate().translationX(710);
+                waiting.setVisibility(View.VISIBLE);
+                // send RequestToServer "1 = higher"
+                sendRequestToServer(1);
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
@@ -97,15 +95,24 @@ public class Game extends Activity implements View.OnClickListener {
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
                 waiting.setVisibility(View.VISIBLE);
+
+                // send RequestToServer "2 = lower"
+                sendRequestToServer(2);
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 changeImageResource();
-                high.setVisibility(View.INVISIBLE);
+               /* high.setVisibility(View.INVISIBLE);
                 low.setVisibility(View.INVISIBLE);
                 pass.setVisibility(View.INVISIBLE);
-                waiting.setVisibility(View.VISIBLE);
+                waiting.setVisibility(View.VISIBLE); */
+                high.animate().translationX(710);
+                low.animate().translationX(-710);
+                pass.animate().translationX(710);
+
+                // send RequestToServer "3 = pass"
+                // sendRequestToServer(3);
             }
         });
         runOnUiThread(new Runnable() {
@@ -122,13 +129,18 @@ public class Game extends Activity implements View.OnClickListener {
         });
 
         helperClass = new HelperClass(this);
-
+        Intent i = getIntent();
+        i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
+        gameResponse = (Response) i.getParcelableExtra("responseObject");
+        stat.setText("You: " + gameResponse.playerPoints + " " + gameResponse.opponentName + " " + gameResponse.opponentPoints);
     }
+
     public void changeImageResource()
     {
         int i = rgenerator.nextInt(51);
         gamecards.setImageResource(mImageIds[i]);
     }
+
     public void showProgressDialog(){
         if(progressDialog == null){
             // display dialog when loading data
@@ -173,12 +185,6 @@ public class Game extends Activity implements View.OnClickListener {
     @Override
     protected void onResume(){
         super.onResume();
-
-       // debug
-        // should only be done as long as we are guessing correct!!
-       // PostGamePlay postGamePlay = new PostGamePlay(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), "290215", 2, this);
-       // postGamePlay.postRequest();
-
 
         // check if user is logged out, (if the values stored are empty)
         // if they are then finish activity
@@ -226,6 +232,11 @@ public class Game extends Activity implements View.OnClickListener {
 
     }
 
+    private void sendRequestToServer(int choice){
+        PostGamePlay postGamePlay = new PostGamePlay(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.gameId, choice, this);
+        postGamePlay.postRequest();
+    }
+
     // used to send the rematch data to server
     private void sendRematchPost(){
 
@@ -252,7 +263,7 @@ public class Game extends Activity implements View.OnClickListener {
 
         } else if (!response.opponentWins.contentEquals("0")){
             // if the opponent wins
-            dialog.setMessage("Sorry! \n\n" + response.opponentName + " giwon against you. \n\n" +
+            dialog.setMessage("Sorry! \n\n" + response.opponentName + " won against you. \n\n" +
                 response.opponentPoints + " - " + response.playerPoints);
 
         }
@@ -368,7 +379,7 @@ public class Game extends Activity implements View.OnClickListener {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-
+/*
     public int getGameId() {
         return gameId;
     }
@@ -384,4 +395,5 @@ public class Game extends Activity implements View.OnClickListener {
     public void setChoice(int choice) {
         this.choice = choice;
     }
+    */
 }
