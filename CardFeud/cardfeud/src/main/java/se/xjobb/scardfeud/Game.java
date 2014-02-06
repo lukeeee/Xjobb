@@ -79,7 +79,7 @@ public class Game extends Activity implements View.OnClickListener {
         lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
-        waiting.setText("Waiting for " + "null");
+
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -141,7 +141,7 @@ public class Game extends Activity implements View.OnClickListener {
         //i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
         gameResponse = (Response) i.getParcelableExtra("responseObject");
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
-
+        waiting.setText("Waiting for " + gameResponse.opponentName);
         Log.i("Response: ", gameResponse.thisRoundPoints);
         Log.i("Response: ", gameResponse.chatUnread);
         Log.i("Response: ", gameResponse.myTurn);

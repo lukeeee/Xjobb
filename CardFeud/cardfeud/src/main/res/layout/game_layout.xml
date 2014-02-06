@@ -26,9 +26,7 @@
             android:textSize="20sp"
             android:background="@drawable/button"
             android:textStyle="bold"
-            android:id="@+id/gamestat"
-            android:shadowColor="#000"
-            android:shadowRadius="40"/>
+            android:id="@+id/gamestat"/>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -47,15 +45,13 @@
         android:layout_height="10dp"/>
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:textSize="40sp"
         android:text="Higher"
         android:background="@drawable/button"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:id="@+id/higher"
-        android:shadowColor="#000"
-        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_up_l"
         android:drawableLeft="@drawable/arrow_up_r"/>
     <View
@@ -63,15 +59,13 @@
         android:layout_height="5dp"/>
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:textSize="40sp"
         android:text="Lower"
         android:background="@drawable/button"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:id="@+id/lower"
-        android:shadowColor="#000"
-        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_down_l"
         android:drawableLeft="@drawable/arrow_down_r"/>
     <View
@@ -79,15 +73,13 @@
         android:layout_height="5dp"/>
     <Button
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:textSize="40sp"
         android:text="Pass "
         android:background="@drawable/button"
         android:layout_gravity="center"
         android:textStyle="bold"
         android:id="@+id/pass"
-        android:shadowColor="#000"
-        android:shadowRadius="40"
         android:drawableRight="@drawable/arrow_pass_r"
         android:drawableLeft="@drawable/arrow_pass_l"/>
         <LinearLayout
