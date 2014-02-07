@@ -4,144 +4,154 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context="se.xjobb.scardfeud.Stats" >
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    tools:context="se.xjobb.scardfeud.Start" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="600dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:textSize="40dp"
-                android:paddingLeft="80dp"
-                android:paddingRight="40dp"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:id="@+id/user"/>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/myFlag"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <Button
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:textSize="40dp"
+                    android:paddingLeft="80dp"
+                    android:paddingRight="80dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_game"
+                    android:id="@+id/user"/>
+
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="2dp"
+                    android:id="@+id/myFlag"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <Button
+                    android:layout_width="600dp"
+                    android:layout_height="180dp"
+                    android:text="Start A New Game"
+                    android:textSize="50sp"
+                    android:background="@drawable/btn_newgame"
+                    android:textStyle="bold"
+                    android:paddingRight="120dp"
+                    android:id="@+id/Btn_newGame"/>
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="470dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/plus"/>
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="Your turn"
+                    android:textSize="40dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_game"
+                    android:id="@+id/games_text"
+                    android:textColor="#0000ff"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/games"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="Waiting"
+                    android:textSize="40dp"
+                    android:paddingLeft="60dp"
+                    android:paddingRight="58dp"
+
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/shape_waittext"
+                    android:id="@+id/waiting_text"
+                    android:textColor="#fff200"/>
+            </RelativeLayout>
+            <LinearLayout
                 android:layout_width="600dp"
-                android:layout_height="180dp"
-                android:text="Start A New Game"
-                android:textSize="50sp"
-                android:background="@drawable/button"
-                android:textStyle="bold"
-                android:id="@+id/Btn_newGame"
-                android:shadowColor="#000"
-                android:shadowRadius="20"
-                android:paddingRight="30dp"
-                android:drawableRight="@drawable/plus"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="30dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:id="@+id/waiting"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="Games"
-                android:textSize="40dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:id="@+id/games_text"
-                android:textColor="#00ff00"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_gravity="left">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:text="Finished"
+                    android:textSize="40dp"
+                    android:paddingLeft="52dp"
+                    android:paddingRight="50dp"
 
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-        <ListView
-            android:layout_width="600dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:id="@+id/games"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="15dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="Waiting"
-                android:textSize="40dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:id="@+id/waiting_text"
-                android:textColor="#fff200"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-        <ListView
-            android:layout_width="600dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:id="@+id/waiting"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="15dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="Finished Games"
-                android:textSize="40dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:textStyle="bold"
-                android:background="@drawable/button"
-                android:id="@+id/fin_game_text"
-                android:textColor="#c00"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"/>
-        <ListView
-            android:layout_width="600dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/button"
-            android:id="@+id/finGames"/>
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_game"
+                    android:id="@+id/fin_game_text"
+                    android:textColor="#c00"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="600dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:id="@+id/finGames"/>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"/>
 
+        </LinearLayout>
     </LinearLayout>
+
 </ScrollView>
+

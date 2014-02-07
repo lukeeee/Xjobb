@@ -34,7 +34,7 @@ import se.xjobb.scardfeud.Posters.PostGameStart;
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
     String[] menuTitle = {"Play","Rules"};
     int[] menuImage = new int[]
-            {R.drawable.ic_play,R.drawable.ic_rules};
+            {R.drawable.ic_play, R.drawable.ic_rules};
     private ProgressDialog progressDialog;
     private boolean isCreated = false;
     HelperClass helperClass = new HelperClass(this);

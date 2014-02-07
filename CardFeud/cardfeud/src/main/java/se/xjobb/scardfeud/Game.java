@@ -103,7 +103,7 @@ public class Game extends Activity implements View.OnClickListener {
                 // sendRequestToServer "1 = higher"
                 SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(1);
-                disableGamePay();
+                //disableGamePay();
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +112,7 @@ public class Game extends Activity implements View.OnClickListener {
                 // send RequestToServer "2 = lower"
                 SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(2);
-                disableGamePay();
+                //disableGamePay();
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +125,7 @@ public class Game extends Activity implements View.OnClickListener {
 
                 SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(3);
-                disableGamePay();
+                //disableGamePay();
             }
         });
         runOnUiThread(new Runnable() {
@@ -206,6 +206,7 @@ public class Game extends Activity implements View.OnClickListener {
     }
 
     private void animate(){
+        waiting.setVisibility(View.VISIBLE);
         high.animate().translationX(710).setDuration(1000);
         low.animate().translationX(-710).setDuration(1000);
         pass.animate().translationX(710).setDuration(1000);
@@ -528,8 +529,7 @@ public class Game extends Activity implements View.OnClickListener {
             enableGamePlay();
         } else {
             // it's not my turn
-            disableGamePay();
-            waiting.setVisibility(View.VISIBLE);
+            animate();
 
             /*
             // get myTurnList

@@ -20,6 +20,7 @@ public class SoundsVibration {
                 Log.i("MPerror", "" + e);
             }
         } else {
+            Log.i("Ljud av", User.UserDetails.getUsername());
 
         }
     }
@@ -28,7 +29,7 @@ public class SoundsVibration {
             Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
             vib.vibrate(50);
         } else {
-            
+            Log.i("Vibration av", User.UserDetails.getUsername());
         }
 
     }

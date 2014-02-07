@@ -22,68 +22,135 @@
             android:layout_gravity="center">
             <Button
                 android:layout_width="600dp"
-                android:layout_height="110dp"
+                android:layout_height="120dp"
                 android:textSize="40sp"
                 android:background="@drawable/button"
                 android:textStyle="bold"
-                android:id="@+id/gamestat"
-                android:shadowColor="#000"
-                android:shadowRadius="30"/>
+                android:id="@+id/gamestat"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:id="@+id/youflag"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="18dp"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:id="@+id/opponentFlag"
+                android:layout_marginLeft="508dp"
+                android:layout_marginTop="18dp"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="14dp"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
             <ImageView
                 android:layout_width="320dp"
-                android:layout_height="460sp"
+                android:layout_height="460dp"
                 android:id="@+id/gamecards"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
-        <Button
-            android:layout_width="600dp"
+            android:layout_height="14dp"/>
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="80sp"
-            android:text="Higher"
-            android:background="@drawable/button"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/higher"
-            android:shadowColor="#000"
-            android:shadowRadius="30"/>
+            android:gravity="center">
+            <Button
+                android:layout_width="600dp"
+                android:layout_height="120dp"
+                android:textSize="80sp"
+                android:text="Higher"
+                android:background="@drawable/button"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/higher"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_high"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowhigl"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_high"
+                android:layout_marginLeft="470dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowhigr"/>
+
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
-        <Button
-            android:layout_width="600dp"
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="80sp"
-            android:text="Lower"
-            android:background="@drawable/button"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/lower"
-            android:shadowColor="#000"
-            android:shadowRadius="30"/>
+            android:gravity="center">
+            <Button
+                android:layout_width="600dp"
+                android:layout_height="120dp"
+                android:textSize="80sp"
+                android:text="Lower"
+                android:background="@drawable/button"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/lower"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_low"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowlowl"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_low"
+                android:layout_marginLeft="470dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowlowr"/>
+
+        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"/>
-        <Button
-            android:layout_width="600dp"
+        <RelativeLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="80sp"
-            android:text="Pass "
-            android:background="@drawable/button"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:id="@+id/pass"
-            android:shadowColor="#000"
-            android:shadowRadius="30"/>
+            android:gravity="center">
+            <Button
+                android:layout_width="600dp"
+                android:layout_height="120dp"
+                android:textSize="80sp"
+                android:text="Pass"
+                android:background="@drawable/button"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/pass"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_pass_l"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowpassl"/>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/arrow_pass_r"
+                android:layout_marginLeft="470dp"
+                android:layout_marginTop="18dp"
+                android:id="@+id/arrowpassr"/>
+
+        </RelativeLayout>
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
@@ -94,7 +161,7 @@
 
         </LinearLayout>
         <TextView
-            android:layout_marginTop="-410dp"
+            android:layout_marginTop="-440dp"
             android:layout_width="600dp"
             android:layout_height="280dp"
             android:background="@drawable/button"
