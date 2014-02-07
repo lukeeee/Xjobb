@@ -312,17 +312,17 @@ public class Game extends Activity implements View.OnClickListener {
     }
     public void onClick(View view) {
        if (view == stat){
-            AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
-            dialog.setTitle("Game stats");
-            dialog.setIcon(R.drawable.stat);
-            dialog.setMessage("Round ONE: ");
-            dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
-            dialog.show();
-        }
+           AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
+           dialog.setTitle("Game stats");
+           dialog.setIcon(R.drawable.stat);
+           dialog.setMessage("Round ONE: ");
+           dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int which) {
+                   dialog.cancel();
+               }
+           });
+           dialog.show();
+    }
 
     }
 

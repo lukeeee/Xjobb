@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,11 +84,11 @@ public class FinishedGameAdapter extends BaseAdapter{
 
 
             if(myPoints> opPoints){
-                finishBtn.setText("You won against\n" + response.opponentName + " " + myPoints + "-" + opPoints);
+                finishBtn.setText("You won against\n" + response.opponentName + " " + myPoints + "-" + opPoints + "\n"+response.finishedTime);
                 gameResultIMG.setImageDrawable(win);
 
             } else if(opPoints > myPoints) {
-                finishBtn.setText("You lost against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+                finishBtn.setText("You lost against\n"+ response.opponentName + " " + myPoints +"-" + opPoints + "\n"+response.finishedTime);
                 gameResultIMG.setImageDrawable(loose);
 
             } else {
@@ -98,7 +99,22 @@ public class FinishedGameAdapter extends BaseAdapter{
 
 
         view.setTag(finishedGames.get(i));
-        view.setOnClickListener(finListener);
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Game stats");
+                dialog.setIcon(R.drawable.stat);
+                dialog.setMessage(response.lastRoundDetails);
+                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();*/
+                Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
+            }
+        });
 
         return view;
     }
