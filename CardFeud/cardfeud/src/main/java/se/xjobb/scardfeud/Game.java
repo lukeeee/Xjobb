@@ -102,6 +102,7 @@ public class Game extends Activity implements View.OnClickListener {
                 // when pressing "higher"
                 // sendRequestToServer "1 = higher"
                 SoundsVibration.vibrate(Game.this);
+                //SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(1);
                 //disableGamePay();
             }
@@ -111,6 +112,7 @@ public class Game extends Activity implements View.OnClickListener {
                 // when pressing "lower"
                 // send RequestToServer "2 = lower"
                 SoundsVibration.vibrate(Game.this);
+               // SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(2);
                 //disableGamePay();
             }
@@ -124,6 +126,7 @@ public class Game extends Activity implements View.OnClickListener {
                 //send RequestToServer "3 = pass"
 
                 SoundsVibration.vibrate(Game.this);
+                //SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(3);
                 //disableGamePay();
             }
@@ -536,6 +539,7 @@ public class Game extends Activity implements View.OnClickListener {
 
         if(gameResponse.myTurn.contains("1")){
             // it is my turn
+
             enableGamePlay();
         } else {
             // it's not my turn
