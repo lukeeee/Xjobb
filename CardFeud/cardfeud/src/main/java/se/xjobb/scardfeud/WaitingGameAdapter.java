@@ -81,6 +81,7 @@ public class WaitingGameAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 SoundsVibration.start(R.raw.clock, context);
+                SoundsVibration.vibrate(context);
                /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                 dialog.setTitle("Game stats");
                 dialog.setIcon(R.drawable.stat);

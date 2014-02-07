@@ -61,6 +61,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         final Button play = (Button)view.findViewById(R.id.playGameBtn);
         final ImageView playFlag = (ImageView)view.findViewById(R.id.playFlag);
         final Response response = GameListResult.getMyTurns().get(i);
+        //new font on text
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
         try {
@@ -75,6 +76,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
             playFlag.setImageDrawable(drawable);
         }
+        //set text to opponent name and score
         play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         play.setTypeface(tf);
 
@@ -86,6 +88,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //vibration onclick and animations
                 SoundsVibration.vibrate(context);
                 play.animate().translationX(710).setDuration(600);
                 playFlag.animate().translationX(710).setDuration(600);
