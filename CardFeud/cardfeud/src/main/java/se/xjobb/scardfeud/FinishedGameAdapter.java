@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class FinishedGameAdapter extends BaseAdapter{
         String result;
         Drawable win = context.getResources().getDrawable(R.drawable.game_win);
         Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
+        int[] lost = new int[]
+                {R.drawable.btn_wait};
 
 
         if (view == null) {
@@ -89,14 +92,19 @@ public class FinishedGameAdapter extends BaseAdapter{
             finishBtn.setTypeface(tf);
             int myPoints = Integer.parseInt(response.playerPoints);
             int opPoints = Integer.parseInt(response.opponentPoints);
+            String endTime = response.finishedTime.substring(0, 11);
+            Log.i("endTime", endTime);
 
-
+            //diffrent finish text + btn + img in view
             if(myPoints> opPoints){
-                finishBtn.setText("You won against\n" + response.opponentName + " " + myPoints + "-" + opPoints);
+                finishBtn.setText("You won against\n" + response.opponentName + ", with " + myPoints
+                        + "-" + opPoints + "\n"+endTime);
                 gameResultIMG.setImageDrawable(win);
 
             } else if(opPoints > myPoints) {
-                finishBtn.setText("You lost against\n"+ response.opponentName + " " + myPoints +"-" + opPoints);
+                finishBtn.setBackgroundResource(lost[0]);
+                finishBtn.setText("         You lost against\n         "+ response.opponentName + ", with "
+                        + myPoints +"-" + opPoints + "\n         "+endTime);
                 gameResultIMG.setImageDrawable(loose);
 
             } else {
@@ -107,7 +115,23 @@ public class FinishedGameAdapter extends BaseAdapter{
 
 
         view.setTag(finishedGames.get(i));
-        view.setOnClickListener(finListener);
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Game stats");
+                dialog.setIcon(R.drawable.stat);
+                dialog.setMessage(response.lastRoundDetails);
+                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();*/
+
+                Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
+            }
+        });
 
         return view;
     }

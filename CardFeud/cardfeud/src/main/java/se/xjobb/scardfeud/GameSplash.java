@@ -115,6 +115,7 @@ public class GameSplash extends Activity {
 
                 opponent.animate().x(150f).y(850f).setDuration(1000);
                 oppFlag.animate().x(500f).y(880f).setDuration(1000);
+                SoundsVibration.start(R.raw.tada, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
         new Handler().postDelayed(new Runnable() {
