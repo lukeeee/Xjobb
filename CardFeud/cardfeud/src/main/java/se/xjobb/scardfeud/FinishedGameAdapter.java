@@ -112,6 +112,7 @@ public class FinishedGameAdapter extends BaseAdapter{
                     }
                 });
                 dialog.show();*/
+
                 Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
             }
         });

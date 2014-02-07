@@ -77,11 +77,26 @@ public class WaitingGameAdapter extends BaseAdapter {
         wait.setText("for: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         wait.setTypeface(tf);
         view.setTag(opponentsTurns.get(i));
-        view.setOnClickListener(waitingListener);
+        wait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SoundsVibration.start(R.raw.clock, context);
+               /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Game stats");
+                dialog.setIcon(R.drawable.stat);
+                dialog.setMessage(response.lastRoundDetails);
+                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();*/
+
+
+            }
+        });
 
         return view;
     }
-
-
 }
 

@@ -400,12 +400,16 @@ public class Game extends Activity implements View.OnClickListener {
         if(!response.playerWins.contentEquals("0")){
             // if the current player wins
             dialog.setMessage("Congratulations! \n\n" + "You won against " + response.opponentName + "\n\n" +
-                response.playerPoints + " - " + response.opponentPoints);
+                    response.playerPoints + " - " + response.opponentPoints);
+            SoundsVibration.vibrate(this);
+            SoundsVibration.start(R.raw.applause, Game.this);
 
         } else if (!response.opponentWins.contentEquals("0")){
             // if the opponent wins
             dialog.setMessage("Sorry! \n\n" + response.opponentName + " won against you. \n\n" +
-                response.opponentPoints + " - " + response.playerPoints);
+                    response.opponentPoints + " - " + response.playerPoints);
+            SoundsVibration.vibrate(this);
+            SoundsVibration.start(R.raw.sad, Game.this);
 
         }
 

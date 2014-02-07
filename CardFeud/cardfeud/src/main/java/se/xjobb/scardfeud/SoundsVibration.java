@@ -21,7 +21,7 @@ public class SoundsVibration {
     }
     public static void vibrate(Context context){
         Vibrator vib = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        vib.vibrate(500);
+        vib.vibrate(200);
 
     }
 }

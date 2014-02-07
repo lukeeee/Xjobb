@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +27,7 @@ public class AvailableGameAdapter extends BaseAdapter {
     ArrayList<Response> myTurns;
     Context context;
     private String username;
-    ImageView playFlag;
+
 
 
 
@@ -57,8 +58,8 @@ public class AvailableGameAdapter extends BaseAdapter {
             view = infalInflater.inflate(R.layout.playgame_list, null);
         }
 
-        Button play = (Button)view.findViewById(R.id.playGameBtn);
-        playFlag = (ImageView)view.findViewById(R.id.playFlag);
+        final Button play = (Button)view.findViewById(R.id.playGameBtn);
+        final ImageView playFlag = (ImageView)view.findViewById(R.id.playFlag);
         final Response response = GameListResult.getMyTurns().get(i);
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
@@ -77,17 +78,27 @@ public class AvailableGameAdapter extends BaseAdapter {
         play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         play.setTypeface(tf);
 
-
+        final int START_ACTIVITY_DELAY = 300;
+        final ImageView arrow_game = (ImageView)view.findViewById(R.id.arrow_game);
 
         //play.getBackground().setAlpha(200);
         view.setTag(myTurns.get(i));
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SoundsVibration.vibrate(context);
+                play.animate().translationX(710).setDuration(600);
+                playFlag.animate().translationX(710).setDuration(600);
+                arrow_game.animate().translationX(710).setDuration(600);
+                //delay the gamestart for animations
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
                 Intent i = new Intent(context, GameSplash.class);
                 i.putExtra("responseObject", (Parcelable) response);
                 Log.i("INFO", response.chatUnread);
                 context.startActivity(i);
+                    }}, START_ACTIVITY_DELAY);
             }
         });
 
