@@ -16,7 +16,6 @@ import java.util.Locale;
 public class Stats extends FragmentActivity implements ActionBar.TabListener {
     int[] menuImages = new int[]
             {R.drawable.stats};
-    String[] menuTitle = {"My Stats","Country List","World List"};
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -70,8 +69,8 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
             // this tab is selected.
             actionBar.addTab(
                     actionBar.newTab()
-                            //.setText(menuTitle[i])
-                                    .setIcon(menuImages[0])
+                            .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            //.setIcon(menuImages[0])
                             .setTabListener(this));
         }
     }
