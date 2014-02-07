@@ -9,19 +9,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#005500"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="160dp"
-            android:text="Settings"
+            android:layout_height="80dp"
+            android:text=".:Settings:."
+            android:id="@+id/settings"
             android:layout_gravity="center"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="#fff"
-            android:textSize="50dp"/>
+            android:layout_marginBottom="8dp"
+            android:textSize="70sp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -35,15 +38,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="App Sounds"
+                android:id="@+id/appsoundtxt"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="50dp"/>
+                android:textSize="50sp"/>
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sounds"
                 android:background="@drawable/button"
-                android:layout_marginLeft="190dp"/>
+                android:id="@+id/sounds"
+                android:layout_marginLeft="92dp"
+                android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -58,16 +63,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="App Vibration"
+                android:id="@+id/appvibtxt"
                 android:textStyle="bold"
-                android:layout_marginRight="20dp"
                 android:textColor="#fff"
-                android:textSize="50dp"/>
+                android:textSize="50sp"/>
             <ToggleButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/vibration"
                 android:background="@drawable/button"
-                android:layout_marginLeft="135dp"/>
+                android:layout_marginLeft="60dp"
+                android:textSize="20sp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -83,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="Notification Sounds"
                 android:textStyle="bold"
+                android:id="@+id/appnottxt"
                 android:textColor="#fff"
                 android:textSize="50dp"/>
             <ToggleButton
@@ -90,14 +97,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/notification_sound"
                 android:background="@drawable/button"
-                android:layout_marginLeft="15dp"/>
+                android:textSize="20sp"
+                android:layout_marginLeft="6dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="540dp"
+            android:layout_width="600dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -107,7 +115,7 @@
                 android:text="My Account"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:layout_marginTop="1dp"
                 android:layout_marginBottom="1dp"
                 android:gravity="left"
@@ -118,7 +126,7 @@
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="540dp"
+            android:layout_width="600dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -128,7 +136,7 @@
                 android:text="About"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:gravity="left"
                 android:id="@+id/about_us"/>
         </LinearLayout>
@@ -137,7 +145,26 @@
             android:layout_height="1dp"
             android:background="#fff"/>
         <LinearLayout
-            android:layout_width="540dp"
+            android:layout_width="600dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CardFeud Premium?"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="50sp"
+                android:gravity="left"
+                android:id="@+id/premium"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+        <LinearLayout
+            android:layout_width="600dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center">
@@ -147,7 +174,7 @@
                 android:text="Log Out"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:gravity="left"
                 android:id="@+id/logout"/>
         </LinearLayout>
@@ -162,20 +189,19 @@
             android:gravity="center">
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Version:  Beta 1.0"
+                android:layout_height="match_parent"
+                android:text="Version:            Beta 1.0"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:layout_marginLeft="40dp"
-                android:textSize="50dp"
+                android:textSize="50sp"
                 android:id="@+id/version_text"
-                android:gravity="left"/>
+                android:layout_marginLeft="3dp"
+                android:gravity="left|center"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#fff"/>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -183,30 +209,30 @@
 
             <Button
                 android:layout_marginTop="10dp"
-                android:layout_width="300dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textSize="50sp"
+                android:textSize="25sp"
                 android:background="@drawable/button"
                 android:text="Game debug"
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:layout_marginRight="300dp"
+                android:layout_marginRight="150dp"
                 android:id="@+id/game"/>
 
             <Button
-                android:layout_width="300dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textSize="50sp"
+                android:textSize="25sp"
                 android:background="@drawable/button"
                 android:text="Change Cnty"
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:layout_marginLeft="310dp"
+                android:layout_marginLeft="155dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/debug_country"/>
         </RelativeLayout>
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
