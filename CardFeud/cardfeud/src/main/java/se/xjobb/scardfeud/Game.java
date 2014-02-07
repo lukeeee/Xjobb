@@ -407,16 +407,26 @@ public class Game extends Activity implements View.OnClickListener {
         dialog.setTitle("Game Finished");
         dialog.setIcon(R.drawable.invite);
 
-        if(!response.playerWins.contentEquals("0")){
+        int playerScore = Integer.parseInt(response.playerPoints);
+        int opponentScore = Integer.parseInt(response.opponentPoints);
+
+        if(playerScore > opponentScore){
             // if the current player wins
             dialog.setMessage("Congratulations! \n\n" + "You won against " + response.opponentName + "\n\n" +
                     response.playerPoints + " - " + response.opponentPoints);
             SoundsVibration.vibrate(this);
             SoundsVibration.start(R.raw.applause, Game.this);
 
-        } else if (!response.opponentWins.contentEquals("0")){
+        } else if (opponentScore > playerScore){
             // if the opponent wins
             dialog.setMessage("Sorry! \n\n" + response.opponentName + " won against you. \n\n" +
+                    response.opponentPoints + " - " + response.playerPoints);
+            SoundsVibration.vibrate(this);
+            SoundsVibration.start(R.raw.sad, Game.this);
+
+        } else {
+            // if it's a tie
+            dialog.setMessage("Sorry! \n\n" + "It was a tie! \n\n" +
                     response.opponentPoints + " - " + response.playerPoints);
             SoundsVibration.vibrate(this);
             SoundsVibration.start(R.raw.sad, Game.this);
