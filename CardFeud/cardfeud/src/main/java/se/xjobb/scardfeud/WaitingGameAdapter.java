@@ -74,7 +74,7 @@ public class WaitingGameAdapter extends BaseAdapter {
 
             waitFlag.setImageDrawable(drawable);
         }
-        wait.setText("for: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
+        wait.setText(response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         wait.setTypeface(tf);
         view.setTag(opponentsTurns.get(i));
         wait.setOnClickListener(new View.OnClickListener() {
