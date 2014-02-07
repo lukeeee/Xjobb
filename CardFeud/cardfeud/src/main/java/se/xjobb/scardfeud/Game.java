@@ -378,8 +378,13 @@ public class Game extends Activity implements View.OnClickListener {
     }
 
     private void sendRequestToServer(int choice){
-        PostGamePlay postGamePlay = new PostGamePlay(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.gameId, choice, this);
-        postGamePlay.postRequest();
+        if(!helperClass.isConnected()){
+            helperClass.showNetworkErrorDialog();
+            // add retry dialog
+        } else {
+            PostGamePlay postGamePlay = new PostGamePlay(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.gameId, choice, this);
+            postGamePlay.postRequest();
+        }
     }
 
     // used to send the rematch data to server
