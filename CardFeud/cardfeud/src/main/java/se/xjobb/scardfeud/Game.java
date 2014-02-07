@@ -103,7 +103,6 @@ public class Game extends Activity implements View.OnClickListener {
                 // sendRequestToServer "1 = higher"
                 SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(1);
-                sendRequestToServer(1);
                 //disableGamePay();
             }
         });
