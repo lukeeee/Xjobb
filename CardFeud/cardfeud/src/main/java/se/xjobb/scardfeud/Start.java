@@ -177,6 +177,8 @@ public class Start extends Fragment implements View.OnClickListener {
     private void refreshAvailableGames(){
         // make sure the adapter is not null
         if(availableGameAdapter != null){
+            gamestext.setVisibility(View.INVISIBLE);
+
             // refresh adapter
             availableGameAdapter.notifyDataSetChanged();
 
@@ -192,10 +194,7 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(availableGameAdapter.getCount() > 0){
                 gamestext.setVisibility(View.VISIBLE);
-            } else {
-                gamestext.setVisibility(View.INVISIBLE);
             }
-
         }
     }
 
@@ -203,6 +202,8 @@ public class Start extends Fragment implements View.OnClickListener {
     private void refreshFinishedGames(){
         // make sure adapter is not null
         if(finishedGameAdapter != null){
+            fin_Gamestext.setVisibility(View.INVISIBLE);
+
             // refresh adapter
             finishedGameAdapter.notifyDataSetChanged();
 
@@ -218,10 +219,7 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(finishedGameAdapter.getCount() > 0){
                 fin_Gamestext.setVisibility(View.VISIBLE);
-            } else {
-                fin_Gamestext.setVisibility(View.INVISIBLE);
             }
-
         }
     }
 
@@ -230,6 +228,8 @@ public class Start extends Fragment implements View.OnClickListener {
     private void refreshWaitingGames(){
         // make sure adapter is not null
         if(waitingGameAdapter != null){
+            waitingtext.setVisibility(View.INVISIBLE);
+
             // refresh adapter
             waitingGameAdapter.notifyDataSetChanged();
 
@@ -246,10 +246,7 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(waitingGameAdapter.getCount() > 0){
                 waitingtext.setVisibility(View.VISIBLE);
-            } else {
-                waitingtext.setVisibility(View.INVISIBLE);
             }
-
         }
     }
 
