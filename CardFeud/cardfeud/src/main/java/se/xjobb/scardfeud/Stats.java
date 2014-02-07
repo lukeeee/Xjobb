@@ -1,10 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,14 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.Locale;
 
 
 public class Stats extends FragmentActivity implements ActionBar.TabListener {
+    int[] menuImages = new int[]
+            {R.drawable.stats};
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -74,6 +70,7 @@ public class Stats extends FragmentActivity implements ActionBar.TabListener {
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            //.setIcon(menuImages[0])
                             .setTabListener(this));
         }
     }
