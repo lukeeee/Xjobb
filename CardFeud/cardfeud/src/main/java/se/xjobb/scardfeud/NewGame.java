@@ -170,10 +170,12 @@ public class NewGame extends Activity implements View.OnClickListener{
     public void onClick(View v) {
 
         if(v == search_player){
+            SoundsVibration.vibrate(NewGame.this);
             Intent i = new Intent(getBaseContext(), Search.class);
             startActivity(i);
             this.finish();
         } else if(v == random_player){
+            SoundsVibration.vibrate(NewGame.this);
             challengeRandomPlayer();
         } else if (v == flag){
             flag.animate().translationX(210).setDuration(500);

@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
-import se.xjobb.scardfeud.JsonGetClasses.Response;
 
 
 /**
@@ -104,6 +99,7 @@ public class Start extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         if (view == newGame){
+            SoundsVibration.vibrate(getActivity().getApplicationContext());
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
         } else if (view == flag){
