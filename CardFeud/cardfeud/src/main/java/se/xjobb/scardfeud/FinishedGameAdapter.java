@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Collections;
 import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
@@ -53,6 +54,8 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         finishedGames.clear();
         finishedGames = GameListResult.getFinishedGames();
+        // custom sorting by last event
+        Collections.sort(finishedGames, new CustomComparator());
     }
 
     @Override

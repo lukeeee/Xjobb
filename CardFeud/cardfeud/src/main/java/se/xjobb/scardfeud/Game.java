@@ -26,8 +26,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
-import java.util.Random;
+import java.util.List;
 
+import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
@@ -42,8 +43,6 @@ public class Game extends Activity implements View.OnClickListener {
     private ProgressDialog progressDialog;
     private ImageView gamecard, youFlag, opponentFlag;
     private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr;
-    private static final Random rgenerator = new Random();
-    private int userId;
     private TextView waiting;
     private LinearLayout lnrMain;
     private Response gameResponse;  // This object represents a current game
@@ -578,32 +577,4 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
-
-    // This object represents the current ongoing game_layout
-
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-/*
-    public int getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(int gameId) {
-        this.gameId = gameId;
-    }
-
-    public int getChoice() {
-        return choice;
-    }
-
-    public void setChoice(int choice) {
-        this.choice = choice;
-    }
-    */
 }

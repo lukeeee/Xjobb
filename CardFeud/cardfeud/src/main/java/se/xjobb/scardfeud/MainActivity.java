@@ -217,12 +217,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             Log.e(TAG, ex.getMessage());
         }
 
-        // clear all old lists
-        GameListResult.getOpponentsTurns().clear();
-        GameListResult.getMyTurns().clear();
-        GameListResult.getFinishedGames().clear();
-        Log.i("Before Finished", Integer.toString(GameListResult.getMyTurns().size()));
-
         // check which JSON objects that are present
         if(jsonResponse != null){
 
@@ -371,6 +365,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     protected void onStop(){
         super.onStop();
         isCreated = false;
+        // if loading dialog is visible, then hide it, will still leak from error dialog
+        if(progressDialog != null){
+            progressDialog.cancel();
+        }
     }
 
     @Override

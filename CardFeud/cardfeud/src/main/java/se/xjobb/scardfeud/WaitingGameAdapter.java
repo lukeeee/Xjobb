@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.util.Collections;
 import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
@@ -54,6 +56,9 @@ public class WaitingGameAdapter extends BaseAdapter {
 
         waitingGames.clear();
         waitingGames = GameListResult.getOpponentsTurns();
+        // custom sorting by last event
+        Collections.sort(waitingGames, new CustomComparator());
+        Log.i("Games waiting: ", Integer.toString(GameListResult.getOpponentsTurns().size()));
     }
 
     @Override
@@ -84,7 +89,7 @@ public class WaitingGameAdapter extends BaseAdapter {
             waitFlag.setImageDrawable(drawable);
         }
 
-        wait.setText(response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
+        wait.setText(response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n" + response.lastEventTime);
         wait.setTypeface(tf);
         view.setTag(waitingGames.get(i));
 
