@@ -26,13 +26,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
-import org.apache.http.client.HttpResponseException;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
@@ -106,6 +101,7 @@ public class Game extends Activity implements View.OnClickListener {
             public void onClick(View v) {
                 // when pressing "higher"
                 // sendRequestToServer "1 = higher"
+                SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(1);
                 disableGamePay();
             }
@@ -114,6 +110,7 @@ public class Game extends Activity implements View.OnClickListener {
             public void onClick(View v) {
                 // when pressing "lower"
                 // send RequestToServer "2 = lower"
+                SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(2);
                 disableGamePay();
             }
@@ -125,6 +122,8 @@ public class Game extends Activity implements View.OnClickListener {
 
                 // when pressing pass
                 //send RequestToServer "3 = pass"
+
+                SoundsVibration.vibrate(Game.this);
                 sendRequestToServer(3);
                 disableGamePay();
             }
