@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
@@ -30,9 +32,6 @@ public class Start extends Fragment implements View.OnClickListener {
     TextView waitingtext;
     TextView fin_Gamestext;
     private Button newGame;
-    private List<Response> myTurns;
-    private List<Response> opponentsTurns;
-    private List<Response> finishedGames;
     private String username;
     private String myCountry;
     LinearLayout games, waiting, finGames;
@@ -90,10 +89,6 @@ public class Start extends Fragment implements View.OnClickListener {
             flag.setImageDrawable(drawable);
         }
 
-        myTurns = GameListResult.getMyTurns();
-        opponentsTurns = GameListResult.getOpponentsTurns();
-        finishedGames = GameListResult.getFinishedGames();
-
         createAvailableGameAdapter();
         createWaitingGameAdapter();
         createFinishedGameAdapter();
@@ -118,100 +113,169 @@ public class Start extends Fragment implements View.OnClickListener {
     }
 
     private void createAvailableGameAdapter(){
-        if(!myTurns.isEmpty()) {
-            availableGameAdapterCreated = true;
-            availableGameAdapter = new AvailableGameAdapter(getActivity());
+        availableGameAdapterCreated = true;
+        availableGameAdapter = new AvailableGameAdapter(getActivity());
+        final int adapterCount = availableGameAdapter.getCount();
 
-            final int adapterCount = availableGameAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = availableGameAdapter.getView(i, null, null);
+            games.addView(item);
+        }
 
-            for (int i = 0; i < adapterCount; i++) {
-                View item = availableGameAdapter.getView(i, null, null);
-                games.addView(item);
-            }
+        if(adapterCount >0){
             gamestext.setVisibility(View.VISIBLE);
         }
     }
 
     private void createWaitingGameAdapter(){
-        if(!opponentsTurns.isEmpty()) {
-            waitingGameAdapterCreated = true;
-            waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.icon, new Start(), view.getTag() + "");
-                    ft.addToBackStack(null);
-                    ft.commit();
+        waitingGameAdapterCreated = true;
+        waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.icon, new Start(), view.getTag() + "");
+                ft.addToBackStack(null);
+                ft.commit();
 
-
-                }
-            });
-            final int adapterCount = waitingGameAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = waitingGameAdapter.getView(i, null, null);
-                waiting.addView(item);
             }
+        });
+        final int adapterCount = waitingGameAdapter.getCount();
+
+        for (int i = 0; i < adapterCount; i++) {
+            View item = waitingGameAdapter.getView(i, null, null);
+            waiting.addView(item);
+        }
+
+        if(adapterCount > 0){
             waitingtext.setVisibility(View.VISIBLE);
         }
     }
 
     private void createFinishedGameAdapter(){
-        if(!finishedGames.isEmpty()) {
-            finishedGameAdapterCreated = true;
-            finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.icon, new Start(), view.getTag() + "");
-                    ft.addToBackStack(null);
-                    ft.commit();
+        finishedGameAdapterCreated = true;
+        finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.icon, new Start(), view.getTag() + "");
+                ft.addToBackStack(null);
+                ft.commit();
 
-
-                }
-            });
-            final int adapterCount = finishedGameAdapter.getCount();
-
-            for (int i = 0; i < adapterCount; i++) {
-                View item = finishedGameAdapter.getView(i, null, null);
-                finGames.addView(item);
             }
+        });
+        final int adapterCount = finishedGameAdapter.getCount();
+
+        for (int i = 0; i < adapterCount; i++) {
+            View item = finishedGameAdapter.getView(i, null, null);
+            finGames.addView(item);
+        }
+
+        if(adapterCount > 0){
             fin_Gamestext.setVisibility(View.VISIBLE);
         }
     }
 
 
+
+    // refresh the views for available games
+    private void refreshAvailableGames(){
+        // make sure the adapter is not null
+        if(availableGameAdapter != null){
+            // refresh adapter
+            availableGameAdapter.notifyDataSetChanged();
+
+            // remove all views
+            games.removeAllViews();
+
+            // add all views again, to make it accurate
+            for (int i = 0; i < availableGameAdapter.getCount(); i++) {
+                View item = availableGameAdapter.getView(i, null, null);
+                games.addView(item);
+            }
+
+            // show/hide text depending on number of items
+            if(availableGameAdapter.getCount() > 0){
+                gamestext.setVisibility(View.VISIBLE);
+            } else {
+                gamestext.setVisibility(View.INVISIBLE);
+            }
+
+        }
+    }
+
+    // refresh views for finishedGames
+    private void refreshFinishedGames(){
+        // make sure adapter is not null
+        if(finishedGameAdapter != null){
+            // refresh adapter
+            finishedGameAdapter.notifyDataSetChanged();
+
+            // remove all views
+            finGames.removeAllViews();
+
+            // add all views again, to make it accurate
+            for (int i = 0; i < finishedGameAdapter.getCount(); i++) {
+                View item = finishedGameAdapter.getView(i, null, null);
+                finGames.addView(item);
+            }
+
+            // show/hide text depending on number of items
+            if(finishedGameAdapter.getCount() > 0){
+                fin_Gamestext.setVisibility(View.VISIBLE);
+            } else {
+                fin_Gamestext.setVisibility(View.INVISIBLE);
+            }
+
+        }
+    }
+
+
+    // refresh views for waiting games
+    private void refreshWaitingGames(){
+        // make sure adapter is not null
+        if(waitingGameAdapter != null){
+            // refresh adapter
+            waitingGameAdapter.notifyDataSetChanged();
+
+
+            // remove all views
+            waiting.removeAllViews();
+
+            // add all views again to make it accurate
+            for (int i = 0; i < waitingGameAdapter.getCount(); i++) {
+                View item = waitingGameAdapter.getView(i, null, null);
+                waiting.addView(item);
+            }
+
+            // show/hide text depending on number of items
+            if(waitingGameAdapter.getCount() > 0){
+                waitingtext.setVisibility(View.VISIBLE);
+            } else {
+                waitingtext.setVisibility(View.INVISIBLE);
+            }
+
+        }
+    }
+
     // refresh the arraylists data and adapters
     public void refresh(){
-        myTurns = GameListResult.getMyTurns();
-        opponentsTurns = GameListResult.getOpponentsTurns();
-        finishedGames = GameListResult.getFinishedGames();
 
-        // check if the arraylist adapters is instantiated
-        if(!availableGameAdapterCreated){
+        // check if we need to create any adapters (that are not already created
+        if(!GameListResult.getMyTurns().isEmpty() && !availableGameAdapterCreated){
             createAvailableGameAdapter();
         }
 
-        if(!finishedGameAdapterCreated){
-            createFinishedGameAdapter();
-        }
-
-        if(!waitingGameAdapterCreated){
+        if(!GameListResult.getOpponentsTurns().isEmpty() && !waitingGameAdapterCreated){
             createWaitingGameAdapter();
         }
 
-
-        // make sure tha adapters are not null
-        if(availableGameAdapter != null){
-            availableGameAdapter.notifyDataSetChanged();
+        if(!GameListResult.getFinishedGames().isEmpty() && !finishedGameAdapterCreated){
+            createFinishedGameAdapter();
         }
 
-        if(finishedGameAdapter != null){
-            finishedGameAdapter.notifyDataSetChanged();
-        }
-
-        if(waitingGameAdapter != null){
-            waitingGameAdapter.notifyDataSetChanged();
-        }
+        // refresh all views and adapters
+        refreshAvailableGames();
+        refreshFinishedGames();
+        refreshWaitingGames();
     }
 }

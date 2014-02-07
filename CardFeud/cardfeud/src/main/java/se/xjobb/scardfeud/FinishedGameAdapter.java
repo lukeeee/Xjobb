@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
@@ -20,15 +21,14 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
  * Created by Lukas on 2014-01-30.
  */
 public class FinishedGameAdapter extends BaseAdapter{
-    ArrayList<Response> finishedGames;
     Context context;
     View.OnClickListener finListener;
-
+    List<Response> finishedGames;
 
     public FinishedGameAdapter(Context context, View.OnClickListener finListener){
         this.context = context;
-        this.finishedGames = (ArrayList) GameListResult.getFinishedGames();
         this.finListener = finListener;
+        finishedGames = GameListResult.getFinishedGames();
     }
 
     @Override
@@ -44,6 +44,15 @@ public class FinishedGameAdapter extends BaseAdapter{
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+
+        finishedGames.clear();
+        finishedGames = GameListResult.getFinishedGames();
     }
 
     @Override
@@ -64,7 +73,7 @@ public class FinishedGameAdapter extends BaseAdapter{
         ImageView finFlag = (ImageView)view.findViewById(R.id.finFlag);
 
 
-        final Response response = GameListResult.getFinishedGames().get(i);
+        final Response response = finishedGames.get(i);
         try {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());

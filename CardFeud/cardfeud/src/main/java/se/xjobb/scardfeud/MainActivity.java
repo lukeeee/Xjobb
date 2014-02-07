@@ -217,6 +217,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             Log.e(TAG, ex.getMessage());
         }
 
+        // clear all old lists
+        GameListResult.getOpponentsTurns().clear();
+        GameListResult.getMyTurns().clear();
+        GameListResult.getFinishedGames().clear();
+        Log.i("Before Finished", Integer.toString(GameListResult.getMyTurns().size()));
+
         // check which JSON objects that are present
         if(jsonResponse != null){
 
@@ -271,12 +277,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         Start startFrag = (Start) getSupportFragmentManager().findFragmentByTag(startTag);
         if(startFrag != null){
             startFrag.refresh();
-            Log.i("TAG Found ", "Found it");
         }
 
         // check if there are any game invitations
         checkGameInvitations();
-
     }
 
     // used to get current games/invites to games
@@ -299,6 +303,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         }
     }
+
 
     public void showProgressDialog(){
         if(progressDialog == null){
@@ -345,6 +350,14 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             checkUserDetails();
             // update
             getGameLists(false);
+
+            /*
+            // refresh the start fragment
+            Start startFrag = (Start) getSupportFragmentManager().findFragmentByTag(startTag);
+            if(startFrag != null){
+                Log.i("AAAAA", "AAAA");
+                startFrag.refresh();
+            } */
         }
     }
 
@@ -372,17 +385,16 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 startActivity(statsIntent);
                 return true;
             case R.id.action_refresh:
-                Intent intent = getIntent();
+               /* Intent intent = getIntent();
                 overridePendingTransition(0, 0);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 finish();
                 overridePendingTransition(0, 0);
                 startActivity(intent);
-                return true;
-
+                return true; */
                 // refresh
-                //getGameLists(false);
-                //return true;
+                getGameLists(false);
+                return true;
         }
 
         return true;

@@ -3,6 +3,7 @@ package se.xjobb.scardfeud;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
@@ -23,31 +25,38 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
  * Created by Lukas on 2014-01-30.
  */
 public class AvailableGameAdapter extends BaseAdapter {
-    ArrayList<Response> myTurns;
     Context context;
-    private String username;
     ImageView playFlag;
-
+    List<Response> availableGames;
 
 
     public AvailableGameAdapter(Context context){
         this.context = context;
-        this.myTurns = (ArrayList) GameListResult.getMyTurns();
+        availableGames = GameListResult.getMyTurns();
     }
 
     @Override
     public int getCount() {
-        return myTurns.size();
+        return availableGames.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return myTurns.get(i);
+        return availableGames.get(i);
     }
 
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+
+        availableGames.clear();
+        availableGames = GameListResult.getMyTurns();
     }
 
     @Override
@@ -59,7 +68,7 @@ public class AvailableGameAdapter extends BaseAdapter {
 
         Button play = (Button)view.findViewById(R.id.playGameBtn);
         playFlag = (ImageView)view.findViewById(R.id.playFlag);
-        final Response response = GameListResult.getMyTurns().get(i);
+        final Response response = availableGames.get(i);
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
         try {
@@ -80,13 +89,12 @@ public class AvailableGameAdapter extends BaseAdapter {
 
 
         //play.getBackground().setAlpha(200);
-        view.setTag(myTurns.get(i));
+        view.setTag(availableGames.get(i));
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, GameSplash.class);
                 i.putExtra("responseObject", (Parcelable) response);
-                Log.i("INFO", response.chatUnread);
                 context.startActivity(i);
             }
         });

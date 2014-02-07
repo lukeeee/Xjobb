@@ -26,8 +26,13 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
+import org.apache.http.client.HttpResponseException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
+import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
@@ -489,6 +494,7 @@ public class Game extends Activity implements View.OnClickListener {
         helperClass.showErrorDialog(message);
     }
 
+
     // finish method when posting game play
     public void finishRequest(String result){
         Log.i("Result: ", result);
@@ -516,6 +522,30 @@ public class Game extends Activity implements View.OnClickListener {
             // it's not my turn
             disableGamePay();
             waiting.setVisibility(View.VISIBLE);
+
+            /*
+            // get myTurnList
+            List<Response> listMyTurn = GameListResult.getMyTurns();
+            // remove this object
+            listMyTurn.remove(gameResponse);
+            // set list
+            GameListResult.setMyTurns(listMyTurn);
+
+            if(gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
+                // get waitingGameList
+                List<Response> listWaiting = GameListResult.getOpponentsTurns();
+                // add object
+                listWaiting.add(gameResponse);
+                // set list
+                GameListResult.setOpponentsTurns(listWaiting);
+            } else {
+                // get finishedGamesList
+                List<Response> listFinished = GameListResult.getFinishedGames();
+                // add object
+                listFinished.add(gameResponse);
+                // set list
+                GameListResult.setFinishedGames(listFinished);
+            } */
         }
 
         // if the finished time field is set, the game is over and we show a dialog.

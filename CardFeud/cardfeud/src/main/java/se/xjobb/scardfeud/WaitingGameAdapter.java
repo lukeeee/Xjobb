@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
@@ -20,31 +20,40 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
  * Created by Lukas on 2014-01-30.
  */
 public class WaitingGameAdapter extends BaseAdapter {
-    ArrayList<Response> opponentsTurns;
     Context context;
+    List<Response> waitingGames;
     View.OnClickListener waitingListener;
     ImageView waitFlag;
 
 
     public WaitingGameAdapter(Context context, View.OnClickListener waitingListener){
         this.context = context;
-        this.opponentsTurns = (ArrayList) GameListResult.getOpponentsTurns();
         this.waitingListener = waitingListener;
+        waitingGames = GameListResult.getOpponentsTurns();
     }
 
     @Override
     public int getCount() {
-        return opponentsTurns.size();
+        return waitingGames.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return opponentsTurns.get(i);
+        return waitingGames.get(i);
     }
 
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+
+        waitingGames.clear();
+        waitingGames = GameListResult.getOpponentsTurns();
     }
 
     @Override
@@ -61,7 +70,7 @@ public class WaitingGameAdapter extends BaseAdapter {
 
 
         //wait.getBackground().setAlpha(200);
-        Response response = GameListResult.getOpponentsTurns().get(i);
+        Response response = waitingGames.get(i);
         try {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
@@ -76,7 +85,7 @@ public class WaitingGameAdapter extends BaseAdapter {
         }
         wait.setText("for: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         wait.setTypeface(tf);
-        view.setTag(opponentsTurns.get(i));
+        view.setTag(waitingGames.get(i));
         view.setOnClickListener(waitingListener);
 
         return view;
