@@ -20,15 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
-import java.util.List;
-
-import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
@@ -41,9 +39,10 @@ public class Game extends Activity implements View.OnClickListener {
     private Button stat;
     private Button pass;
     private ProgressDialog progressDialog;
-    private ImageView gamecard, youFlag, opponentFlag;
-    private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr;
+    private ImageView gamecard;
+    private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr, youFlag, opponentFlag;
     private TextView waiting;
+    private ViewAnimator tjena;
     private LinearLayout lnrMain;
     private Response gameResponse;  // This object represents a current game
     private final String TAG = "CardFeud JSON Exception: ";
@@ -76,6 +75,7 @@ public class Game extends Activity implements View.OnClickListener {
         arrowlr = (ImageView)findViewById(R.id.arrowlowr);
         arrowpl = (ImageView)findViewById(R.id.arrowpassl);
         arrowpr = (ImageView)findViewById(R.id.arrowpassr);
+        tjena = (ViewAnimator)findViewById(R.id.tjenis);
         //waiting.getBackground().setAlpha(200);
         //high.getBackground().setAlpha(200);
         //low.getBackground().setAlpha(200);
@@ -125,6 +125,7 @@ public class Game extends Activity implements View.OnClickListener {
                 //send RequestToServer "3 = pass"
 
                 SoundsVibration.vibrate(Game.this);
+
                 //SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(3);
                 //disableGamePay();
@@ -268,6 +269,7 @@ public class Game extends Activity implements View.OnClickListener {
         int id = getResources().getIdentifier(cardName, "drawable", getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         gamecard.setImageDrawable(drawable);
+        tjena.showNext();
     }
 
     // used to set the correct card
