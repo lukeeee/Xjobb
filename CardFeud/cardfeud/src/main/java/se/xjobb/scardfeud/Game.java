@@ -52,7 +52,7 @@ public class Game extends Activity implements View.OnClickListener {
     private HelperClass helperClass;
     private int rematchChoice;  // represents the choice for rematch, 1 = Yes 0 = No
     Animation animRotate;
-    private static int Wait_Rotate = 1500;
+    private static int Wait_Rotate = 1000;
 
     /*
     private static final Integer[] mImageIds =
