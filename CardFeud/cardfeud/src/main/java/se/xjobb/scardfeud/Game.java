@@ -11,10 +11,13 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +51,8 @@ public class Game extends Activity implements View.OnClickListener {
     private final String TAG = "CardFeud JSON Exception: ";
     private HelperClass helperClass;
     private int rematchChoice;  // represents the choice for rematch, 1 = Yes 0 = No
+    Animation animRotate;
+    private static int Wait_Rotate = 1500;
 
     /*
     private static final Integer[] mImageIds =
@@ -90,7 +95,13 @@ public class Game extends Activity implements View.OnClickListener {
         pass.setTypeface(tf);
         lnrMain = (LinearLayout)findViewById(R.id.gamelnrMain);
         stat.setOnClickListener(this);
+        waiting.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
+
+        animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
+        animRotate.setDuration(1000);
+
+        //animRotate.setAnimationListener(this);
 
         final ActionBar actionBar = getActionBar();
         actionBar.setLogo(R.drawable.icon);
@@ -332,6 +343,17 @@ public class Game extends Activity implements View.OnClickListener {
            });
            dialog.show();
     }
+        else if (view == waiting){
+           waiting.startAnimation(animRotate);
+           new Handler().postDelayed(new Runnable() {
+               @Override
+               public void run() {
+
+                   waiting.clearAnimation();
+               }}, Wait_Rotate);
+       //TODO }
+
+       }
 
     }
 
@@ -579,4 +601,18 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
+    /* TODO @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
+    }*/
 }
