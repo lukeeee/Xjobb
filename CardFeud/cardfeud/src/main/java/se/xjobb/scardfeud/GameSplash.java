@@ -1,7 +1,5 @@
 package se.xjobb.scardfeud;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -11,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +29,7 @@ public class GameSplash extends Activity {
     ImageView youFlag, oppFlag;
     Response response;
     ArrayList<Response> myTurns;
+    Animation blink, bounce;
 
 
     @Override
@@ -54,6 +55,8 @@ public class GameSplash extends Activity {
 
             youFlag.setImageDrawable(drawable);
         }
+        blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
+        bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
 
 
 
@@ -91,12 +94,14 @@ public class GameSplash extends Activity {
         anim2.setDuration(2500);
         anim2.start();*/
         v_char.animate().x(230f).setDuration(1500);
+        youFlag.animate().x(70f).setDuration(1500);
         s_char.animate().x(360f).setDuration(1500);
+        oppFlag.animate().x(530f).setDuration(1500);
 
 
         you.setVisibility(View.INVISIBLE);
-        opponent.setVisibility(View.INVISIBLE);
         youFlag.setVisibility(View.INVISIBLE);
+        opponent.setVisibility(View.INVISIBLE);
         oppFlag.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -106,15 +111,15 @@ public class GameSplash extends Activity {
                 opponent.setVisibility(View.VISIBLE);
                 youFlag.setVisibility(View.VISIBLE);
                 oppFlag.setVisibility(View.VISIBLE);
-                PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 220f);
+                youFlag.startAnimation(blink);
+                oppFlag.startAnimation(blink);
+                you.startAnimation(bounce);
+                opponent.startAnimation(bounce);
+                /*PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 220f);
                 PropertyValuesHolder pvhY1 = PropertyValuesHolder.ofFloat("y", 280f);
                 ObjectAnimator.ofPropertyValuesHolder(you, pvhX1, pvhY1).setDuration(1000).start();
-                PropertyValuesHolder pvhX2 = PropertyValuesHolder.ofFloat("x", 90f);
-                PropertyValuesHolder pvhY2 = PropertyValuesHolder.ofFloat("y", 295f);
-                ObjectAnimator.ofPropertyValuesHolder(youFlag, pvhX2, pvhY2).setDuration(1000).start();
 
-                opponent.animate().x(150f).y(850f).setDuration(1000);
-                oppFlag.animate().x(500f).y(880f).setDuration(1000);
+                opponent.animate().x(150f).y(850f).setDuration(1000);*/
                 SoundsVibration.start(R.raw.tada, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);

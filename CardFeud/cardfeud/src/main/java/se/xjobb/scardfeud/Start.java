@@ -107,11 +107,11 @@ public class Start extends Fragment implements View.OnClickListener {
 
         if (view == newGame){
             newGame.startAnimation(jiggle);
+            SoundsVibration.vibrate(getActivity().getApplicationContext());
             //plus.startAnimation(jiggle);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-            SoundsVibration.vibrate(getActivity().getApplicationContext());
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
                 }}, START_ACTIVITY_DELAY);

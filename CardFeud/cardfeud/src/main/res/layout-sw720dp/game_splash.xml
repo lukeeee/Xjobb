@@ -11,20 +11,15 @@
         android:layout_height="fill_parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="120sp"
+            android:textSize="100sp"
             android:text="hej hej"
             android:textColor="#fff"
             android:layout_marginTop="320dp"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="80dp"
             android:id="@+id/you_text"
             android:paddingRight="80dp"/>
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="330dp"
-            android:id="@+id/yourFlag"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,6 +29,12 @@
             android:id="@+id/v_char"
             android:layout_marginLeft="220dp"
             android:layout_marginTop="500dp"/>
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="480dp"
+            android:layout_marginLeft="80dp"
+            android:id="@+id/yourFlag"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,23 +43,23 @@
             android:textColor="#fff"
             android:id="@+id/s_char"
             android:layout_marginLeft="360dp"
-            android:layout_marginTop="560dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="120sp"
-            android:text="tjo tjo"
-            android:textColor="#fff"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="800dp"
-            android:id="@+id/opponent_text"/>
+            android:layout_marginTop="560dp" />
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="820dp"
-            android:layout_marginLeft="640dp"
+            android:layout_marginTop="700dp"
+            android:layout_marginLeft="560dp"
             android:id="@+id/oppFlag"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="100sp"
+            android:text="tjo tjo"
+            android:textColor="#fff"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="850dp"
+            android:id="@+id/opponent_text"/>
+
     </RelativeLayout>
 
 
