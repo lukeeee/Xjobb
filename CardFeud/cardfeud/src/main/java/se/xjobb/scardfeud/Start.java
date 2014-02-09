@@ -5,11 +5,14 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,13 +33,15 @@ public class Start extends Fragment implements View.OnClickListener {
     private String username;
     private String myCountry;
     LinearLayout games, waiting, finGames;
-    ImageView flag;
+    ImageView flag,plus;
     FinishedGameAdapter finishedGameAdapter;
     WaitingGameAdapter waitingGameAdapter;
     AvailableGameAdapter availableGameAdapter;
     boolean finishedGameAdapterCreated = false;
     boolean waitingGameAdapterCreated = false;
     boolean availableGameAdapterCreated = false;
+    Animation jiggle;
+    private static int START_ACTIVITY_DELAY = 400;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +56,7 @@ public class Start extends Fragment implements View.OnClickListener {
         waiting = (LinearLayout)rootView.findViewById(R.id.waiting);
         finGames = (LinearLayout)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
+        plus = (ImageView)rootView.findViewById(R.id.plus);
         //user.getBackground().setAlpha(200);
         //gamestext.getBackground().setAlpha(200);
         //fin_Gamestext.getBackground().setAlpha(200);
@@ -70,6 +76,7 @@ public class Start extends Fragment implements View.OnClickListener {
         fin_Gamestext.setTypeface(tf);
 
         user.setText(username);
+        jiggle = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.jiggle);
 
         // set the correct flag, if not found set default
         try {
@@ -99,9 +106,15 @@ public class Start extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         if (view == newGame){
+            newGame.startAnimation(jiggle);
+            //plus.startAnimation(jiggle);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
             SoundsVibration.vibrate(getActivity().getApplicationContext());
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
+                }}, START_ACTIVITY_DELAY);
         } else if (view == flag){
             flag.animate().translationX(210);
 
