@@ -30,6 +30,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
 import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.Posters.PostGameList;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
@@ -216,7 +217,7 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
-    private void animate(){
+    public void animate(){
         waiting.setVisibility(View.VISIBLE);
         high.animate().translationX(710).setDuration(1000);
         low.animate().translationX(-710).setDuration(1000);
@@ -418,6 +419,61 @@ public class Game extends Activity implements View.OnClickListener {
         }
     }
 
+    // used to send a gameList request to update current games
+    private void sendGameListUpdateRequest(){
+        if(!helperClass.isConnected()){
+            helperClass.showNetworkErrorDialog();
+            // add retry dialog
+        } else {
+            // send request for a rematch
+            PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true);
+            postGameList.postRequest();
+        }
+    }
+
+    // save the result json string to shared prefs
+    public void saveResult(String result){
+        try{
+            getSharedPreferences(helperClass.getPrefsResult(), MODE_PRIVATE).edit().putString("gameListResult", result).commit();
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+    }
+
+    // show error feedback and offer retry on game rematch post
+    public void showErrorGameListDialog(String message){
+        progressDialog = null;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("An Error has occurred!");
+        builder.setMessage(message);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send request to the server again.
+                sendGameListUpdateRequest();
+                dialog.dismiss();
+            }
+        });
+
+        /*   This dialog choice is disabled to prevent cheating
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // just close the dialog
+                dialog.dismiss();
+            }
+        });  */
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+
+
     // show a popup with game result, and the possibility to request a rematch
     private void showGameFinishedPopUp(final Response response){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -524,10 +580,36 @@ public class Game extends Activity implements View.OnClickListener {
     }
 
     // show error feedback on game play
-    public void showErrorDialog(String message){
+    public void showErrorDialog(String message, String gamePlayChoice){
         progressDialog = null;
         disableGamePay();
-        helperClass.showErrorDialog(message);
+
+        final int choice = Integer.parseInt(gamePlayChoice);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("An Error has occurred!");
+        builder.setMessage(message);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send request to the server again. (with the same choice as before)
+                sendRequestToServer(choice);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // just close the dialog
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
 
@@ -553,35 +635,16 @@ public class Game extends Activity implements View.OnClickListener {
 
         if(gameResponse.myTurn.contains("1")){
             // it is my turn
+            // hide the progress dialog here
+            hideProgressDialog();
 
             enableGamePlay();
         } else {
-            // it's not my turn
-            animate();
+            // it's not my turn, don't hide progress here (since we will hide it later when the other request is done)
+            // send request to update gameList
+            sendGameListUpdateRequest();
 
-            /*
-            // get myTurnList
-            List<Response> listMyTurn = GameListResult.getMyTurns();
-            // remove this object
-            listMyTurn.remove(gameResponse);
-            // set list
-            GameListResult.setMyTurns(listMyTurn);
-
-            if(gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
-                // get waitingGameList
-                List<Response> listWaiting = GameListResult.getOpponentsTurns();
-                // add object
-                listWaiting.add(gameResponse);
-                // set list
-                GameListResult.setOpponentsTurns(listWaiting);
-            } else {
-                // get finishedGamesList
-                List<Response> listFinished = GameListResult.getFinishedGames();
-                // add object
-                listFinished.add(gameResponse);
-                // set list
-                GameListResult.setFinishedGames(listFinished);
-            } */
+            // animate(); is now called from the poster class
         }
 
         // if the finished time field is set, the game is over and we show a dialog.

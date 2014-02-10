@@ -323,6 +323,18 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         helperClass.showErrorDialog(message);
     }
 
+
+    // save the result json string to shared prefs
+    public void saveResult(String result){
+        try{
+            getSharedPreferences(helperClass.getPrefsResult(), MODE_PRIVATE).edit().putString("gameListResult", result).commit();
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+    }
+
+
     // set tag for start fragment
     public static void setStartTag(String tag){
         startTag = tag;
@@ -343,16 +355,22 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             // if onCreate was not called
             checkUserDetails();
             // update
-            getGameLists(false);
+            // read the result json string from shared prefs
+            String storedResult = null;
+            try{
+                storedResult = getSharedPreferences(helperClass.getPrefsResult(), MODE_PRIVATE).getString("gameListResult", null);
+            } catch (Exception ex){
+                Log.e("Exception SharedPrefs: ", ex.getMessage());
+            }
 
-            /*
-            // refresh the start fragment
-            Start startFrag = (Start) getSupportFragmentManager().findFragmentByTag(startTag);
-            if(startFrag != null){
-                Log.i("AAAAA", "AAAA");
-                startFrag.refresh();
-            } */
+            // read in stored values from gameList request sent in "Game"
+            if(storedResult != null){
+                finishRequest(storedResult);
+            }
         }
+
+        //OLD: getGameLists(false);
+
     }
 
     @Override

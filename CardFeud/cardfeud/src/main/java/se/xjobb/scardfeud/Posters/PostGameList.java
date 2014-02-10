@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
 
+import se.xjobb.scardfeud.Game;
 import se.xjobb.scardfeud.MainActivity;
 import se.xjobb.scardfeud.NewGame;
 import se.xjobb.scardfeud.Search;
@@ -29,6 +30,7 @@ public class PostGameList {
     private String userId;
     private String userIdentifier;
     private MainActivity callback;
+    private Game gameCallback;
     private boolean refresh = false;
 
     public PostGameList(int userId, String userIdentifier, MainActivity callback){
@@ -41,6 +43,14 @@ public class PostGameList {
         this.userId = Integer.toString(userId);
         this.userIdentifier = userIdentifier;
         this.callback = callback;
+        this.refresh = refresh;
+    }
+
+    // if we are refreshing from "Game"
+    public PostGameList(int userId, String userIdentifier, Game gameCallback, boolean refresh){
+        this.userId = Integer.toString(userId);
+        this.userIdentifier = userIdentifier;
+        this.gameCallback = gameCallback;
         this.refresh = refresh;
     }
 
@@ -122,10 +132,8 @@ public class PostGameList {
             return postGameRequest(urls[0]);
         }
 
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result){
 
+        private void feedBackMain(String result){
             if(result.contains("Did not work!")){
                 callback.hideProgressDialog();
                 callback.showErrorDialog("An error has occurred! Please try again.");
@@ -143,8 +151,45 @@ public class PostGameList {
                 callback.showErrorDialog("The server is not responding! Please try again.");
             } else {
                 callback.hideProgressDialog();
+                callback.saveResult(result);
                 callback.finishRequest(result);
             }
+        }
+
+        private void feedBackGame(String result){
+            if(result.contains("Did not work!")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorGameListDialog("An error has occurred! Please try again.");
+            } else if (result.contains("Server Error")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorGameListDialog("A server error has occurred! Please try again.");
+            } else if (result.contains("Wrong account details")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorGameListDialog("Account Error! Please try logging in again.");
+            } else if (result.contains("Something went wrong")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorGameListDialog("We are sorry something went wrong! Please try again.");
+            } else if (result.contains("Server Timeout")){
+                gameCallback.hideProgressDialog();
+                gameCallback.showErrorGameListDialog("The server is not responding! Please try again.");
+            } else {
+                gameCallback.hideProgressDialog();
+                gameCallback.saveResult(result);
+                gameCallback.animate();
+            }
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result){
+            if(callback != null){
+                // if the request was from "MainActivity"
+                feedBackMain(result);
+            } else if(gameCallback != null){
+                // if the request was from "Game"
+                feedBackGame(result);
+            }
+
         }
     }
 

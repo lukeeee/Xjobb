@@ -35,6 +35,3 @@ public class CustomComparator implements Comparator<Response> {
         }
     }
 }
-
-
-//    "lastevent": "2014-01-31 13:59:34",

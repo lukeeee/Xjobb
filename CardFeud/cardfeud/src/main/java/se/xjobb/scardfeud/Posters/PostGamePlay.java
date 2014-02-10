@@ -119,25 +119,24 @@ public class PostGamePlay {
             return postGamePlayRequest(urls[0]);
         }
 
-        // process result for Search class
+        // process result
         private void feedBackGame(String result, Game gameCallback){
             if(result.contains("Did not work!")){
                 gameCallback.hideProgressDialog();
-                gameCallback.showErrorDialog("An error has occurred! Please try again.");
+                gameCallback.showErrorDialog("An error has occurred! Please try again.", choice);
             } else if (result.contains("Server Error")){
                 gameCallback.hideProgressDialog();
-                gameCallback.showErrorDialog("A server error has occurred! Please try again.");
+                gameCallback.showErrorDialog("A server error has occurred! Please try again.", choice);
             } else if (result.contains("Wrong account details")){
                 gameCallback.hideProgressDialog();
-                gameCallback.showErrorDialog("Account Error! Please try logging in again.");
+                gameCallback.showErrorDialog("Account Error! Please try logging in again.", choice);
             } else if (result.contains("Something went wrong")){
                 gameCallback.hideProgressDialog();
-                gameCallback.showErrorDialog("We are sorry something went wrong! Please try again.");
+                gameCallback.showErrorDialog("We are sorry something went wrong! Please try again.", choice);
             } else if (result.contains("Server Timeout")){
                 gameCallback.hideProgressDialog();
-                gameCallback.showErrorDialog("The server is not responding! Please try again.");
+                gameCallback.showErrorDialog("The server is not responding! Please try again.", choice);
             } else {
-                gameCallback.hideProgressDialog();
                 gameCallback.finishRequest(result);
             }
         }
