@@ -49,8 +49,8 @@ public class PostDeviceId {
 
             // timeout parameters
             HttpParams httpParams = new BasicHttpParams();
-            int timeoutConnection = 3000;
-            int timeoutSocket = 5000;
+            int timeoutConnection = 4000;
+            int timeoutSocket = 6000;
             HttpConnectionParams.setConnectionTimeout(httpParams, timeoutConnection);
             HttpConnectionParams.setSoTimeout(httpParams, timeoutSocket);
 

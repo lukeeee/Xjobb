@@ -89,7 +89,7 @@ public class PostGameStart {
             // dialog is already showing...  (MainActivity shows it)
         } else if (gameCallback != null){
             new HttpAsyncTask().execute("http://dev.cardfeud.com/app/index.php?f=gamestart&user=" + userId + "&sid=" + userIdentifier +"&opponent=" + opponent + "&rematch=" + rematch +"&res=json");
-            gameCallback.showProgressDialog();;
+            gameCallback.showProgressDialog();
         }
     }
 
@@ -101,8 +101,8 @@ public class PostGameStart {
 
             // timeout parameters
             HttpParams httpParams = new BasicHttpParams();
-            int timeoutConnection = 3000;
-            int timeoutSocket = 5000;
+            int timeoutConnection = 4000;
+            int timeoutSocket = 6000;
             HttpConnectionParams.setConnectionTimeout(httpParams, timeoutConnection);
             HttpConnectionParams.setSoTimeout(httpParams, timeoutSocket);
 
@@ -250,8 +250,7 @@ public class PostGameStart {
                 gameCallback.hideProgressDialog();
                 gameCallback.showErrorRematchDialog("The server is not responding! Please try again.");
             } else if(result.contains("Request Sent")){
-                gameCallback.hideProgressDialog();
-                gameCallback.finishRematchRequest();
+                gameCallback.gameOverListUpdate();
             }
         }
 

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
@@ -40,6 +41,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     HelperClass helperClass = new HelperClass(this);
     private final String TAG = "CardFeud JSON Exception: ";
     private List<InvitationResponse> invitationResponsesList;
+    private List<AlertDialog> alertDialogs;
     private static String startTag;
 
     /**
@@ -97,6 +99,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                             .setTabListener(this));
         }
 
+        alertDialogs = new ArrayList<AlertDialog>(); // keeping track of all showing invitation dialogs
+
         checkUserDetails();
         getGameLists(false);
         isCreated = true;
@@ -134,6 +138,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     // show a popup with the new game invitation
     private void showGameInvitationPopUp(final Response response){
+        AlertDialog alertDialog;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Game Invitation");
         dialog.setIcon(R.drawable.invite);
@@ -162,8 +167,9 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
                 dialog.cancel();
             }
         });
-        dialog.show();
-
+        alertDialog = dialog.create();
+        alertDialog.show();
+        alertDialogs.add(alertDialog); // add this dialog to a list with dialogs
     }
 
     // check if there are any game invitations
@@ -376,7 +382,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     @Override
     protected void onPause(){
         super.onPause();
-        //isCreated = false;
+        // check if there was any invitation dialogs from before and dismiss them (they will be loaded again in onResume)
+        for(AlertDialog alertDialog : alertDialogs){
+            alertDialog.dismiss();
+        }
+        // the clear list
+        alertDialogs.clear();
     }
 
     @Override

@@ -215,10 +215,10 @@ public class Login extends Activity implements View.OnClickListener{
     public void showProgressDialog(){
         if(progressDialog == null){
             // display dialog when loading data
-            progressDialog = ProgressDialog.show(this, "Loading", "Please Wait...", true, false);
+            progressDialog = ProgressDialog.show(this, null, "Loading...", true, false);
         } else {
             progressDialog.cancel();
-            progressDialog = ProgressDialog.show(this, "Loading", "Please Wait...", true, false);
+            progressDialog = ProgressDialog.show(this, null, "Loading...", true, false);
         }
     }
 

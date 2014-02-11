@@ -32,6 +32,7 @@ public class PostGameList {
     private MainActivity callback;
     private Game gameCallback;
     private boolean refresh = false;
+    private boolean gameOver = false;
 
     public PostGameList(int userId, String userIdentifier, MainActivity callback){
         this.userId = Integer.toString(userId);
@@ -47,12 +48,16 @@ public class PostGameList {
     }
 
     // if we are refreshing from "Game"
-    public PostGameList(int userId, String userIdentifier, Game gameCallback, boolean refresh){
+    public PostGameList(int userId, String userIdentifier, Game gameCallback, boolean refresh, boolean gameOver){
         this.userId = Integer.toString(userId);
         this.userIdentifier = userIdentifier;
-        this.gameCallback = gameCallback;
         this.refresh = refresh;
+        this.gameCallback = gameCallback;
+        this.gameOver = gameOver;
     }
+
+
+
 
     public void postRequest(){
 
@@ -75,8 +80,8 @@ public class PostGameList {
 
             // timeout parameters
             HttpParams httpParams = new BasicHttpParams();
-            int timeoutConnection = 3000;
-            int timeoutSocket = 5000;
+            int timeoutConnection = 4000;
+            int timeoutSocket = 6000;
             HttpConnectionParams.setConnectionTimeout(httpParams, timeoutConnection);
             HttpConnectionParams.setSoTimeout(httpParams, timeoutSocket);
 
@@ -173,9 +178,19 @@ public class PostGameList {
                 gameCallback.hideProgressDialog();
                 gameCallback.showErrorGameListDialog("The server is not responding! Please try again.");
             } else {
-                gameCallback.hideProgressDialog();
-                gameCallback.saveResult(result);
-                gameCallback.animate();
+
+                if(!gameOver){
+                    // game is in progress
+                    gameCallback.hideProgressDialog();
+                    gameCallback.saveResult(result);
+                    gameCallback.animate();
+                } else {
+                    // the game is finished
+                    gameCallback.hideProgressDialog();
+                    gameCallback.saveResult(result);
+                    gameCallback.finishRematchRequest();
+                }
+
             }
         }
 
@@ -189,7 +204,6 @@ public class PostGameList {
                 // if the request was from "Game"
                 feedBackGame(result);
             }
-
         }
     }
 

@@ -89,6 +89,12 @@ public class Start extends Fragment implements View.OnClickListener {
             int id = getResources().getIdentifier("globe", "drawable", getActivity().getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             flag.setImageDrawable(drawable);
+        } catch (NullPointerException ex){
+            // fixes a bug on startup
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getActivity().getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
         }
 
         createAvailableGameAdapter();

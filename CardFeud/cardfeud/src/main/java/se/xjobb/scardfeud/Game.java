@@ -48,18 +48,12 @@ public class Game extends Activity implements View.OnClickListener {
     private ViewAnimator tjena;
     private LinearLayout lnrMain;
     private Response gameResponse;  // This object represents a current game
+    int rematchChoice = 0;
     private final String TAG = "CardFeud JSON Exception: ";
     private HelperClass helperClass;
-    private int rematchChoice;  // represents the choice for rematch, 1 = Yes 0 = No
+    private boolean gameOver;
     Animation animRotate;
 
-    /*
-    private static final Integer[] mImageIds =
-            { R.drawable.c_1, R.drawable.c_8, R.drawable.c_5,R.drawable.c_4,R.drawable.c_11,R.drawable.c_13,R.drawable.c_9,R.drawable.c_12,R.drawable.c_7,
-                    R.drawable.c_6,R.drawable.c_10,R.drawable.c_3,R.drawable.c_2,R.drawable.s_1, R.drawable.s_8, R.drawable.s_5,R.drawable.s_4,R.drawable.s_11,R.drawable.s_13,R.drawable.s_9,R.drawable.s_12,R.drawable.s_7,
-                    R.drawable.s_6,R.drawable.s_10,R.drawable.s_3,R.drawable.s_2,R.drawable.h_1, R.drawable.h_8, R.drawable.h_5,R.drawable.h_4,R.drawable.h_11,R.drawable.h_13,R.drawable.h_9,R.drawable.h_12,R.drawable.h_7,
-                    R.drawable.h_6,R.drawable.h_10,R.drawable.h_3,R.drawable.h_2,R.drawable.d_1, R.drawable.d_8, R.drawable.d_5,R.drawable.d_4,R.drawable.d_11,R.drawable.d_13,R.drawable.d_9,R.drawable.d_12,R.drawable.d_7,
-                    R.drawable.d_6,R.drawable.d_10,R.drawable.d_3,R.drawable.d_2}; */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -413,21 +407,28 @@ public class Game extends Activity implements View.OnClickListener {
             helperClass.showNetworkErrorDialog();
             // add retry dialog
         } else {
-            // send request for a rematch
-            PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.opponentId, rematchChoice, this);
+            // send request for a rematch  ( 1 = new match )
+            PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), gameResponse.opponentId, 1, this);
             postGameStart.postRequest();
         }
     }
 
     // used to send a gameList request to update current games
-    private void sendGameListUpdateRequest(){
+    private void sendGameListUpdateRequest(boolean gameIsOver){
         if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
             // add retry dialog
         } else {
-            // send request for a rematch
-            PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true);
-            postGameList.postRequest();
+            // if the game is in progress
+            if(!gameIsOver){
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, false);
+                postGameList.postRequest();
+            } else {
+                // the game is in finished
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, true);
+                postGameList.postRequest();
+            }
+
         }
     }
 
@@ -454,19 +455,17 @@ public class Game extends Activity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send request to the server again.
-                sendGameListUpdateRequest();
+                sendGameListUpdateRequest(gameOver);
                 dialog.dismiss();
             }
         });
-
-        /*   This dialog choice is disabled to prevent cheating
         builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // just close the dialog
                 dialog.dismiss();
             }
-        });  */
+        });
 
         AlertDialog alert = builder.create();
         alert.show();
@@ -508,8 +507,7 @@ public class Game extends Activity implements View.OnClickListener {
 
         dialog.setPositiveButton("Rematch", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // rematch
-                rematchChoice = 1;
+                // rematch, gameList will be refreshed in this request as well
                 sendRematchPost();
                 dialog.cancel();
             }
@@ -524,11 +522,23 @@ public class Game extends Activity implements View.OnClickListener {
             }
         });
         */
+
         dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // rematch
-                rematchChoice = 0;
-                sendRematchPost();
+                // if the user clicks the cancel button
+                // show progressDialog and update gameList
+                showProgressDialog();
+                sendGameListUpdateRequest(true);
+                dialog.cancel();
+            }
+        });
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // if the user clicks "Back" button on phone or choose the cancel button
+                // show progressDialog and update gameList
+                showProgressDialog();
+                sendGameListUpdateRequest(true);
                 dialog.cancel();
             }
         });
@@ -549,6 +559,7 @@ public class Game extends Activity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send request to the server again.
+                rematchChoice = 1;
                 sendRematchPost();
                 dialog.dismiss();
             }
@@ -565,6 +576,13 @@ public class Game extends Activity implements View.OnClickListener {
         alert.show();
     }
 
+
+    // update gameList's when the game is finished
+    public void gameOverListUpdate(){
+        // true == gameOver
+        sendGameListUpdateRequest(gameOver);
+    }
+
     // finish method when posting rematch data
     public void finishRematchRequest(){
         if(rematchChoice == 1){
@@ -572,10 +590,6 @@ public class Game extends Activity implements View.OnClickListener {
             Toast.makeText(this, "Rematch request sent!", 1000).show();
         }
 
-        //Intent i = new Intent(getBaseContext(), MainActivity.class);
-        //startActivity(i);
-
-        //
         this.finish();
     }
 
@@ -641,8 +655,9 @@ public class Game extends Activity implements View.OnClickListener {
             enableGamePlay();
         } else {
             // it's not my turn, don't hide progress here (since we will hide it later when the other request is done)
-            // send request to update gameList
-            sendGameListUpdateRequest();
+            // send request to update gameList, game is in progress (gameOver == false)
+            gameOver = false;
+            sendGameListUpdateRequest(gameOver);
 
             // animate(); is now called from the poster class
         }
@@ -651,6 +666,7 @@ public class Game extends Activity implements View.OnClickListener {
         if(!gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
             // the game is over
             disableGamePay();
+            gameOver = true;
             showGameFinishedPopUp(gameResponse);
         }
     }
