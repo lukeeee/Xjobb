@@ -7,5 +7,5 @@
         android:title="@string/action_about"
         android:orderInCategory="100"
         android:icon="@drawable/ic_action_about"
-        se.xjobb.scardfeud:showAsAction="always"/>
+        android:showAsAction="always"/>
 </menu>
