@@ -52,7 +52,7 @@ public class Game extends Activity implements View.OnClickListener {
     private final String TAG = "CardFeud JSON Exception: ";
     private HelperClass helperClass;
     private boolean gameOver;
-    Animation animRotate;
+    Animation animRotate, Bounce;
 
 
     @Override
@@ -74,11 +74,7 @@ public class Game extends Activity implements View.OnClickListener {
         arrowpl = (ImageView)findViewById(R.id.arrowpassl);
         arrowpr = (ImageView)findViewById(R.id.arrowpassr);
         tjena = (ViewAnimator)findViewById(R.id.tjenis);
-        //waiting.getBackground().setAlpha(200);
-        //high.getBackground().setAlpha(200);
-        //low.getBackground().setAlpha(200);
-        //stat.getBackground().setAlpha(200);
-        //pass.getBackground().setAlpha(200);
+
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         waiting.setTypeface(tf);
@@ -92,6 +88,7 @@ public class Game extends Activity implements View.OnClickListener {
         waiting.setVisibility(View.INVISIBLE);
 
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
+        Bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
 
         //animRotate.setAnimationListener(this);
 
@@ -272,7 +269,8 @@ public class Game extends Activity implements View.OnClickListener {
         int id = getResources().getIdentifier(cardName, "drawable", getPackageName());
         Drawable drawable = getResources().getDrawable(id);
         gamecard.setImageDrawable(drawable);
-        tjena.showNext();
+        tjena.startAnimation(Bounce);
+        //SoundsVibration.start(R.raw.drop, Game.this);
     }
 
     // used to set the correct card
