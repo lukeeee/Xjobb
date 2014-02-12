@@ -9,85 +9,85 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#005500"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:textSize="20sp"
-                android:background="@drawable/button"
-                android:textStyle="bold"
-                android:id="@+id/gamestat"/>
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:id="@+id/youflag"
-                android:layout_marginLeft="1dp"
-                android:layout_marginTop="3dp"/>
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:id="@+id/opponentFlag"
-                android:layout_marginLeft="254dp"
-                android:layout_marginTop="3dp"/>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="7dp"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
-            <ViewAnimator
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:animateFirstView="false"
-                android:id="@+id/tjenis">
-                <ImageView
-                    android:layout_width="160dp"
-                    android:layout_height="230sp"
-                    android:id="@+id/gamecards"/>
-            </ViewAnimator>
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="7dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#005500"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:textStyle="bold"
+            android:id="@+id/gamestat"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/youflag"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="9dp"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/opponentFlag"
+            android:layout_marginLeft="254dp"
+            android:layout_marginTop="9dp"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <ViewAnimator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:animateFirstView="false"
+        android:id="@+id/tjenis">
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="230sp"
+            android:id="@+id/gamecards"/>
+        </ViewAnimator>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="7dp"/>
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center">
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="55dp"
-                android:textSize="40sp"
-                android:text="Higher"
-                android:background="@drawable/button"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:id="@+id/higher"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:textSize="40sp"
+        android:text="Higher"
+        android:background="@drawable/button"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:id="@+id/higher"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_high"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowhigl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_high"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowhigr"/>
 
         </RelativeLayout>
@@ -101,7 +101,7 @@
             android:gravity="center">
             <Button
                 android:layout_width="300dp"
-                android:layout_height="55dp"
+                android:layout_height="60dp"
                 android:textSize="40sp"
                 android:text="Lower"
                 android:background="@drawable/button"
@@ -113,20 +113,20 @@
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_low"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowlowl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_low"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowlowr"/>
 
         </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="5dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
             android:gravity="center">
             <Button
                 android:layout_width="300dp"
-                android:layout_height="55dp"
+                android:layout_height="60dp"
                 android:textSize="40sp"
                 android:text="Pass"
                 android:background="@drawable/button"
@@ -146,20 +146,28 @@
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_pass_l"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowpassl"/>
             <ImageView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/arrow_pass_r"
                 android:layout_marginLeft="235dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="9dp"
                 android:id="@+id/arrowpassr"/>
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gamelnrMain"
+            android:layout_gravity="center|bottom">
 
+        </LinearLayout>
         <TextView
-            android:layout_marginTop="-175dp"
+            android:layout_marginTop="-250dp"
             android:layout_width="300dp"
             android:layout_height="140dp"
             android:background="@drawable/button"
@@ -169,17 +177,8 @@
             android:textStyle="bold"
             android:text="Waiting for opponent"
             android:id="@+id/waiting"/>
-        <LinearLayout
-            android:layout_marginTop="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/gamelnrMain"
-            android:layout_gravity="center|bottom"
-            android:gravity="bottom">
-
-        </LinearLayout>
 
 
-    </LinearLayout>
-</ScrollView>
+
+</LinearLayout>
+    </ScrollView>

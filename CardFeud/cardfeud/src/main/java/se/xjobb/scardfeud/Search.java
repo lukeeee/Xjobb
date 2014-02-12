@@ -2,7 +2,9 @@ package se.xjobb.scardfeud;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -62,6 +64,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         searchText.setTypeface(tf);
+
 
         //Determine screen size
         if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
@@ -205,16 +208,35 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
     }
 
 
+
     @Override
     public void onClick(View v) {
         if(v == foundUserButton){
-            // challenge found player
-            challengePlayer();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Search.this);
+            dialog.setTitle("Challenge Player");
+            dialog.setIcon(R.drawable.ic_action_help_d);
+            dialog.setMessage("Do You want to Challenge " + foundUser.getUsername() + "?\nOr add " + foundUser.getUsername() + " to your Friends?");
+            dialog.setPositiveButton("Challenge", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    challengePlayer();
+                }
+            });
+            dialog.setNeutralButton("+ Friend", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
         }
+            // challenge found player
+            //challengePlayer();
+        
     }
-
-
-    @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
