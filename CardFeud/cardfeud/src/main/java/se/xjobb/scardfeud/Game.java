@@ -1,8 +1,8 @@
 package se.xjobb.scardfeud;
 
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.animation.ObjectAnimator;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -35,8 +35,9 @@ import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
-public class Game extends Activity implements View.OnClickListener {
+public class Game extends ActionBarActivity implements View.OnClickListener {
 
+    private ActionBar actionBar;
     private Button high;
     private Button low;
     private Button stat;
@@ -92,7 +93,7 @@ public class Game extends Activity implements View.OnClickListener {
 
         //animRotate.setAnimationListener(this);
 
-        final ActionBar actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
 

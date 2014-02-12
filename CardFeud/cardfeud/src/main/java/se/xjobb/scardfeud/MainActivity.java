@@ -1,17 +1,20 @@
 package se.xjobb.scardfeud;
 
-import android.app.ActionBar;
+//import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
+//import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+//import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,14 +28,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+
+    private ActionBar actionBar;
     String[] menuTitle = {"Play","Rules"};
     int[] menuImage = new int[]
             {R.drawable.ic_play, R.drawable.ic_rules};
@@ -64,7 +68,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         setContentView(R.layout.activity_main);
 
         // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -430,18 +434,20 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
 
     @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
     }
 
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+
     }
 
     /**

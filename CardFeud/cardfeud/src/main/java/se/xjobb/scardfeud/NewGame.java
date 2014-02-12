@@ -1,8 +1,7 @@
 package se.xjobb.scardfeud;
 
-
-import android.app.ActionBar;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -22,7 +21,9 @@ import com.google.android.gms.ads.AdView;
 
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
-public class NewGame extends Activity implements View.OnClickListener{
+public class NewGame extends ActionBarActivity implements View.OnClickListener{
+
+    private ActionBar actionBar;
     TextView user;
     TextView friends;
     Button search_player;
@@ -65,7 +66,7 @@ public class NewGame extends Activity implements View.OnClickListener{
         helperClass = new HelperClass(this);
         setFlag = true;
         setUserFlag();
-        final ActionBar actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
 

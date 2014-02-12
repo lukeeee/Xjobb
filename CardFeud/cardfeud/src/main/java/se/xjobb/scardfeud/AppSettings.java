@@ -1,7 +1,7 @@
 package se.xjobb.scardfeud;
 
-import android.app.ActionBar;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,8 +28,9 @@ import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 
 
-public class AppSettings extends Activity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
+public class AppSettings extends ActionBarActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
+    private ActionBar actionBar;
     private Button logoutButton;
     private HelperClass helperClass;
     private String username, myCountry;
@@ -99,7 +100,7 @@ public class AppSettings extends Activity implements View.OnClickListener, Compo
         setSwitchStatus();
         setVersionText();
 
-        final ActionBar actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
         runOnUiThread(new Runnable() {

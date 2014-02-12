@@ -1,7 +1,7 @@
 package se.xjobb.scardfeud;
 
-import android.app.ActionBar;
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -26,8 +26,9 @@ import se.xjobb.scardfeud.Posters.PostSearch;
 /**
  * Created by Svempa on 2014-01-16.
  */
-public class Search extends Activity implements View.OnClickListener, EditText.OnEditorActionListener{
+public class Search extends ActionBarActivity implements View.OnClickListener, EditText.OnEditorActionListener{
 
+    private ActionBar actionBar;
     private View linearLayout;
     private View relativeLayout;
     private ImageView foundUserImage;
@@ -56,7 +57,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
         searchText.setOnEditorActionListener(this);
         helperClass = new HelperClass(this);
-        final ActionBar actionBar = getActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
         Typeface tf = Typeface.createFromAsset(getAssets(),
@@ -229,7 +230,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
             }
 
             // trim all trailing whitespaces
-            searchQuery.trim();
+            searchQuery = searchQuery.trim();
             // replace all whitespaces in search string with url appropriate char
             searchQuery = searchQuery.replace(" ", "%20");
 
@@ -240,7 +241,7 @@ public class Search extends Activity implements View.OnClickListener, EditText.O
 
             if(User.UserDetails.getUserId() != 0 && User.UserDetails.getIdentifier() != null
                     && searchQuery != null){
-                if(helperClass.isConnected() != true){
+                if(!helperClass.isConnected()){
                     helperClass.showNetworkErrorDialog();
                     // add retry to dialog.
                 } else {

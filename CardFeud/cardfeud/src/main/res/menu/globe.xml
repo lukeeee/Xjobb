@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:se.xjobb.scardfeud="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_globe"
+<item android:id="@+id/action_globe"
         android:title="@string/action_globe"
         android:orderInCategory="100"
         android:icon="@drawable/globe_icon"
-        android:showAsAction="always"/>
+        se.xjobb.scardfeud:showAsAction="always"/>
 
 </menu>
