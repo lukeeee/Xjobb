@@ -117,11 +117,11 @@ public class GameSplash extends Activity {
                 oppFlag.startAnimation(blink);
                 //you.startAnimation(bounce);
                 //opponent.startAnimation(bounce);
-                PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 220f);
+                PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 150f);
                 PropertyValuesHolder pvhY1 = PropertyValuesHolder.ofFloat("y", 280f);
                 ObjectAnimator.ofPropertyValuesHolder(you, pvhX1, pvhY1).setDuration(1000).start();
 
-                opponent.animate().x(150f).y(900f).setDuration(1000);
+                opponent.animate().x(180f).y(900f).setDuration(1000);
                 SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
