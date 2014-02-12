@@ -64,7 +64,7 @@ public class FinishedGameAdapter extends BaseAdapter{
         Drawable win = context.getResources().getDrawable(R.drawable.game_win);
         Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
         int[] lost = new int[]
-                {R.drawable.btn_wait};
+                {R.drawable.btn_lost};
 
 
         if (view == null) {
