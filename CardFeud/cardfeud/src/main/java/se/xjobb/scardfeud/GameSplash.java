@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -95,10 +96,13 @@ public class GameSplash extends Activity {
         ObjectAnimator anim2 = ObjectAnimator.ofFloat(s_char, "alpha", 0f, 1f);
         anim2.setDuration(2500);
         anim2.start();*/
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
         v_char.animate().x(230f).setDuration(1500);
         youFlag.animate().x(70f).setDuration(1500);
         s_char.animate().x(360f).setDuration(1500);
         oppFlag.animate().x(530f).setDuration(1500);
+        }
 
 
         you.setVisibility(View.INVISIBLE);
@@ -117,11 +121,14 @@ public class GameSplash extends Activity {
                 oppFlag.startAnimation(blink);
                 //you.startAnimation(bounce);
                 //opponent.startAnimation(bounce);
+                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
                 PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 150f);
                 PropertyValuesHolder pvhY1 = PropertyValuesHolder.ofFloat("y", 280f);
                 ObjectAnimator.ofPropertyValuesHolder(you, pvhX1, pvhY1).setDuration(1000).start();
 
                 opponent.animate().x(180f).y(900f).setDuration(1000);
+                }
                 SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
