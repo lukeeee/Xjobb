@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -210,19 +211,29 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void animate(){
-        waiting.setVisibility(View.VISIBLE);
-        high.animate().translationX(710).setDuration(1000);
-        low.animate().translationX(-710).setDuration(1000);
-        pass.animate().translationX(710).setDuration(1000);
-        arrowhl.animate().translationX(710).setDuration(1000);
-        arrowpl.animate().translationX(710).setDuration(1000);
-        arrowhr.animate().translationX(710).setDuration(1000);
-        arrowpr.animate().translationX(710).setDuration(1000);
-        arrowlr.animate().translationX(-710).setDuration(1000);
-        arrowll.animate().translationX(-710).setDuration(1000);
-        ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
-        anim.setDuration(2000);
-        anim.start();
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
+            waiting.setVisibility(View.VISIBLE);
+            high.animate().translationX(710).setDuration(1000);
+            low.animate().translationX(-710).setDuration(1000);
+            pass.animate().translationX(710).setDuration(1000);
+            arrowhl.animate().translationX(710).setDuration(1000);
+            arrowpl.animate().translationX(710).setDuration(1000);
+            arrowhr.animate().translationX(710).setDuration(1000);
+            arrowpr.animate().translationX(710).setDuration(1000);
+            arrowlr.animate().translationX(-710).setDuration(1000);
+            arrowll.animate().translationX(-710).setDuration(1000);
+            ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
+            anim.setDuration(2000);
+            anim.start();
+        } else{
+            waiting.setVisibility(View.VISIBLE);
+            high.setVisibility(View.INVISIBLE);
+            low.setVisibility(View.INVISIBLE);
+            pass.setVisibility(View.INVISIBLE);
+            // do something for phones running an SDK before froyo
+        }
+
     }
 
 

@@ -53,7 +53,6 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         //random_player.getBackground().setAlpha(200);
         search_player.setOnClickListener(this);
         random_player.setOnClickListener(this);
-        flag.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         userCountry = User.UserDetails.getUserCountryCode();
         Typeface tf = Typeface.createFromAsset(getAssets(),
@@ -178,9 +177,6 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         } else if(v == random_player){
             SoundsVibration.vibrate(NewGame.this);
             challengeRandomPlayer();
-        } else if (v == flag){
-            flag.animate().translationX(210).setDuration(500);
-
         }
     }
 
