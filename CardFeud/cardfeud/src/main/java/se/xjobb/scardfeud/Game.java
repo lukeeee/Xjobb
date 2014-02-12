@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -209,8 +210,8 @@ public class Game extends Activity implements View.OnClickListener {
     }
 
     public void animate(){
-        /*int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){*/
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
             waiting.setVisibility(View.VISIBLE);
             high.animate().translationX(710).setDuration(1000);
             low.animate().translationX(-710).setDuration(1000);
@@ -224,12 +225,13 @@ public class Game extends Activity implements View.OnClickListener {
             ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
             anim.setDuration(2000);
             anim.start();
-        /*} else{
+        } else{
+            waiting.setVisibility(View.VISIBLE);
             high.setVisibility(View.INVISIBLE);
             low.setVisibility(View.INVISIBLE);
             pass.setVisibility(View.INVISIBLE);
             // do something for phones running an SDK before froyo
-        }*/
+        }
 
     }
 

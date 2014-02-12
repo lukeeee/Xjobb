@@ -3,12 +3,11 @@ package se.xjobb.scardfeud;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -103,9 +101,12 @@ public class AvailableGameAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //vibration onclick and animations
                 SoundsVibration.vibrate(context);
+                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
                 play.animate().translationX(710).setDuration(600);
                 playFlag.animate().translationX(710).setDuration(600);
                 arrow_game.animate().translationX(710).setDuration(600);
+                }
                 //delay the gamestart for animations
                 new Handler().postDelayed(new Runnable() {
                     @Override
