@@ -1,5 +1,7 @@
 package se.xjobb.scardfeud;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -113,14 +115,14 @@ public class GameSplash extends Activity {
                 oppFlag.setVisibility(View.VISIBLE);
                 youFlag.startAnimation(blink);
                 oppFlag.startAnimation(blink);
-                you.startAnimation(bounce);
-                opponent.startAnimation(bounce);
-                /*PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 220f);
+                //you.startAnimation(bounce);
+                //opponent.startAnimation(bounce);
+                PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 220f);
                 PropertyValuesHolder pvhY1 = PropertyValuesHolder.ofFloat("y", 280f);
                 ObjectAnimator.ofPropertyValuesHolder(you, pvhX1, pvhY1).setDuration(1000).start();
 
-                opponent.animate().x(150f).y(850f).setDuration(1000);*/
-                SoundsVibration.start(R.raw.tada, GameSplash.this);
+                opponent.animate().x(150f).y(900f).setDuration(1000);
+                SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
         new Handler().postDelayed(new Runnable() {
