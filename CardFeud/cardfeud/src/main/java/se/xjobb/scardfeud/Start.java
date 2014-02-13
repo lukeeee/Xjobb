@@ -56,7 +56,6 @@ public class Start extends Fragment implements View.OnClickListener {
         waiting = (LinearLayout)rootView.findViewById(R.id.waiting);
         finGames = (LinearLayout)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
-        plus = (ImageView)rootView.findViewById(R.id.plus);
         //user.getBackground().setAlpha(200);
         //gamestext.getBackground().setAlpha(200);
         //fin_Gamestext.getBackground().setAlpha(200);

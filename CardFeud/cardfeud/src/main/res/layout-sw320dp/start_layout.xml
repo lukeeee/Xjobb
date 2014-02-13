@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_width="600dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
@@ -20,7 +20,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_height="15dp"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,19 +29,19 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:textSize="40dp"
-                    android:paddingLeft="80dp"
-                    android:paddingRight="80dp"
+                    android:layout_height="30dp"
+                    android:textSize="20dp"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
                     android:gravity="center"
                     android:textStyle="bold"
                     android:background="@drawable/btn_game"
                     android:id="@+id/user"/>
 
                 <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginTop="1dp"
                     android:id="@+id/myFlag"/>
             </RelativeLayout>
             <RelativeLayout
@@ -52,33 +52,34 @@
 
                 <Button
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="90dp"
                     android:text="Start A New Game"
-                    android:textSize="50sp"
+                    android:textSize="25sp"
                     android:background="@drawable/btn_newgame"
                     android:textStyle="bold"
-                    android:paddingRight="120dp"
+                    android:paddingRight="60dp"
                     android:id="@+id/Btn_newGame"/>
                 <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginLeft="470dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="235dp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/plus"/>
             </RelativeLayout>
+
             <RelativeLayout
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="30dp"
                     android:text="Your turn"
-                    android:textSize="40dp"
-                    android:paddingLeft="40dp"
-                    android:paddingRight="40dp"
-                    android:layout_marginLeft="20dp"
+                    android:textSize="20sp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:background="@drawable/btn_game"
                     android:id="@+id/games_text"
@@ -95,27 +96,27 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="10dp"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="30dp"
                     android:text="Waiting"
-                    android:textSize="40dp"
-                    android:paddingLeft="60dp"
-                    android:paddingRight="58dp"
+                    android:textSize="20sp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="29dp"
 
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:background="@drawable/shape_waittext"
                     android:id="@+id/waiting_text"
                     android:textColor="#fff200"/>
             </RelativeLayout>
             <LinearLayout
-                android:layout_width="600dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:id="@+id/waiting"
@@ -123,27 +124,27 @@
                 android:layout_alignParentTop="true"/>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="10dp"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="30dp"
                     android:text="Finished"
-                    android:textSize="40dp"
-                    android:paddingLeft="52dp"
-                    android:paddingRight="50dp"
+                    android:textSize="20sp"
+                    android:paddingLeft="26dp"
+                    android:paddingRight="25dp"
 
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:textStyle="bold"
                     android:background="@drawable/btn_game"
                     android:id="@+id/fin_game_text"
                     android:textColor="#c00"/>
             </RelativeLayout>
             <LinearLayout
-                android:layout_width="600dp"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:orientation="vertical"
@@ -151,10 +152,9 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="4dp"/>
+                android:layout_height="2dp"/>
 
         </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
-
