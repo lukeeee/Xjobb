@@ -7,5 +7,4 @@
         android:orderInCategory="100"
         android:icon="@drawable/globe_icon"
         se.xjobb.scardfeud:showAsAction="always"/>
-
 </menu>

@@ -536,9 +536,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // if the user clicks the cancel button
-                // show progressDialog and update gameList
-                showProgressDialog();
-                sendGameListUpdateRequest(true);
                 dialog.cancel();
             }
         });

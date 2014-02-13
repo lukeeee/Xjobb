@@ -1,6 +1,6 @@
 package se.xjobb.scardfeud;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -33,7 +33,7 @@ import se.xjobb.scardfeud.Posters.PostLogin;
 /**
  * Created by Svempa on 2013-12-16.
  */
-public class Login extends Activity implements View.OnClickListener{
+public class Login extends ActionBarActivity implements View.OnClickListener{
 
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -132,7 +132,7 @@ public class Login extends Activity implements View.OnClickListener{
     private void showGooglePlayServicesAvailabilityErrorDialog(
         final int connectionStatusCode) {
 
-        final Activity activity = this;
+        final ActionBarActivity activity = this;
 
         runOnUiThread(new Runnable() {
             public void run() {

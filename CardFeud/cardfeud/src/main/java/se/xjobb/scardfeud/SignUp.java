@@ -1,6 +1,6 @@
 package se.xjobb.scardfeud;
 
-import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import se.xjobb.scardfeud.Posters.PostSignUp;
 
 
-public class SignUp extends Activity implements View.OnClickListener {
+public class SignUp extends ActionBarActivity implements View.OnClickListener {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
@@ -332,7 +332,7 @@ public class SignUp extends Activity implements View.OnClickListener {
 
 
             // check input
-            if(validateInput(username, password, passwordRepeat, countryCode) != false){
+            if(validateInput(username, password, passwordRepeat, countryCode)){
 
                 username = username.trim();
                 password = password.trim();
