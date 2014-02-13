@@ -14,13 +14,12 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:textSize="50sp"
             android:text="hej hej"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:gravity="center"
             android:id="@+id/you_text"
-            android:layout_marginRight="10dp"
             android:paddingRight="40dp"/>
         <TextView
             android:layout_width="match_parent"
@@ -30,14 +29,9 @@
             android:textColor="#fff"
             android:gravity="center"
             android:id="@+id/v_char"
-            android:layout_marginRight="55dp"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="80dp"/>
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="60dp"
-            android:id="@+id/yourFlag"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,23 +40,17 @@
             android:textColor="#fff"
             android:id="@+id/s_char"
             android:gravity="center"
-            android:layout_marginLeft="55dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginTop="100dp" />
-        <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginLeft="260dp"
-            android:id="@+id/oppFlag"/>
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:textSize="50sp"
             android:gravity="center"
             android:text="tjo tjo"
-            android:textColor="#fff"
+            android:textColor="#000"
             android:layout_marginTop="215dp"
-            android:layout_marginLeft="10dp"
             android:id="@+id/opponent_text"/>
 
         </RelativeLayout>

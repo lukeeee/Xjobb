@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,7 +25,6 @@ public class GameSplash extends Activity {
     private static int NAME_FLOAT = 1500;
     TextView you, opponent,v_char,s_char;
     String username;
-    ImageView youFlag, oppFlag;
     Response response;
     ArrayList<Response> myTurns;
     Animation blink, bounce,move_in;
@@ -42,21 +39,18 @@ public class GameSplash extends Activity {
         v_char = (TextView)findViewById(R.id.v_char);
         s_char = (TextView)findViewById(R.id.s_char);
         username = User.UserDetails.getUsername();
-        youFlag = (ImageView)findViewById(R.id.yourFlag);
-        oppFlag = (ImageView)findViewById(R.id.oppFlag);
         try {
             String country = User.UserDetails.getUserCountryCode().toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
-            youFlag.setImageDrawable(drawable);
+            you.setBackgroundDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = getResources().getIdentifier("globe", "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
 
-            youFlag.setImageDrawable(drawable);
+            you.setBackgroundDrawable(drawable);
         }
-        blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
         bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
         move_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_move);
 
@@ -70,13 +64,13 @@ public class GameSplash extends Activity {
             String country = response.opponentName.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
-            oppFlag.setImageDrawable(drawable);
+            opponent.setBackgroundDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = getResources().getIdentifier("globe", "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
 
-            oppFlag.setImageDrawable(drawable);
+            opponent.setBackgroundDrawable(drawable);
         }
 
         you.setText(username);
@@ -101,27 +95,15 @@ public class GameSplash extends Activity {
 
 
         you.setVisibility(View.INVISIBLE);
-        youFlag.setVisibility(View.INVISIBLE);
         opponent.setVisibility(View.INVISIBLE);
-        oppFlag.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //floating animations on text and imageviews after specified time
                 you.setVisibility(View.VISIBLE);
                 opponent.setVisibility(View.VISIBLE);
-                youFlag.setVisibility(View.VISIBLE);
-                oppFlag.setVisibility(View.VISIBLE);
-                youFlag.startAnimation(blink);
-                oppFlag.startAnimation(blink);
-                //you.startAnimation(bounce);
-                //opponent.startAnimation(bounce);
-                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-                if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
                 you.startAnimation(bounce);
                 opponent.startAnimation(bounce);
-
-                }
                 SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
