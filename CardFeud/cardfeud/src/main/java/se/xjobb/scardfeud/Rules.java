@@ -3,6 +3,7 @@ package se.xjobb.scardfeud;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,9 @@ import com.google.android.gms.ads.AdView;
  * Created by Lukas on 2014-01-08.
  */
 public class Rules extends Fragment {
-TextView rules;
-LinearLayout rulesLnrMain;
+    TextView rules;
+    LinearLayout rulesLnrMain;
+    private String myCountry;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,19 +33,25 @@ LinearLayout rulesLnrMain;
         rules.setTypeface(tf);
 
         rulesLnrMain = (LinearLayout)rootView.findViewById(R.id.rulesLnrMain);
+        myCountry = User.UserDetails.getUserCountryCode();
 
+        if(myCountry.equals("US")){
+            Log.i("hallo", myCountry);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AdView adView = new AdView(getActivity());
+                    adView.setAdUnitId("0445b7141d9d4e1b");
+                    adView.setAdSize(AdSize.BANNER);
+                    AdRequest.Builder builder = new AdRequest.Builder();
+                    builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                    adView.loadAd(builder.build());
+                    rulesLnrMain.addView(adView);
+                }
+            });
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AdView adView = new AdView(getActivity());
-                adView.setAdUnitId("0445b7141d9d4e1b");
-                adView.setAdSize(AdSize.BANNER);
-                AdRequest.Builder builder = new AdRequest.Builder();
-                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-                adView.loadAd(builder.build());
-                rulesLnrMain.addView(adView);
-            }
-        }); return rootView;
+        }else{
+
+        } return rootView;
     }
 }

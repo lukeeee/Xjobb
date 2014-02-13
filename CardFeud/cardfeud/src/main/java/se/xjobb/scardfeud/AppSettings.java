@@ -97,18 +97,26 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AdView adView = new AdView(AppSettings.this);
-                adView.setAdUnitId("0445b7141d9d4e1b");
-                adView.setAdSize(AdSize.BANNER);
-                AdRequest.Builder builder = new AdRequest.Builder();
-                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-                adView.loadAd(builder.build());
-                lnrMain.addView(adView);
-            }
-        });
+
+        Log.i("hallo", myCountry);
+
+        if(myCountry.equals("US")){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AdView adView = new AdView(AppSettings.this);
+                    adView.setAdUnitId("0445b7141d9d4e1b");
+                    adView.setAdSize(AdSize.BANNER);
+                    AdRequest.Builder builder = new AdRequest.Builder();
+                    builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                    adView.loadAd(builder.build());
+                    lnrMain.addView(adView);
+                }
+            });
+
+        }else{
+
+        }
     }
 
     @Override
