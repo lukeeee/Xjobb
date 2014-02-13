@@ -27,7 +27,7 @@ public class GameSplash extends Activity {
     String username;
     Response response;
     ArrayList<Response> myTurns;
-    Animation blink, bounce,move_in;
+    Animation blink, bounce1,bounce2,move_in;
 
 
     @Override
@@ -51,7 +51,8 @@ public class GameSplash extends Activity {
 
             you.setBackgroundDrawable(drawable);
         }
-        bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
+        bounce1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
+        bounce2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
         move_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_move);
 
 
@@ -82,22 +83,22 @@ public class GameSplash extends Activity {
         v_char.setTypeface(tf);
         opponent.setTypeface(tf);
 
+
+        you.startAnimation(bounce1);
+        SoundsVibration.start(R.raw.drop, GameSplash.this);
         //animation float in
         v_char.startAnimation(move_in);
         s_char.startAnimation(move_in);
 
 
 
-        you.setVisibility(View.INVISIBLE);
         opponent.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //bounce animations on text and imageviews after specified time
-                you.setVisibility(View.VISIBLE);
                 opponent.setVisibility(View.VISIBLE);
-                you.startAnimation(bounce);
-                opponent.startAnimation(bounce);
+                opponent.startAnimation(bounce2);
                 SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
