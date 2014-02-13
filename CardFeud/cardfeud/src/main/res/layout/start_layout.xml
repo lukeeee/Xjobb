@@ -20,7 +20,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="15dp"/>
+        android:layout_height="5dp"/>
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="70dp"
                 android:text="Start A New Game"
                 android:textSize="25sp"
                 android:background="@drawable/btn_newgame"
@@ -60,15 +60,15 @@
                 android:paddingRight="60dp"
                 android:id="@+id/Btn_newGame"/>
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="235dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="240dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/plus"/>
         </RelativeLayout>
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left">

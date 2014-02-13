@@ -69,6 +69,8 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
 
+        if(userCountry.equals("US")){
+
     runOnUiThread(new Runnable() {
         @Override
         public void run() {
@@ -81,6 +83,9 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
             lnrMain.addView(adView);
         }
     });
+    }else{
+
+        }
     }
 
     @Override
