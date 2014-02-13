@@ -1,8 +1,5 @@
 package se.xjobb.scardfeud;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,8 +7,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,7 +52,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     private final String TAG = "CardFeud JSON Exception: ";
     private HelperClass helperClass;
     private boolean gameOver;
-    Animation animRotate, Bounce;
+    Animation animRotate, Bounce, move_right,move_left,fade_in;
 
 
     @Override
@@ -91,6 +89,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         Bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
+        move_right = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_r);
+        move_left = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_left);
+        fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
 
         //animRotate.setAnimationListener(this);
 
@@ -211,28 +212,18 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     }
 
     public void animate(){
-        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
-            waiting.setVisibility(View.VISIBLE);
-            high.animate().translationX(710).setDuration(1000);
-            low.animate().translationX(-710).setDuration(1000);
-            pass.animate().translationX(710).setDuration(1000);
-            arrowhl.animate().translationX(710).setDuration(1000);
-            arrowpl.animate().translationX(710).setDuration(1000);
-            arrowhr.animate().translationX(710).setDuration(1000);
-            arrowpr.animate().translationX(710).setDuration(1000);
-            arrowlr.animate().translationX(-710).setDuration(1000);
-            arrowll.animate().translationX(-710).setDuration(1000);
-            ObjectAnimator anim = ObjectAnimator.ofFloat(waiting, "alpha", 0f, 1f);
-            anim.setDuration(2000);
-            anim.start();
-        } else{
-            waiting.setVisibility(View.VISIBLE);
-            high.setVisibility(View.INVISIBLE);
-            low.setVisibility(View.INVISIBLE);
-            pass.setVisibility(View.INVISIBLE);
-            // do something for phones running an SDK before froyo
-        }
+        waiting.setVisibility(View.VISIBLE);
+        high.startAnimation(move_right);
+        pass.startAnimation(move_right);
+        arrowhl.startAnimation(move_right);
+        arrowpl.startAnimation(move_right);
+        arrowhr.startAnimation(move_right);
+        arrowpr.startAnimation(move_right);
+        waiting.startAnimation(fade_in);
+        low.startAnimation(move_left);
+        arrowlr.startAnimation(move_left);
+        arrowll.startAnimation(move_left);
+
 
     }
 

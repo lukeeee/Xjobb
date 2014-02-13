@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -71,6 +72,8 @@ public class AvailableGameAdapter extends BaseAdapter {
         playFlag = (ImageView)view.findViewById(R.id.playFlag);
         final Response response = availableGames.get(i);
         final ImageView playFlag = (ImageView)view.findViewById(R.id.playFlag);
+        final Animation move;
+        move = AnimationUtils.loadAnimation(context, R.anim.move_right);
         //new font on text
 
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
@@ -91,7 +94,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         play.setText("against: " + response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n"+response.lastEventTime);
         play.setTypeface(tf);
 
-        final int START_ACTIVITY_DELAY = 300;
+        final int START_ACTIVITY_DELAY = 500;
         final ImageView arrow_game = (ImageView)view.findViewById(R.id.arrow_game);
 
         //play.getBackground().setAlpha(200);
@@ -101,19 +104,18 @@ public class AvailableGameAdapter extends BaseAdapter {
             public void onClick(View v) {
                 //vibration onclick and animations
                 SoundsVibration.vibrate(context);
-                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-                if (currentapiVersion >= Build.VERSION_CODES.HONEYCOMB_MR1){
-                play.animate().translationX(710).setDuration(600);
-                playFlag.animate().translationX(710).setDuration(600);
-                arrow_game.animate().translationX(710).setDuration(600);
-                }
+
+                play.startAnimation(move);
+                playFlag.startAnimation(move);
+                arrow_game.startAnimation(move);
+
                 //delay the gamestart for animations
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                Intent i = new Intent(context, GameSplash.class);
-                i.putExtra("responseObject", (Parcelable) response);
-                context.startActivity(i);
+                        Intent i = new Intent(context, GameSplash.class);
+                        i.putExtra("responseObject", (Parcelable) response);
+                        context.startActivity(i);
                     }}, START_ACTIVITY_DELAY);
             }
         });
