@@ -22,6 +22,7 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
  */
 public class GameSplash extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
+    private static int FIRST_FLOAT = 500;
     private static int NAME_FLOAT = 1500;
     TextView you, opponent,v_char,s_char;
     String username;
@@ -58,7 +59,7 @@ public class GameSplash extends Activity {
 
 
         Intent i = getIntent();
-       // i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
+        // i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
         response = (Response) i.getParcelableExtra("responseObject");
         opponent.setText(response.opponentName);
         try {
@@ -82,13 +83,23 @@ public class GameSplash extends Activity {
         s_char.setTypeface(tf);
         v_char.setTypeface(tf);
         opponent.setTypeface(tf);
+        you.setVisibility(View.INVISIBLE);
+        s_char.setVisibility(View.INVISIBLE);
+        v_char.setVisibility(View.INVISIBLE);
 
-
-        you.startAnimation(bounce1);
-        SoundsVibration.start(R.raw.drop, GameSplash.this);
-        //animation float in
-        v_char.startAnimation(move_in);
-        s_char.startAnimation(move_in);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                you.setVisibility(View.VISIBLE);
+                s_char.setVisibility(View.VISIBLE);
+                v_char.setVisibility(View.VISIBLE);
+                you.startAnimation(bounce1);
+                SoundsVibration.start(R.raw.drop, GameSplash.this);
+                //animation float in
+                v_char.startAnimation(move_in);
+                s_char.startAnimation(move_in);
+                onStart();
+            }}, FIRST_FLOAT);
 
 
 
