@@ -33,6 +33,7 @@ public class PostGameList {
     private Game gameCallback;
     private boolean refresh = false;
     private boolean gameOver = false;
+    private boolean gamePlayRefresh = false;
 
     public PostGameList(int userId, String userIdentifier, MainActivity callback){
         this.userId = Integer.toString(userId);
@@ -48,12 +49,13 @@ public class PostGameList {
     }
 
     // if we are refreshing from "Game"
-    public PostGameList(int userId, String userIdentifier, Game gameCallback, boolean refresh, boolean gameOver){
+    public PostGameList(int userId, String userIdentifier, Game gameCallback, boolean refresh, boolean gameOver, boolean gamePlayRefresh){
         this.userId = Integer.toString(userId);
         this.userIdentifier = userIdentifier;
         this.refresh = refresh;
         this.gameCallback = gameCallback;
         this.gameOver = gameOver;
+        this.gamePlayRefresh = gamePlayRefresh;
     }
 
 
@@ -179,18 +181,22 @@ public class PostGameList {
                 gameCallback.showErrorGameListDialog("The server is not responding! Please try again.");
             } else {
 
-                if(!gameOver){
+                if(!gameOver && !gamePlayRefresh){
                     // game is in progress
                     gameCallback.hideProgressDialog();
                     gameCallback.saveResult(result);
                     gameCallback.animate();
+                } else if(gamePlayRefresh) {
+                    // we are refreshing in gamePlay
+                    gameCallback.hideProgressDialog();
+                    gameCallback.saveResult(result);
+                    gameCallback.enableGamePlay();
                 } else {
                     // the game is finished
                     gameCallback.hideProgressDialog();
                     gameCallback.saveResult(result);
                     gameCallback.finishRematchRequest();
                 }
-
             }
         }
 

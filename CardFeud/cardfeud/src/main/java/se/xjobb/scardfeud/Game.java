@@ -30,6 +30,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
@@ -55,6 +58,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     private HelperClass helperClass;
     private boolean gameOver;
     private boolean isCreated = false;
+    private boolean refresh = false;
+    List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
 
 
@@ -89,6 +94,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         stat.setOnClickListener(this);
         waiting.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
+
+        alertDialogs = new ArrayList<AlertDialog>(); // keeping track of all showing invitation dialogs
 
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         Bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
@@ -227,13 +234,11 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         low.startAnimation(move_left);
         arrowlr.startAnimation(move_left);
         arrowll.startAnimation(move_left);
-
-
     }
 
 
     // used to disable game buttons
-    private void disableGamePay(){
+    private void disableGamePlay(){
         high.setVisibility(View.INVISIBLE);
         low.setVisibility(View.INVISIBLE);
         pass.setVisibility(View.INVISIBLE);
@@ -243,38 +248,36 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         arrowpr.setVisibility(View.INVISIBLE);
         arrowlr.setVisibility(View.INVISIBLE);
         arrowll.setVisibility(View.INVISIBLE);
+        waiting.clearAnimation();
 
         // TODO handle if pass is disabled in JSON response
 
     }
 
     // used to enable game buttons
-    private void enableGamePlay(){
+    public void enableGamePlay(){
         high.setVisibility(View.VISIBLE);
+        high.clearAnimation();
         low.setVisibility(View.VISIBLE);
+        low.clearAnimation();
         pass.setVisibility(View.VISIBLE);
-        waiting.setVisibility(View.INVISIBLE);
+        pass.clearAnimation();
+        waiting.setVisibility(View.GONE);
+        waiting.clearAnimation();
         arrowhl.setVisibility(View.VISIBLE);
+        arrowhl.clearAnimation();
         arrowpl.setVisibility(View.VISIBLE);
+        arrowpl.clearAnimation();
         arrowhr.setVisibility(View.VISIBLE);
+        arrowhr.clearAnimation();
         arrowpr.setVisibility(View.VISIBLE);
+        arrowpr.clearAnimation();
         arrowlr.setVisibility(View.VISIBLE);
+        arrowlr.clearAnimation();
         arrowll.setVisibility(View.VISIBLE);
+        arrowll.clearAnimation();
 
         // TODO handle if pass is disabled in JSON response
-
-    }
-    private void enableGamePlayRefresh(){
-        waiting.setVisibility(View.INVISIBLE);
-        high.startAnimation(move_left);
-        pass.startAnimation(move_left);
-        arrowhl.startAnimation(move_left);
-        arrowpl.startAnimation(move_left);
-        arrowhr.startAnimation(move_left);
-        arrowpr.startAnimation(move_left);
-        low.startAnimation(move_right);
-        arrowlr.startAnimation(move_right);
-        arrowll.startAnimation(move_right);
     }
 
     // used to update stats
@@ -282,23 +285,37 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
     }
 
+    // used to decode bitmap
+    private Bitmap decodeFile(int resourceId){
+        try {
+            //Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeResource(getResources(), resourceId, o);
+
+            //The new size we want to scale to
+            final int REQUIRED_SIZE = 140;  //180
+
+            //Find the correct scale value. It should be the power of 2.
+            int scale=1;
+            while(o.outWidth/scale/2>=REQUIRED_SIZE && o.outHeight/scale/2>=REQUIRED_SIZE)
+                scale*=2;
+
+            //Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize=scale;
+            return BitmapFactory.decodeResource(getResources(), resourceId, o2);
+        } catch (Resources.NotFoundException e) {}
+        return null;
+    }
 
     // used to select the correct card from resources, with cardName and then set that card
     private void setCardFromResources(String cardName){
         int id = getResources().getIdentifier(cardName, "drawable", getPackageName());
 
-        // use BitMapFactory to load image more memory efficient
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inSampleSize = 1;  // 16 is the worst quality possible with least memory, 1 is original
-        o.inDither = false;   //Disable Dithering mode
-        o.inPurgeable = true; //Tell to gc that whether it needs free memory, the Bitmap can be cleared
-        Bitmap bitmapCard =BitmapFactory.decodeResource(getResources(),id, o);
-
-        gamecard.setImageBitmap(bitmapCard);
+        gamecard.setImageBitmap(decodeFile(id));
         animationView.startAnimation(Bounce);
 
-        //OLD: Drawable drawable = getResources().getDrawable(id);
-        //OLD: gamecard.setImageDrawable(drawable);
         //SoundsVibration.start(R.raw.drop, Game.this);
     }
 
@@ -384,12 +401,24 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         // update the game if onCreate was not called.
         // So if screen goes black i game and we "start" the screen again game will refresh
         if(!isCreated){
+            refresh = true;
             sendRequestToServer(0);
         }
 
         isCreated = false;
         // we don't need to show animations here.. sendGameListUpdateRequest(true);
 
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        // check if there was any invitation dialogs from before and dismiss them (they will be loaded again in onResume)
+        for(AlertDialog alertDialog : alertDialogs){
+            alertDialog.dismiss();
+        }
+        // the clear list
+        alertDialogs.clear();
     }
 
     @Override
@@ -419,6 +448,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 return true;
             case R.id.action_refresh:
                 // refresh
+                refresh = true;
                 sendRequestToServer(0);
                 return true;
         }
@@ -451,18 +481,22 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     }
 
     // used to send a gameList request to update current games
-    private void sendGameListUpdateRequest(boolean gameIsOver){
+    private void sendGameListUpdateRequest(boolean gameIsOver, boolean gameRefresh){
         if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
             // add retry dialog
         } else {
             // if the game is in progress
-            if(!gameIsOver){
-                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, false);
+            if(!gameIsOver && !gameRefresh){
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, false, false);
+                postGameList.postRequest();
+            } else if(gameRefresh){
+                // game refresh
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, false, true);
                 postGameList.postRequest();
             } else {
                 // the game is in finished
-                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, true);
+                PostGameList postGameList = new PostGameList(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), this, true, true, false);
                 postGameList.postRequest();
             }
 
@@ -492,7 +526,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send request to the server again.
-                sendGameListUpdateRequest(gameOver);
+                sendGameListUpdateRequest(gameOver, false);
                 dialog.dismiss();
             }
         });
@@ -512,6 +546,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
     // show a popup with game result, and the possibility to request a rematch
     private void showGameFinishedPopUp(final Response response){
+        AlertDialog alertDialog;
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Game Finished");
         dialog.setIcon(R.drawable.invite);
@@ -566,7 +601,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 // if the user clicks the cancel button
                 // show progressDialog and update gameList
                 showProgressDialog();
-                sendGameListUpdateRequest(true);
+                sendGameListUpdateRequest(true, false);
                 dialog.dismiss();
             }
         });
@@ -576,11 +611,13 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 // if the user clicks "Back" button on phone
                 // show progressDialog and update gameList
                 showProgressDialog();
-                sendGameListUpdateRequest(true);
+                sendGameListUpdateRequest(true, false);
                 dialog.cancel();
             }
         });
-        dialog.show();
+        alertDialog = dialog.create();
+        alertDialog.show();
+        alertDialogs.add(alertDialog); // add this dialog to a list with dialogs
 
     }
 
@@ -618,7 +655,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     // update gameList's when the game is finished
     public void gameOverListUpdate(){
         // true == gameOver
-        sendGameListUpdateRequest(gameOver);
+        sendGameListUpdateRequest(gameOver, false);
     }
 
     // finish method when posting rematch data
@@ -634,7 +671,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     // show error feedback on game play
     public void showErrorDialog(String message, String gamePlayChoice){
         progressDialog = null;
-        disableGamePay();
+        disableGamePlay();
 
         final int choice = Integer.parseInt(gamePlayChoice);
 
@@ -687,15 +724,26 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         if(gameResponse.myTurn.contains("1")){
             // it is my turn
-            // hide the progress dialog here
-            hideProgressDialog();
+            // if we are not refreshing
+            if(!refresh){
+                // hide the progress dialog here
+                hideProgressDialog();
+                enableGamePlay();
+            } else {
+                // we used the refresh function
+                // it's not my turn, don't hide progress here (since we will hide it later when the other request is done)
+                // send request to update gameList, game is in progress (gameOver == false)
+                gameOver = false;
+                sendGameListUpdateRequest(gameOver, true);
+                refresh = false;
+            }
 
-            enableGamePlay();
+
         } else {
             // it's not my turn, don't hide progress here (since we will hide it later when the other request is done)
             // send request to update gameList, game is in progress (gameOver == false)
             gameOver = false;
-            sendGameListUpdateRequest(gameOver);
+            sendGameListUpdateRequest(gameOver, false);
 
             // animate(); is now called from the poster class
         }
@@ -703,7 +751,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         // if the finished time field is set, the game is over and we show a dialog.
         if(!gameResponse.finishedTime.contentEquals("0000-00-00 00:00:00")){
             // the game is over
-            disableGamePay();
+            disableGamePlay();
             gameOver = true;
             showGameFinishedPopUp(gameResponse);
         }
