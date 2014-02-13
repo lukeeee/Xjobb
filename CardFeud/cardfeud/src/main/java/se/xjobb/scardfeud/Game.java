@@ -522,6 +522,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 // rematch, gameList will be refreshed in this request as well
                 sendRematchPost();
+                // use .dismiss() here so the .cancel code won't be called
                 dialog.dismiss();
             }
         });
@@ -531,7 +532,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
                // TODO Implement brag on facebook
                 // brag on facebook
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         */
@@ -539,13 +540,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // if the user clicks the cancel button
-                dialog.cancel();
+                // show progressDialog and update gameList
+                showProgressDialog();
+                sendGameListUpdateRequest(true);
+                dialog.dismiss();
             }
         });
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                // if the user clicks "Back" button on phone or choose the cancel button
+                // if the user clicks "Back" button on phone
                 // show progressDialog and update gameList
                 showProgressDialog();
                 sendGameListUpdateRequest(true);
