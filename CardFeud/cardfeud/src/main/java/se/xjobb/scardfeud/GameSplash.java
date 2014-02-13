@@ -1,7 +1,5 @@
 package se.xjobb.scardfeud;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -13,7 +11,6 @@ import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,10 +25,9 @@ public class GameSplash extends Activity {
     private static int NAME_FLOAT = 1500;
     TextView you, opponent,v_char,s_char;
     String username;
-    ImageView youFlag, oppFlag;
     Response response;
     ArrayList<Response> myTurns;
-    Animation blink, bounce;
+    Animation blink, bounce,move_in;
 
 
     @Override
@@ -43,22 +39,20 @@ public class GameSplash extends Activity {
         v_char = (TextView)findViewById(R.id.v_char);
         s_char = (TextView)findViewById(R.id.s_char);
         username = User.UserDetails.getUsername();
-        youFlag = (ImageView)findViewById(R.id.yourFlag);
-        oppFlag = (ImageView)findViewById(R.id.oppFlag);
         try {
             String country = User.UserDetails.getUserCountryCode().toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
-            youFlag.setImageDrawable(drawable);
+            you.setBackgroundDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = getResources().getIdentifier("globe", "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
 
-            youFlag.setImageDrawable(drawable);
+            you.setBackgroundDrawable(drawable);
         }
-        blink = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.blink);
         bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);
+        move_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.splash_move);
 
 
 
@@ -70,17 +64,17 @@ public class GameSplash extends Activity {
             String country = response.opponentName.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
-            oppFlag.setImageDrawable(drawable);
+            opponent.setBackgroundDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = getResources().getIdentifier("globe", "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
 
-            oppFlag.setImageDrawable(drawable);
+            opponent.setBackgroundDrawable(drawable);
         }
 
         you.setText(username);
-
+        //change font
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         you.setTypeface(tf);
@@ -88,40 +82,22 @@ public class GameSplash extends Activity {
         v_char.setTypeface(tf);
         opponent.setTypeface(tf);
 
-        //opacity animations on textview
-        /*ObjectAnimator anim1 = ObjectAnimator.ofFloat(v_char, "alpha", 0f, 1f);
-        anim1.setDuration(2500);
-        anim1.start();
-        ObjectAnimator anim2 = ObjectAnimator.ofFloat(s_char, "alpha", 0f, 1f);
-        anim2.setDuration(2500);
-        anim2.start();*/
-        v_char.animate().x(230f).setDuration(1500);
-        youFlag.animate().x(70f).setDuration(1500);
-        s_char.animate().x(360f).setDuration(1500);
-        oppFlag.animate().x(530f).setDuration(1500);
+        //animation float in
+        v_char.startAnimation(move_in);
+        s_char.startAnimation(move_in);
+
 
 
         you.setVisibility(View.INVISIBLE);
-        youFlag.setVisibility(View.INVISIBLE);
         opponent.setVisibility(View.INVISIBLE);
-        oppFlag.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //floating animations on text and imageviews after specified time
+                //bounce animations on text and imageviews after specified time
                 you.setVisibility(View.VISIBLE);
                 opponent.setVisibility(View.VISIBLE);
-                youFlag.setVisibility(View.VISIBLE);
-                oppFlag.setVisibility(View.VISIBLE);
-                youFlag.startAnimation(blink);
-                oppFlag.startAnimation(blink);
-                //you.startAnimation(bounce);
-                //opponent.startAnimation(bounce);
-                PropertyValuesHolder pvhX1 = PropertyValuesHolder.ofFloat("x", 150f);
-                PropertyValuesHolder pvhY1 = PropertyValuesHolder.ofFloat("y", 280f);
-                ObjectAnimator.ofPropertyValuesHolder(you, pvhX1, pvhY1).setDuration(1000).start();
-
-                opponent.animate().x(180f).y(900f).setDuration(1000);
+                you.startAnimation(bounce);
+                opponent.startAnimation(bounce);
                 SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);

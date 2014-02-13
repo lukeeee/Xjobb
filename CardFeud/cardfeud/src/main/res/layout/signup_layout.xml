@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_up_text"
         android:textColor="@color/ColorWhite"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="40dp"
         android:gravity="center"
         android:id="@+id/signup_text"
@@ -29,7 +29,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="5dp"
         android:layout_gravity="center">
 
         <TextView
@@ -42,7 +41,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:paddingLeft="10dp"
             android:inputType="textPersonName"
             android:hint="@string/username_hint"
@@ -63,7 +62,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:paddingLeft="10dp"
             android:inputType="textPassword"
             android:hint="@string/password_hint"
@@ -84,7 +83,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:paddingLeft="10dp"
             android:inputType="textPassword"
             android:hint="@string/password_repeat_hint"
@@ -104,7 +103,7 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:background="@drawable/plain_white"
@@ -116,8 +115,8 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
             android:id="@+id/signUpButton"
             android:background="@drawable/button"
             android:text="@string/sign_up_text"
@@ -130,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:id="@+id/already_text"
             android:textColor="@color/ColorWhite"
@@ -138,8 +137,8 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
             android:textSize="25sp"
             android:id="@+id/goToLoginButton"
             android:background="@drawable/button"
