@@ -408,9 +408,29 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 startActivity(settingsIntent);
                 return true;
             case R.id.action_stats:
-                Intent statsIntent = new Intent(getBaseContext(), Stats.class);
-                startActivity(statsIntent);
-                return true;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("Premium");
+                dialog.setIcon(R.drawable.stat);
+                dialog.setMessage("Go Premium and you get\nPersonal stats\nHigh Score in your country\nHigh score in world\nAnd no Ads");
+                dialog.setPositiveButton("Go Premium", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.setNeutralButton("Debug", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent statsIntent = new Intent(getBaseContext(), Stats.class);
+                        startActivity(statsIntent);
+                    }
+                });
+
+                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                dialog.show();
+
             case R.id.action_refresh:
                /* Intent intent = getIntent();
                 overridePendingTransition(0, 0);
@@ -426,7 +446,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         return true;
 
-        }
+    }
 
 
     @Override

@@ -74,7 +74,7 @@ public class GameSplash extends Activity {
         }
 
         you.setText(username);
-
+        //change font
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
         you.setTypeface(tf);
@@ -82,13 +82,7 @@ public class GameSplash extends Activity {
         v_char.setTypeface(tf);
         opponent.setTypeface(tf);
 
-        //opacity animations on textview
-        /*ObjectAnimator anim1 = ObjectAnimator.ofFloat(v_char, "alpha", 0f, 1f);
-        anim1.setDuration(2500);
-        anim1.start();
-        ObjectAnimator anim2 = ObjectAnimator.ofFloat(s_char, "alpha", 0f, 1f);
-        anim2.setDuration(2500);
-        anim2.start();*/
+        //animation float in
         v_char.startAnimation(move_in);
         s_char.startAnimation(move_in);
 
@@ -99,7 +93,7 @@ public class GameSplash extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //floating animations on text and imageviews after specified time
+                //bounce animations on text and imageviews after specified time
                 you.setVisibility(View.VISIBLE);
                 opponent.setVisibility(View.VISIBLE);
                 you.startAnimation(bounce);

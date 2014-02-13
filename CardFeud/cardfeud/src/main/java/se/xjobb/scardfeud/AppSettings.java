@@ -1,13 +1,13 @@
 package se.xjobb.scardfeud;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
@@ -34,8 +33,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
     private Button logoutButton;
     private HelperClass helperClass;
     private String username, myCountry;
-    private Button game;
-    private Button countryDebug;
     private Button myAccount;
     private Button about_btn, premium;
     private TextView versionText, appsoundstxt, appnottxt, appvibtxt, settings;
@@ -52,8 +49,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         setContentView(R.layout.app_settings);
 
         logoutButton = (Button)findViewById(R.id.logout);
-        game = (Button)findViewById(R.id.game);
-        countryDebug = (Button)findViewById(R.id.debug_country);
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
         premium = (Button)findViewById(R.id.premium);
@@ -86,8 +81,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         appvibtxt.setTypeface(tf);
 
         logoutButton.setOnClickListener(this);
-        game.setOnClickListener(this);
-        countryDebug.setOnClickListener(this);
         soundToggleButton.setOnCheckedChangeListener(this);
         notificationSoundToggleButton.setOnCheckedChangeListener(this);
         vibrationToggleButton.setOnCheckedChangeListener(this);
@@ -96,6 +89,7 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
         helperClass = new HelperClass(this);
+        premium.setOnClickListener(this);
         created = true;
         setSwitchStatus();
         setVersionText();
@@ -245,31 +239,24 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         if(v == logoutButton){
             logoutButton.setTextColor(getResources().getColor(R.color.ColorBlack));
             finishActivity();
-        } else if (v == game){
-            Intent gp = new Intent(getApplicationContext(), Game.class);
-            startActivity(gp);
-        } else if(v == countryDebug){
-            // debug for temporary change of country
-            List<String> debugCountries = new ArrayList<String>();
-            debugCountries.add("SE");
-            debugCountries.add("DE");
-            debugCountries.add("NG");
-            debugCountries.add("US");
-            debugCountries.add("GB");
-            debugCountries.add("ES");
-            debugCountries.add("BG");
-            debugCountries.add("XX");
-            debugCountries.add("C_");
-            debugCountries.add("PE");
-            debugCountries.add("IS");
+        } else if (v == premium){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
+            dialog.setTitle("Premium");
+            dialog.setIcon(R.drawable.stat);
+            dialog.setMessage("Go Premium and you get\nPersonal stats\nHigh Score in your country\nHigh score in world\nAnd no Ads");
+            dialog.setPositiveButton("Go Premium", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
 
-
-            int random = (int )(Math.random() * 10);
-            String country = debugCountries.get(random);
-            User.UserDetails.setUserCountryCode(country);
-            Toast.makeText(this, "Country changed to: " + country, 1000).show();
-        }
-        else if (v == myAccount){
+            dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            dialog.show();
+        }else if (v == myAccount){
             myAccount.setTextColor(getResources().getColor(R.color.ColorBlack));
             AlertDialog.Builder dialog = new AlertDialog.Builder(AppSettings.this);
             dialog.setTitle("My Account");
