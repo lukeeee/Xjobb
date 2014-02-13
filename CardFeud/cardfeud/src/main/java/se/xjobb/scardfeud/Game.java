@@ -52,6 +52,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     private final String TAG = "CardFeud JSON Exception: ";
     private HelperClass helperClass;
     private boolean gameOver;
+    private boolean isCreated = false;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
 
 
@@ -95,6 +96,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         //animRotate.setAnimationListener(this);
 
+        isCreated = true;
         actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
@@ -354,6 +356,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
             this.finish();
         }
+
+        // update the game if onCreate was not called.
+        // So if screen goes black i game and we "start" the screen again game will refresh
+        if(!isCreated){
+            sendRequestToServer(0);
+        }
+
+        isCreated = false;
+        // we don't need to show animations here.. sendGameListUpdateRequest(true);
+
     }
 
     @Override
@@ -510,7 +522,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 // rematch, gameList will be refreshed in this request as well
                 sendRematchPost();
-                dialog.cancel();
+                dialog.dismiss();
             }
         });
         /*
