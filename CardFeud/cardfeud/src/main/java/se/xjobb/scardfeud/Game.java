@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -272,9 +274,19 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     // used to select the correct card from resources, with cardName and then set that card
     private void setCardFromResources(String cardName){
         int id = getResources().getIdentifier(cardName, "drawable", getPackageName());
-        Drawable drawable = getResources().getDrawable(id);
-        gamecard.setImageDrawable(drawable);
+
+        // use BitMapFactory to load image more memory efficient
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inSampleSize = 1;  // 16 is the worst quality possible with least memory, 1 is original
+        o.inDither = false;   //Disable Dithering mode
+        o.inPurgeable = true; //Tell to gc that whether it needs free memory, the Bitmap can be cleared
+        Bitmap bitmapCard =BitmapFactory.decodeResource(getResources(),id, o);
+
+        gamecard.setImageBitmap(bitmapCard);
         tjena.startAnimation(Bounce);
+
+        //OLD: Drawable drawable = getResources().getDrawable(id);
+        //OLD: gamecard.setImageDrawable(drawable);
         //SoundsVibration.start(R.raw.drop, Game.this);
     }
 

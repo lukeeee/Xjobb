@@ -160,7 +160,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
 
 
     private void challengeRandomPlayer(){
-        if(helperClass.isConnected() != true){
+        if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
             // add retry to dialog.
         } else {
