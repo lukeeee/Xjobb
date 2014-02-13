@@ -17,6 +17,7 @@
             android:layout_height="60dp"
             android:textSize="50sp"
             android:text="hej hej"
+            android:padding="0dp"
             android:textColor="#000"
             android:gravity="center"
             android:id="@+id/you_text"
@@ -30,7 +31,7 @@
             android:gravity="center"
             android:id="@+id/v_char"
             android:layout_marginRight="60dp"
-            android:layout_marginTop="80dp"/>
+            android:layout_marginTop="50dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -41,7 +42,7 @@
             android:id="@+id/s_char"
             android:gravity="center"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="100dp" />
+            android:layout_marginTop="90dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -50,6 +51,7 @@
             android:gravity="center"
             android:text="tjo tjo"
             android:textColor="#000"
+            android:padding="0dp"
             android:layout_marginTop="215dp"
             android:id="@+id/opponent_text"/>
 
