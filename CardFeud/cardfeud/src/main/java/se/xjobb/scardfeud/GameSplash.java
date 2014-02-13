@@ -23,7 +23,7 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
 public class GameSplash extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
     private static int FIRST_FLOAT = 500;
-    private static int NAME_FLOAT = 1500;
+    private static int NAME_FLOAT = 1900;
     TextView you, opponent,v_char,s_char;
     String username;
     Response response;

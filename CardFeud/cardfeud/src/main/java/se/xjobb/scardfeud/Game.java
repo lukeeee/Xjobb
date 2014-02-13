@@ -47,7 +47,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     private ImageView gamecard;
     private ImageView arrowhr, arrowhl, arrowlr, arrowll, arrowpl, arrowpr, youFlag, opponentFlag;
     private TextView waiting;
-    private ViewAnimator tjena;
+    private ViewAnimator animationView;
     private LinearLayout lnrMain;
     private Response gameResponse;  // This object represents a current game
     int rematchChoice = 0;
@@ -76,7 +76,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         arrowlr = (ImageView)findViewById(R.id.arrowlowr);
         arrowpl = (ImageView)findViewById(R.id.arrowpassl);
         arrowpr = (ImageView)findViewById(R.id.arrowpassr);
-        tjena = (ViewAnimator)findViewById(R.id.tjenis);
+        animationView = (ViewAnimator)findViewById(R.id.tjenis);
 
         Typeface tf = Typeface.createFromAsset(getAssets(),
                 "fonts/hobostd.otf");
@@ -264,6 +264,18 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         // TODO handle if pass is disabled in JSON response
 
     }
+    private void enableGamePlayRefresh(){
+        waiting.setVisibility(View.INVISIBLE);
+        high.startAnimation(move_left);
+        pass.startAnimation(move_left);
+        arrowhl.startAnimation(move_left);
+        arrowpl.startAnimation(move_left);
+        arrowhr.startAnimation(move_left);
+        arrowpr.startAnimation(move_left);
+        low.startAnimation(move_right);
+        arrowlr.startAnimation(move_right);
+        arrowll.startAnimation(move_right);
+    }
 
     // used to update stats
     private void updateStats(){
@@ -283,7 +295,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         Bitmap bitmapCard =BitmapFactory.decodeResource(getResources(),id, o);
 
         gamecard.setImageBitmap(bitmapCard);
-        tjena.startAnimation(Bounce);
+        animationView.startAnimation(Bounce);
 
         //OLD: Drawable drawable = getResources().getDrawable(id);
         //OLD: gamecard.setImageDrawable(drawable);
@@ -697,18 +709,4 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         }
     }
 
-    /* TODO @Override
-    public void onAnimationStart(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-
-    }*/
 }
