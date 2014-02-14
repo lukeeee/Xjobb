@@ -115,8 +115,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 // when pressing "higher"
                 // sendRequestToServer "1 = higher"
                 SoundsVibration.vibrate(Game.this);
-                //SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(1);
+                //SoundsVibration.start(R.raw.drop, Game.this);
                 //disableGamePay();
             }
         });
@@ -125,8 +125,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 // when pressing "lower"
                 // send RequestToServer "2 = lower"
                 SoundsVibration.vibrate(Game.this);
-               // SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(2);
+                // SoundsVibration.start(R.raw.drop, Game.this);
                 //disableGamePay();
             }
         });
@@ -137,10 +137,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
                 // when pressing pass
                 //send RequestToServer "3 = pass"
-
                 SoundsVibration.vibrate(Game.this);
-
-                //SoundsVibration.start(R.raw.drop, Game.this);
                 sendRequestToServer(3);
                 //disableGamePay();
             }
@@ -472,6 +469,32 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
     }
 
+    // used to show correct feedback onClick
+    private void checkPointsAndShowFeedback(){
+
+        if(!refresh){
+            // if we are not refreshing
+            if(gameResponse.thisRoundPoints != null && !gameResponse.thisRoundPoints.equals("") &&
+                    gameResponse.lastRoundPoints != null && !gameResponse.lastRoundPoints.equals("")){
+                // gameResponse.thisRoundPoints will be 0 on pass and -1 on wrong, +1 on correct
+
+                if(!gameResponse.thisRoundPoints.equals("0")){
+                    // we got a point
+                    Toast.makeText(this, "Point gained!", 500).show();
+                } else if(gameResponse.lastRoundPoints.equals("-1")){
+                    // we lost one point
+                    Toast.makeText(this, "Point lost!", 500).show();
+                } else if(gameResponse.passProhibited.equals("1")){
+                    // do nothing
+                }
+
+                // Handle when A is and an A is coming, should not show wrong toast then
+            }
+        }
+
+    }
+
+
     private void sendRequestToServer(int choice){
         if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
@@ -733,9 +756,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         setCorrectCard();
         updateStats();
-        if(gameResponse.lastRoundDetails != null){
-            Toast.makeText(this, gameResponse.lastRoundDetails, 1000).show();
-        }
+
+        checkPointsAndShowFeedback();
 
         if(gameResponse.myTurn.contains("1")){
             // it is my turn

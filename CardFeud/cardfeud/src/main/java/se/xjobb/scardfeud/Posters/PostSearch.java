@@ -130,12 +130,9 @@ public class PostSearch {
 
         } catch (ConnectTimeoutException ex) {
             result = "Server Timeout";
-            Log.e("Exception Timeout: ", ex.getMessage());
         } catch (SocketTimeoutException ex) {
             result = "Server Timeout";
-            Log.e("Exception Timeout: ", ex.getMessage());
         } catch (Exception e) {
-            Log.d("InputStream", e.getLocalizedMessage());
             result = "Did not work!";
         }
 
