@@ -136,16 +136,8 @@ public class Start extends Fragment implements View.OnClickListener {
 
     private void createWaitingGameAdapter(){
         waitingGameAdapterCreated = true;
-        waitingGameAdapter = new WaitingGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.icon, new Start(), view.getTag() + "");
-                ft.addToBackStack(null);
-                ft.commit();
+        waitingGameAdapter = new WaitingGameAdapter(getActivity());
 
-            }
-        });
         final int adapterCount = waitingGameAdapter.getCount();
 
         for (int i = 0; i < adapterCount; i++) {
@@ -160,16 +152,8 @@ public class Start extends Fragment implements View.OnClickListener {
 
     private void createFinishedGameAdapter(){
         finishedGameAdapterCreated = true;
-        finishedGameAdapter = new FinishedGameAdapter(getActivity().getApplicationContext(), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.icon, new Start(), view.getTag() + "");
-                ft.addToBackStack(null);
-                ft.commit();
+        finishedGameAdapter = new FinishedGameAdapter(getActivity());
 
-            }
-        });
         final int adapterCount = finishedGameAdapter.getCount();
 
         for (int i = 0; i < adapterCount; i++) {

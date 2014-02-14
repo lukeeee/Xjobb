@@ -95,7 +95,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         waiting.setOnClickListener(this);
         waiting.setVisibility(View.INVISIBLE);
 
-        alertDialogs = new ArrayList<AlertDialog>(); // keeping track of all showing invitation dialogs
+        alertDialogs = new ArrayList<AlertDialog>(); // keeping track of all dialogs
 
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         Bounce = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bounce);

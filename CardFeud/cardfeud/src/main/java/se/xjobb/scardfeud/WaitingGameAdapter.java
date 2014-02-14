@@ -24,13 +24,11 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
 public class WaitingGameAdapter extends BaseAdapter {
     Context context;
     List<Response> waitingGames;
-    View.OnClickListener waitingListener;
     ImageView waitFlag;
 
 
-    public WaitingGameAdapter(Context context, View.OnClickListener waitingListener){
+    public WaitingGameAdapter(Context context){
         this.context = context;
-        this.waitingListener = waitingListener;
         waitingGames = GameListResult.getOpponentsTurns();
     }
 

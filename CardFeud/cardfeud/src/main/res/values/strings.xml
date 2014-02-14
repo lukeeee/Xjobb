@@ -40,7 +40,7 @@
     <string name="sign_in_text">Sign in</string>
     <string name="go_to_sign_up_text">New to Cardfeud?</string>
     <string name="go_to_sign_up_button_text">Go to Sign Up</string>
-    <string name="rules">Will the next card be High or Low?\n\nAce low and King high\n\nIf your right you win one point and gets to keep playing\n\nIf your wrong you loose one point and the turn to your opponent\n\nYou can pass to your opponent if you don´t want to guess\n\nYou can either meet your friends on Iphone or Android or meet a random opponent</string>
+    <string name="rules">Will the next card be High or Low?\n\nAce low and King high\n\nIf you\'re right you win one point and gets to keep playing\n\nIf you\'re wrong you loose one point and the turn to your opponent\n\nYou can pass to your opponent if you don\'t want to guess\n\nYou can either meet your friends on Iphone or Android or meet a random opponent</string>
 
 
 </resources>
