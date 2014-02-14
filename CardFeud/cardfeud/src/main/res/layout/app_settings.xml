@@ -203,12 +203,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#fff"/>
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:text="chat"
-            android:textSize="30dp"
-            android:id="@+id/chat"/>
 
         <LinearLayout
             android:layout_marginTop="10dp"

@@ -94,7 +94,7 @@ public class GameSplash extends Activity {
                 s_char.setVisibility(View.VISIBLE);
                 v_char.setVisibility(View.VISIBLE);
                 you.startAnimation(bounce1);
-                SoundsVibration.start(R.raw.drop, GameSplash.this);
+                SoundsVibration.start(R.raw.shuffle, GameSplash.this);
                 //animation float in
                 v_char.startAnimation(move_in);
                 s_char.startAnimation(move_in);
@@ -110,7 +110,7 @@ public class GameSplash extends Activity {
                 //bounce animations on text and imageviews after specified time
                 opponent.setVisibility(View.VISIBLE);
                 opponent.startAnimation(bounce2);
-                SoundsVibration.start(R.raw.drop, GameSplash.this);
+                //SoundsVibration.start(R.raw.drop, GameSplash.this);
                 onStart();
             }}, NAME_FLOAT);
         new Handler().postDelayed(new Runnable() {

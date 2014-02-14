@@ -34,7 +34,7 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
     private HelperClass helperClass;
     private String username, myCountry;
     private Button myAccount;
-    private Button about_btn, premium,chat;
+    private Button about_btn, premium;
     private TextView versionText, appsoundstxt, appnottxt, appvibtxt, settings;
     private ToggleButton soundToggleButton;
     private ToggleButton notificationSoundToggleButton;
@@ -52,7 +52,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         myAccount = (Button)findViewById(R.id.myAccount);
         about_btn = (Button)findViewById(R.id.about_us);
         premium = (Button)findViewById(R.id.premium);
-        chat = (Button)findViewById(R.id.chat);
         versionText = (TextView)findViewById(R.id.version_text);
         appnottxt = (TextView)findViewById(R.id.appnottxt);
         appsoundstxt = (TextView)findViewById(R.id.appsoundtxt);
@@ -91,7 +90,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
         myCountry = User.UserDetails.getUserCountryCode();
         helperClass = new HelperClass(this);
         premium.setOnClickListener(this);
-        chat.setOnClickListener(this);
         created = true;
         setSwitchStatus();
         setVersionText();
@@ -296,11 +294,7 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
                 }
             });
             dialog.show();
-        } else if(v == chat){
-            Intent chatIntent = new Intent(getApplicationContext(), Chat.class);
-            startActivity(chatIntent);
         }
-
         }
 
     @Override

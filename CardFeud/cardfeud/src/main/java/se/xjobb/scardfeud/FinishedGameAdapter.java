@@ -92,8 +92,8 @@ public class FinishedGameAdapter extends BaseAdapter{
             finFlag.setImageDrawable(drawable);
 
             finishBtn.setTypeface(tf);
-            int myPoints = Integer.parseInt(response.playerPoints);
-            int opPoints = Integer.parseInt(response.opponentPoints);
+            final int myPoints = Integer.parseInt(response.playerPoints);
+            final int opPoints = Integer.parseInt(response.opponentPoints);
             String endTime = response.finishedTime.substring(0, 11);
             Log.i("endTime", endTime);
 
@@ -112,30 +112,28 @@ public class FinishedGameAdapter extends BaseAdapter{
             } else {
                 //oavgjort...
             }
-        }
 
 
 
-        view.setTag(finishedGames.get(i));
-        finishBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("Game stats");
-                dialog.setIcon(R.drawable.stat);
-                dialog.setMessage(response.lastRoundDetails);
-                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+
+            view.setTag(finishedGames.get(i));
+            finishBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(myPoints > opPoints){
+                        SoundsVibration.start(R.raw.cheer, context);
+                        SoundsVibration.vibrate(context);
+                    } else if(opPoints > myPoints) {
+                        SoundsVibration.start(R.raw.buu, context);
+                        SoundsVibration.vibrate(context);
                     }
-                });
-                dialog.show();*/
 
-                Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
-            }
-        });
+                    Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
+                }
+            });
 
-        return view;
+
+        }   return view;
     }
 }
 

@@ -316,7 +316,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         gamecard.setImageBitmap(decodeFile(id));
         animationView.startAnimation(Bounce);
 
-        //SoundsVibration.start(R.raw.drop, Game.this);
+        SoundsVibration.start(R.raw.swoosh, Game.this);
     }
 
     // used to set the correct card
@@ -439,10 +439,10 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                         "* You get one point if you are right\n\n" +
                         "* You loose one point if you are wrong");
                 dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
                 dialog.show();
 
                 return true;
@@ -451,7 +451,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 refresh = true;
                 sendRequestToServer(0);
                 return true;
+
+            case R.id.action_chat:
+                Intent chatIntent = new Intent(getApplicationContext(), Chat.class);
+                startActivity(chatIntent);
+                return true;
         }
+
+
 
         return true;
 
