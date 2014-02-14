@@ -167,7 +167,15 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
         waiting.setText("Waiting for " + gameResponse.opponentName);
         setCorrectCard();
-        enableGamePlay();
+
+        if(gameResponse.myTurn.equals("1")){
+            // it's my turn
+            enableGamePlay();
+        } else {
+            // it's not my turn
+            disableGamePlay();
+            waiting.setVisibility(View.VISIBLE);
+        }
 
         // Log.i("Response: ", gameResponse.thisRoundPoints);
        // Log.i("Response: ", gameResponse.chatUnread);

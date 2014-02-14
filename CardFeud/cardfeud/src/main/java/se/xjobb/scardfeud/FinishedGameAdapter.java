@@ -144,7 +144,7 @@ public class FinishedGameAdapter extends BaseAdapter{
         }   return view;
     }
 
-    // calculate how long the game lasted and return suitable string
+    // calculate how long the game lasted and return suitable String
     private String calculateGameTime(Date dateStart, Date dateFinish){
 
         String gameTime;

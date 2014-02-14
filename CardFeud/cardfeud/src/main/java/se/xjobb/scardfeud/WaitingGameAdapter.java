@@ -1,9 +1,11 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +75,7 @@ public class WaitingGameAdapter extends BaseAdapter {
 
 
         //wait.getBackground().setAlpha(200);
-        Response response = waitingGames.get(i);
+        final Response response = waitingGames.get(i);
         try {
             String country = response.opponentName.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
@@ -96,18 +98,11 @@ public class WaitingGameAdapter extends BaseAdapter {
             public void onClick(View v) {
                 SoundsVibration.start(R.raw.clock, context);
                 SoundsVibration.vibrate(context);
-               /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("Game stats");
-                dialog.setIcon(R.drawable.stat);
-                dialog.setMessage(response.lastRoundDetails);
-                dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                dialog.show();*/
 
-
+                // start "Game" with the current game
+                Intent i = new Intent(context, Game.class);
+                i.putExtra("responseObject", (Parcelable) response);
+                context.startActivity(i);
             }
         });
 
