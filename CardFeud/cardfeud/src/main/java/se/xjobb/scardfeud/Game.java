@@ -299,7 +299,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             BitmapFactory.decodeResource(getResources(), resourceId, o);
 
             //The new size we want to scale to
-            final int REQUIRED_SIZE = 140;  //180
+            final int REQUIRED_SIZE = 180;  //180
 
             //Find the correct scale value. It should be the power of 2.
             int scale=1;
@@ -471,12 +471,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
     // used to show correct feedback onClick
     private void checkPointsAndShowFeedback(){
-
         if(!refresh){
             // if we are not refreshing
-            if(gameResponse.thisRoundPoints != null && !gameResponse.thisRoundPoints.equals("") &&
-                    gameResponse.lastRoundPoints != null && !gameResponse.lastRoundPoints.equals("")){
-                // gameResponse.thisRoundPoints will be 0 on pass and -1 on wrong, +1 on correct
+            try{
 
                 if(!gameResponse.thisRoundPoints.equals("0")){
                     // we got a point
@@ -489,6 +486,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 }
 
                 // Handle when A is and an A is coming, should not show wrong toast then
+            } catch(NullPointerException ex){
+
             }
         }
 
