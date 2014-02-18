@@ -41,7 +41,8 @@ public class Start extends Fragment implements View.OnClickListener {
     boolean waitingGameAdapterCreated = false;
     boolean availableGameAdapterCreated = false;
     Animation jiggle;
-    private static int START_ACTIVITY_DELAY = 400;
+    private static int START_ACTIVITY_DELAY = 350;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
