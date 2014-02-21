@@ -61,6 +61,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     private boolean refresh = false;
     List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
+    Boolean hasPremium = false;
 
 
     @Override
@@ -142,6 +143,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 //disableGamePay();
             }
         });
+        if (hasPremium == false){
+            Log.i("Premium Madaafakka", "");
+        }else{
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -154,6 +158,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 lnrMain.addView(adView);
             }
         });
+        }
 
 
 
