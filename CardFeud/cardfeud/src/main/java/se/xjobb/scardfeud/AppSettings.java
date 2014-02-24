@@ -42,6 +42,7 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
     private boolean created = false;
     private final String TAG = "CardFeud SharedPrefs Exception ";
     private LinearLayout lnrMain;
+    Boolean hasPremium = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +101,9 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
 
         Log.i("hallo", myCountry);
 
-        if(myCountry.equals("US")){
+        if (hasPremium == false){
+            Log.i("Premium Madaafakka", "");
+        }else{
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -113,8 +116,6 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
                     lnrMain.addView(adView);
                 }
             });
-
-        }else{
 
         }
     }

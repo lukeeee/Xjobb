@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
     private boolean setFlag = false;
     ImageView flag;
     LinearLayout lnrMain;
-
+    Boolean hasPremium = false;
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
 
@@ -69,23 +70,24 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
 
-        if(userCountry.equals("US")){
 
-    runOnUiThread(new Runnable() {
-        @Override
-        public void run() {
-            AdView adView = new AdView(NewGame.this);
-            adView.setAdUnitId("0445b7141d9d4e1b");
-            adView.setAdSize(AdSize.BANNER);
-            AdRequest.Builder builder = new AdRequest.Builder();
-            builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-            adView.loadAd(builder.build());
-            lnrMain.addView(adView);
+        if (hasPremium == false){
+            Log.i("Premium Madaafakka", "");
+        }else{
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AdView adView = new AdView(NewGame.this);
+                    adView.setAdUnitId("0445b7141d9d4e1b");
+                    adView.setAdSize(AdSize.BANNER);
+                    AdRequest.Builder builder = new AdRequest.Builder();
+                    builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                    adView.loadAd(builder.build());
+                    lnrMain.addView(adView);
+                }
+            });
         }
-    });
-    }else{
 
-        }
     }
 
     @Override
