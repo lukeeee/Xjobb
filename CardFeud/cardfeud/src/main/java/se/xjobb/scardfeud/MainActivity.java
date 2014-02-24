@@ -326,7 +326,30 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     // show error dialog
     public void showErrorDialog(String message){
         progressDialog = null;
-        helperClass.showErrorDialog(message);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("An Error has occurred!");
+        builder.setMessage(message);
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // send request to the server again.
+                getGameLists(false);
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // just close the dialog
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 
@@ -430,7 +453,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     }
                 });
                 dialog.show();
-
+                return true;
             case R.id.action_refresh:
                /* Intent intent = getIntent();
                 overridePendingTransition(0, 0);

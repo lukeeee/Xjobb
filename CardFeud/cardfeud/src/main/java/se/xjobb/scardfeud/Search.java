@@ -75,6 +75,13 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             pixelMargin = (int) (60 * scale + 0.5f);
             imageLayout = (int) (96 * scale + 0.5f);
             textSize = 70;
+        } else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {
+            // Small Size Screen
+            scale = this.getResources().getDisplayMetrics().density;
+            pixelLayout = (int) (150 * scale + 0.5f);
+            pixelMargin = (int) (15 * scale + 0.5f);
+            imageLayout = (int) (24 * scale + 0.5f);
+            textSize = 10;
         } else {
             // Normal Size Screen
             scale = this.getResources().getDisplayMetrics().density;

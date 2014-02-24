@@ -133,13 +133,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // TODO handle if pass is disabled in JSON response
-
-                // when pressing pass
-                //send RequestToServer "3 = pass"
-                SoundsVibration.vibrate(Game.this);
-                sendRequestToServer(3);
-                //disableGamePay();
+                // TODO handle if pass is disabled in JSON response  == TEST
+                if(!gameResponse.passProhibited.equals("1")){
+                    // when pressing pass
+                    //send RequestToServer "3 = pass"
+                    SoundsVibration.vibrate(Game.this);
+                    sendRequestToServer(3);
+                    //disableGamePay();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Can't pass on this card, since you opponent already passed!", 1000).show();
+                }
             }
         });
         runOnUiThread(new Runnable() {
@@ -326,9 +329,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
     // used to set the correct card
     private void setCorrectCard(){
-        Log.i("Card Color: ", gameResponse.cardColor);
-        Log.i("Card value: ", gameResponse.cardValue);
-
 
         if(gameResponse.cardColor.contains("1")){
             // if the card should be spades
