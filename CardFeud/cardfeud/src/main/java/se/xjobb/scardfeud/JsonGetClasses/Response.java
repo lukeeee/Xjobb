@@ -45,6 +45,9 @@ public class Response implements Parcelable {
     @SerializedName("opponent_name")
     public String opponentName;
 
+    @SerializedName("opponent_country")
+    public String opponentCountry;
+
     @SerializedName("card_color")
     public String cardColor;
 
@@ -125,6 +128,7 @@ public class Response implements Parcelable {
                 this.playerName,
                 this.opponentId,
                 this.opponentName,
+                this.opponentCountry,
                 this.cardColor,
                 this.cardValue,
                 this.passProhibited,
@@ -145,7 +149,7 @@ public class Response implements Parcelable {
 
     public Response (Parcel in) {
         // gameId = in.readString();
-        String[] data = new String[26];
+        String[] data = new String[27];
         in.readStringArray(data);
         this.gameId = data[0];
         this.startTime = data[1];
@@ -157,22 +161,23 @@ public class Response implements Parcelable {
         this.playerName = data[7];
         this.opponentId = data[8];
         this.opponentName = data[9];
-        this.cardColor = data[10];
-        this.cardValue = data[11];
-        this.passProhibited = data[12];
-        this.lastRoundDetails = data[13];
-        this.thisRoundDetails = data[14];
-        this.lastRoundPoints = data[15];
-        this.thisRoundPoints = data[16];
-        this.myTurn = data[17];
-        this.opponentPoints = data[18];
-        this.opponentErrors = data[19];
-        this.opponentWins = data[20];
-        this.playerPoints = data[21];
-        this.playerErrors = data[22];
-        this.playerWins = data[23];
-        this.chatUnread = data[24];
-        this.odds = data[25];
+        this.opponentCountry = data[10];
+        this.cardColor = data[11];
+        this.cardValue = data[12];
+        this.passProhibited = data[13];
+        this.lastRoundDetails = data[14];
+        this.thisRoundDetails = data[15];
+        this.lastRoundPoints = data[16];
+        this.thisRoundPoints = data[17];
+        this.myTurn = data[18];
+        this.opponentPoints = data[19];
+        this.opponentErrors = data[20];
+        this.opponentWins = data[21];
+        this.playerPoints = data[22];
+        this.playerErrors = data[23];
+        this.playerWins = data[24];
+        this.chatUnread = data[25];
+        this.odds = data[26];
     }
 
 }

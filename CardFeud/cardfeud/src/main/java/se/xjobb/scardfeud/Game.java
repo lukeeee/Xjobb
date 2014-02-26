@@ -210,7 +210,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
        // Log.i("Response: ", gameResponse.opponentPoints);
 
         try {
-            String country = gameResponse.opponentName.toLowerCase();
+            String country = gameResponse.opponentCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             opponentFlag.setImageDrawable(drawable);

@@ -221,10 +221,10 @@ public class SignUp extends ActionBarActivity implements View.OnClickListener {
     private boolean validateInput(String username, String password, String passwordRepeat,
                                String countryCode){
 
-        if(username.length() > 30 || username.length() < 2){
+        if(username.length() > 12 || username.length() < 2){
             usernameEditText.setBackgroundResource(R.drawable.error);
             usernameEditText.setPadding(20, 0, 0, 0);
-            errorUsername.setText("2-30 chars");
+            errorUsername.setText("2-12 chars");
             return false;
         }
 
