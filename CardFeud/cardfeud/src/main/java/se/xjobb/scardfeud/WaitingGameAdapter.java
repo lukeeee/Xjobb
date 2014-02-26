@@ -77,7 +77,7 @@ public class WaitingGameAdapter extends BaseAdapter {
         //wait.getBackground().setAlpha(200);
         final Response response = waitingGames.get(i);
         try {
-            String country = response.opponentName.toLowerCase();
+            String country = response.opponentCountry.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
             waitFlag.setImageDrawable(drawable);

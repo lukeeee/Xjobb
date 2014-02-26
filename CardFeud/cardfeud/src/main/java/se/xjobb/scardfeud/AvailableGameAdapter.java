@@ -79,7 +79,7 @@ public class AvailableGameAdapter extends BaseAdapter {
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
         try {
-            String country = response.opponentName.toLowerCase();
+            String country = response.opponentCountry.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
             playFlag.setImageDrawable(drawable);

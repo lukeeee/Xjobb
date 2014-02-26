@@ -83,7 +83,7 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         final Response response = finishedGames.get(i);
         try {
-            String country = response.opponentName.toLowerCase();
+            String country = response.opponentCountry.toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
             finFlag.setImageDrawable(drawable);
