@@ -88,7 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Friends> contactList = new ArrayList<Friends>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_COUNTRIES +
-                " ORDER BY country, year, user_id";
+                " ORDER BY country, year";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -100,7 +100,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 contact.setID(Integer.parseInt(cursor.getString(0)));
                 contact.setCountry(cursor.getString(1));
                 contact.setFriend(cursor.getString(2));
-                contact.setUserID(Integer.parseInt(cursor.getString(3)));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
