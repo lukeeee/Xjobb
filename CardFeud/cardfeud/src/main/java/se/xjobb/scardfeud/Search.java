@@ -248,8 +248,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             dialog.setNeutralButton("+ Friend", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
-                    Friends friend = new Friends(foundUser.getUsername(),
-                            foundUser.getCountryCode());
+                    Friends friend = new Friends("Challenge your Friend ", foundUser.getUsername());
                     db.addFriend(friend);
                     Toast.makeText(getApplicationContext(), foundUser.getUsername() + " added to your friends", 1000).show();
 

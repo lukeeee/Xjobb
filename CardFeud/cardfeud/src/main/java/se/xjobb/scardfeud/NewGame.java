@@ -1,24 +1,29 @@
 package se.xjobb.scardfeud;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
@@ -37,13 +42,18 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
     Boolean hasPremium = false;
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
+    ListView friendList;
+    private ArrayAdapter<String> adapter;
+    private List<String> data;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newgame);
         user = (TextView)findViewById(R.id.user2);
-        friends = (TextView)findViewById(R.id.friends);
+        friends = (TextView)findViewById(R.id.friendsText);
+        friendList = (ListView)findViewById(R.id.friends);
         search_player = (Button)findViewById(R.id.search_player);
         random_player = (Button)findViewById(R.id.random_player);
         flag = (ImageView)findViewById(R.id.flagMy);
@@ -70,6 +80,19 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
 
+        data = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+        friendList.setAdapter(adapter);
+
+        db = new DatabaseHandler(this);
+
+        /*FriendAdapter friendAdapter = new FriendAdapter(getApplicationContext());
+        final int adapterCount = friendAdapter.getCount();
+        for (int i = 0; i < adapterCount; i++) {
+            View item = friendAdapter.getView(i, null, null);
+            friendList.addView(item);
+        }*/
+
 
         if (hasPremium == false){
             Log.i("Premium Madaafakka", "");
@@ -93,6 +116,17 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
     @Override
     protected void onResume(){
         super.onResume();
+        List<Friends> cl = db.getAllContacts();
+
+        adapter.clear();
+
+        if (!cl.isEmpty()) {
+            for (Friends c : cl) {
+                adapter.add(c.toString());
+            }
+        } else {
+            adapter.add("No items");
+        }
 
         // if on create was not called
         if(!setFlag){
