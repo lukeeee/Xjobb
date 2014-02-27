@@ -63,7 +63,6 @@ public class FinishedGameAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        String result;
         Drawable win = context.getResources().getDrawable(R.drawable.game_win);
         Drawable loose = context.getResources().getDrawable(R.drawable.game_lost);
         int[] lost = new int[]
@@ -83,7 +82,7 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         final Response response = finishedGames.get(i);
         try {
-            String country = response.opponentName.toLowerCase();   ///  GET FLAG BUUUGGGGG
+            String country = response.opponentCountry.toLowerCase();   ///  GET FLAG BUUUGGGGG
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
             finFlag.setImageDrawable(drawable);
@@ -91,57 +90,57 @@ public class FinishedGameAdapter extends BaseAdapter{
             // if the flag can't be found
             int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
-
             finFlag.setImageDrawable(drawable);
-
-            finishBtn.setTypeface(tf);
-            final int myPoints = Integer.parseInt(response.playerPoints);
-            final int opPoints = Integer.parseInt(response.opponentPoints);
-            String endTime = response.finishedTime.substring(0, 11);
-            //Log.i("endTime", endTime);
-
-            //diffrent finish text + btn + img in view
-            if(myPoints> opPoints){
-                finishBtn.setText("You won against\n" + response.opponentName + ", with " + myPoints
-                        + "-" + opPoints + "\n"+endTime);
-                gameResultIMG.setImageDrawable(win);
-
-            } else if(opPoints > myPoints) {
-                finishBtn.setBackgroundResource(lost[0]);
-                finishBtn.setText("         You lost against\n         "+ response.opponentName + ", with "
-                        + myPoints +"-" + opPoints + "\n         "+endTime);
-                gameResultIMG.setImageDrawable(loose);
-
-            } else {
-                //oavgjort...
-            }
+        }
 
 
+        finishBtn.setTypeface(tf);
+        final int myPoints = Integer.parseInt(response.playerPoints);
+        final int opPoints = Integer.parseInt(response.opponentPoints);
+        String endTime = response.finishedTime.substring(0, 11);
+        //Log.i("endTime", endTime);
+
+        //diffrent finish text + btn + img in view
+        if(myPoints> opPoints){
+            finishBtn.setText("You won against\n" + response.opponentName + ", with " + myPoints
+                    + "-" + opPoints + "\n"+endTime);
+            gameResultIMG.setImageDrawable(win);
+
+        } else if(opPoints > myPoints) {
+            finishBtn.setBackgroundResource(lost[0]);
+            finishBtn.setText("         You lost against\n         "+ response.opponentName + ", with "
+                    + myPoints +"-" + opPoints + "\n         "+endTime);
+            gameResultIMG.setImageDrawable(loose);
+
+        } else {
+            //oavgjort...
+        }
 
 
-            view.setTag(finishedGames.get(i));
-            finishBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean victory = false;
 
-                    if(myPoints > opPoints){
-                        SoundsVibration.start(R.raw.cheer, context);
-                        SoundsVibration.vibrate(context);
-                        victory = true;
-                    } else if(opPoints > myPoints) {
-                        SoundsVibration.start(R.raw.buu, context);
-                        SoundsVibration.vibrate(context);
-                        victory = false;
-                    }
 
-                    showDetailsDialog(response, victory);
-                    //Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
+        view.setTag(finishedGames.get(i));
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean victory = false;
+
+                if(myPoints > opPoints){
+                    SoundsVibration.start(R.raw.cheer, context);
+                    SoundsVibration.vibrate(context);
+                    victory = true;
+                } else if(opPoints > myPoints) {
+                    SoundsVibration.start(R.raw.buu, context);
+                    SoundsVibration.vibrate(context);
+                    victory = false;
                 }
-            });
 
+                showDetailsDialog(response, victory);
+                //Log.i("fisk", response.lastRoundDetails + response.thisRoundDetails);
+            }
+        });
 
-        }   return view;
+        return view;
     }
 
     // calculate how long the game lasted and return suitable String
