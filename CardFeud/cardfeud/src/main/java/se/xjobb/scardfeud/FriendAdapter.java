@@ -23,6 +23,7 @@ public class FriendAdapter extends BaseAdapter {
 
     public FriendAdapter(Context context){
         this.context = context;
+
         this.friends = (ArrayList) db.getAllContacts();
     }
 

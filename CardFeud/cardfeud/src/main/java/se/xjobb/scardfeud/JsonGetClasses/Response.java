@@ -98,23 +98,13 @@ public class Response implements Parcelable {
 
     /* Everything below is used to pass objects of this type along with intents */
 
-    @Override
+    //@Override
     public int describeContents() {
         return 0;
     }
 
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<Response> CREATOR = new Parcelable.Creator<Response>() {
-        public Response createFromParcel(Parcel in) {
-            return new Response(in);
-        }
 
-        public Response[] newArray(int size) {
-            return new Response[size];
-        }
-    };
-
-    @Override
+    //@Override
     public void writeToParcel(Parcel dest, int flags) {
         //dest.writeStrin("");
         dest.writeStringArray(new String[]{
@@ -147,7 +137,18 @@ public class Response implements Parcelable {
                 this.odds});
     }
 
-    public Response (Parcel in) {
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Response> CREATOR = new Parcelable.Creator<Response>() {
+        public Response createFromParcel(Parcel in) {
+            return new Response(in);
+        }
+
+        public Response[] newArray(int size) {
+            return new Response[size];
+        }
+    };
+
+    private Response (Parcel in) {
         // gameId = in.readString();
         String[] data = new String[27];
         in.readStringArray(data);

@@ -132,6 +132,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public int getCountryCount() {
         String countQuery = "SELECT  * FROM " + TABLE_COUNTRIES;
         SQLiteDatabase db = this.getReadableDatabase();
+
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
