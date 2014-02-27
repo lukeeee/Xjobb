@@ -23,7 +23,7 @@ public class FriendAdapter extends BaseAdapter {
 
     public FriendAdapter(Context context){
         this.context = context;
-
+        this.db = new DatabaseHandler(context);
         this.friends = (ArrayList) db.getAllContacts();
     }
 
@@ -46,7 +46,7 @@ public class FriendAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = infalInflater.inflate(R.layout.waitgame_list, null);
+            view = infalInflater.inflate(R.layout.friendlist, null);
         }
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
