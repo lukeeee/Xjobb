@@ -1,13 +1,13 @@
 package se.xjobb.scardfeud;
 
 import android.app.AlertDialog;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 import se.xjobb.scardfeud.Posters.PostSearch;
 
@@ -37,7 +38,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
     private TextView noResults;
     private Button foundUserButton;
     private EditText searchText;
-
+    Response response;
     private String searchQuery;
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
@@ -148,6 +149,19 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
 
         foundUserImage = new ImageView(this);
+        /*response = (Response) i.getParcelableExtra("responseObject");
+        try {
+            String country = response.opponentCountry.toLowerCase();
+            int id = getResources().getIdentifier(country, "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+            foundUserImage.setBackgroundDrawable(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = getResources().getIdentifier("globe", "drawable", getPackageName());
+            Drawable drawable = getResources().getDrawable(id);
+
+            foundUserImage.setBackgroundDrawable(drawable);
+        }*/
         foundUserImage.setImageResource(R.drawable.globe);
 
         RelativeLayout.LayoutParams paramsImage = new RelativeLayout.LayoutParams(
