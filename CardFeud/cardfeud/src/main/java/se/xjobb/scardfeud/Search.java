@@ -90,7 +90,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             pixelLayout = (int) (300 * scale + 0.5f);
             pixelMargin = (int) (30 * scale + 0.5f);
             imageLayout = (int) (48 * scale + 0.5f);
-            textSize = 20;
+            textSize = 30;
         }
     }
 
