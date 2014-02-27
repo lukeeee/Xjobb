@@ -3,6 +3,8 @@ package se.xjobb.scardfeud.JsonGetClasses;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import se.xjobb.scardfeud.User;
+
 /**
  * Created by Svempa on 2014-02-27.
  */

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,9 +102,11 @@ public class WaitingGameAdapter extends BaseAdapter {
 
                 // start "Game" with the current game
                 Intent i = new Intent(context, Game.class);
+                Bundle b = new Bundle();
+
                 ResponseParcelable responseParcelable = new ResponseParcelable(response);
-                i.setExtrasClassLoader(User.UserDetails.getClassLoader());
-                i.putExtra("responseObject", responseParcelable);
+                b.putParcelable("responseObject", responseParcelable);
+                i.putExtra("responseObject", b);
                 context.startActivity(i);
             }
         });

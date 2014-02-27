@@ -167,9 +167,10 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
 
         helperClass = new HelperClass(this);
+
         Intent i = getIntent();
-        i.setExtrasClassLoader(User.UserDetails.getClassLoader());
-        ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
+        Bundle b = i.getBundleExtra("responseObject");
+        ResponseParcelable responseParcelable = (ResponseParcelable) b.getParcelable("responseObject");
         gameResponse = responseParcelable.getResponse();
 
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
@@ -313,17 +314,16 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         if(gameResponse.cardColor.contains("1")){
             // if the card should be spades
-            setCardFromResources("s_" + gameResponse.cardValue);
+            setCardFromResources("h_" + gameResponse.cardValue);
         } else if(gameResponse.cardColor.contains("2")){
             // if the card should be cloves
-            setCardFromResources("c_" + gameResponse.cardValue);
+            setCardFromResources("d_" + gameResponse.cardValue);
         } else if(gameResponse.cardColor.contains("3")){
             // if the card should be hearts
-            setCardFromResources("h_" + gameResponse.cardValue);
+            setCardFromResources("c_" + gameResponse.cardValue);
         } else if(gameResponse.cardColor.contains("4")){
             // if the card should be diamonds
-            setCardFromResources("d_" + gameResponse.cardValue);
-
+            setCardFromResources("s_" + gameResponse.cardValue);
         }
     }
 

@@ -101,9 +101,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         alertDialogs = new ArrayList<AlertDialog>(); // keeping track of all showing invitation dialogs
 
-        // set Android class loader
-        User.UserDetails.setClassLoader(getClassLoader());
-
         checkUserDetails();
         getGameLists(false);
         isCreated = true;

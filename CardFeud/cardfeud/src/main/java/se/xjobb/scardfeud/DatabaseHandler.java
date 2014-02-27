@@ -77,8 +77,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Friends country = new Friends(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+        Friends country = new Friends((cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)));
         // return country
         return country;
     }

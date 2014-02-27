@@ -59,8 +59,8 @@ public class GameSplash extends Activity {
 
 
         Intent i = getIntent();
-        i.setExtrasClassLoader(User.UserDetails.getClassLoader());
-        ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
+        Bundle b = i.getBundleExtra("responseObject");
+        ResponseParcelable responseParcelable = (ResponseParcelable) b.getParcelable("responseObject");
         response = responseParcelable.getResponse();
 
         opponent.setText(response.opponentName);
@@ -122,9 +122,11 @@ public class GameSplash extends Activity {
             public void run() {
                 //Start main activity when timer is over
                 Intent ix = new Intent(GameSplash.this, Game.class);
+                Bundle b = new Bundle();
+
                 ResponseParcelable responseParcelable = new ResponseParcelable(response);
-                ix.setExtrasClassLoader(User.UserDetails.getClassLoader());
-                ix.putExtra("responseObject", responseParcelable);
+                b.putParcelable("responseObject", responseParcelable);
+                ix.putExtra("responseObject", b);
                 startActivity(ix);
 
                 // Close this activity
