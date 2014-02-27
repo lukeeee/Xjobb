@@ -146,7 +146,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                 }
             }
         });
-        if (hasPremium == false){
+        if (!hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
         runOnUiThread(new Runnable() {

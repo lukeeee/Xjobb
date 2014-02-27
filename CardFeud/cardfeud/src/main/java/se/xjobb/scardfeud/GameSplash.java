@@ -63,7 +63,7 @@ public class GameSplash extends Activity {
         response = (Response) i.getParcelableExtra("responseObject");
         opponent.setText(response.opponentName);
         try {
-            String country = response.opponentName.toLowerCase();
+            String country = response.opponentCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             opponent.setBackgroundDrawable(drawable);
