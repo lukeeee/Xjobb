@@ -90,7 +90,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             pixelLayout = (int) (300 * scale + 0.5f);
             pixelMargin = (int) (30 * scale + 0.5f);
             imageLayout = (int) (48 * scale + 0.5f);
-            textSize = 20;
+            textSize = 30;
         }
     }
 
@@ -248,7 +248,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             dialog.setNeutralButton("+ Friend", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
 
-                    Friends friend = new Friends("Challenge your Friend ", foundUser.getUsername());
+                    Friends friend = new Friends(foundUser.getCountryCode(), foundUser.getUsername());
                     db.addFriend(friend);
                     Toast.makeText(getApplicationContext(), foundUser.getUsername() + " added to your friends", 1000).show();
 
