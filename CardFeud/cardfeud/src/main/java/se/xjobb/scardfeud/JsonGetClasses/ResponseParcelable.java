@@ -51,13 +51,13 @@ public class ResponseParcelable implements Parcelable {
         response.odds = in.readString();
     }
 
-    //@Override
+    @Override
     public int describeContents() {
         return 0;
     }
 
 
-    //@Override
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
 
         dest.writeString(response.gameId);

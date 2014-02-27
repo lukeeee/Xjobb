@@ -168,7 +168,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         helperClass = new HelperClass(this);
         Intent i = getIntent();
-        i.setExtrasClassLoader(ResponseParcelable.class.getClassLoader());
+        i.setExtrasClassLoader(User.UserDetails.getClassLoader());
         ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
         gameResponse = responseParcelable.getResponse();
 

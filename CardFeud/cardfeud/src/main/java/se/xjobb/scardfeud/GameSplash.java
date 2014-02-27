@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -60,7 +59,7 @@ public class GameSplash extends Activity {
 
 
         Intent i = getIntent();
-        i.setExtrasClassLoader(ResponseParcelable.class.getClassLoader());
+        i.setExtrasClassLoader(User.UserDetails.getClassLoader());
         ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
         response = responseParcelable.getResponse();
 
@@ -124,6 +123,7 @@ public class GameSplash extends Activity {
                 //Start main activity when timer is over
                 Intent ix = new Intent(GameSplash.this, Game.class);
                 ResponseParcelable responseParcelable = new ResponseParcelable(response);
+                ix.setExtrasClassLoader(User.UserDetails.getClassLoader());
                 ix.putExtra("responseObject", responseParcelable);
                 startActivity(ix);
 

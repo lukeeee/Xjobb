@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +115,7 @@ public class AvailableGameAdapter extends BaseAdapter {
                     public void run() {
                         Intent i = new Intent(context, GameSplash.class);
                         ResponseParcelable responseParcelable = new ResponseParcelable(response);
+                        i.setExtrasClassLoader(User.UserDetails.getClassLoader());
                         i.putExtra("responseObject", responseParcelable);
                         context.startActivity(i);
                     }}, START_ACTIVITY_DELAY);

@@ -54,6 +54,7 @@ public class User {
         private static boolean vibration;
         private static boolean sound;
         private static boolean soundNotification;
+        private static ClassLoader classLoader;
 
         public static String getUsername(){
             return username;
@@ -125,6 +126,14 @@ public class User {
 
         public static void setNotificationSound(boolean soundNotificationIn){
             soundNotification = soundNotificationIn;
+        }
+
+        public static ClassLoader getClassLoader() {
+            return classLoader;
+        }
+
+        public static void setClassLoader(ClassLoader classLoader) {
+            classLoader = classLoader;
         }
     }
 
