@@ -77,8 +77,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        Friends country = new Friends(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
+        Friends country = new Friends((cursor.getString(0)),
+                cursor.getString(1), Integer.parseInt(cursor.getString(2)));
         // return country
         return country;
     }
@@ -100,6 +100,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 contact.setID(Integer.parseInt(cursor.getString(0)));
                 contact.setCountry(cursor.getString(1));
                 contact.setFriend(cursor.getString(2));
+                contact.setUserID(Integer.parseInt(cursor.getString(3)));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
