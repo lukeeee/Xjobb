@@ -139,10 +139,6 @@ public class SignUp extends ActionBarActivity implements View.OnClickListener {
                 getSharedPreferences(helperClass.getPrefsCountryCode(), MODE_PRIVATE).edit().putString("countrycode", User.UserDetails.getUserCountryCode()).commit();
             }
 
-          //  if(User.UserDetails.getDeviceRegId() != null){
-          //      getSharedPreferences(helperClass.getPrefsDeviceRegId(), MODE_PRIVATE).edit().putString("deviceRegId", User.UserDetails.getDeviceRegId()).commit();
-          //  }
-
         } catch (Exception ex){
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }

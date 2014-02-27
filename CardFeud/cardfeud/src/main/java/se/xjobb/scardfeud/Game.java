@@ -115,27 +115,36 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // when pressing "higher"
-                // sendRequestToServer "1 = higher"
-                SoundsVibration.vibrate(Game.this);
-                sendRequestToServer(1);
-                //SoundsVibration.start(R.raw.drop, Game.this);
-                //disableGamePay();
+                if(!gameResponse.cardValue.equals("13")){
+                    // sendRequestToServer "1 = higher"
+                    SoundsVibration.vibrate(Game.this);
+                    sendRequestToServer(1);
+                    //SoundsVibration.start(R.raw.drop, Game.this);
+                    //disableGamePay();
+                } else {
+                    Toast.makeText(getApplicationContext(), "There is nothing higher than King", 1000).show();
+                }
+
             }
         });
         low.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // when pressing "lower"
-                // send RequestToServer "2 = lower"
-                SoundsVibration.vibrate(Game.this);
-                sendRequestToServer(2);
-                // SoundsVibration.start(R.raw.drop, Game.this);
-                //disableGamePay();
+                if(!gameResponse.cardValue.equals("1")){
+                    // send RequestToServer "2 = lower"
+                    SoundsVibration.vibrate(Game.this);
+                    sendRequestToServer(2);
+                    // SoundsVibration.start(R.raw.drop, Game.this);
+                    //disableGamePay();
+                } else {
+                    Toast.makeText(getApplicationContext(), "There is nothing lower than an Ace", 1000).show();
+                }
+
             }
         });
         pass.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                // TODO handle if pass is disabled in JSON response  == TEST
                 if(!gameResponse.passProhibited.equals("1")){
                     // when pressing pass
                     //send RequestToServer "3 = pass"
@@ -239,9 +248,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         arrowlr.setVisibility(View.INVISIBLE);
         arrowll.setVisibility(View.INVISIBLE);
         waiting.clearAnimation();
-
-        // TODO handle if pass is disabled in JSON response
-
     }
 
     // used to enable game buttons
@@ -266,8 +272,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         arrowlr.clearAnimation();
         arrowll.setVisibility(View.VISIBLE);
         arrowll.clearAnimation();
-
-        // TODO handle if pass is disabled in JSON response
     }
 
     // used to update stats
@@ -410,10 +414,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            /*case R.id.action_chat:
-                Intent settingsIntent = new Intent(getBaseContext(), AppSettings.class);
-                startActivity(settingsIntent);
-                return true;*/
             case R.id.action_help:
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Game.this);
                 dialog.setTitle("Quick Help");
@@ -455,7 +455,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         if(!refresh){
             // if we are not refreshing
             try{
-
                 if(!gameResponse.thisRoundPoints.equals("0")){
                     // we got a point
                     Toast.makeText(this, "Point gained!", 500).show();
@@ -720,6 +719,15 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     }
 
 
+    // check opponentName, if it's greater than 12 chars then we modify it
+    private Response checkAndModifyOpponentName(Response response){
+        if(response.opponentName.length() > 12){
+            // remove everything after 9 chars and add "..."
+            response.opponentName = response.opponentName.substring(0, 9) + "...";
+        }
+        return response;
+    }
+
     // finish method when posting game play
     public void finishRequest(String result){
         Log.i("Result: ", result);
@@ -729,6 +737,9 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
             // create Response object with all the JSON values
             gameResponse = gson.fromJson(result, Response.class);
+
+            // check and modify name
+            gameResponse = checkAndModifyOpponentName(gameResponse);
 
         } catch (Exception ex){
             Log.e(TAG, ex.getMessage());

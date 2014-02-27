@@ -62,7 +62,14 @@ public class PostSearch {
             if(foundUserId != 0 && foundUsername != null){
                 // set the user values for the found user
                 foundUser = new User();
-                foundUser.setUsername(foundUsername);
+                String username = "";
+
+                if(foundUsername.length() > 12){
+                    // remove everything after 9 chars and add "..."
+                    username = foundUsername.substring(0, 9) + "...";
+                }
+
+                foundUser.setUsername(username);
                 foundUser.setUserId(foundUserId);
             } else {
                 foundUser = null;

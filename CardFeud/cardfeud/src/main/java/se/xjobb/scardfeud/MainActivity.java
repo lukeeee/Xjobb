@@ -186,6 +186,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
+    // check opponentName, if it's greater than 12 chars then we modify it
+    private Response checkAndModifyOpponentName(Response response){
+        if(response.opponentName.length() > 12){
+            // remove everything after 9 chars and add "..."
+            response.opponentName = response.opponentName.substring(0, 9) + "...";
+        }
+        return response;
+    }
+
     // get all objects of a certain type in the json response and save them to a list
     private List<Response> getResponses(JSONObject serverResponse, String objectName){
         List<Response> responses = new ArrayList<Response>();
@@ -205,13 +214,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             Log.e(TAG, ex.getMessage());
         }
 
+
+        // check each response object
+        for(Response response : responses){
+            checkAndModifyOpponentName(response);
+        }
+
         return responses;
     }
 
     // called when Async Post is finished
     // Here where the json data is processed
     public void finishRequest(String result){
-        Log.i("RESULTAT: ", result);
 
         JSONObject jsonResponse = null;
 
@@ -228,8 +242,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
             // if there is invitations present in response
             if(!jsonResponse.isNull("invitations")){
-                Log.i("invite: ","true");
-
                 // get and store all invitation response objects in a static list
                 GameListResult.setInvitations(getResponses(jsonResponse, "invitations"));
             } else {
@@ -238,8 +250,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
 
             if(!jsonResponse.isNull("my_turn")){
-                Log.i("my_turn: ","true");
-
                 // get and store all my_turn response objects in a static list
                 GameListResult.setMyTurns(getResponses(jsonResponse, "my_turn"));
             } else {
@@ -248,8 +258,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
 
             if(!jsonResponse.isNull("opponents_turn")){
-                Log.i("opponents_turn: ", "true");
-
                 // get and store all opponents_turn response objects in a static list
                 GameListResult.setOpponentsTurns(getResponses(jsonResponse, "opponents_turn"));
             } else {
@@ -258,9 +266,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
 
             if(!jsonResponse.isNull("finished")){
-                Log.i("finished: ", "true");
-
-                // get and store all finished response objects in a static list
+                 // get and store all finished response objects in a static list
                 GameListResult.setFinishedGames(getResponses(jsonResponse, "finished"));
             } else {
                 // make sure old values are removed

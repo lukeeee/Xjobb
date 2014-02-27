@@ -405,7 +405,7 @@ public class Login extends ActionBarActivity implements View.OnClickListener{
 
 
                 // check input
-                if(validateInput(username, password) != false){
+                if(validateInput(username, password)){
 
                     username = username.trim();
                     password = password.trim();
@@ -440,10 +440,3 @@ public class Login extends ActionBarActivity implements View.OnClickListener{
 
 
 }
-
-
-
-// Do we need to replace the identifier each time? or can we use the same all the time?
-// Change appearance of the notice and make sure it is removed onclick
-// log sound and vibb in service
-// if != null && !isEmpty() ???
