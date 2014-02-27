@@ -28,7 +28,7 @@ public class FriendAdapter extends BaseAdapter {
     NewGame ng;
 
 
-    public FriendAdapter(Context context){
+    public FriendAdapter(Context context, NewGame ng){
         this.context = context;
         this.db = new DatabaseHandler(context);
         this.friends = (ArrayList) db.getAllContacts();
@@ -64,11 +64,11 @@ public class FriendAdapter extends BaseAdapter {
 
 
         //wait.getBackground().setAlpha(200);
-        final Friends frie = db.getAllContacts().get(i);
+        final Friends friend = db.getAllContacts().get(i);
 
 
         try {
-            String country = frie.getCountry().toLowerCase();
+            String country = friend.getCountry().toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
             challengeFlag.setImageDrawable(drawable);
@@ -80,7 +80,7 @@ public class FriendAdapter extends BaseAdapter {
             challengeFlag.setImageDrawable(drawable);
         }
 
-        chall.setText(frie.getFriend());
+        chall.setText(friend.getFriend());
         chall.setTypeface(tf);
         view.setTag(friends.get(i));
 
@@ -93,9 +93,8 @@ public class FriendAdapter extends BaseAdapter {
                     // add retry to dialog.
                 } else {
                     // challenge friend
-                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), frie.getID(), ng);
+                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), friend.getID(), ng);
                     postGameStart.postRequest();
-                    Toast.makeText(context, "Game request sent to " + frie.getFriend(), 1000).show();
                 }
             }
         });

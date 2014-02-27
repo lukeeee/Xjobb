@@ -85,7 +85,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
 
         db = new DatabaseHandler(this);
 
-        FriendAdapter friendAdapter = new FriendAdapter(this);
+        FriendAdapter friendAdapter = new FriendAdapter(this, this);
         final int adapterCount = friendAdapter.getCount();
         for (int i = 0; i < adapterCount; i++) {
             View item = friendAdapter.getView(i, null, null);

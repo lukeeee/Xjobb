@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.JsonGetClasses.ResponseParcelable;
 
 /**
  * Created by Lukas on 2014-02-05.
@@ -59,8 +60,10 @@ public class GameSplash extends Activity {
 
 
         Intent i = getIntent();
-        // i.setExtrasClassLoader(Response.class.getClass().getClassLoader());   //Exception here, but alla values are there???
-        response = (Response) i.getParcelableExtra("responseObject");
+        i.setExtrasClassLoader(ResponseParcelable.class.getClassLoader());
+        ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
+        response = responseParcelable.getResponse();
+
         opponent.setText(response.opponentName);
         try {
             String country = response.opponentCountry.toLowerCase();
@@ -120,7 +123,8 @@ public class GameSplash extends Activity {
             public void run() {
                 //Start main activity when timer is over
                 Intent ix = new Intent(GameSplash.this, Game.class);
-                ix.putExtra("responseObject", (Parcelable) response);
+                ResponseParcelable responseParcelable = new ResponseParcelable(response);
+                ix.putExtra("responseObject", responseParcelable);
                 startActivity(ix);
 
                 // Close this activity

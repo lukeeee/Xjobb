@@ -19,6 +19,7 @@ import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.GameListResult;
 import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.JsonGetClasses.ResponseParcelable;
 
 /**
  * Created by Lukas on 2014-01-30.
@@ -101,7 +102,8 @@ public class WaitingGameAdapter extends BaseAdapter {
 
                 // start "Game" with the current game
                 Intent i = new Intent(context, Game.class);
-                i.putExtra("responseObject", (Parcelable) response);
+                ResponseParcelable responseParcelable = new ResponseParcelable(response);
+                i.putExtra("responseObject", responseParcelable);
                 context.startActivity(i);
             }
         });

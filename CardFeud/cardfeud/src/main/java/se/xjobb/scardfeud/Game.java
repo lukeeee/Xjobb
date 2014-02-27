@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.xjobb.scardfeud.JsonGetClasses.Response;
+import se.xjobb.scardfeud.JsonGetClasses.ResponseParcelable;
 import se.xjobb.scardfeud.Posters.PostGameList;
 import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
@@ -167,8 +168,10 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         helperClass = new HelperClass(this);
         Intent i = getIntent();
-        //i.setExtrasClassLoader(Response.class.getClass().getClassLoader());    //Exception here, but alla values are there?
-        gameResponse = (Response) i.getParcelableExtra("responseObject");
+        i.setExtrasClassLoader(ResponseParcelable.class.getClassLoader());
+        ResponseParcelable responseParcelable = (ResponseParcelable) i.getParcelableExtra("responseObject");
+        gameResponse = responseParcelable.getResponse();
+
         stat.setText("You  " + gameResponse.playerPoints + "-" + gameResponse.opponentPoints +"  "+ gameResponse.opponentName);
         waiting.setText("Waiting for " + gameResponse.opponentName);
         setCorrectCard();
@@ -181,33 +184,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             disableGamePlay();
             waiting.setVisibility(View.VISIBLE);
         }
-
-        // Log.i("Response: ", gameResponse.thisRoundPoints);
-       // Log.i("Response: ", gameResponse.chatUnread);
-       // Log.i("Response: ", gameResponse.myTurn);
-       // Log.i("Response: ", gameResponse.opponentName);
-       // Log.i("Response: ", gameResponse.cardColor);
-       // Log.i("Response: ", gameResponse.cardValue);
-       // Log.i("Response: ", gameResponse.finishedTime);
-       // Log.i("Response: ", gameResponse.lastEvent);
-       // Log.i("Response: ", gameResponse.lastEventTime);  //adad
-       // ----Log.i("Response: ", gameResponse.lastRoundDetails);
-       // Log.i("Response: ", gameResponse.gameId);
-       // Log.i("Response: ", gameResponse.startTime);
-       // ----Log.i("Response: ", gameResponse.odds);
-       // Log.i("Response: ", gameResponse.thisRoundDetails);
-       // Log.i("Response: ", gameResponse.lastRoundPoints); ///
-       // Log.i("Response: ", gameResponse.passProhibited);
-       // Log.i("Response: ", gameResponse.playerErrors);
-       // Log.i("Response: ", gameResponse.playerName);
-       // Log.i("Response: ", gameResponse.playerOne);
-       // Log.i("Response: ", gameResponse.playerPoints);
-       // Log.i("Response: ", gameResponse.playerTwo);
-       // Log.i("Response: ", gameResponse.playerWins);
-       // Log.i("Response: ", gameResponse.opponentWins);
-       // Log.i("Response: ", gameResponse.opponentErrors);
-       // Log.i("Response: ", gameResponse.opponentId);
-       // Log.i("Response: ", gameResponse.opponentPoints);
 
         try {
             String country = gameResponse.opponentCountry.toLowerCase();

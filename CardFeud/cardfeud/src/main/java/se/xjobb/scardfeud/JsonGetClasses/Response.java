@@ -1,8 +1,5 @@
 package se.xjobb.scardfeud.JsonGetClasses;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -11,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * This represents a json response. GameList -> Response
  *
  */
-public class Response implements Parcelable {
+public class Response {
 
     /* Used to represent json objects */
 
@@ -95,90 +92,4 @@ public class Response implements Parcelable {
 
     @SerializedName("odds")
     public String odds;
-
-    /* Everything below is used to pass objects of this type along with intents */
-
-    //@Override
-    public int describeContents() {
-        return 0;
-    }
-
-
-    //@Override
-    public void writeToParcel(Parcel dest, int flags) {
-        //dest.writeStrin("");
-        dest.writeStringArray(new String[]{
-                this.gameId,
-                this.startTime,
-                this.finishedTime,
-                this.lastEvent,
-                this.lastEventTime,
-                this.playerOne,
-                this.playerTwo,
-                this.playerName,
-                this.opponentId,
-                this.opponentName,
-                this.opponentCountry,
-                this.cardColor,
-                this.cardValue,
-                this.passProhibited,
-                this.lastRoundDetails,
-                this.thisRoundDetails,
-                this.lastRoundPoints,
-                this.thisRoundPoints,
-                this.myTurn,
-                this.opponentPoints,
-                this.opponentErrors,
-                this.opponentWins,
-                this.playerPoints,
-                this.playerErrors,
-                this.playerWins,
-                this.chatUnread,
-                this.odds});
-    }
-
-    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<Response> CREATOR = new Parcelable.Creator<Response>() {
-        public Response createFromParcel(Parcel in) {
-            return new Response(in);
-        }
-
-        public Response[] newArray(int size) {
-            return new Response[size];
-        }
-    };
-
-    private Response (Parcel in) {
-        // gameId = in.readString();
-        String[] data = new String[27];
-        in.readStringArray(data);
-        this.gameId = data[0];
-        this.startTime = data[1];
-        this.finishedTime = data[2];
-        this.lastEvent = data[3];
-        this.lastEventTime = data[4];
-        this.playerOne = data[5];
-        this.playerTwo = data[6];
-        this.playerName = data[7];
-        this.opponentId = data[8];
-        this.opponentName = data[9];
-        this.opponentCountry = data[10];
-        this.cardColor = data[11];
-        this.cardValue = data[12];
-        this.passProhibited = data[13];
-        this.lastRoundDetails = data[14];
-        this.thisRoundDetails = data[15];
-        this.lastRoundPoints = data[16];
-        this.thisRoundPoints = data[17];
-        this.myTurn = data[18];
-        this.opponentPoints = data[19];
-        this.opponentErrors = data[20];
-        this.opponentWins = data[21];
-        this.playerPoints = data[22];
-        this.playerErrors = data[23];
-        this.playerWins = data[24];
-        this.chatUnread = data[25];
-        this.odds = data[26];
-    }
-
 }
