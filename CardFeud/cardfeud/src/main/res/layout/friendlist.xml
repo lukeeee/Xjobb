@@ -13,7 +13,7 @@
         android:textSize="17sp"
         android:textStyle="bold"
         android:background="@drawable/button"
-        android:id="@+id/waitGameBtn"
+        android:id="@+id/challengeBtn"
         android:gravity="left|center"
         android:paddingLeft="50dp"
         android:textColor="#000"
@@ -26,5 +26,5 @@
         android:layout_height="40dp"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="12dp"
-        android:id="@+id/waitFlag"/>
+        android:id="@+id/challengeFlag"/>
 </RelativeLayout>

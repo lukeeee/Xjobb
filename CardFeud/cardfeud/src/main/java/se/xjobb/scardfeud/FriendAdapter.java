@@ -1,15 +1,21 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
 /**
@@ -19,12 +25,14 @@ public class FriendAdapter extends BaseAdapter {
     List<Friends> friends;
     Context context;
     DatabaseHandler db;
+    NewGame ng;
 
 
     public FriendAdapter(Context context){
         this.context = context;
         this.db = new DatabaseHandler(context);
         this.friends = (ArrayList) db.getAllContacts();
+        this.ng = ng;
     }
 
     @Override
@@ -51,21 +59,44 @@ public class FriendAdapter extends BaseAdapter {
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
 
-        Button wait = (Button)view.findViewById(R.id.waitGameBtn);
+        Button chall = (Button)view.findViewById(R.id.challengeBtn);
+        ImageView challengeFlag = (ImageView)view.findViewById(R.id.challengeFlag);
 
 
         //wait.getBackground().setAlpha(200);
         final Friends frie = db.getAllContacts().get(i);
 
-        wait.setText("Challange your friend " + frie.getFriend());
-        wait.setTypeface(tf);
+
+        try {
+            String country = frie.getCountry().toLowerCase();
+            int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+            challengeFlag.setImageDrawable(drawable);
+        } catch (Resources.NotFoundException ex) {
+            // if the flag can't be found
+            int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
+            Drawable drawable = context.getResources().getDrawable(id);
+
+            challengeFlag.setImageDrawable(drawable);
+        }
+
+        chall.setText(frie.getFriend());
+        chall.setTypeface(tf);
         view.setTag(friends.get(i));
 
-        wait.setOnClickListener(new View.OnClickListener() {
+        chall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SoundsVibration.start(R.raw.clock, context);
-                SoundsVibration.vibrate(context);
+                HelperClass helperClass = new HelperClass(context);
+                if (!helperClass.isConnected()) {
+                    helperClass.showNetworkErrorDialog();
+                    // add retry to dialog.
+                } else {
+                    // challenge friend
+                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), frie.getID(), ng);
+                    postGameStart.postRequest();
+                    Toast.makeText(context, "Game request sent to " + frie.getFriend(), 1000).show();
+                }
             }
         });
 

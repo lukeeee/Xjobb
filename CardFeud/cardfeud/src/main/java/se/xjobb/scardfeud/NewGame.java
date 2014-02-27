@@ -83,7 +83,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
         //friendList.setAdapter(adapter);
 
-        //db = new DatabaseHandler(this);
+        db = new DatabaseHandler(this);
 
         FriendAdapter friendAdapter = new FriendAdapter(this);
         final int adapterCount = friendAdapter.getCount();
