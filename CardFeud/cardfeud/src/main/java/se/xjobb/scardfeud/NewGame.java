@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,11 +37,11 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
     private String userCountry;
     private boolean setFlag = false;
     ImageView flag;
-    LinearLayout lnrMain;
+    LinearLayout lnrMain, friendList;
     Boolean hasPremium = false;
     private ProgressDialog progressDialog;
     private HelperClass helperClass;
-    ListView friendList;
+    //ListView friendList;
     private ArrayAdapter<String> adapter;
     private List<String> data;
     private DatabaseHandler db;
@@ -53,7 +52,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         setContentView(R.layout.newgame);
         user = (TextView)findViewById(R.id.user2);
         friends = (TextView)findViewById(R.id.friendsText);
-        friendList = (ListView)findViewById(R.id.friends);
+        friendList = (LinearLayout)findViewById(R.id.friends);
         search_player = (Button)findViewById(R.id.search_player);
         random_player = (Button)findViewById(R.id.random_player);
         flag = (ImageView)findViewById(R.id.flagMy);
@@ -81,20 +80,20 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
         actionBar.setDisplayShowTitleEnabled(false);
 
         data = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
-        friendList.setAdapter(adapter);
+        //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+        //friendList.setAdapter(adapter);
 
-        db = new DatabaseHandler(this);
+        //db = new DatabaseHandler(this);
 
-        /*FriendAdapter friendAdapter = new FriendAdapter(getApplicationContext());
+        FriendAdapter friendAdapter = new FriendAdapter(this);
         final int adapterCount = friendAdapter.getCount();
         for (int i = 0; i < adapterCount; i++) {
             View item = friendAdapter.getView(i, null, null);
             friendList.addView(item);
-        }*/
+        }
 
 
-        if (hasPremium == false){
+        if (!hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
             runOnUiThread(new Runnable() {
@@ -116,19 +115,7 @@ public class NewGame extends ActionBarActivity implements View.OnClickListener{
     @Override
     protected void onResume(){
         super.onResume();
-        List<Friends> cl = db.getAllContacts();
 
-        adapter.clear();
-
-        if (!cl.isEmpty()) {
-            for (Friends c : cl) {
-                adapter.add(c.toString());
-            }
-        } else {
-            adapter.add("No items");
-        }
-
-        // if on create was not called
         if(!setFlag){
             setUserFlag();
         }

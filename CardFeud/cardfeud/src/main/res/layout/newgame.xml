@@ -1,10 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context="se.xjobb.scardfeud.NewGame"
+    tools:context="se.xjobb.scardfeud.NewGame" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
     <View
         android:layout_width="match_parent"
@@ -97,14 +100,14 @@
             android:background="@drawable/btn_game"
             android:id="@+id/friendsText"/>
     </RelativeLayout>
-    <ListView
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="@drawable/button"
-        android:id="@+id/friends"/>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/friends"/>
         <View
-            android:layout_height="250dp"
+            android:layout_height="20dp"
             android:layout_width="match_parent"/>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -118,3 +121,4 @@
 
 
 </LinearLayout>
+    </ScrollView>
