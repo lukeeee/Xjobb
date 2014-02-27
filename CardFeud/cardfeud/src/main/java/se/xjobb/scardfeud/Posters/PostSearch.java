@@ -47,7 +47,6 @@ public class PostSearch {
 
         try{
             // parse the Json result manually
-
             result = result.replaceAll("\"", "");
             int delimiterIndex = result.indexOf(":");
 

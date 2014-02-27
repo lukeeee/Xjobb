@@ -203,7 +203,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
 
     private void challengePlayer(){
-        if(helperClass.isConnected() != true){
+        if(!helperClass.isConnected()){
             helperClass.showNetworkErrorDialog();
             // add retry to dialog.
         } else {
