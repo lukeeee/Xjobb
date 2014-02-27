@@ -24,6 +24,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_COUNTRY = "country";
     private static final String KEY_YEAR = "year";
+    private static final String KEY_USER_ID = "user_id";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_COUNTRIES + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_COUNTRY + " TEXT,"
-                + KEY_YEAR + " TEXT" + ")";
+                + KEY_YEAR + " TEXT" + KEY_USER_ID + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -59,6 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_COUNTRY, contact.getCountry()); // Country
         values.put(KEY_YEAR, contact.getFriend()); // Friend
+        values.put(KEY_USER_ID, contact.getUserID());
 
         // Inserting Row
         db.insert(TABLE_COUNTRIES, null, values);
@@ -70,7 +72,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_COUNTRIES, new String[]{KEY_ID,
-                KEY_COUNTRY, KEY_YEAR}, KEY_ID + "=?",
+                KEY_COUNTRY, KEY_YEAR, KEY_USER_ID}, KEY_ID + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -114,6 +116,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_COUNTRY, contact.getCountry());
         values.put(KEY_YEAR, contact.getFriend());
+        values.put(KEY_USER_ID, contact.getUserID());
 
         // updating row
         return db.update(TABLE_COUNTRIES, values, KEY_ID + " = ?",
