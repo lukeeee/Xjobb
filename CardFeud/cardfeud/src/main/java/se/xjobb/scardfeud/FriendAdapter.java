@@ -80,7 +80,7 @@ public class FriendAdapter extends BaseAdapter {
             challengeFlag.setImageDrawable(drawable);
         }
 
-        chall.setText(friend.getFriend());
+        chall.setText(friend.getFriend().toString());
         chall.setTypeface(tf);
         view.setTag(friends.get(i));
 
