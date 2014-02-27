@@ -88,7 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Friends> contactList = new ArrayList<Friends>();
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_COUNTRIES +
-                " ORDER BY country, year";
+                " ORDER BY country, year, user_id";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
