@@ -150,9 +150,9 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
 
         foundUserImage = new ImageView(this);
-        /*response = (Response) i.getParcelableExtra("responseObject");
+        /* Will look like this when it's working
         try {
-            String country = response.opponentCountry.toLowerCase();
+            String country = foundUser.getCountryCode().toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             foundUserImage.setBackgroundDrawable(drawable);
