@@ -48,6 +48,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
     int pixelMargin;
     int imageLayout;
     int textSize;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,9 +150,9 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
 
         foundUserImage = new ImageView(this);
-        /* Will look like this when it's working
+        /*response = (Response) i.getParcelableExtra("responseObject");
         try {
-            String country = foundUser.getCountryCode().toLowerCase();
+            String country = response.opponentCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getPackageName());
             Drawable drawable = getResources().getDrawable(id);
             foundUserImage.setBackgroundDrawable(drawable);
@@ -217,7 +218,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
 
     private void challengePlayer(){
-        if(!helperClass.isConnected()){
+        if(helperClass.isConnected() != true){
             helperClass.showNetworkErrorDialog();
             // add retry to dialog.
         } else {
@@ -233,6 +234,7 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
 
     @Override
     public void onClick(View v) {
+        db = new DatabaseHandler(this);
         if(v == foundUserButton){
             AlertDialog.Builder dialog = new AlertDialog.Builder(Search.this);
             dialog.setTitle("Challenge Player");
@@ -245,6 +247,11 @@ public class Search extends ActionBarActivity implements View.OnClickListener, E
             });
             dialog.setNeutralButton("+ Friend", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+
+                    Friends friend = new Friends(foundUser.getUsername(),
+                            foundUser.getCountryCode());
+                    db.addFriend(friend);
+                    Toast.makeText(getApplicationContext(), foundUser.getUsername() + " added to your friends", 1000).show();
 
                 }
             });
