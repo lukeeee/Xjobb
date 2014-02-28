@@ -2,6 +2,7 @@ package se.xjobb.scardfeud;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -666,6 +668,51 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    public void ratingDialog(){
+        if (!User.UserDetails.getHasRated()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setTitle("Rate Us");
+            builder.setMessage("Please rate us on Google play");
+            builder.setInverseBackgroundForced(true);
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // open google play
+                    Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    try {
+                        startActivity(goToMarket);
+                    } catch (ActivityNotFoundException e) {
+                        Toast.makeText(getApplicationContext(), "Couldn't launch the market", Toast.LENGTH_LONG).show();
+                    }
+                    //User.UserDetails.setHasRated(true);
+                    dialog.cancel();
+
+                }
+            });
+            builder.setNeutralButton("Ask me later", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // open next finished game
+                    User.UserDetails.setHasRated(false);
+                    dialog.cancel();
+                }
+            });
+            builder.setNegativeButton("Don't ask me again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // just close the dialog
+                    dialog.dismiss();
+                    User.UserDetails.setHasRated(true);
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+
     }
 
 

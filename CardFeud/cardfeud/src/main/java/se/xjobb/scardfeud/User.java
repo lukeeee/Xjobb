@@ -55,6 +55,7 @@ public class User {
         private static boolean sound;
         private static boolean soundNotification;
         private static ClassLoader classLoader;
+        private static boolean hasRated = false;
 
         public static String getUsername(){
             return username;
@@ -118,6 +119,14 @@ public class User {
 
         public static void setSound(boolean soundIn){
             sound = soundIn;
+        }
+
+        public static boolean getHasRated(){
+            return hasRated;
+        }
+
+        public static void setHasRated(boolean hasRated){
+            hasRated = hasRated;
         }
 
         public static boolean getNotificationSound(){

@@ -25,6 +25,7 @@ public class HelperClass {
     private final String PREFNOTIFICATIONSSOUND = "cardFeudNotificationSound";
     private final String PREFSVIBRATION = "cardFeudVibration";
     private final String PREFSRESULT = "cardFeudResult";
+    private final String PREFSRATE = "hasRated";
     private String projectNumber = "155115390012";
     // Constructor to set Context
     public HelperClass(Context context){
@@ -72,6 +73,8 @@ public class HelperClass {
     }
 
     public String getPrefsResult() { return this.PREFSRESULT; }
+
+    public String getPrefsRate() { return this.PREFSRATE; }
 
     public String getKey(){
         return this.KEY;
