@@ -4,10 +4,9 @@ package se.xjobb.scardfeud;
  * Created by Lukas on 2014-02-27.
  */
 public class Friends{
-    private int _id;
     private String _country;
     private String _friend;
-    private int _userId;
+    private String _userId;
 
     // Empty constructor
     public Friends() {
@@ -15,28 +14,10 @@ public class Friends{
     }
 
     // constructor
-    public Friends(int id, String country, String friend, int user_id) {
-        _id = id;
-        _country = country;
-        _friend = friend;
-        _userId = user_id;
-    }
-
-    // constructor
-    public Friends(String country, String _friend, int _userId) {
+    public Friends(String _userId, String country, String _friend) {
+        this._userId = _userId;
         this._country = country;
         this._friend = _friend;
-        this._userId = _userId;
-    }
-
-    // getting ID
-    public int getID() {
-        return this._id;
-    }
-
-    // setting _id
-    public void setID(int id) {
-        this._id = id;
     }
 
     // getting country
@@ -60,12 +41,12 @@ public class Friends{
     }
 
     // getting ID
-    public int getUserID() {
+    public String getUserID() {
         return this._userId;
     }
 
     // setting _id
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this._userId = userID;
     }
 

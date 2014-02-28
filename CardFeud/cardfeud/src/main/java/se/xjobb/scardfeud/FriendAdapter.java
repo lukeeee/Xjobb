@@ -1,9 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +65,7 @@ public class FriendAdapter extends BaseAdapter {
         final Friends friend = db.getAllContacts().get(i);
 
 
-        try {
+        /*try {
             String country = friend.getCountry().toLowerCase();
             int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
             Drawable drawable = context.getResources().getDrawable(id);
@@ -78,11 +76,13 @@ public class FriendAdapter extends BaseAdapter {
             Drawable drawable = context.getResources().getDrawable(id);
 
             challengeFlag.setImageDrawable(drawable);
-        }
+        }*/
+        challengeFlag.setImageResource(R.drawable.globe);
 
-        chall.setText(friend.getFriend().toString());
+        chall.setText(friend.getFriend());
         chall.setTypeface(tf);
         view.setTag(friends.get(i));
+        Log.i("get user id", friend.getUserID() + ", " + friend.getCountry() + ", " + friend.getFriend());
 
         chall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +93,7 @@ public class FriendAdapter extends BaseAdapter {
                     // add retry to dialog.
                 } else {
                     // challenge friend
-                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), friend.getID(), ng);
+                    PostGameStart postGameStart = new PostGameStart(User.UserDetails.getUserId(), User.UserDetails.getIdentifier(), Integer.parseInt(friend.getUserID()), ng);
                     postGameStart.postRequest();
                 }
             }

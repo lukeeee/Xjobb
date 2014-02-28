@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.SocketTimeoutException;
-import java.net.URLEncoder;
 
 import se.xjobb.scardfeud.Search;
 import se.xjobb.scardfeud.User;
@@ -67,6 +66,8 @@ public class PostSearch {
                 if(foundUsername.length() > 12){
                     // remove everything after 9 chars and add "..."
                     username = foundUsername.substring(0, 9) + "...";
+                } else {
+                    username = foundUsername;
                 }
 
                 foundUser.setUsername(username);
@@ -74,7 +75,6 @@ public class PostSearch {
             } else {
                 foundUser = null;
             }
-
         } catch (NumberFormatException ex) {
             Log.e("Exception Substring: ", ex.getMessage());
         } catch (NullPointerException ex) {
