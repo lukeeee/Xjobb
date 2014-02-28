@@ -65,7 +65,7 @@ public class Start extends Fragment implements View.OnClickListener {
         waitingtext.setVisibility(View.INVISIBLE);
         fin_Gamestext.setVisibility(View.INVISIBLE);
         showFinGame.setVisibility(View.GONE);
-        //hideFinGame.setVisibility(View.GONE);
+        hideFinGame.setVisibility(View.INVISIBLE);
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/hobostd.otf");
         newGame.setTypeface(tf);
@@ -101,6 +101,8 @@ public class Start extends Fragment implements View.OnClickListener {
         createFinishedGameAdapter();
 
         MainActivity.setStartTag(getTag());
+        showFinGame.setOnClickListener(this);
+        hideFinGame.setOnClickListener(this);
 
         return rootView;
     }
@@ -119,6 +121,16 @@ public class Start extends Fragment implements View.OnClickListener {
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
                 }}, START_ACTIVITY_DELAY);
+        } else if(view == hideFinGame){
+            finGames.setVisibility(View.GONE);
+            hideFinGame.setVisibility(View.GONE);
+            showFinGame.setVisibility(View.VISIBLE);
+
+        } else if(view == showFinGame){
+            finGames.setVisibility(View.VISIBLE);
+            hideFinGame.setVisibility(View.VISIBLE);
+            showFinGame.setVisibility(View.GONE);
+
         }
 
     }
@@ -167,6 +179,7 @@ public class Start extends Fragment implements View.OnClickListener {
 
         if(adapterCount > 0){
             fin_Gamestext.setVisibility(View.VISIBLE);
+            hideFinGame.setVisibility(View.VISIBLE);
         }
     }
 
@@ -218,6 +231,7 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(finishedGameAdapter.getCount() > 0){
                 fin_Gamestext.setVisibility(View.VISIBLE);
+                hideFinGame.setVisibility(View.VISIBLE);
             }
         }
     }

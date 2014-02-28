@@ -141,6 +141,22 @@
                     android:background="@drawable/btn_game"
                     android:id="@+id/fin_game_text"
                     android:textColor="#c00"/>
+
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/btn_game"
+                    android:layout_marginLeft="510dp"
+                    android:text="hide"
+                    android:id="@+id/hideFinGame"/>
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/btn_game"
+                    android:layout_marginLeft="510dp"
+                    android:textSize="28dp"
+                    android:text="show"
+                    android:id="@+id/showFinGame"/>
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="600dp"
