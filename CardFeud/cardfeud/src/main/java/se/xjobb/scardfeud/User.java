@@ -54,8 +54,7 @@ public class User {
         private static boolean vibration;
         private static boolean sound;
         private static boolean soundNotification;
-        private static ClassLoader classLoader;
-        private static boolean hasRated = false;
+        private static boolean hasRated;
 
         public static String getUsername(){
             return username;
@@ -125,8 +124,8 @@ public class User {
             return hasRated;
         }
 
-        public static void setHasRated(boolean hasRated){
-            hasRated = hasRated;
+        public static void setHasRated(boolean hasRatedIn){
+            hasRated = hasRatedIn;
         }
 
         public static boolean getNotificationSound(){
@@ -135,14 +134,6 @@ public class User {
 
         public static void setNotificationSound(boolean soundNotificationIn){
             soundNotification = soundNotificationIn;
-        }
-
-        public static ClassLoader getClassLoader() {
-            return classLoader;
-        }
-
-        public static void setClassLoader(ClassLoader classLoader) {
-            classLoader = classLoader;
         }
     }
 

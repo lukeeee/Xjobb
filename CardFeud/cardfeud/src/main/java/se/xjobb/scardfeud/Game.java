@@ -669,7 +669,33 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         AlertDialog alert = builder.create();
         alert.show();
     }
-    public void ratingDialog(){
+
+    // get the correct hasRated value from shared prefs
+    private boolean getSavedHasRated(){
+        boolean hasRated = false;
+
+        try{
+            hasRated = getSharedPreferences(helperClass.getPrefsRate(), MODE_PRIVATE).getBoolean("hasRated", false);
+        } catch (Exception ex){
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+        return hasRated;
+    }
+
+    // save if the user has rated the app to shared prefs
+    private void saveHasRated(){
+        try{
+            getSharedPreferences(helperClass.getPrefsRate(), MODE_PRIVATE).edit().putBoolean("hasRated", User.UserDetails.getHasRated()).commit();
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+    }
+
+    private void ratingDialog(final Game game){
+        // get if the user has rated or not from shared prefs
+        User.UserDetails.setHasRated(getSavedHasRated());
+
         if (!User.UserDetails.getHasRated()){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
@@ -687,25 +713,33 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
                     } catch (ActivityNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Couldn't launch the market", Toast.LENGTH_LONG).show();
                     }
-                    //User.UserDetails.setHasRated(true);
-                    dialog.cancel();
-
+                    // set and save if rated
+                    User.UserDetails.setHasRated(true);
+                    saveHasRated();
+                    dialog.dismiss();
+                    game.finish();
                 }
             });
             builder.setNeutralButton("Ask me later", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // open next finished game
+                    // set and save if rated
                     User.UserDetails.setHasRated(false);
-                    dialog.cancel();
+                    saveHasRated();
+                    dialog.dismiss();
+                    game.finish();
                 }
             });
             builder.setNegativeButton("Don't ask me again", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // just close the dialog and don't remind later
-                    dialog.dismiss();
+                    // get and save if rated
                     User.UserDetails.setHasRated(true);
+                    saveHasRated();
+                    dialog.dismiss();
+                    game.finish();
                 }
             });
 
@@ -730,7 +764,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             Toast.makeText(this, "Rematch request sent!", 1000).show();
         }
 
-        this.finish();
+        ratingDialog(this);
     }
 
     // show error feedback on game play
@@ -830,7 +864,6 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             disableGamePlay();
             gameOver = true;
             showGameFinishedPopUp(gameResponse);
-            ratingDialog();
         }
     }
 
