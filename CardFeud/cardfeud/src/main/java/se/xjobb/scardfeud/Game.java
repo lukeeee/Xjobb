@@ -703,13 +703,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             builder.setNegativeButton("Don't ask me again", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // just close the dialog
+                    // just close the dialog and don't remind later
                     dialog.dismiss();
                     User.UserDetails.setHasRated(true);
                 }
             });
 
             AlertDialog alert = builder.create();
+            alertDialogs.add(alert);
             alert.show();
         }
 

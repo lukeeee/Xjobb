@@ -28,7 +28,7 @@ public class Start extends Fragment implements View.OnClickListener {
     TextView gamestext;
     TextView waitingtext;
     TextView fin_Gamestext;
-    private Button newGame;
+    private Button newGame,showFinGame,hideFinGame;
     private String username;
     private String myCountry;
     LinearLayout games, waiting, finGames;
@@ -56,12 +56,16 @@ public class Start extends Fragment implements View.OnClickListener {
         waiting = (LinearLayout)rootView.findViewById(R.id.waiting);
         finGames = (LinearLayout)rootView.findViewById(R.id.finGames);
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
+        showFinGame = (Button)rootView.findViewById(R.id.showFinGame);
+        hideFinGame = (Button)rootView.findViewById(R.id.hideFinGame);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
         gamestext.setVisibility(View.INVISIBLE);
         waitingtext.setVisibility(View.INVISIBLE);
         fin_Gamestext.setVisibility(View.INVISIBLE);
+        showFinGame.setVisibility(View.GONE);
+        //hideFinGame.setVisibility(View.GONE);
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/hobostd.otf");
         newGame.setTypeface(tf);
