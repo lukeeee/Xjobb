@@ -829,6 +829,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             disableGamePlay();
             gameOver = true;
             showGameFinishedPopUp(gameResponse);
+            ratingDialog();
         }
     }
 
