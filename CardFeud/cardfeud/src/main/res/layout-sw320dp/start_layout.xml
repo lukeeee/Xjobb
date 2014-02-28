@@ -152,7 +152,7 @@
                 <Button
                     android:layout_width="40dp"
                     android:layout_height="30dp"
-                    android:background="@drawable/button"
+                    android:background="@drawable/btn_game"
                     android:layout_marginLeft="250dp"
                     android:textSize="14dp"
                     android:text="show"
