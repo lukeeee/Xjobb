@@ -136,17 +136,21 @@ public class Start extends Fragment implements View.OnClickListener {
             saveHasHiddenFinishedGames();
 
         } else if(view == showFinGame){
-            finGames.setVisibility(View.VISIBLE);
-            hideFinGame.setVisibility(View.VISIBLE);
-            fin_Gamestext.setVisibility(View.VISIBLE);
-            showFinGame.setVisibility(View.GONE);
-            arrw2.setVisibility(View.GONE);
-            arrw1.setVisibility(View.GONE);
+            showFinishedGames();
             User.UserDetails.setHasHiddenFGames(false);
             saveHasHiddenFinishedGames();
-
         }
 
+    }
+
+    // show all finished games
+    private void showFinishedGames(){
+        finGames.setVisibility(View.VISIBLE);
+        hideFinGame.setVisibility(View.VISIBLE);
+        fin_Gamestext.setVisibility(View.VISIBLE);
+        showFinGame.setVisibility(View.GONE);
+        arrw2.setVisibility(View.GONE);
+        arrw1.setVisibility(View.GONE);
     }
 
     // hide all finished games
@@ -201,9 +205,21 @@ public class Start extends Fragment implements View.OnClickListener {
             finGames.addView(item);
         }
 
+        /*
+
         if(adapterCount > 0){
             fin_Gamestext.setVisibility(View.VISIBLE);
             hideFinGame.setVisibility(View.VISIBLE);
+        } */
+
+        // show/hide text depending on number of items
+        if(adapterCount > 0){
+            if (User.UserDetails.getHasHiddenFGames()){
+                hideFinGame.setVisibility(View.VISIBLE);
+            } else {
+                fin_Gamestext.setVisibility(View.GONE);
+                hideFinGame.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -257,7 +273,7 @@ public class Start extends Fragment implements View.OnClickListener {
                 if (User.UserDetails.getHasHiddenFGames()){
                     hideFinGame.setVisibility(View.VISIBLE);
                 } else {
-                    fin_Gamestext.setVisibility(View.VISIBLE);
+                    fin_Gamestext.setVisibility(View.GONE);
                     hideFinGame.setVisibility(View.VISIBLE);
                 }
             }
@@ -316,7 +332,7 @@ public class Start extends Fragment implements View.OnClickListener {
         boolean hasHiddenFGames = false;
 
         try{
-            hasHiddenFGames = getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), getActivity().MODE_PRIVATE).getBoolean("hasHiddenFGames", false);
+            hasHiddenFGames = getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), MainActivity.MODE_PRIVATE).getBoolean("hasHiddenFGames", false);
         } catch (Exception ex){
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
@@ -325,7 +341,7 @@ public class Start extends Fragment implements View.OnClickListener {
     }
     private void saveHasHiddenFinishedGames(){
         try{
-            getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), getActivity().MODE_PRIVATE).edit().putBoolean("hasHiddenFGames", User.UserDetails.getHasHiddenFGames()).commit();
+            getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), MainActivity.MODE_PRIVATE).edit().putBoolean("hasHiddenFGames", User.UserDetails.getHasHiddenFGames()).commit();
         } catch (Exception ex) {
             Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
