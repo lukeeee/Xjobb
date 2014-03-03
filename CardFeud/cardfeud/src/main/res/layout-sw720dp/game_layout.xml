@@ -157,17 +157,8 @@
                 android:id="@+id/arrowpassr"/>
 
         </RelativeLayout>
-        <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/gamelnrMain"
-            android:layout_gravity="center|bottom">
-
-        </LinearLayout>
         <TextView
-            android:layout_marginTop="-440dp"
+            android:layout_marginTop="-340dp"
             android:layout_width="600dp"
             android:layout_height="280dp"
             android:background="@drawable/button"
@@ -177,6 +168,16 @@
             android:textStyle="bold"
             android:text="Waiting for opponent"
             android:id="@+id/waiting"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/gamelnrMain"
+            android:layout_gravity="center|bottom">
+
+        </LinearLayout>
+
 
 
 
