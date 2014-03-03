@@ -129,7 +129,7 @@ public class Start extends Fragment implements View.OnClickListener {
             BitmapFactory.decodeResource(getResources(), resourceId, o);
 
             //The new size we want to scale to
-            final int REQUIRED_SIZE = 120;  //   SET SIZE HERE, WAS 180 before
+            final int REQUIRED_SIZE = 80;  //   SET SIZE HERE, WAS 180 before
 
             //Find the correct scale value. It should be the power of 2.
             int scale=1;
