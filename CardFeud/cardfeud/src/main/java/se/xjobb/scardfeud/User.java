@@ -55,6 +55,7 @@ public class User {
         private static boolean sound;
         private static boolean soundNotification;
         private static boolean hasRated;
+        private static boolean hasHiddenFGames;
 
         public static String getUsername(){
             return username;
@@ -126,6 +127,14 @@ public class User {
 
         public static void setHasRated(boolean hasRatedIn){
             hasRated = hasRatedIn;
+        }
+
+        public static void setHasHiddenFGames(boolean hasHiddenFGamesIn){
+            hasHiddenFGames = hasHiddenFGamesIn;
+        }
+
+        public static boolean getHasHiddenFGames(){
+            return hasHiddenFGames;
         }
 
         public static boolean getNotificationSound(){

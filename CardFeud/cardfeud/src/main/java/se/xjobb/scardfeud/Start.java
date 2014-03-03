@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class Start extends Fragment implements View.OnClickListener {
     private String username;
     private String myCountry;
     LinearLayout games, waiting, finGames;
-    ImageView flag,plus;
+    ImageView flag,arrw1,arrw2;
     FinishedGameAdapter finishedGameAdapter;
     WaitingGameAdapter waitingGameAdapter;
     AvailableGameAdapter availableGameAdapter;
@@ -41,6 +42,7 @@ public class Start extends Fragment implements View.OnClickListener {
     boolean availableGameAdapterCreated = false;
     Animation jiggle;
     private static int START_ACTIVITY_DELAY = 350;
+    HelperClass helperClass = new HelperClass(getActivity());
 
 
     @Override
@@ -58,14 +60,18 @@ public class Start extends Fragment implements View.OnClickListener {
         flag = (ImageView)rootView.findViewById(R.id.myFlag);
         showFinGame = (Button)rootView.findViewById(R.id.showFinGame);
         hideFinGame = (Button)rootView.findViewById(R.id.hideFinGame);
+        arrw1 = (ImageView)rootView.findViewById(R.id.showFinGame2);
+        arrw2 = (ImageView)rootView.findViewById(R.id.showFinGame1);
         newGame.setOnClickListener(this);
         username = User.UserDetails.getUsername();
         myCountry = User.UserDetails.getUserCountryCode();
         gamestext.setVisibility(View.INVISIBLE);
         waitingtext.setVisibility(View.INVISIBLE);
-        fin_Gamestext.setVisibility(View.INVISIBLE);
+        fin_Gamestext.setVisibility(View.GONE);
         showFinGame.setVisibility(View.GONE);
-        hideFinGame.setVisibility(View.INVISIBLE);
+        hideFinGame.setVisibility(View.GONE);
+        arrw2.setVisibility(View.GONE);
+        arrw1.setVisibility(View.GONE);
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/hobostd.otf");
         newGame.setTypeface(tf);
@@ -103,6 +109,7 @@ public class Start extends Fragment implements View.OnClickListener {
         MainActivity.setStartTag(getTag());
         showFinGame.setOnClickListener(this);
         hideFinGame.setOnClickListener(this);
+        User.UserDetails.setHasHiddenFGames(getSavedHasHiddenFinishedGames());
 
         return rootView;
     }
@@ -124,12 +131,22 @@ public class Start extends Fragment implements View.OnClickListener {
         } else if(view == hideFinGame){
             finGames.setVisibility(View.GONE);
             hideFinGame.setVisibility(View.GONE);
+            fin_Gamestext.setVisibility(View.GONE);
             showFinGame.setVisibility(View.VISIBLE);
+            arrw2.setVisibility(View.VISIBLE);
+            arrw1.setVisibility(View.VISIBLE);
+            User.UserDetails.setHasHiddenFGames(true);
+            saveHasHiddenFinishedGames();
 
         } else if(view == showFinGame){
             finGames.setVisibility(View.VISIBLE);
             hideFinGame.setVisibility(View.VISIBLE);
+            fin_Gamestext.setVisibility(View.VISIBLE);
             showFinGame.setVisibility(View.GONE);
+            arrw2.setVisibility(View.GONE);
+            arrw1.setVisibility(View.GONE);
+            User.UserDetails.setHasHiddenFGames(false);
+            saveHasHiddenFinishedGames();
 
         }
 
@@ -283,5 +300,23 @@ public class Start extends Fragment implements View.OnClickListener {
         refreshAvailableGames();
         refreshFinishedGames();
         refreshWaitingGames();
+    }
+    private boolean getSavedHasHiddenFinishedGames(){
+        boolean hasHiddenFGames = false;
+
+        try{
+            hasHiddenFGames = getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), getActivity().MODE_PRIVATE).getBoolean("hasHiddenFGames", false);
+        } catch (Exception ex){
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+        return hasHiddenFGames;
+    }
+    private void saveHasHiddenFinishedGames(){
+        try{
+            getActivity().getSharedPreferences(helperClass.getPrefsHideFGames(), getActivity().MODE_PRIVATE).edit().putBoolean("hasHiddenFGames", User.UserDetails.getHasHiddenFGames()).commit();
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
     }
 }
