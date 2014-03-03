@@ -109,7 +109,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         getGameLists(false);
         isCreated = true;
         User.UserDetails.setWelcomeMsg(getSavedWelcomeMsg());
-        
+
         if (!User.UserDetails.getWelcomeMsg()){
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setTitle("Hello " + User.UserDetails.getUsername());
