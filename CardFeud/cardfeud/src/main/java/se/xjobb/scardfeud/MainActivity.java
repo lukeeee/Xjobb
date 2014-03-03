@@ -108,6 +108,24 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         checkUserDetails();
         getGameLists(false);
         isCreated = true;
+        User.UserDetails.setWelcomeMsg(getSavedWelcomeMsg());
+        
+        if (!User.UserDetails.getWelcomeMsg()){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setTitle("Hello " + User.UserDetails.getUsername());
+        dialog.setMessage("Welcome to Cardfeud!\n\n" +
+                "Tap button to start a new game\n\nSlide to see the rules\n\n" +
+                "And shake your phone or tap refresh button to refresh\n\n" +
+                "Have fun and tell your friends to download Cardfeud on Google Play"/*+"\n\n/LEVA Applications"*/);
+        dialog.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                User.UserDetails.setWelcomeMsg(true);
+                saveWelcomeMsg();
+                dialog.cancel();
+            }
+        });
+        dialog.show();
+        }
 
 
 
@@ -124,6 +142,26 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         if(User.UserDetails.getUsername() == null && User.UserDetails.getIdentifier() == null){
             this.finish();
+        }
+    }
+    private boolean getSavedWelcomeMsg(){
+        boolean welcomeMsg = false;
+
+        try{
+            welcomeMsg = getSharedPreferences(helperClass.getPrefsWelcome(), MODE_PRIVATE).getBoolean("welcomeMsg", false);
+        } catch (Exception ex){
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
+        }
+
+        return welcomeMsg;
+    }
+
+    // save if the user has rated the app to shared prefs
+    private void saveWelcomeMsg(){
+        try{
+            getSharedPreferences(helperClass.getPrefsWelcome(), MODE_PRIVATE).edit().putBoolean("welcomeMsg", User.UserDetails.getWelcomeMsg()).commit();
+        } catch (Exception ex) {
+            Log.e("Exception SharedPrefs: ", ex.getMessage());
         }
     }
 
