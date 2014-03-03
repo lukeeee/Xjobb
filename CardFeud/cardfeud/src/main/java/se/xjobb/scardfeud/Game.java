@@ -768,6 +768,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
             AlertDialog alert = builder.create();
             alertDialogs.add(alert);
             alert.show();
+        } else {
+            this.finish();
         }
 
     }
