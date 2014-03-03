@@ -3,6 +3,7 @@ package se.xjobb.scardfeud;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -10,6 +11,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -42,7 +45,7 @@ import se.xjobb.scardfeud.Posters.PostGamePlay;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
 
-public class Game extends ActionBarActivity implements View.OnClickListener {
+public class Game extends ActionBarActivity implements View.OnClickListener, ShakeEventListener.OnShakeListener {
 
     private ActionBar actionBar;
     private Button high;
@@ -65,6 +68,8 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
     List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
     Boolean hasPremium = false;
+    private SensorManager mSensorManager;
+    private ShakeEventListener mSensorListener;
 
 
     @Override
@@ -113,6 +118,12 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         actionBar = getSupportActionBar();
         actionBar.setLogo(R.drawable.icon);
         actionBar.setDisplayShowTitleEnabled(false);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorListener = new ShakeEventListener();
+
+        mSensorListener.setOnShakeListener(this);
+
 
         high.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -397,6 +408,10 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             sendRequestToServer(0);
         }
 
+        mSensorManager.registerListener(mSensorListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
+
         isCreated = false;
         // we don't need to show animations here.. sendGameListUpdateRequest(true);
 
@@ -411,6 +426,13 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
         }
         // the clear list
         alertDialogs.clear();
+        mSensorManager.unregisterListener(mSensorListener);
+    }
+    @Override
+    public void onShake() {
+        // refresh
+        refresh = true;
+        sendRequestToServer(0);
     }
 
     @Override
@@ -866,5 +888,5 @@ public class Game extends ActionBarActivity implements View.OnClickListener {
             showGameFinishedPopUp(gameResponse);
         }
     }
-
 }
+

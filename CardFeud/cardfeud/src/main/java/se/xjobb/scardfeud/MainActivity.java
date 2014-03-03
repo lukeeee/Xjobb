@@ -2,15 +2,18 @@ package se.xjobb.scardfeud;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +33,7 @@ import se.xjobb.scardfeud.JsonGetClasses.Response;
 import se.xjobb.scardfeud.Posters.PostGameList;
 import se.xjobb.scardfeud.Posters.PostGameStart;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, ShakeEventListener.OnShakeListener {
 
     private ActionBar actionBar;
     String[] menuTitle = {"Play","Rules"};
@@ -42,7 +45,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private final String TAG = "CardFeud JSON Exception: ";
     private List<InvitationResponse> invitationResponsesList;
     private List<AlertDialog> alertDialogs;
-    private static String startTag;
+    private static String startTag;private SensorManager mSensorManager;
+    private ShakeEventListener mSensorListener;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -104,6 +108,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         checkUserDetails();
         getGameLists(false);
         isCreated = true;
+
+
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorListener = new ShakeEventListener();
+
+        mSensorListener.setOnShakeListener(this);
     }
 
     // check user details
@@ -404,6 +415,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
         }
 
+        mSensorManager.registerListener(mSensorListener,
+                mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_UI);
+
         //OLD: getGameLists(false);
 
     }
@@ -417,6 +432,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
         // the clear list
         alertDialogs.clear();
+
+        mSensorManager.unregisterListener(mSensorListener);
     }
 
     @Override
@@ -427,6 +444,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         if(progressDialog != null){
             progressDialog.cancel();
         }
+    }
+    @Override
+    public void onShake() {
+        // refresh
+        getGameLists(false);
     }
 
     @Override
