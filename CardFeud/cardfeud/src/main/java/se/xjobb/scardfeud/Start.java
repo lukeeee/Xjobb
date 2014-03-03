@@ -198,13 +198,9 @@ public class Start extends Fragment implements View.OnClickListener {
 
         if(finishedGameAdapter.getCount() > 0){
             if (User.UserDetails.getHasHiddenFGames()){
-                hideFinGame.setVisibility(View.GONE);
-                fin_Gamestext.setVisibility(View.GONE);
-                showFinGame.setVisibility(View.VISIBLE);
+                showTrue();
             } else {
-                hideFinGame.setVisibility(View.VISIBLE);
-                fin_Gamestext.setVisibility(View.VISIBLE);
-                showFinGame.setVisibility(View.GONE);
+                showFalse();
             }
         }
     }
