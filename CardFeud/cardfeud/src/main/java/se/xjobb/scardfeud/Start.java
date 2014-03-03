@@ -79,6 +79,8 @@ public class Start extends Fragment implements View.OnClickListener {
         gamestext.setTypeface(tf);
         waitingtext.setTypeface(tf);
         fin_Gamestext.setTypeface(tf);
+        showFinGame.setTypeface(tf);
+        hideFinGame.setTypeface(tf);
 
         user.setText(username);
         jiggle = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.jiggle);
@@ -252,8 +254,12 @@ public class Start extends Fragment implements View.OnClickListener {
 
             // show/hide text depending on number of items
             if(finishedGameAdapter.getCount() > 0){
-                fin_Gamestext.setVisibility(View.VISIBLE);
-                hideFinGame.setVisibility(View.VISIBLE);
+                if (User.UserDetails.getHasHiddenFGames()){
+                    hideFinGame.setVisibility(View.VISIBLE);
+                } else {
+                    fin_Gamestext.setVisibility(View.VISIBLE);
+                    hideFinGame.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
