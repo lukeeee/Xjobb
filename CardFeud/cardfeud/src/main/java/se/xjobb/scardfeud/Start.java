@@ -196,9 +196,16 @@ public class Start extends Fragment implements View.OnClickListener {
             finGames.addView(item);
         }
 
-        if(adapterCount > 0){
-            fin_Gamestext.setVisibility(View.VISIBLE);
-            hideFinGame.setVisibility(View.VISIBLE);
+        if(finishedGameAdapter.getCount() > 0){
+            if (User.UserDetails.getHasHiddenFGames()){
+                hideFinGame.setVisibility(View.GONE);
+                fin_Gamestext.setVisibility(View.GONE);
+                showFinGame.setVisibility(View.VISIBLE);
+            } else {
+                hideFinGame.setVisibility(View.VISIBLE);
+                fin_Gamestext.setVisibility(View.VISIBLE);
+                showFinGame.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -250,10 +257,9 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(finishedGameAdapter.getCount() > 0){
                 if (User.UserDetails.getHasHiddenFGames()){
-                    hideFinGame.setVisibility(View.VISIBLE);
+                    showTrue();
                 } else {
-                    fin_Gamestext.setVisibility(View.VISIBLE);
-                    hideFinGame.setVisibility(View.VISIBLE);
+                    showFalse();
                 }
             }
         }
@@ -306,6 +312,23 @@ public class Start extends Fragment implements View.OnClickListener {
         refreshAvailableGames();
         refreshFinishedGames();
         refreshWaitingGames();
+    }
+    private void showFalse(){
+        hideFinGame.setVisibility(View.VISIBLE);
+        fin_Gamestext.setVisibility(View.VISIBLE);
+        finGames.setVisibility(View.VISIBLE);
+        showFinGame.setVisibility(View.GONE);
+        arrw1.setVisibility(View.GONE);
+        arrw2.setVisibility(View.GONE);
+    }
+    private void showTrue(){
+        hideFinGame.setVisibility(View.GONE);
+        fin_Gamestext.setVisibility(View.GONE);
+        finGames.setVisibility(View.GONE);
+        showFinGame.setVisibility(View.VISIBLE);
+        arrw1.setVisibility(View.VISIBLE);
+        arrw2.setVisibility(View.VISIBLE);
+
     }
     private boolean getSavedHasHiddenFinishedGames(){
         boolean hasHiddenFGames = false;
