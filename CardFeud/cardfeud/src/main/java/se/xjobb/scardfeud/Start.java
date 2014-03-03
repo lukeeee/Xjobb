@@ -129,12 +129,7 @@ public class Start extends Fragment implements View.OnClickListener {
             startActivity(ng);
                 }}, START_ACTIVITY_DELAY);
         } else if(view == hideFinGame){
-            finGames.setVisibility(View.GONE);
-            hideFinGame.setVisibility(View.GONE);
-            fin_Gamestext.setVisibility(View.GONE);
-            showFinGame.setVisibility(View.VISIBLE);
-            arrw2.setVisibility(View.VISIBLE);
-            arrw1.setVisibility(View.VISIBLE);
+            hideFinishedGames();
             User.UserDetails.setHasHiddenFGames(true);
             saveHasHiddenFinishedGames();
 
@@ -150,6 +145,16 @@ public class Start extends Fragment implements View.OnClickListener {
 
         }
 
+    }
+
+    // hide all finished games
+    private void hideFinishedGames(){
+        finGames.setVisibility(View.GONE);
+        hideFinGame.setVisibility(View.GONE);
+        fin_Gamestext.setVisibility(View.GONE);
+        showFinGame.setVisibility(View.VISIBLE);
+        arrw2.setVisibility(View.VISIBLE);
+        arrw1.setVisibility(View.VISIBLE);
     }
 
     private void createAvailableGameAdapter(){
