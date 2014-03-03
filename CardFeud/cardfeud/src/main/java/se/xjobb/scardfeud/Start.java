@@ -131,36 +131,16 @@ public class Start extends Fragment implements View.OnClickListener {
             startActivity(ng);
                 }}, START_ACTIVITY_DELAY);
         } else if(view == hideFinGame){
-            hideFinishedGames();
+            showFinishedGames();
             User.UserDetails.setHasHiddenFGames(true);
             saveHasHiddenFinishedGames();
 
         } else if(view == showFinGame){
-            showFinishedGames();
+            hideFinishedGames();
             User.UserDetails.setHasHiddenFGames(false);
             saveHasHiddenFinishedGames();
         }
 
-    }
-
-    // show all finished games
-    private void showFinishedGames(){
-        finGames.setVisibility(View.VISIBLE);
-        hideFinGame.setVisibility(View.VISIBLE);
-        fin_Gamestext.setVisibility(View.VISIBLE);
-        showFinGame.setVisibility(View.GONE);
-        arrw2.setVisibility(View.GONE);
-        arrw1.setVisibility(View.GONE);
-    }
-
-    // hide all finished games
-    private void hideFinishedGames(){
-        finGames.setVisibility(View.GONE);
-        hideFinGame.setVisibility(View.GONE);
-        fin_Gamestext.setVisibility(View.GONE);
-        showFinGame.setVisibility(View.VISIBLE);
-        arrw2.setVisibility(View.VISIBLE);
-        arrw1.setVisibility(View.VISIBLE);
     }
 
     private void createAvailableGameAdapter(){
@@ -206,12 +186,11 @@ public class Start extends Fragment implements View.OnClickListener {
         }
 
 
-        // show/hide text depending on number of items
-        if(finishedGameAdapter.getCount() > 0){
+        if(adapterCount > 0){
             if (User.UserDetails.getHasHiddenFGames()){
-                showTrue();
+                showFinishedGames();
             } else {
-                showFalse();
+                hideFinishedGames();
             }
         }
     }
@@ -264,14 +243,11 @@ public class Start extends Fragment implements View.OnClickListener {
             // show/hide text depending on number of items
             if(finishedGameAdapter.getCount() > 0){
                 if (User.UserDetails.getHasHiddenFGames()){
-                    showTrue();
+                    showFinishedGames();
                 } else {
-<<<<<<< HEAD
                     fin_Gamestext.setVisibility(View.GONE);
                     hideFinGame.setVisibility(View.VISIBLE);
-=======
-                    showFalse();
->>>>>>> 8a80f5ab644805ae5950c19cb9e686c6940183f6
+                    hideFinishedGames();
                 }
             }
         }
@@ -304,7 +280,7 @@ public class Start extends Fragment implements View.OnClickListener {
         }
     }
 
-    // refresh the arraylists data and adapters
+    // refresh the array lists data and adapters
     public void refresh(){
 
         // check if we need to create any adapters (that are not already created
@@ -325,7 +301,9 @@ public class Start extends Fragment implements View.OnClickListener {
         refreshFinishedGames();
         refreshWaitingGames();
     }
-    private void showFalse(){
+
+    // hide finished games
+    private void hideFinishedGames(){
         hideFinGame.setVisibility(View.VISIBLE);
         fin_Gamestext.setVisibility(View.VISIBLE);
         finGames.setVisibility(View.VISIBLE);
@@ -333,7 +311,9 @@ public class Start extends Fragment implements View.OnClickListener {
         arrw1.setVisibility(View.GONE);
         arrw2.setVisibility(View.GONE);
     }
-    private void showTrue(){
+
+    // show finished games
+    private void showFinishedGames(){
         hideFinGame.setVisibility(View.GONE);
         fin_Gamestext.setVisibility(View.GONE);
         finGames.setVisibility(View.GONE);
