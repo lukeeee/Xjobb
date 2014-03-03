@@ -91,15 +91,13 @@ public class Start extends Fragment implements View.OnClickListener {
         try {
             String country = myCountry.toLowerCase();
             int id = getResources().getIdentifier(country, "drawable", getActivity().getPackageName());
-            //OLD: Drawable drawable = getResources().getDrawable(id);
-            //OLD: flag.setImageDrawable(drawable);
-            flag.setImageBitmap(decodeFile(id));
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = getResources().getIdentifier("globe", "drawable", getActivity().getPackageName());
-            //OLD: Drawable drawable = getResources().getDrawable(id);
-            //OLD: flag.setImageDrawable(drawable);
-            flag.setImageBitmap(decodeFile(id));
+            Drawable drawable = getResources().getDrawable(id);
+            flag.setImageDrawable(drawable);
         } catch (NullPointerException ex){
             // fixes a bug on startup
             // if the flag can't be found
@@ -120,29 +118,6 @@ public class Start extends Fragment implements View.OnClickListener {
         return rootView;
     }
 
-    // used to decode bitmap
-    private Bitmap decodeFile(int resourceId){
-        try {
-            //Decode image size
-            BitmapFactory.Options o = new BitmapFactory.Options();
-            o.inJustDecodeBounds = true;
-            BitmapFactory.decodeResource(getResources(), resourceId, o);
-
-            //The new size we want to scale to
-            final int REQUIRED_SIZE = 80;  //   SET SIZE HERE, WAS 180 before
-
-            //Find the correct scale value. It should be the power of 2.
-            int scale=1;
-            while(o.outWidth/scale/2>=REQUIRED_SIZE && o.outHeight/scale/2>=REQUIRED_SIZE)
-                scale*=2;
-
-            //Decode with inSampleSize
-            BitmapFactory.Options o2 = new BitmapFactory.Options();
-            o2.inSampleSize=scale;
-            return BitmapFactory.decodeResource(getResources(), resourceId, o2);
-        } catch (Resources.NotFoundException e) {}
-        return null;
-    }
 
     @Override
     public void onClick(View view) {

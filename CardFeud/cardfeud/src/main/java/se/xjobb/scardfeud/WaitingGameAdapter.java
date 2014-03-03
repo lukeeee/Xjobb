@@ -3,6 +3,8 @@ package se.xjobb.scardfeud;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -74,20 +76,22 @@ public class WaitingGameAdapter extends BaseAdapter {
         Button wait = (Button)view.findViewById(R.id.waitGameBtn);
         waitFlag = (ImageView)view.findViewById(R.id.waitFlag);
 
-
         //wait.getBackground().setAlpha(200);
         final Response response = waitingGames.get(i);
         try {
             String country = response.opponentCountry.toLowerCase();
-            int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
-            Drawable drawable = context.getResources().getDrawable(id);
-            waitFlag.setImageDrawable(drawable);
+            int id = 0;
+            id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
+
+            if(id == 0){
+                id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
+            }
+
+            waitFlag.setImageBitmap(decodeFile(id));
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
-            Drawable drawable = context.getResources().getDrawable(id);
-
-            waitFlag.setImageDrawable(drawable);
+            waitFlag.setImageBitmap(decodeFile(id));
         }
 
         wait.setText(response.opponentName + "\nScore " + response.playerPoints + "-" + response.opponentPoints + "\n" + response.lastEventTime);
@@ -112,6 +116,30 @@ public class WaitingGameAdapter extends BaseAdapter {
         });
 
         return view;
+    }
+
+    // used to decode bitmap
+    private Bitmap decodeFile(int resourceId){
+        try {
+            //Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeResource(context.getResources(), resourceId, o);
+
+            //The new size we want to scale to
+            final int REQUIRED_SIZE = 80;  //   SET SIZE HERE, WAS 180 before
+
+            //Find the correct scale value. It should be the power of 2.
+            int scale=1;
+            while(o.outWidth/scale/2>=REQUIRED_SIZE && o.outHeight/scale/2>=REQUIRED_SIZE)
+                scale*=2;
+
+            //Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize=scale;
+            return BitmapFactory.decodeResource(context.getResources(), resourceId, o2);
+        } catch (Resources.NotFoundException e) {}
+        return null;
     }
 }
 

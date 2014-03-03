@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -81,18 +83,23 @@ public class FinishedGameAdapter extends BaseAdapter{
 
 
         final Response response = finishedGames.get(i);
+
         try {
             String country = response.opponentCountry.toLowerCase();
-            int id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
-            Drawable drawable = context.getResources().getDrawable(id);
-            finFlag.setImageDrawable(drawable);
+            int id = 0;
+
+            id = context.getResources().getIdentifier(country, "drawable", context.getPackageName());
+
+            if(id == 0){
+                id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
+            }
+
+            finFlag.setImageBitmap(decodeFile(id));
         } catch (Resources.NotFoundException ex) {
             // if the flag can't be found
             int id = context.getResources().getIdentifier("globe", "drawable", context.getPackageName());
-            Drawable drawable = context.getResources().getDrawable(id);
-            finFlag.setImageDrawable(drawable);
+            finFlag.setImageBitmap(decodeFile(id));
         }
-
 
         finishBtn.setTypeface(tf);
         final int myPoints = Integer.parseInt(response.playerPoints);
@@ -142,6 +149,32 @@ public class FinishedGameAdapter extends BaseAdapter{
 
         return view;
     }
+
+
+    // used to decode bitmap
+    private Bitmap decodeFile(int resourceId){
+        try {
+            //Decode image size
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            BitmapFactory.decodeResource(context.getResources(), resourceId, o);
+
+            //The new size we want to scale to
+            final int REQUIRED_SIZE = 80;  //   SET SIZE HERE, WAS 180 before
+
+            //Find the correct scale value. It should be the power of 2.
+            int scale=1;
+            while(o.outWidth/scale/2>=REQUIRED_SIZE && o.outHeight/scale/2>=REQUIRED_SIZE)
+                scale*=2;
+
+            //Decode with inSampleSize
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize=scale;
+            return BitmapFactory.decodeResource(context.getResources(), resourceId, o2);
+        } catch (Resources.NotFoundException e) {}
+        return null;
+    }
+
 
     // calculate how long the game lasted and return suitable String
     private String calculateGameTime(Date dateStart, Date dateFinish){
