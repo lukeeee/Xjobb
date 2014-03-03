@@ -56,6 +56,7 @@ public class User {
         private static boolean soundNotification;
         private static boolean hasRated;
         private static boolean hasHiddenFGames;
+        private static boolean welcomeMsg;
 
         public static String getUsername(){
             return username;
@@ -135,6 +136,14 @@ public class User {
 
         public static boolean getHasHiddenFGames(){
             return hasHiddenFGames;
+        }
+
+        public static void setWelcomeMsg(boolean welcomeMsgIn){
+            welcomeMsg = welcomeMsgIn;
+        }
+
+        public static boolean getWelcomeMsg(){
+            return welcomeMsg;
         }
 
         public static boolean getNotificationSound(){
