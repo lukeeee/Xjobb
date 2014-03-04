@@ -1,6 +1,7 @@
 package se.xjobb.scardfeud;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +60,7 @@ public class FriendAdapter extends BaseAdapter {
                 "fonts/hobostd.otf");
 
         Button chall = (Button)view.findViewById(R.id.challengeBtn);
+        Button delete = (Button)view.findViewById(R.id.delete);
         ImageView challengeFlag = (ImageView)view.findViewById(R.id.challengeFlag);
 
 
@@ -83,7 +86,17 @@ public class FriendAdapter extends BaseAdapter {
         chall.setTypeface(tf);
         view.setTag(friends.get(i));
         Log.i("get user id", friend.getUserID() + ", " + friend.getCountry() + ", " + friend.getFriend());
-
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.deleteFriend(friend);
+                Toast.makeText(context, friend.getFriend() + " deleted", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(context, NewGame.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                context.startActivity(i);
+                ((NewGame) context).finish();
+            }
+        });
         chall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

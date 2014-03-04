@@ -123,9 +123,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Deleting single Country
-    public void deleteAll() {
+    public void deleteFriend(Friends friend) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_FRIENDS, null, null);
+        db.delete(TABLE_FRIENDS, KEY_ID + " = ?",
+                new String[]{String.valueOf(friend.getUserID())});
         db.close();
     }
 
