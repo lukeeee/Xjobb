@@ -92,7 +92,7 @@ public class FriendAdapter extends BaseAdapter {
         final Animation spin;
         final Animation fade;
         spin = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.spin);
-        fade = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.fade_in);
+        fade = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.fade_out);
 
         final ImageView deleteImg = (ImageView)view.findViewById(R.id.deleteImg);
         Log.i("get user id", friend.getUserID() + ", " + friend.getCountry() + ", " + friend.getFriend());
