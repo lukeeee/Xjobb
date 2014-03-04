@@ -3,10 +3,13 @@ package se.xjobb.scardfeud;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,18 +88,28 @@ public class FriendAdapter extends BaseAdapter {
         chall.setText(friend.getFriend());
         chall.setTypeface(tf);
         view.setTag(friends.get(i));
+        final int DELETE_DELAY = 500;
+        final Animation spin;
+        spin = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.spin);
+
+        final ImageView deleteImg = (ImageView)view.findViewById(R.id.deleteImg);
         Log.i("get user id", friend.getUserID() + ", " + friend.getCountry() + ", " + friend.getFriend());
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.deleteFriend(friend);
-                Toast.makeText(context, friend.getFriend() + " deleted", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(context, NewGame.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                context.startActivity(i);
-                ((NewGame) context).finish();
-            }
-        });
+                deleteImg.startAnimation(spin);
+                SoundsVibration.vibrate(context.getApplicationContext());
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        db.deleteFriend(friend);
+                        Toast.makeText(context, friend.getFriend() + " deleted", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(context, NewGame.class);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        context.startActivity(i);
+                        ((NewGame) context).finish();
+                    }}, DELETE_DELAY);
+ }});
         chall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

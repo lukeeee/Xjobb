@@ -2,19 +2,14 @@ package se.xjobb.scardfeud;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,8 +37,6 @@ public class Start extends Fragment implements View.OnClickListener {
     boolean finishedGameAdapterCreated = false;
     boolean waitingGameAdapterCreated = false;
     boolean availableGameAdapterCreated = false;
-    Animation jiggle;
-    private static int START_ACTIVITY_DELAY = 350;
     HelperClass helperClass = new HelperClass(getActivity());
 
 
@@ -85,7 +78,6 @@ public class Start extends Fragment implements View.OnClickListener {
         hideFinGame.setTypeface(tf);
 
         user.setText(username);
-        jiggle = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.jiggle);
 
         // set the correct flag, if not found set default
         try {
@@ -123,15 +115,9 @@ public class Start extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
 
         if (view == newGame){
-            newGame.startAnimation(jiggle);
             SoundsVibration.vibrate(getActivity().getApplicationContext());
-            //plus.startAnimation(jiggle);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
             Intent ng = new Intent(getActivity().getApplicationContext(), NewGame.class);
             startActivity(ng);
-                }}, START_ACTIVITY_DELAY);
         } else if(view == hideFinGame){
             showFinishedGames();
             User.UserDetails.setHasHiddenFGames(true);
