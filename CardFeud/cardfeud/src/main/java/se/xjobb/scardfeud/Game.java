@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -58,6 +59,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
     private TextView waiting;
     private ViewAnimator animationView;
     private LinearLayout lnrMain;
+    private AdView adView;
     private Response gameResponse;  // This object represents a current game
     int rematchChoice = 0;
     private final String TAG = "CardFeud JSON Exception: ";
@@ -65,6 +67,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
     private boolean gameOver;
     private boolean isCreated = false;
     private boolean refresh = false;
+    private boolean adViewStarted = false;
     List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
     Boolean hasPremium = true;
@@ -175,13 +178,17 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    AdView adView = new AdView(Game.this);
-                    adView.setAdUnitId("0445b7141d9d4e1b");
-                    adView.setAdSize(AdSize.BANNER);
-                    AdRequest.Builder builder = new AdRequest.Builder();
-                    builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-                    adView.loadAd(builder.build());
-                    lnrMain.addView(adView);
+                    if(adView == null){
+                        adView = new AdView(Game.this);
+                        adView.setAdUnitId("0445b7141d9d4e1b");
+                        adView.setAdSize(AdSize.BANNER);
+                        AdRequest.Builder builder = new AdRequest.Builder();
+                        builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                        adView.loadAd(builder.build());
+                        adViewStarted = true;
+                        lnrMain.addView(adView);
+                    }
+
                 }
             });
         }
@@ -420,6 +427,11 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
     @Override
     protected void onPause(){
         super.onPause();
+
+        if(adViewStarted){
+            adView.destroy();
+        }
+
         // check if there was any invitation dialogs from before and dismiss them (they will be loaded again in onResume)
         for(AlertDialog alertDialog : alertDialogs){
             alertDialog.dismiss();
@@ -889,6 +901,14 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
             gameOver = true;
             showGameFinishedPopUp(gameResponse);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if(adView != null){
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 }
 
