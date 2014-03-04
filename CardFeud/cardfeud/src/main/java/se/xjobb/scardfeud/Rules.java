@@ -21,7 +21,7 @@ public class Rules extends Fragment {
     TextView rules;
     LinearLayout rulesLnrMain;
     private String myCountry;
-    Boolean hasPremium = false;
+    Boolean hasPremium = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +36,7 @@ public class Rules extends Fragment {
         rulesLnrMain = (LinearLayout)rootView.findViewById(R.id.rulesLnrMain);
         myCountry = User.UserDetails.getUserCountryCode();
 
-        if (hasPremium){
+        if (!hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
             getActivity().runOnUiThread(new Runnable() {

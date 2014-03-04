@@ -67,7 +67,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
     private boolean refresh = false;
     List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
-    Boolean hasPremium = true;
+    Boolean hasPremium = false;
     private SensorManager mSensorManager;
     private ShakeEventListener mSensorListener;
 
@@ -169,7 +169,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
                 }
             }
         });
-        if (hasPremium){
+        if (!hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
         runOnUiThread(new Runnable() {
