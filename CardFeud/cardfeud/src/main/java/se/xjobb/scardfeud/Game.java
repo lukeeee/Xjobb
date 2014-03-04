@@ -169,21 +169,21 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
                 }
             }
         });
-        if (hasPremium){
+        if (!hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                AdView adView = new AdView(Game.this);
-                adView.setAdUnitId("0445b7141d9d4e1b");
-                adView.setAdSize(AdSize.BANNER);
-                AdRequest.Builder builder = new AdRequest.Builder();
-                builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-                adView.loadAd(builder.build());
-                lnrMain.addView(adView);
-            }
-        });
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AdView adView = new AdView(Game.this);
+                    adView.setAdUnitId("0445b7141d9d4e1b");
+                    adView.setAdSize(AdSize.BANNER);
+                    AdRequest.Builder builder = new AdRequest.Builder();
+                    builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+                    adView.loadAd(builder.build());
+                    lnrMain.addView(adView);
+                }
+            });
         }
 
 
