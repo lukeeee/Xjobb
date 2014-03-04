@@ -62,9 +62,9 @@ public class FriendAdapter extends BaseAdapter {
         Typeface tf = Typeface.createFromAsset(context.getAssets(),
                 "fonts/hobostd.otf");
 
-        Button chall = (Button)view.findViewById(R.id.challengeBtn);
-        Button delete = (Button)view.findViewById(R.id.delete);
-        ImageView challengeFlag = (ImageView)view.findViewById(R.id.challengeFlag);
+        final Button chall = (Button)view.findViewById(R.id.challengeBtn);
+        final Button delete = (Button)view.findViewById(R.id.delete);
+        final ImageView challengeFlag = (ImageView)view.findViewById(R.id.challengeFlag);
 
 
         //wait.getBackground().setAlpha(200);
@@ -90,7 +90,9 @@ public class FriendAdapter extends BaseAdapter {
         view.setTag(friends.get(i));
         final int DELETE_DELAY = 500;
         final Animation spin;
+        final Animation fade;
         spin = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.spin);
+        fade = AnimationUtils.loadAnimation(context.getApplicationContext(), R.anim.fade_in);
 
         final ImageView deleteImg = (ImageView)view.findViewById(R.id.deleteImg);
         Log.i("get user id", friend.getUserID() + ", " + friend.getCountry() + ", " + friend.getFriend());
@@ -98,6 +100,9 @@ public class FriendAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 deleteImg.startAnimation(spin);
+                chall.startAnimation(fade);
+                challengeFlag.startAnimation(fade);
+                delete.startAnimation(fade);
                 SoundsVibration.vibrate(context.getApplicationContext());
                 new Handler().postDelayed(new Runnable() {
                     @Override
