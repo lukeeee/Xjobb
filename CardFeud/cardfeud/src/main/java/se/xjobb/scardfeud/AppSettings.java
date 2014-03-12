@@ -101,7 +101,7 @@ public class AppSettings extends ActionBarActivity implements View.OnClickListen
 
         Log.i("hallo", myCountry);
 
-        if (!hasPremium){
+        if (hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
             runOnUiThread(new Runnable() {

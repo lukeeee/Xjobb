@@ -10,7 +10,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -70,7 +69,7 @@ public class Game extends ActionBarActivity implements View.OnClickListener, Sha
     private boolean adViewStarted = false;
     List<AlertDialog> alertDialogs;
     Animation animRotate, Bounce, move_right,move_left,fade_in;
-    Boolean hasPremium = false;
+    Boolean hasPremium = true;
     private SensorManager mSensorManager;
     private ShakeEventListener mSensorListener;
 

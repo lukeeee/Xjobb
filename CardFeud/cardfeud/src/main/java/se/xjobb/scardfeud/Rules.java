@@ -36,7 +36,7 @@ public class Rules extends Fragment {
         rulesLnrMain = (LinearLayout)rootView.findViewById(R.id.rulesLnrMain);
         myCountry = User.UserDetails.getUserCountryCode();
 
-        if (!hasPremium){
+        if (hasPremium){
             Log.i("Premium Madaafakka", "");
         }else{
             getActivity().runOnUiThread(new Runnable() {
